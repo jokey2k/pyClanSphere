@@ -1,0 +1,38 @@
+{% extends "admin/layout.html" %}
+{% block title %}{{ _("News Overview") }}{% endblock %}
+{% block contents %}
+  <h1>{{ _("News Overview") }}</h1>
+  <table>
+    <tr>
+      <th>{{ _("Title") }}</th>
+      <th>{{ _("Author") }}</th>
+      <th>{{ _("Status") }}</th>
+    </tr>
+  {%- for news in newsitems %}
+    <tr class="{{ loop.cycle('odd', 'even') }}">
+	  {%- if news.can_edit() %}
+      <td><a href="{{ url_for('admin/news_edit', news_id=news.id)|e }}">{{
+          news.title|e }}</a></td>
+      {%- else %}
+      <td>{{ news.title|e }}</td>
+	  {%- endif %}
+      <td>{{ news.author.display_name|e }}</td>
+      {%- if news.status == 1 %}
+      <td>{%- trans %}Draft{% endtrans %}</td>
+      {%- else %}
+      <td>{%- trans %}Published{% endtrans %}</td>
+	  {%- endif %}
+    </tr>
+  {%- endfor %}
+  </table>
+  <form action="{{ url_for('admin/news_create')|e }}" method="get">
+    <div class="actions">
+      <input type="submit" value="{{ _('New News') }}">
+    </div>
+  </form>
+  {%- if pagination.necessary %}
+  <div class="pagination">
+    {{ pagination.generate() }}
+  </div>
+  {%- endif %}
+{% endblock %}

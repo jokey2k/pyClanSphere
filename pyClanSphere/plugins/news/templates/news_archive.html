@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}{{ _("Archive") }}{% endblock %}
+{% from "_news.html" import render_entry %}
+{% block contents %}
+  {%- if month_list %}
+    <h2>{% trans %}Archive{% endtrans %}</h2>
+    <ul>
+    {%- for item in months %}
+      <li><a href="{{ url_for('news/archive', year=item.year,
+        month=item.month)|e }}">{{ item|monthformat }}</a></li>
+    {%- else %}
+      <li><em>{{ _("empty archive") }}</em></li>
+    {%- endfor %}
+    </ul>
+  {%- else -%}
+    {%- if not month %}
+      <h2>{% trans year %}Archive for {{ year }}{% endtrans %}</h2>
+    {%- elif not day %}
+      <h2>{% trans month=date|monthformat %}Archive for {{ month }}{% endtrans %}</h2>
+    {%- else %}
+      <h2>{% trans day=date|dateformat('full') %}Archive for {{ day }}{% endtrans %}</h2>
+    {%- endif %}
+    {%- for entry in newsitems %}
+      {{ render_entry(entry) }}
+    {%- endfor %}
+    {%- if pagination.necessary %}
+    <div class="pagination">
+      {{ pagination.generate() }}
+    </div>
+    {%- endif %}
+  {%- endif %}
+{% endblock %}
