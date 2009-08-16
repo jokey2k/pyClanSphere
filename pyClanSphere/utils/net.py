@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.utils.net
-    ~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~
 
     This module implements various network related functions and among
     others a minimal urllib implementation that supports timeouts.

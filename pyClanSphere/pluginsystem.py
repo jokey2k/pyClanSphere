@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.pluginsystem
-    ~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~
 
     This module implements the plugin system.
 

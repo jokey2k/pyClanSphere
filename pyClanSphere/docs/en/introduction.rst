@@ -1,5 +1,5 @@
 Introduction to pyClanSphere
-====================
+============================
 
 pyClanSphere is a content publishing platform with the focus on extensibility
 and a user friendly interface.  This chapter of the help gives you a basic

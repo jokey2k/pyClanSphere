@@ -1,6 +1,6 @@
 """
     pyClanSphere.utils.crypto
-    ~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~
 
     This module implements various cryptographic functions.
 

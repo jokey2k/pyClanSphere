@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.docs
-    ~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~
 
     This module implements a simple multilingual documentation system on
     top of docutils.  The `build-documentation` script builds pickled files

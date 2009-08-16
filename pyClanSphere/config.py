@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.config
-    ~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~
 
     This module implements the configuration.  The configuration is a more or
     less flat thing saved as ini in the instance folder.  If the configuration

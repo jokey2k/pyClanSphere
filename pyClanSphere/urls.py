@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.urls
-    ~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~
 
     This module implements a function that creates a list of urls for all
     the core components.

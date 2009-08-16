@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.utils.log
-    ~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~
 
     This module implements application depending logging.  This logging system
     is optimized for performance and always logs into a special file in the

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere CGI Runner
-    ~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~
 
     Run pyClanSphere as CGI. Requires python 2.5 or python 2.4 with
     the wsgiref module installed.  For help con configuration

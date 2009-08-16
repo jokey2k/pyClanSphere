@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.utils.forms
-    ~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~
 
     This module implements a sophisticated form validation and rendering
     system that is based on diva with concepts from django newforms and

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere._core
-    ~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~
 
     Internal core module that survives reloads.
 

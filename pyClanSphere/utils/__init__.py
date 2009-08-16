@@ -1,6 +1,6 @@
 """
     pyClanSphere.utils
-    ~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~
 
     This package implements various functions used all over the code.
 

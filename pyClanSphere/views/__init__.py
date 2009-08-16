@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.views
-    ~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~
 
     This module binds all the endpoints specified in `pyClanSphere.urls` to
     python functions in the view modules.

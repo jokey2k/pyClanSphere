@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.widgets
-    ~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~
 
     This module provides the core widgets and functionality to build your
     own.  Widgets are, in the context of pyClanSphere, classes that have a

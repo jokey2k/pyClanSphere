@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
     Start a pyClanSphere Server
-    ~~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     This script opens a development server for pyClanSphere.
 

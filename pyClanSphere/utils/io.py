@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.utils.io
-    ~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~
 
     Various helper utilities for input/output.
 

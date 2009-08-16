@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.models
-    ~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~
 
     The core models and query helper functions.
 

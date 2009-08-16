@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.api
-    ~~~~~~~~
+    ~~~~~~~~~~~~~~~~
 
     Module for plugins and core. Star import this to get
     access to all the important helper functions.

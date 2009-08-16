@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     _init_pyClanSphere
-    ~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~
 
     Helper to locate pyClanSphere and the instance folder.
     :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.

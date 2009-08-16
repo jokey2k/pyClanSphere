@@ -1,6 +1,6 @@
 """
     pyClanSphere.utils.mail
-    ~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~
 
     This module implements some email-related functions and classes.
 

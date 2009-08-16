@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.views.admin
-    ~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~
 
     This module implements the admin views. The admin interface is only
     available for admins, editors and authors but not for subscribers. For

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere Test Suite
-    ~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~
 
     This is the pyClanSphere test suite. It collects all modules in the pyClanSphere
     package, builds a TestSuite with their doctests and executes them. It also

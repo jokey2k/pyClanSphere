@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.environment
-    ~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~
 
     This module can figure how pyClanSphere is installed and where it has to look
     for shared information.  Currently it knows about two modes: development

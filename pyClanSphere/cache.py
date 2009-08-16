@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.cache
-    ~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~
 
     This module implements the pyClanSphere caching system.  This is essentially
     a binding to memcached.

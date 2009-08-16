@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere._dynamic
-    ~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~
 
     Contains modules that are self updateable and contain important
     precalculated information.

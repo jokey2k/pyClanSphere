@@ -1,6 +1,6 @@
 """
     pyClanSphere.utils
-    ~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~
 
     This module implements XML-related functions and classes.
 

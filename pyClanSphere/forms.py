@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.forms
-    ~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~
 
     The form classes the pyClanSphere core uses.
 

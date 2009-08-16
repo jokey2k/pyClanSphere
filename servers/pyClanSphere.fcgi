@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere FastCGI Runner
-    ~~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     If FastCGI is your hosting environment this is the correct file.
     For working FastCGI support you have to have flup installed.

@@ -1,6 +1,6 @@
 """
     pyClanSphere.utils.validators
-    ~~~~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     This module implements various functions for validation of miscellaneous
     things, e.g. urls.

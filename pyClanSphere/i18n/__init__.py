@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.i18n
-    ~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~
 
     i18n tools for pyClanSphere.  This module provides various helpers for
     internationalization.  That is a translation system (with an API,

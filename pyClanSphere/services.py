@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.services
-    ~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~
 
     The builtin (JSON) services.
 

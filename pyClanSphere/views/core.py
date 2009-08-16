@@ -2,7 +2,7 @@
 
 """
     pyClanSphere.views.core
-    ~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~
 
     This module exports the main index page where plugins can hook in to display their widgets
 

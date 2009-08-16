@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.websetup
-    ~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~
 
     This module installs pyClanSphere automatically if the app is not ready.
     Because the whole pyClanSphere infrastructure is not available during the

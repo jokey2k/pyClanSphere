@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.database
-    ~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~
 
     This module is a rather complex layer on top of SQLAlchemy 0.4.
     Basically you will never use the `pyClanSphere.database` module except you

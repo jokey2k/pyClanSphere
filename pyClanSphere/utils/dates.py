@@ -1,6 +1,6 @@
 """
     pyClanSphere.utils.dates
-    ~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~
 
     This module implements date formatting and parsing functions.
 

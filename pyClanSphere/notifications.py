@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.notifications
-    ~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~
     
     ### FIXME: This needs cleanupwork and is broken at the moment!!!! (deZEMLification needed)
 
