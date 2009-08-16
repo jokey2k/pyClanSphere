@@ -1,0 +1,29 @@
+pyClanSphere is written and maintained by the pyClanSphere Team and various contributors:
+
+Project Leader:
+
+- Markus Ullmann <mail@markus-ullmann.de>
+
+Developers:
+
+None yet
+
+Contributors:
+
+None yet
+
+Translators:
+
+None yet
+
+Authors of libraries or code snippets included in pyClanSphere:
+
+- Armin Ronacher <armin.ronacher@active-4.com>
+  This app started off zine, a nice blogging software.
+  Many thanks to him and all his contributors for that
+  nice piece of python software, which made
+  pyClanSphere possible.
+
+  I was about to just use it as is and add all my stuff as plugin
+  but it had one mistake, where the ball started rolling:
+  Ever seen a gamer writing HTML or even ZEML? ;)

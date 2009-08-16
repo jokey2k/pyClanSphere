@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="{{ cfg.language|e }}">
+<head>
+  <title>{% block title %}{% endblock %} &mdash; {{ cfg.clan_title|e }}</title>
+  <meta name="DC.title" content="{{ self.title() }} &mdash; {{ cfg.clan_title|e }}">
+  <link rel="stylesheet" type="text/css" href="{{ shared_url('vessel_theme::style.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ shared_url(cfg['vessel_theme/variation']) }}">
+  {{ get_page_metadata() }}
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <h1><a href="{{ url_for('core/index')|e }}">{{ cfg.clan_title|e }}</a></h1>
+      <p class="description">{{ cfg.clan_tagline }}</p>
+    </div>
+    <div class="contentwrapper">
+      <div class="contents">
+        {{ emit_event('before-contents-rendered') }}
+        {% block contents %}{% endblock %}
+        {{ emit_event('after-contents-rendered') }}
+      </div>
+      <div class="sidebar">
+        {{ render_widgets() }}
+      </div>
+    </div>
+    <div class="footer">
+      <p>{% trans pyClanSphere='<a href="http://pyclansphere.digital-family.de/">pyClanSphere</a>'
+        %}Proudly powered by {{ pyClanSphere }}, Theme copyright by Armin Ronacher.{% endtrans %}</p>
+    </div>
+  </div>
+</body>
+</html>

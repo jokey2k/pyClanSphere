@@ -1,0 +1,175 @@
+#!/usr/bin/env python
+"""
+    Create Package
+    ~~~~~~~~~~~~~~
+
+    This script dumps pyClanSphere with all files required files into a .tar.gz
+    and .zip archive for distribution.
+
+    :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
+    :license: BSD, see LICENSE for more details.
+"""
+import re
+import os
+import sys
+import shutil
+import tempfile
+import subprocess
+from optparse import OptionParser
+
+
+IGNORED = map(re.compile, r'''
+^artwork/
+^\.hgignore$
+'''.strip().splitlines())
+
+EXTRA_RST = 'README INSTALL'.split()
+
+_documented_plugin_re = re.compile(r'^pyClanSphere/plugins/([^/]+)/docs/')
+
+
+def is_ignored(filename):
+    for rule in IGNORED:
+        if rule.search(filename):
+            return True
+    return False
+
+
+class BuildError(Exception):
+    pass
+
+
+def find_files(force):
+    allowed_states = frozenset('CI?')
+    tracked_states = frozenset('CM')
+    client = subprocess.Popen(['hg', 'status', '-A'], stdout=subprocess.PIPE)
+    for line in client.communicate()[0].splitlines():
+        line = line.split(None, 1)
+        if len(line) != 2:
+            continue
+        status, filename = line
+        if not force and status not in allowed_states:
+            raise BuildError('hg unclean. Uncommited modifications?')
+        if status in tracked_states and not is_ignored(filename):
+            yield filename
+
+
+def get_pyClanSphere_version():
+    from pyClanSphere import __version__ as rv
+    return rv
+
+
+def run_script(dir, script, args=None):
+    subprocess.call([os.path.join(dir, 'scripts', script)] + list(args or ()))
+
+
+def delete_pycs(folder):
+    for dirname, folders, files in os.walk(folder):
+        for filename in files:
+            if filename.endswith('.pyc') or filename.endswith('.pyo') :
+                filename = os.path.join(folder, dirname, filename)
+                os.remove(filename)
+
+
+def build(dst_dir, build_dir, options):
+    pyClanSphere_version = get_pyClanSphere_version()
+    release_name = 'pyClanSphere-%s' % '-'.join(pyClanSphere_version.split())
+    archive_base = os.path.join(dst_dir, release_name)
+
+    # create a subfolder for this release
+    release_dir = os.path.join(build_dir, release_name)
+    os.mkdir(release_dir)
+
+    documented_plugins = set()
+
+    # copy all tracked files into the build dir
+    print 'Bootstrapping build directory [%s]' % build_dir
+    for filename in find_files(options.force):
+        target_folder = os.path.join(release_dir, os.path.dirname(filename))
+        if not os.path.exists(target_folder):
+            os.makedirs(target_folder)
+        shutil.copy(filename, target_folder)
+        print filename
+        match = _documented_plugin_re.match(filename)
+        if match is not None:
+            documented_plugins.add(match.group(1))
+
+    print 'The following plugins are documented:'
+    for plugin in sorted(documented_plugins):
+        print '  *', plugin
+
+    # build translations
+    run_script(release_dir, 'compile-translations')
+
+    # and the documentation for everything
+    run_script(release_dir, 'build-documentation')
+    for plugin in documented_plugins:
+        run_script(release_dir, 'build-documentation',
+                   [os.path.join(release_dir, 'pyClanSphere', 'plugins', plugin)])
+
+    # build extra rst files into .html files
+    old_dir = os.getcwd()
+    try:
+        os.chdir(release_dir)
+        for filename in EXTRA_RST:
+            subprocess.call(['rst2html.py', filename, filename + '.html'])
+    finally:
+        os.chdir(old_dir)
+
+    # delete .pyc files the documentation builder might have created
+    delete_pycs(release_dir)
+
+    # now create the archives
+    messages = []
+    old_dir = os.getcwd()
+    try:
+        os.chdir(build_dir)
+        if options.tar:
+            tarball_filename = archive_base + '.tar.gz'
+            subprocess.call(['tar', 'vczf', tarball_filename, release_name])
+            messages.append('Created tarball in %s' % tarball_filename)
+        if options.zip:
+            zip_filename = archive_base + '.zip'
+            subprocess.call(['zip', '-r', zip_filename, release_name])
+            messages.append('Created zip file in %s' % zip_filename)
+    finally:
+        os.chdir(old_dir)
+
+    print '-' * 60
+    print 'Summary'
+    for message in messages:
+        print message
+
+
+def main():
+    parser = OptionParser(usage='%prog [options] destination')
+    parser.add_option('--no-zip', dest='zip', action='store_false',
+                      default=True, help='Do not generate a .zip file')
+    parser.add_option('--no-tar', dest='tar', action='store_false',
+                      default=True, help='Do not generate a tarball')
+    parser.add_option('-f', '--force', dest='force', action='store_true',
+                      default=False, help='Force build, even if local '
+                      'modifications exist.')
+    options, args = parser.parse_args()
+    if len(args) != 1:
+        parser.error('incorrect number of arguments')
+    dst = args[0]
+
+    if not os.path.exists(dst):
+        os.makedirs(dst)
+
+    try:
+        build_dir = tempfile.mkdtemp(prefix='pyClanSphere')
+        try:
+            build(os.path.abspath(dst), build_dir, options)
+        finally:
+            shutil.rmtree(build_dir, ignore_errors=True)
+    except BuildError, e:
+        print >> sys.stderr, e
+
+
+if __name__ == '__main__':
+    base_dir = os.path.join(os.path.dirname(__file__), '..')
+    os.chdir(base_dir)
+    sys.path.insert(0, base_dir)
+    main()

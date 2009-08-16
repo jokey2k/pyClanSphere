@@ -1,0 +1,6 @@
+{% extends "account/layout.html" %}
+{% from "_about_pyClanSphere.html" import render_about_pyClanSphere_title, render_about_pyClanSphere_body %}
+{% block title %}{{ render_about_pyClanSphere_title() }}{% endblock %}
+{% block contents %}
+  {{ render_about_pyClanSphere_body() }}
+{% endblock %}

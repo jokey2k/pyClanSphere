@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block title %}{{ _("Index") }}{% endblock %}
+{% block contents %}
+  <h2>{% trans %}Welcome{% endtrans %}</h2>
+  <div class="notification">
+    <p>{% trans %}So far there are no entries here.{% endtrans %}</p>
+  </div>
+{% endblock %}

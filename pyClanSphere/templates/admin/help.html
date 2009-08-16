@@ -1,0 +1,6 @@
+{% extends "admin/layout.html" %}
+{% from "_help.html" import render_help_title, render_help_body %}
+{% block title %}{{ render_help_title(title) }}{% endblock %}
+{% block contents %}
+  {{ render_help_body(title, toc, body) }}
+{% endblock %}

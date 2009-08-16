@@ -1,0 +1,81 @@
+/**
+ * pyClanSphere Administration Tools
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *
+ * Part of the pyClanSphere core framework. Provides default script
+ * functions for the administration interface.
+ *
+ * :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
+ * :license: BSD, see LICENSE for more details.
+ */
+
+$(function() {
+  // fade in messages
+  var messages = $('div.message').hide().fadeIn('slow');
+  window.setTimeout(function() {
+    messages.each(function() {
+      if (!$(this).is('.message-error'))
+        $(this).animate({height: 'hide', opacity: 'hide'}, 'slow');
+    });
+  }, 8000);
+
+  // support for toggleable sections
+  $('div.toggleable').each(function() {
+    var
+      fieldset = $(this),
+      children = fieldset.children().slice(1);
+    // collapse it if it should be collapsed and there are no errors in there
+    if ($(this).is('.collapsed') && $('.errors', this).length == 0)
+      children.hide();
+    $('h3', this).click(function() {
+      children.toggle();
+      fieldset.toggleClass('collapsed');
+    });
+  });
+
+  // If we're on a new-post/edit-post page we can update the
+  // page title dynamically based on the text field.
+  (function() {
+    var input_box = $('#post_form #f_title');
+    if (input_box.length == 0)
+      return;
+
+    // windows browser put the invisible space directly into the
+    // window manager title which causes a question mark to show
+    // up.  Because of that we fire the change() event right away
+    // to force an updated title without the invisble space.
+    var title = document.title.split(/\u200B/, 2)[1];
+    input_box.bind('change', function() {
+      var arg = input_box.val();
+      document.title = (arg ? arg + ' — ' : '') + title;
+    }).change();
+  })();
+
+  // Make some textareas resizable
+  (function() {
+    var ta = $('textarea.resizable');
+    if (ta.length == 0)
+      return;
+
+    ta.TextAreaResizer();
+
+    // make all forms remember the height of the textarea.  This
+    // code does funny things if multiple textareas are resizable
+    // but it should work for most situations.
+    var cookie_set = false;
+    $('form').submit(function() {
+      if (cookie_set)
+        return;
+      var height = parseInt($('form textarea.resizable').css('height'));
+      if (height > 0)
+        document.cookie = 'ta_height=' + height;
+      cookie_set = true;
+    });
+
+    // if we have the textarea height in the cookie, update the
+    // height for the textareas.
+    var height = document.cookie.match(/ta_height=(\d+)/)[1];
+    if (height != null)
+      ta.css('height', height + 'px');
+  })();
+});

@@ -1,0 +1,20 @@
+=============================================================
+pyClanSphere - a Python powered, clansphere inspired Clan CMS
+=============================================================
+
+Installation
+============
+
+See the file INSTALL for a list of dependencies and installation
+instructions.
+
+License and Copyright
+=====================
+
+pyClanSphere is written and maintained by Markus Ullmann.
+Some parts of the core are imported from Zine blog written
+by Armin Ronacher. See the AUTHORS file for a complete list
+of contributors known as the pyClanSphere Team.
+
+pyClanSphere is released under a BSD-style license, see
+the LICENSE file for more details.

@@ -1,0 +1,69 @@
+MISSING: tests for nearly everything that has to do with the config file (i.e.
+		 no permissions, external changes, etc)
+		 tests for some parts of Configuration's dict interface (iter* etc)
+
+
+Basics:
+
+	>>> app.cfg                             # doctest: +ELLIPSIS
+	<Configuration ...>
+	>>> app.cfg['clan_title']
+	iu'My Clan Page'
+
+
+Basic transaction test. Also tests that default values are not written to the
+config file.
+
+	>>> t = app.cfg.edit()
+	>>> t['clan_title']
+	iu'My Clan Page'
+	>>> t['clan_title'] = 'Another Site Title'
+	>>> t.commit()
+	>>> app.cfg['clan_title']
+	u'Another Site Title'
+
+
+Test revert_to_default
+
+	>>> t = app.cfg.edit()
+	>>> t.revert_to_default('clan_title')
+	>>> t['clan_title']
+	iu'My Clan Page'
+	>>> t.commit()
+	>>> app.cfg['clan_title']
+	iu'My Clan Page'
+
+
+Transactions can only be committed once:
+	
+	>>> t.commit()
+	Traceback (most recent call last):
+	...
+	ValueError: This transaction was already committed.
+
+
+Handling of inexisting keys
+
+	>>> app.cfg.change_single('inexisting_key', 23)
+	Traceback (most recent call last):
+	...
+	KeyError: 'inexisting_key'
+	>>> app.cfg['inexisting_key']
+	Traceback (most recent call last):
+	...
+	KeyError: 'inexisting_key'
+
+
+__contains__
+
+	>>> 'pyClanSphere/clan_title' in app.cfg
+	True
+	>>> 'foobar' in app.cfg
+	False
+
+
+Reset the config so future tests get the same initial values
+	
+	>>> reset = app.cfg.edit()
+	>>> reset.revert_to_default('language')
+	>>> reset.commit()

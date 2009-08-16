@@ -1,0 +1,20 @@
+{% extends "admin/layout.html" %}
+{% block title %}{{ _("Maintenance") }}{% endblock %}
+{% block contents %}
+  <h1>{{ _("Maintenance") }}</h1>
+  <p>{% trans %}
+    From here you can set your site into maintenance mode and do administrative
+    tasks.  It's recommend to enable maintenance mode before doing software
+    upgrades, imports, exports or plugin installations.  While it's not stricly
+    necessary for the latter it's good idea to test the changes before going
+    live with them.  As long as maintenance mode is enabled users will see a
+    message that says that the site is in maintenance mode.
+  {% endtrans %}</p>
+  <form action="" method="post">
+    <div class="actions">
+      {{ form.hidden_fields }}
+      <input type="submit" value="{{ _('Disable maintenance mode') if
+        maintenance_mode else _('Enable maintenance mode') }}" />
+    </div>
+  </form>
+{% endblock %}

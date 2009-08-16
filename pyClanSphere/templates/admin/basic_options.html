@@ -1,0 +1,15 @@
+{% extends "admin/layout.html" %}
+{% block title %}{{ _("Basic Options") }}{% endblock %}
+{% block contents %}
+  <h1>{{ _("Basic Options") }}</h1>
+  <p>{% trans %}
+    From here you can configure the basic site settings like the
+    title and tagline.
+  {% endtrans %}</p>
+  {% call form() %}
+    {{ form.as_dl() }}
+    <div class="actions">
+      <input type="submit" value="{{ _('Save') }}">
+    </div>
+  {% endcall %}
+{% endblock %}

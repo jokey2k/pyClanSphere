@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}{{ _("Page Not Found") }}{% endblock %}
+{% block contents %}
+  <h2>{{ _("Page Not Found") }}</h2>
+  <p>{{ _("Sorry, the page you requested does not exist.") }}</p>
+  <p>{% trans %}You may have followed a bad link or mis-typed a URL.
+    That’s most likely what went wrong.{% endtrans %}</p>
+  <p>{% trans index_link=url_for('core/index')|e %}You may want to
+    have a look at the <a href="{{ index_link }}">main page</a>.{% endtrans %}</p>
+{% endblock %}

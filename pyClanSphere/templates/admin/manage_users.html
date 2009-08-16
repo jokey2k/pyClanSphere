@@ -1,0 +1,32 @@
+{% extends "admin/layout.html" %}
+{% block title %}{{ _("Manage Users") }}{% endblock %}
+{% block contents %}
+  <h1>{{ _("Manage Users") }}</h1>
+  <table>
+    <tr>
+      <th>{{ _("ID") }}</th>
+      <th>{{ _("Username") }}</th>
+      <th>{{ _("Realname") }}</th>
+      <th>{{ _("Mail") }}</th>
+    </tr>
+  {%- for user in users %}
+    <tr class="{{ loop.cycle('odd', 'even') }}">
+      <td>{{ user.id }}</td>
+      <td><a href="{{ url_for('admin/edit_user', user_id=user.id)|e }}">{{
+          user.username|e }}</a></td>
+      <td>{{ user.real_name|e }}</td>
+      <td>{{ (user.email or '')|e }}</td>
+    </tr>
+  {%- endfor %}
+  </table>
+  <form action="{{ url_for('admin/new_user')|e }}" method="get">
+    <div class="actions">
+      <input type="submit" value="{{ _('New User') }}">
+    </div>
+  </form>
+  {%- if pagination.necessary %}
+  <div class="pagination">
+    {{ pagination.generate() }}
+  </div>
+  {%- endif %}
+{% endblock %}
