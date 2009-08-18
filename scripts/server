@@ -60,8 +60,10 @@ def main():
 
     app = get_wsgi_app(instance)
     if options.profile:
-        from werkzeug.contrib.profiler import ProfilerMiddleware
-        app = ProfilerMiddleware(app, stream=sys.stderr)
+        from flickzeug.profiling.profiler import Profiler
+        def filter_func(path):
+            return True
+        app = Profiler(app, "profiles", '/_profiler', filter_func)
 
     if options.mount != '/':
         mountpoint = options.mount.rstrip('/')
