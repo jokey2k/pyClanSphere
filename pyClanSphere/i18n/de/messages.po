@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyClanSphere 0.1\n"
 "Report-Msgid-Bugs-To: armin.ronacher@active-4.com\n"
-"POT-Creation-Date: 2009-01-02 02:02+0000\n"
-"PO-Revision-Date: 2009-08-22 16:36+0200\n"
-"Last-Translator: Georg Brandl <georg@python.org>\n"
-"Language-Team: de <LL@li.org>\n"
+"POT-Creation-Date: 2009-08-22 19:19+0200\n"
+"PO-Revision-Date: 2009-08-22 19:36+0200\n"
+"Last-Translator: Markus Ullmann <mail@markus-ullmann.de>\n"
+"Language-Team: de <pyclansphere@digital-family.de>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -67,7 +67,6 @@ msgid "My Clan Page"
 msgstr "Meine Clanseite"
 
 #: pyClanSphere/config.py:44
-#, fuzzy
 msgid "just another Clan page"
 msgstr "unsere pyClanSphere Welt"
 
@@ -527,7 +526,6 @@ msgid "can enter admin panel"
 msgstr "kann das Adminpanel öffnen"
 
 #: pyClanSphere/privileges.py:205
-#, fuzzy
 msgid "can administer everything"
 msgstr "kann die Site administrieren"
 
@@ -1752,7 +1750,6 @@ msgid "Installed APIs"
 msgstr "Installierte APIs"
 
 #: pyClanSphere/templates/admin/information.html:122
-#, fuzzy
 msgid ""
 "\n"
 "    The following APIs are installed on this pyClanSphere instance. APIs "
@@ -1877,7 +1874,6 @@ msgid "Maintenance"
 msgstr "Wartung"
 
 #: pyClanSphere/templates/admin/maintenance.html:5
-#, fuzzy
 msgid ""
 "\n"
 "    From here you can set your site into maintenance mode and do "
