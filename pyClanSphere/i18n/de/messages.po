@@ -1,17 +1,16 @@
-# Translations template for PROJECT.
-# Copyright (C) 2009 The pyClanSphere Team
-# This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# German translations for pyClanSphere.
+# Copyright (C) 2008 The Pocoo Team
+# This file is distributed under the same license as the pyClanSphere project.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
-"Report-Msgid-Bugs-To: pyClanSphere@digital-family.de\n"
-"POT-Creation-Date: 2009-08-22 16:36+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: pyClanSphere 0.1\n"
+"Report-Msgid-Bugs-To: armin.ronacher@active-4.com\n"
+"POT-Creation-Date: 2009-01-02 02:02+0000\n"
+"PO-Revision-Date: 2009-08-22 16:36+0200\n"
+"Last-Translator: Georg Brandl <georg@python.org>\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,27 +18,31 @@ msgstr ""
 
 #: pyClanSphere/application.py:676
 msgid "Default Theme"
-msgstr ""
+msgstr "Standard-Design"
 
 #: pyClanSphere/application.py:677
 msgid "Simple default theme that doesn't contain any style information."
-msgstr ""
+msgstr "Ein einfaches Standard-Design ohne Stilinformationen."
 
 #: pyClanSphere/application.py:726
 #, python-format
 msgid "Theme “%s” is no longer available, falling back to default theme."
 msgstr ""
+"Das Design „%s” ist nicht länger verfügbar, es wird das Standarddesign "
+"benutzt."
 
 #: pyClanSphere/application.py:749
 #, python-format
 msgid "Copyright %(years)s by the pyClanSphere Team"
-msgstr ""
+msgstr "Copyright %(years)s by the pyClanSphere Team"
 
 #: pyClanSphere/config.py:33
 msgid ""
 "The database URI.  For more information about database settings consult the "
 "pyClanSphere help."
 msgstr ""
+"Die Datenbank URI.  Für mehr Informationen über die Datenbankeinstellungen  "
+"konsultiere die pyClanSphere Hilfe."
 
 #: pyClanSphere/config.py:36
 msgid ""
@@ -47,20 +50,26 @@ msgid ""
 " URL on https if this is savely possible.  This requires a working SSL setup"
 " or otherwise pyClanSphere will become unresponsive."
 msgstr ""
+"Wenn ein Request auf einer HTTP URL ankommt wird pyClanSphere eine "
+"Weiterleitung auf die selbe Resource unter Verwendung von HTTPS einleiten.  "
+"Dies erfordert ein funktionierendes SSL Setup."
 
 #: pyClanSphere/config.py:40
 msgid ""
 "If enabled the database will collect the SQL statements and add them to the "
 "bottom of the page for easier debugging"
 msgstr ""
+"Wenn aktiviert, wird die Datenbank gesammelte SQL Statements am Ende jeder "
+"generierten HTML Seite einblenden."
 
 #: pyClanSphere/config.py:43
 msgid "My Clan Page"
-msgstr ""
+msgstr "Meine Clanseite"
 
 #: pyClanSphere/config.py:44
+#, fuzzy
 msgid "just another Clan page"
-msgstr ""
+msgstr "unsere pyClanSphere Welt"
 
 #: pyClanSphere/config.py:45
 msgid ""
@@ -69,13 +78,21 @@ msgid ""
 "confusingly.  Remember to change this value if you move your site to a new "
 "location."
 msgstr ""
+"Die Basis URL der Site.  Dies muss eine vollständige URL (mit führendem "
+"http:// oder https://) sein, andernfalls wird sich die Anwendung verwirrend "
+"verhalten.  Dieser Wert muss geändert werden, wenn die Site auf eine neue "
+"URL umzieht."
 
 #: pyClanSphere/config.py:50
+#, fuzzy
 msgid ""
 "The email address given here is used by the notification system to send "
 "mails from.  Also plugins that send mails will use this address as sender "
 "address."
 msgstr ""
+"Diese E-Mail Adresse hier wird vom Benachrichtigungssystem verwendet um "
+"E-Mails zu versenden.  Plugins, die E-Mails versenden, verwenden diese "
+"Adresse als Absender."
 
 #: pyClanSphere/config.py:55
 msgid ""
@@ -84,34 +101,50 @@ msgid ""
 "timezone after posts were created because the information in the database is"
 " stored as UTC."
 msgstr ""
+"Die Zeitzone der Site.  Alle Uhrzeiten und Daten im Benutzerinterface und "
+"auf der Webseite werden in dieser Zeitzone angezeigt.  Es ist möglich die "
+"Zeitzone zu ändern, nachdem Einträge erstellt wurden."
 
 #: pyClanSphere/config.py:60
+#, fuzzy
 msgid "If set to true the site enables the maintainance mode."
-msgstr ""
+msgstr "Wenn auf wahr gesetzt, wird der Wartungsmodus aktiviert."
 
 #: pyClanSphere/config.py:63
+#, fuzzy
 msgid ""
 "If there are multiple pyClanSphere installations on the same host the cookie"
 " name should be set to something different for each one."
 msgstr ""
+"Wenn sich mehrere pyClanSphere Installationen auf dem selben Host befinden, "
+"sollte der Cookie-Name für jedes Blog auf einen anderen Wert gesetzt werden."
 
 #: pyClanSphere/config.py:67
+#, fuzzy
 msgid ""
 "The secret key is used for vairous security related tasks in the system.  "
 "For example the cookie is signed with this value."
 msgstr ""
+"Der Secret Key wird für mehrere sicherheitsrelevante Aufgaben im System "
+"verwendet.  Zum Beispiel wird das Cookie mit diesem Wert signiert."
 
 #: pyClanSphere/config.py:73
+#, fuzzy
 msgid ""
 "The iid uniquely identifies the pyClanSphere instance.  Currently this value"
 " is unused, but once set you should not modify it."
 msgstr ""
+"Die IID identifiziert die pyClanSphere Instanz eindeutig.  Momentan ist "
+"dieser Wert unbenutzt, aber er sollte, einmal gesetzt, nicht verändert "
+"werden."
 
 #: pyClanSphere/config.py:84
 msgid ""
 "During development this is helpful to log emails into a mail.log file in "
 "your instance folder instead of delivering them to your MTA."
 msgstr ""
+"Wärend der Entwicklung ist diese hilfreich um E-Mails in eine Datei names "
+"mail.log im Instanz-Ordner senden anstatt sie zum Mailserver weiterzuleiten."
 
 #: pyClanSphere/config.py:88
 msgid ""
@@ -119,22 +152,24 @@ msgid ""
 "debuggers can catch it instead.  This is useful for plugin and core "
 "development."
 msgstr ""
+"Wenn dieser Wert auf wahr gesetzt wird, werden Fehler in pyClanSphere nicht "
+"gefangen und können von einem Debugger gefangen werden."
 
 #: pyClanSphere/config.py:104
 msgid "No Cache"
-msgstr ""
+msgstr "Kein Cache"
 
 #: pyClanSphere/config.py:105
 msgid "Simple Cache"
-msgstr ""
+msgstr "Einfacher Cache"
 
 #: pyClanSphere/config.py:106
 msgid "memcached"
-msgstr ""
+msgstr "memcached"
 
 #: pyClanSphere/config.py:107
 msgid "Filesystem"
-msgstr ""
+msgstr "Dateisystem"
 
 #: pyClanSphere/config.py:122
 msgid ""
@@ -142,6 +177,10 @@ msgid ""
 "default should be fine for most environments but if you have a very bad "
 "network connection during development you should increase it."
 msgstr ""
+"Dieser Timeout wird von Haus aus für alle Netzwerkoperationen verwendet. Er "
+"sollte für den Großteil der Umgebungen ausreichend sein, allerdings sollte "
+"er bei einer schlechten Konnektivität während der Entwicklung hochgesetzt "
+"werden."
 
 #: pyClanSphere/config.py:131
 msgid ""
@@ -149,6 +188,9 @@ msgid ""
 "for plugins.  If the is not absolute, it's considered relative to the "
 "instance folder."
 msgstr ""
+"Hier können zusätzliche, mit Komma getrennte, Pfade angegeben werden, die "
+"nach Plugins abgesucht werden.  Wenn der Pfad nicht absolut ist, wird er als"
+" relativ zum Instanz-Ordner angesehen."
 
 #: pyClanSphere/config.py:188
 msgid ""
@@ -159,212 +201,226 @@ msgid ""
 "      that the file itself is writeable as well.\n"
 "    "
 msgstr ""
+"\n"
+"    <p>\n"
+"      Dieser Fehler wird unter anderem durch eine nicht schreibbare "
+"Konfigurationsdatei\n"
+"      hervorgerufen.\n"
+"      Überprüfe, ob der Ordner sowie die Konfigurationsdatei selbst "
+"schreibbar sind."
 
 #: pyClanSphere/config.py:200
 #, python-format
 msgid "Could not save configuration file: %s"
-msgstr ""
+msgstr "Konnte die Konfigurationsdatei %s nicht speichern."
 
 #: pyClanSphere/forms.py:44
 #, python-format
 msgid "User “%(value)s” does not exist."
-msgstr ""
+msgstr "Benutzer „%(value)s” existiert nicht."
 
 #: pyClanSphere/forms.py:45
 msgid "You have to enter a username."
-msgstr ""
+msgstr "Du musst einen Benutzernamen angeben."
 
 #: pyClanSphere/forms.py:47
 #, python-format
 msgid "Failed login attempt, user “%s” does not exist"
-msgstr ""
+msgstr "Gescheiterter Loginversuch, der Benutzer „%s” existiert nicht"
 
 #: pyClanSphere/forms.py:55
 #, python-format
 msgid "Failed login attempt from “%s”, invalid password"
-msgstr ""
+msgstr "Gescheiterter Loginversuch von „%s”, falsches Passwort."
 
 #: pyClanSphere/forms.py:57
 msgid "Incorrect password."
-msgstr ""
+msgstr "Falsches Passwort"
 
 #: pyClanSphere/forms.py:62
 msgid "Old password"
-msgstr ""
+msgstr "Altes Passwort"
 
 #: pyClanSphere/forms.py:64
 msgid "New password"
-msgstr ""
+msgstr "Neues Passwort"
 
 #: pyClanSphere/forms.py:66
 msgid "Repeat password"
-msgstr ""
+msgstr "Passwort wiederholen"
 
 #: pyClanSphere/forms.py:76
 msgid "The old password you've entered is wrong."
-msgstr ""
+msgstr "Das alte eingegebene Passwort ist falsch."
 
 #: pyClanSphere/forms.py:81
 msgid "The two passwords don't match."
-msgstr ""
+msgstr "Die zwei Passwörter stimmen nicht überein."
 
 #: pyClanSphere/forms.py:87
 msgid "Disable plugin guard"
-msgstr ""
+msgstr "Plugin-Guard deaktivieren"
 
 #: pyClanSphere/forms.py:88
 msgid "If the plugin guard is disabled errors on plugin setup are not caught."
 msgstr ""
+"Wenn der Plugin-Guard deaktiviert ist, werden keine Fehler während des "
+"Plugin-Starts abgefangen."
 
 #: pyClanSphere/forms.py:138 pyClanSphere/templates/admin/manage_groups.html:8
 msgid "Groupname"
-msgstr ""
+msgstr "Gruppenname"
 
 #: pyClanSphere/forms.py:141 pyClanSphere/forms.py:295
 #: pyClanSphere/templates/admin/information.html:102
 msgid "Privileges"
-msgstr ""
+msgstr "Berechtigungen"
 
 #: pyClanSphere/forms.py:158
 msgid "This groupname is already in use"
-msgstr ""
+msgstr "Der Gruppenname ist bereits vergeben"
 
 #: pyClanSphere/forms.py:180
 msgid "What should pyClanSphere do with users assigned to this group?"
-msgstr ""
+msgstr "Wie soll mit Benutzern dieser Gruppe verfahren werden?"
 
 #: pyClanSphere/forms.py:183
 msgid "Do nothing, just detach the membership"
-msgstr ""
+msgstr "Nichts, nur die Mitgliedschaft auflösen"
 
 #: pyClanSphere/forms.py:184
 msgid "Move the users to another group"
-msgstr ""
+msgstr "Die Benutzer in eine andere Gruppe verschieben"
 
 #: pyClanSphere/forms.py:186
 msgid "Relocate users to"
-msgstr ""
+msgstr "Verschiebe die Benutzer in die Gruppe"
 
 #: pyClanSphere/forms.py:199
 msgid "You have to select a group that gets the users assigned."
-msgstr ""
+msgstr "Du musst eine Gruppe auswählen, welche die Benutzer aufnimmt"
 
 #: pyClanSphere/forms.py:222 pyClanSphere/forms.py:264
 #: pyClanSphere/templates/account/login.html:29
 #: pyClanSphere/templates/admin/manage_users.html:8
 #: pyClanSphere/websetup/templates/admin_account.html:10
 msgid "Username"
-msgstr ""
+msgstr "Benutzername"
 
 #: pyClanSphere/forms.py:225 pyClanSphere/forms.py:265
 #: pyClanSphere/templates/admin/manage_users.html:9
 msgid "Realname"
-msgstr ""
+msgstr "Voller Name"
 
 #: pyClanSphere/forms.py:226
 msgid "Display name"
-msgstr ""
+msgstr "Anzeigename"
 
 #: pyClanSphere/forms.py:227
 msgid "Email"
-msgstr ""
+msgstr "E-Mail"
 
 #: pyClanSphere/forms.py:229
 msgid "Website"
-msgstr ""
+msgstr "Webseite"
 
 #: pyClanSphere/forms.py:231 pyClanSphere/templates/account/login.html:32
 #: pyClanSphere/websetup/templates/admin_account.html:12
 msgid "Password"
-msgstr ""
+msgstr "Passwort"
 
 #: pyClanSphere/forms.py:233 pyClanSphere/forms.py:235
 msgid "Confirm password"
-msgstr ""
+msgstr "Passwort bestätigen"
 
 #: pyClanSphere/forms.py:236
 msgid "Gender"
-msgstr ""
+msgstr "Geschlecht"
 
 #: pyClanSphere/forms.py:237
 msgid "Day of Birth"
-msgstr ""
+msgstr "Geburtstag"
 
 #: pyClanSphere/forms.py:238
 msgid "Height in full cm"
-msgstr ""
+msgstr "Größe in ganzen cm"
 
 #: pyClanSphere/forms.py:239
 msgid "Streetaddress"
-msgstr ""
+msgstr "Straße"
 
 #: pyClanSphere/forms.py:240
 msgid "Zip code"
-msgstr ""
+msgstr "PLZ"
 
 #: pyClanSphere/forms.py:241
 msgid "City"
-msgstr ""
+msgstr "Ort"
 
 #: pyClanSphere/forms.py:242
+#, fuzzy
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #: pyClanSphere/forms.py:268
+#, fuzzy
 msgid "Male"
-msgstr ""
+msgstr "männlich"
 
 #: pyClanSphere/forms.py:269
 msgid "Female"
-msgstr ""
+msgstr "weiblich"
 
 #: pyClanSphere/forms.py:297 pyClanSphere/views/admin.py:74
 msgid "Groups"
-msgstr ""
+msgstr "Gruppen"
 
 #: pyClanSphere/forms.py:316
 msgid "This username is already in use"
-msgstr ""
+msgstr "Der Benutzername ist bereits vergeben"
 
 #: pyClanSphere/forms.py:363
 msgid "This email address is already in use"
-msgstr ""
+msgstr "Diese E-Mail Adresse wird bereits verwendet"
 
 #: pyClanSphere/forms.py:372
 msgid "Passwords do not match"
-msgstr ""
+msgstr "Die Passwörter stimmen nicht überein."
 
 #: pyClanSphere/forms.py:422
 msgid "Filename"
-msgstr ""
+msgstr "Dateiname"
 
 #: pyClanSphere/forms.py:423
 msgid "Log Level"
-msgstr ""
+msgstr "Log-Level"
 
 #: pyClanSphere/forms.py:428
+#, fuzzy
 msgid "Clan Page title"
-msgstr ""
+msgstr "Seitentitel"
 
 #: pyClanSphere/forms.py:429
+#, fuzzy
 msgid "Clan Page tagline"
-msgstr ""
+msgstr "Tags Zeile im Seitenkopf"
 
 #: pyClanSphere/forms.py:430
+#, fuzzy
 msgid "Clan email"
-msgstr ""
+msgstr "Clan E-Mail"
 
 #: pyClanSphere/forms.py:431
 msgid "Language"
-msgstr ""
+msgstr "Sprache"
 
 #: pyClanSphere/forms.py:432
 msgid "Timezone"
-msgstr ""
+msgstr "Zeitzone"
 
 #: pyClanSphere/forms.py:434
 msgid "Cookie Name"
-msgstr ""
+msgstr "Cookie-Name"
 
 #: pyClanSphere/forms.py:447
 msgid "clanindex URL prefix"
@@ -372,228 +428,243 @@ msgstr ""
 
 #: pyClanSphere/forms.py:449
 msgid "Admin URL prefix"
-msgstr ""
+msgstr "Admin URL-Präfix"
 
 #: pyClanSphere/forms.py:451
 msgid "Account URL prefix"
-msgstr ""
+msgstr "Konto URL-Präfix"
 
 #: pyClanSphere/forms.py:452
 msgid "Force HTTPS"
-msgstr ""
+msgstr "HTTPS erzwingen"
 
 #: pyClanSphere/forms.py:478
 msgid "Cache system"
-msgstr ""
+msgstr "Cache-System"
 
 #: pyClanSphere/forms.py:480
 msgid "Default cache timeout"
-msgstr ""
+msgstr "Standardmäßiger Timeout"
 
 #: pyClanSphere/forms.py:482
 msgid "Enable eager caching"
-msgstr ""
+msgstr "Eager caching aktivieren"
 
 #: pyClanSphere/forms.py:483
 msgid "Enable"
-msgstr ""
+msgstr "Aktivieren"
 
 #: pyClanSphere/forms.py:490
 msgid "You have to provide at least one server to use memcached."
-msgstr ""
+msgstr "Du musst mindestens einen Server angeben, wenn memcached aktiviert ist."
 
 #: pyClanSphere/forms.py:494
 msgid "You have to provide cache folder to use filesystem cache."
-msgstr ""
+msgstr "Du musst einen Pfad für den Dateisystem-Cache angeben."
 
 #: pyClanSphere/forms.py:515
 msgid "Use default value"
-msgstr ""
+msgstr "Benutze Standardwert"
 
 #: pyClanSphere/notifications.py:134
 #: pyClanSphere/websetup/templates/admin_account.html:16
 msgid "E-Mail"
-msgstr ""
+msgstr "E-Mail"
 
 #: pyClanSphere/notifications.py:257
 msgid "When pyClanSphere found an urgent security alarm."
-msgstr ""
+msgstr "Wenn pyClanSphere einen dringlichen Sicherheitsalarm auslöst."
 
 #: pyClanSphere/notifications.py:259
+#, fuzzy
 msgid "When pyClanSphere throws errors."
-msgstr ""
+msgstr "pyClanSphere Fehler"
 
 #: pyClanSphere/pluginsystem.py:333
 msgid ""
 "Could not install the plugin because the uploaded file is not a valid plugin"
 " file."
 msgstr ""
+"Konnte das Plugin nicht installieren, die hochgeladene Datei ist keine "
+"Plugin-Datei."
 
 #: pyClanSphere/pluginsystem.py:335
 msgid ""
 "The plugin uploaded has a newer package version than this pyClanSphere "
 "installation can handle."
 msgstr ""
+"Das hochgeladene Plugin hat eine neuere Package-Version, als diese "
+"Installation von pyClanSphere verarbeiten kann."
 
 #: pyClanSphere/pluginsystem.py:338
 msgid "A plugin with the same UID is already installed. Aborted."
-msgstr ""
+msgstr "Ein Plugin mit der gleichen UID wurde bereits installiert. Abbruch."
 
 #: pyClanSphere/pluginsystem.py:340
 msgid ""
 "Could not install the package because the installer wasn't able to write the"
 " package information. Wrong permissions?"
 msgstr ""
+"Konnte das Paket nicht installieren, weil der Installer die Plugin-"
+"Informationen nicht schreiben konnte.  Sind die Zugriffsrechte richtig?"
 
 #: pyClanSphere/pluginsystem.py:362
 msgid "Plugin setup error"
-msgstr ""
+msgstr "Fehler im Plugin-Setup"
 
 #: pyClanSphere/pluginsystem.py:373
 #, python-format
 msgid "Exception happend on setup: %(error)s (%(file)s, line %(line)d)"
-msgstr ""
+msgstr "Ein Fehler ist im Setup aufgetreten: %(error)s (%(file)s, Zeile %(line)d)"
 
 #: pyClanSphere/privileges.py:203
+#, fuzzy
 msgid "can enter user account panel"
-msgstr ""
+msgstr "kann die Benutzereinstellungen verändern"
 
 #: pyClanSphere/privileges.py:204
 msgid "can enter admin panel"
-msgstr ""
+msgstr "kann das Adminpanel öffnen"
 
 #: pyClanSphere/privileges.py:205
+#, fuzzy
 msgid "can administer everything"
-msgstr ""
+msgstr "kann die Site administrieren"
 
 #: pyClanSphere/docs/__init__.py:67
 msgid "no documented plugins installed."
-msgstr ""
+msgstr "Keine dokumentierten Plugins installiert."
 
 #: pyClanSphere/i18n/__init__.py:478
 msgid "now"
-msgstr ""
+msgstr "jetzt"
 
 #: pyClanSphere/plugins/news/__init__.py:28
 msgid "Overview"
-msgstr ""
+msgstr "Übersicht"
 
 #: pyClanSphere/plugins/news/__init__.py:31
 msgid "Write"
-msgstr ""
+msgstr "Schreiben"
 
 #: pyClanSphere/plugins/news/__init__.py:34 pyClanSphere/plugins/news/forms.py:23
 msgid "News"
-msgstr ""
+msgstr "News"
 
 #: pyClanSphere/plugins/news/forms.py:22
 #: pyClanSphere/plugins/news/templates/admin/news_list.html:7
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: pyClanSphere/plugins/news/forms.py:25
 msgid "Date of Publication"
-msgstr ""
+msgstr "Veröffentlichungsdatum"
 
 #: pyClanSphere/plugins/news/forms.py:26
 #: pyClanSphere/plugins/news/templates/admin/news_list.html:9
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: pyClanSphere/plugins/news/forms.py:48
 #: pyClanSphere/plugins/news/templates/admin/news_list.html:21
 msgid "Draft"
-msgstr ""
+msgstr "Entwurf"
 
 #: pyClanSphere/plugins/news/forms.py:49
 #: pyClanSphere/plugins/news/templates/admin/news_list.html:23
 msgid "Published"
-msgstr ""
+msgstr "Veröffentlicht"
 
 #: pyClanSphere/plugins/news/forms.py:56
 msgid "Initially news should always be drafts"
-msgstr ""
+msgstr "News sollten zunächst immer Entwurf sein"
 
 #: pyClanSphere/plugins/news/forms.py:60
 msgid "You have no permission to publish posts."
-msgstr ""
+msgstr "Keine Berechtigung zum Veröffentlichen"
 
 #: pyClanSphere/plugins/news/privileges.py:27
+#, fuzzy
 msgid "can create news"
-msgstr ""
+msgstr "kann neue Seiten anlegen"
 
 #: pyClanSphere/plugins/news/privileges.py:28
+#, fuzzy
 msgid "can edit non-selfwritten news"
-msgstr ""
+msgstr "kann News anderer Benutzer bearbeiten"
 
 #: pyClanSphere/plugins/news/privileges.py:29
 msgid "can work on published items or publish new ones"
-msgstr ""
+msgstr "kann News veröffentlichen und an veröffentlichten arbeiten"
 
 #: pyClanSphere/plugins/news/privileges.py:30
+#, fuzzy
 msgid "can delete news"
-msgstr ""
+msgstr "kann News löschen"
 
 #: pyClanSphere/plugins/news/views.py:128
 #, python-format
 msgid "The entry %s was created successfully."
-msgstr ""
+msgstr "Der Eintrag %s wurde erfolgreich erstellt."
 
 #: pyClanSphere/plugins/news/views.py:131
 #, python-format
 msgid "The entry %s was updated successfully."
-msgstr ""
+msgstr "Der Eintrag %s wurde aktualisiert."
 
 #: pyClanSphere/plugins/news/templates/_news.html:6
 #, python-format
 msgid "written by %(author)s, on %(pub_date)s."
-msgstr ""
+msgstr "geschrieben von %(author)s am %(pub_date)s."
 
 #: pyClanSphere/plugins/news/templates/_news.html:11
 #, python-format
 msgid "<strong>Scheduled Post:</strong> This entry will appear in %(time_span)s."
 msgstr ""
+"<strong>Geplanter Beitrag:</strong> Dieser Eintrag wird in %(time_span)s "
+"veröffentlicht."
 
 #: pyClanSphere/plugins/news/templates/news_archive.html:2
 #: pyClanSphere/plugins/news/templates/news_archive.html:6
 msgid "Archive"
-msgstr ""
+msgstr "Archiv"
 
 #: pyClanSphere/plugins/news/templates/news_archive.html:12
 msgid "empty archive"
-msgstr ""
+msgstr "leeres Archiv"
 
 #: pyClanSphere/plugins/news/templates/news_archive.html:17
 #, python-format
 msgid "Archive for %(year)s"
-msgstr ""
+msgstr "Archiv für %(year)s"
 
 #: pyClanSphere/plugins/news/templates/news_archive.html:19
 #, python-format
 msgid "Archive for %(month)s"
-msgstr ""
+msgstr "Archiv für %(month)s"
 
 #: pyClanSphere/plugins/news/templates/news_archive.html:21
 #, python-format
 msgid "Archive for %(day)s"
-msgstr ""
+msgstr "Archiv für %(day)s"
 
 #: pyClanSphere/plugins/news/templates/news_index.html:3
 msgid "News Index"
-msgstr ""
+msgstr "Newsübersicht"
 
 #: pyClanSphere/plugins/news/templates/news_index.html:9
+#, fuzzy
 msgid "So far there are no news entries here."
-msgstr ""
+msgstr "Momentan gibt es keine Einträge in diesem Blog."
 
 #: pyClanSphere/plugins/news/templates/admin/news_edit.html:3
 #: pyClanSphere/plugins/news/templates/admin/news_list.html:30
 msgid "New News"
-msgstr ""
+msgstr "Neue News"
 
 #: pyClanSphere/plugins/news/templates/admin/news_edit.html:3
 msgid "Edit News"
-msgstr ""
+msgstr "News bearbeiten"
 
 #: pyClanSphere/plugins/news/templates/admin/news_edit.html:15
 #: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:11
@@ -606,21 +677,21 @@ msgstr ""
 #: pyClanSphere/templates/admin/edit_user.html:30
 #: pyClanSphere/templates/admin/url_options.html:18
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 #: pyClanSphere/plugins/news/templates/admin/news_edit.html:16
 #: pyClanSphere/templates/admin/_form_helpers.html:13
 #: pyClanSphere/templates/admin/edit_group.html:14
 #: pyClanSphere/templates/admin/edit_user.html:31
 msgid "Save and continue editing"
-msgstr ""
+msgstr "Speichern und bearbeiten fortsetzen"
 
 #: pyClanSphere/plugins/news/templates/admin/news_edit.html:18
 #: pyClanSphere/templates/admin/_form_helpers.html:15
 #: pyClanSphere/templates/admin/edit_group.html:16
 #: pyClanSphere/templates/admin/edit_user.html:33
 msgid "Delete"
-msgstr ""
+msgstr "Löschen"
 
 #: pyClanSphere/plugins/news/templates/admin/news_edit.html:20
 #: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:12
@@ -630,62 +701,63 @@ msgstr ""
 #: pyClanSphere/templates/admin/edit_group.html:18
 #: pyClanSphere/templates/admin/edit_user.html:35
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #: pyClanSphere/plugins/news/templates/admin/news_list.html:2
 #: pyClanSphere/plugins/news/templates/admin/news_list.html:4
+#, fuzzy
 msgid "News Overview"
-msgstr ""
+msgstr "Übersicht"
 
 #: pyClanSphere/plugins/news/templates/admin/news_list.html:8
 #: pyClanSphere/templates/admin/information.html:142
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #: pyClanSphere/plugins/vessel_theme/__init__.py:25
 msgid "Blue"
-msgstr ""
+msgstr "Blau"
 
 #: pyClanSphere/plugins/vessel_theme/__init__.py:26
 msgid "Gray"
-msgstr ""
+msgstr "Grau"
 
 #: pyClanSphere/plugins/vessel_theme/__init__.py:27
 msgid "Green"
-msgstr ""
+msgstr "Grün"
 
 #: pyClanSphere/plugins/vessel_theme/__init__.py:33
 msgid "Color variation"
-msgstr ""
+msgstr "Farbvariante"
 
 #: pyClanSphere/plugins/vessel_theme/__init__.py:62
 msgid "Color variation changed successfully."
-msgstr ""
+msgstr "Farbvariante wurde erfolgreich geändert."
 
 #: pyClanSphere/plugins/vessel_theme/templates/_widgets.html:2
 #: pyClanSphere/templates/account/layout.html:20
 #: pyClanSphere/templates/admin/layout.html:6
 msgid "Administration"
-msgstr ""
+msgstr "Administration"
 
 #: pyClanSphere/plugins/vessel_theme/templates/_widgets.html:4
 #, python-format
 msgid "logged in as %(username)s."
-msgstr ""
+msgstr "angemeldet als %(username)s."
 
 #: pyClanSphere/plugins/vessel_theme/templates/_widgets.html:5
 msgid "go to admin panel"
-msgstr ""
+msgstr "zur Administration"
 
 #: pyClanSphere/plugins/vessel_theme/templates/layout.html:28
-#, python-format
+#, fuzzy, python-format
 msgid "Proudly powered by %(pyClanSphere)s, Theme copyright by Armin Ronacher."
-msgstr ""
+msgstr "%(pyClanSphere)s unter der Haube, %(theme)s designed von %(author)s."
 
 #: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:2
 #: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:4
 msgid "Configure Vessel Theme"
-msgstr ""
+msgstr "Vessel-Design konfigurieren"
 
 #: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:5
 msgid ""
@@ -693,19 +765,23 @@ msgid ""
 "    This theme comes with various color variations you can choose from.\n"
 "  "
 msgstr ""
+"\n"
+"    Dieses Design hat mehrere Farbvarianten, von denen du eine auswählen "
+"kannst.\n"
+"  "
 
 #: pyClanSphere/shared/js/pyClanSphere.js:31
 #, python-format
 msgid "Replying to comment by %s."
-msgstr ""
+msgstr "Antworte auf Kommentar von %s."
 
 #: pyClanSphere/shared/js/pyClanSphere.js:33
 msgid "(Create as top level comment)"
-msgstr ""
+msgstr "(Erstelle als top-level Kommentar)"
 
 #: pyClanSphere/templates/403.html:2 pyClanSphere/templates/403.html:4
 msgid "Access Denied"
-msgstr ""
+msgstr "Zugriff verweigert"
 
 #: pyClanSphere/templates/403.html:5
 msgid ""
@@ -713,48 +789,60 @@ msgid ""
 "    The access to the requested resource was restricted.\n"
 "  "
 msgstr ""
+"\n"
+"    Der Zugriff auf die gewünschte Ressource wurde verweigert.\n"
+"  "
 
 #: pyClanSphere/templates/404.html:2 pyClanSphere/templates/404.html:4
 msgid "Page Not Found"
-msgstr ""
+msgstr "Seite nicht gefunden"
 
 #: pyClanSphere/templates/404.html:5
 msgid "Sorry, the page you requested does not exist."
-msgstr ""
+msgstr "Die gewünsche Seite wurde leider nicht gefunden."
 
 #: pyClanSphere/templates/404.html:6
 msgid ""
 "You may have followed a bad link or mis-typed a URL.\n"
 "    That’s most likely what went wrong."
 msgstr ""
+"Du bist wahrscheinlich einem kaputten Link gefolgt oder\n"
+"    hast eine URL falsch eingegeben."
 
 #: pyClanSphere/templates/404.html:8
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "You may want to\n"
 "    have a look at the <a href=\"%(index_link)s\">main page</a>."
 msgstr ""
+"Du findest möglicherweise\n"
+"    in der <a href=\"%(index_link)s\">Übersicht</a>, was du gesucht hast."
 
 #: pyClanSphere/templates/500.html:2
+#, fuzzy
 msgid "PyClanSphere Internal Server Error"
-msgstr ""
+msgstr "pyClanSphere interner Serverfehler"
 
 #: pyClanSphere/templates/500.html:4
 msgid "Internal Server Error"
-msgstr ""
+msgstr "Interner Serverfehler"
 
 #: pyClanSphere/templates/500.html:5
+#, fuzzy
 msgid ""
 "\n"
 "    An internal error happened in the application. The site administrator\n"
 "    has been informed about the problem.\n"
 "  "
 msgstr ""
+"\n"
+"    Ein interner Fehler ist aufgetreten. Der Administrator wurde über das "
+"Problem informiert."
 
 #: pyClanSphere/templates/_about_pyClanSphere.html:2
 #: pyClanSphere/templates/_about_pyClanSphere.html:6
 msgid "About pyClanSphere"
-msgstr ""
+msgstr "Über pyClanSphere"
 
 #: pyClanSphere/templates/_about_pyClanSphere.html:9
 msgid ""
@@ -766,11 +854,17 @@ msgid ""
 "      a simple and intuitive user interface.\n"
 "    "
 msgstr ""
+"\n"
+"      pyClanSphere ist eine Plattform für das Veröffentlichen von Inhalten\n"
+"      mit den Schwerpunkten Benutzerfreundlichkeit und Erweiterbarbeit.\n"
+"      Es verfügt über eine umfangreiche Infrastruktur und eine\n"
+"      intuitive Benutzeroberfläche.\n"
+"    "
 
 #: pyClanSphere/templates/_about_pyClanSphere.html:14
 #, python-format
 msgid "© Copyright %(years)s by the pyClanSphere Team. Some rights reserved."
-msgstr ""
+msgstr "© Copyright %(years)s by the pyClanSphere Team. Rechte vorbehalten."
 
 #: pyClanSphere/templates/_about_pyClanSphere.html:17
 msgid ""
@@ -779,6 +873,11 @@ msgid ""
 "      modification, are permitted provided that the following conditions\n"
 "      are met:"
 msgstr ""
+"\n"
+"    Weiterverbreitung und Verwendung in nichtkompilierter oder kompilierter "
+"Form, mit oder ohne\n"
+"    Veränderung, sind unter den folgenden Bedingungen\n"
+"    zulässig:"
 
 #: pyClanSphere/templates/_about_pyClanSphere.html:22
 msgid ""
@@ -786,6 +885,9 @@ msgid ""
 "        copyright notice, this list of conditions and the following\n"
 "        disclaimer."
 msgstr ""
+"Weiterverbreitete nichtkompilierte Exemplare müssen das obige\n"
+"    Copyright, die Liste der Bedingungen und den folgenden\n"
+"    Haftungsausschluss im Quelltext enthalten."
 
 #: pyClanSphere/templates/_about_pyClanSphere.html:25
 msgid ""
@@ -794,6 +896,10 @@ msgid ""
 "        disclaimer in the documentation and/or other materials provided\n"
 "        with the distribution."
 msgstr ""
+"Weiterverbreitete kompilierte Exemplare müssen das obige\n"
+"    Copyright, die Liste der Bedingungen und den folgenden\n"
+"    Haftungsausschluss in der Dokumentation und/oder anderen Materialien,\n"
+"    die mit dem Exemplar verbreitet werden, enthalten."
 
 #: pyClanSphere/templates/_about_pyClanSphere.html:29
 msgid ""
@@ -801,6 +907,10 @@ msgid ""
 "        or promote products derived from this software without specific\n"
 "        prior written permission."
 msgstr ""
+"Die Namen der Beitragsleistenden dürfen nicht zum Kennzeichnen\n"
+"    oder Bewerben von Produkten, die von dieser Software abgeleitet wurden, "
+"ohne spezielle\n"
+"    vorherige schriftliche Genehmigung verwendet werden."
 
 #: pyClanSphere/templates/_about_pyClanSphere.html:34
 msgid ""
@@ -816,38 +926,53 @@ msgid ""
 "      (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\n"
 "      OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
 msgstr ""
+"DIESE SOFTWARE WIRD VOM COPYRIGHT INHABER UND DEN BEITRAGSLEISTENDEN OHNE\n"
+"JEGLICHE SPEZIELLE ODER IMPLIZIERTE GARANTIEN ZUR VERFÜGUNG GESTELLT, DIE\n"
+"UNTER ANDEREM EINSCHLIESSEN: DIE IMPLIZIERTE GARANTIE DER VERWENDBARKEIT\n"
+"DER SOFTWARE FÜR EINEN BESTIMMTEN ZWECK. AUF KEINEN FALL SIND DIE COPYRIGH\n"
+"INHABER ODER DIE BEITRAGSLEISTENDEN FÜR IRGENDWELCHE DIREKTEN, INDIREKTEN,\n"
+"ZUFÄLLIGEN, SPEZIELLEN, BEISPIELHAFTEN ODER FOLGENDEN SCHÄDEN (UNTER\n"
+"ANDEREM VERSCHAFFEN VON ERSATZGÜTERN ODER -DIENSTLEISTUNGEN; EINSCHRÄNKUNG\n"
+"DER NUTZUNGSFÄHIGKEIT; VERLUST VON NUTZUNGSFÄHIGKEIT; DATEN; PROFIT ODER\n"
+"GESCHÄFTSUNTERBRECHUNG), WIE AUCH IMMER VERURSACHT UND UNTER WELCHER\n"
+"VERPFLICHTUNG AUCH IMMER, OB IN VERTRAG, STRIKTER VERPFLICHTUNG ODER\n"
+"UNERLAUBTE HANDLUNG (INKLUSIVE FAHRLÄSSIGKEIT) VERANTWORTLICH, AUF WELCHEM\n"
+"WEG SIE AUCH IMMER DURCH DIE BENUTZUNG DIESER SOFTWARE ENTSTANDEN SIND,\n"
+"SOGAR, WENN SIE AUF DIE MÖGLICHKEIT EINES SOLCHEN SCHADENS HINGEWIESEN\n"
+"WORDEN SIND."
 
 #: pyClanSphere/templates/_help.html:8
 msgid "Table Of Contents"
-msgstr ""
+msgstr "Inhaltsverzeichnis"
 
 #: pyClanSphere/templates/error_layout.html:5
 msgid "pyClanSphere Error"
-msgstr ""
+msgstr "pyClanSphere Fehler"
 
 #: pyClanSphere/templates/index.html:2
 msgid "Index"
-msgstr ""
+msgstr "Übersicht"
 
 #: pyClanSphere/templates/index.html:4
 msgid "Welcome"
-msgstr ""
+msgstr "Willkommen"
 
 #: pyClanSphere/templates/index.html:6
+#, fuzzy
 msgid "So far there are no entries here."
-msgstr ""
+msgstr "Momentan gibt es keine Einträge in diesem Blog."
 
 #: pyClanSphere/templates/internal_error.html:2
 msgid "pyClanSphere Internal Error"
-msgstr ""
+msgstr "Interner pyClanSphere Fehler"
 
 #: pyClanSphere/templates/internal_error.html:4
 msgid "Internal Error"
-msgstr ""
+msgstr "Interner Fehler"
 
 #: pyClanSphere/templates/internal_error.html:6
 msgid "pyClanSphere encountered an internal error during processing:"
-msgstr ""
+msgstr "Ein interner Fehler in pyClanSphere ist aufgetreten:"
 
 #: pyClanSphere/templates/internal_error.html:13
 msgid ""
@@ -856,8 +981,14 @@ msgid ""
 "    documentation.\n"
 "  "
 msgstr ""
+"\n"
+"    Wenn du Schwierigkeiten hast das Problem zu lösen schau in die "
+"pyClanSphere\n"
+"    documentation.\n"
+"  "
 
 #: pyClanSphere/templates/internal_error.html:17
+#, fuzzy
 msgid ""
 "\n"
 "    This error is only visible to site administrators.  If a regular user\n"
@@ -865,78 +996,88 @@ msgid ""
 "    message is displayed.\n"
 "  "
 msgstr ""
+"\n"
+"    Dieser Fehler ist nur für Siteadministratoren sichtbar.  Wenn ein\n"
+"    normaler Benutzer diesen Fehler erzeugt hat, wird ein Eintrag im Fehler\n"
+"    Log angelegt und eine allgemeine Fehlermeldung erzeugt.\n"
+"  "
 
 #: pyClanSphere/templates/layout.html:20
-#, python-format
+#, fuzzy, python-format
 msgid "Empowered by %(pyClanSphere)s."
-msgstr ""
+msgstr "%(pyClanSphere)s unter der Haube."
 
 #: pyClanSphere/templates/maintenance.html:40
 msgid "Maintenance Mode"
-msgstr ""
+msgstr "Wartungsmodus"
 
 #: pyClanSphere/templates/maintenance.html:41
+#, fuzzy
 msgid ""
 "\n"
 "      This pyClanSphere instance is currently in maintenance mode.\n"
 "      Please wait until the administrator reopens the site."
 msgstr ""
+"\n"
+"    Diese pyClanSphere-Instanz wird gerade gewartet.\n"
+"    Bitte warte, bis der Administrator die Site wieder öffnet."
 
 #: pyClanSphere/templates/server_error.html:2
 msgid "pyClanSphere Maintenance Mode"
-msgstr ""
+msgstr "pyClanSphere-Wartungsmodus aktivieren"
 
 #: pyClanSphere/templates/show_author.html:12
 msgid "Posts written by user"
-msgstr ""
+msgstr "Einträge von diesem Benutzer"
 
 #: pyClanSphere/templates/show_author.html:15
 #, python-format
 msgid "%(post)s, on %(date)s"
-msgstr ""
+msgstr "%(post)s, am %(date)s."
 
 #: pyClanSphere/templates/account/delete_account.html:2
 #: pyClanSphere/templates/account/delete_account.html:4
 #: pyClanSphere/templates/account/edit_profile.html:26
 msgid "Delete Account"
-msgstr ""
+msgstr "Benutzerkonto löschen"
 
 #: pyClanSphere/templates/account/delete_account.html:6
 msgid "Do you really want to delete your account?"
-msgstr ""
+msgstr "Möchtest du dein Benutzerprofil wirklich löschen?"
+"(Dieser Schritt ist endgültig)"
 
 #: pyClanSphere/templates/account/delete_account.html:8
 #: pyClanSphere/templates/admin/delete_group.html:16
 #: pyClanSphere/templates/admin/delete_user.html:10
 #: pyClanSphere/templates/admin/remove_plugin.html:12
 msgid "No"
-msgstr ""
+msgstr "Nein"
 
 #: pyClanSphere/templates/account/delete_account.html:9
 #: pyClanSphere/templates/admin/delete_group.html:17
 #: pyClanSphere/templates/admin/delete_user.html:11
 #: pyClanSphere/templates/admin/remove_plugin.html:13
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: pyClanSphere/templates/account/edit_profile.html:3
 msgid "Edit Profile"
-msgstr ""
+msgstr "Profil Bearbeiten"
 
 #: pyClanSphere/templates/account/edit_profile.html:25
 #: pyClanSphere/templates/account/index.html:14
 msgid "Update Profile"
-msgstr ""
+msgstr "Profil aktualisieren"
 
 #: pyClanSphere/templates/account/help.html:6
 #: pyClanSphere/templates/admin/help_404.html:4
 msgid "Documentation Not Found"
-msgstr ""
+msgstr "Dokumentation nicht gefunden"
 
 #: pyClanSphere/templates/account/help.html:7
 #: pyClanSphere/templates/admin/help_404.html:5
 msgid "The online documentation could not be found."
-msgstr ""
+msgstr "Die Online Dokumentation konnte nicht gefunden werden."
 
 #: pyClanSphere/templates/account/index.html:2
 #: pyClanSphere/templates/account/index.html:5
@@ -944,104 +1085,112 @@ msgstr ""
 #: pyClanSphere/templates/admin/index.html:5 pyClanSphere/views/account.py:38
 #: pyClanSphere/views/admin.py:64
 msgid "Dashboard"
-msgstr ""
+msgstr "Dashboard"
 
 #: pyClanSphere/templates/account/index.html:8
 #, python-format
 msgid "Howdy.  Welcome to your pyClanSphere account interface %(user)s."
-msgstr ""
+msgstr "Hallo und Willkommen im pyClanSphere Benutzerprofil, %(user)s."
 
 #: pyClanSphere/templates/account/index.html:12
 #: pyClanSphere/templates/admin/index.html:12
 msgid "Quickstart"
-msgstr ""
+msgstr "Schnellstart"
 
 #: pyClanSphere/templates/account/index.html:15 pyClanSphere/views/account.py:41
 msgid "Notifications"
-msgstr ""
+msgstr "Benachrichtigungen"
 
 #: pyClanSphere/templates/account/layout.html:6
 #: pyClanSphere/templates/admin/layout.html:21
 msgid "My Account"
-msgstr ""
+msgstr "Mein Benutzerprofil"
 
 #: pyClanSphere/templates/account/layout.html:16
-#, python-format
+#, fuzzy, python-format
 msgid "%(clan_title)s &mdash; My Account"
-msgstr ""
+msgstr "%(clan_title)s &mdash; Mein Benutzerprofil"
 
 #: pyClanSphere/templates/account/layout.html:18
 #: pyClanSphere/templates/admin/layout.html:20
+#, fuzzy
 msgid "View Startpage"
-msgstr ""
+msgstr "Startseite anzeigen"
 
 #: pyClanSphere/templates/account/layout.html:22
 #: pyClanSphere/templates/admin/layout.html:22
 msgid "Logout"
-msgstr ""
+msgstr "Abmelden"
 
 #: pyClanSphere/templates/account/layout.html:53
 #: pyClanSphere/templates/admin/layout.html:51
 #, python-format
 msgid "Powered by %(pyClanSphere)s %(version)s."
-msgstr ""
+msgstr "%(pyClanSphere)s %(version)s unter der Haube."
 
 #: pyClanSphere/templates/account/login.html:5
 #: pyClanSphere/templates/account/login.html:15
 #: pyClanSphere/templates/account/login.html:45
 msgid "Login"
-msgstr ""
+msgstr "Anmelden"
 
 #: pyClanSphere/templates/account/login.html:11
+#, fuzzy
 msgid "&laquo; back to the startpage"
-msgstr ""
+msgstr "&laquo; zurück zur Startseite"
 
 #: pyClanSphere/templates/account/login.html:42
 msgid "Remember me"
-msgstr ""
+msgstr "An Konto erinnern"
 
 #: pyClanSphere/templates/account/notification_settings.html:2
 #: pyClanSphere/templates/account/notification_settings.html:4
 msgid "Notification Settings"
-msgstr ""
+msgstr "Benachrichtigungseinstellungen"
 
 #: pyClanSphere/templates/account/notification_settings.html:6
 msgid "You can configure your notification subscriptions from here."
-msgstr ""
+msgstr "Du kannst deine Benachrichtigungseinstellungen von hier konfigurieren."
 
 #: pyClanSphere/templates/account/sorry_to_see_you_go.html:5
 msgid "Bye"
-msgstr ""
+msgstr "Auf Wiedersehen"
 
 #: pyClanSphere/templates/account/sorry_to_see_you_go.html:11
+#, fuzzy
 msgid "&laquo; back to the site index"
-msgstr ""
+msgstr "&laquo; zurück zur Startseite"
 
 #: pyClanSphere/templates/account/sorry_to_see_you_go.html:16
 msgid "We're sorry to see you go!"
-msgstr ""
+msgstr "Es tut uns Leid dich gehen zu sehen!"
 
 #: pyClanSphere/templates/admin/_form_helpers.html:18
 msgid "Preview"
-msgstr ""
+msgstr "Vorschau"
 
 #: pyClanSphere/templates/admin/basic_options.html:2
 #: pyClanSphere/templates/admin/basic_options.html:4
 msgid "Basic Options"
-msgstr ""
+msgstr "Grundeinstellungen"
 
 #: pyClanSphere/templates/admin/basic_options.html:5
+#, fuzzy
 msgid ""
 "\n"
 "    From here you can configure the basic site settings like the\n"
 "    title and tagline.\n"
 "  "
 msgstr ""
+"\n"
+"    Von hier kannst du die Grundeinstellungen deines Blogs\n"
+"    wie den Titel und die Tagline verändern.\n"
+"  "
 
 #: pyClanSphere/templates/admin/cache.html:2
 #: pyClanSphere/templates/admin/cache.html:4
 msgid "Cache Options"
-msgstr ""
+msgstr "Cache-Einstellungen"
 
 #: pyClanSphere/templates/admin/cache.html:6
 msgid ""
@@ -1054,6 +1203,12 @@ msgid ""
 "      the type of server you have and the number of visitors.\n"
 "    "
 msgstr ""
+"\n"
+"      pyClanSphere bringt ein Cache-System mit, das es erlaubt, einen "
+"plötzlichen\n"
+"      Benutzeransturm zu bewältigen.  Das Cache-System hat verschiedene\n"
+"      Backends, unter denen du wählen kannst.\n"
+"    "
 
 #: pyClanSphere/templates/admin/cache.html:12
 msgid ""
@@ -1065,14 +1220,19 @@ msgid ""
 "      plugins it might be a good idea to disable all caching.\n"
 "    "
 msgstr ""
+"\n"
+"      Beachte, dass bei aktiviertem Caching auch Templates gecacht werden\n"
+"      und unter Umständen bei Veränderungen nicht neugeladen werden.  Wenn\n"
+"      du Plugins entwickelst, ist es sinnvoll, den Cache zu deaktivieren.\n"
+"    "
 
 #: pyClanSphere/templates/admin/cache.html:28
 msgid "Cache System"
-msgstr ""
+msgstr "Cache System"
 
 #: pyClanSphere/templates/admin/cache.html:29
 msgid "Currently pyClanSphere supports three caching systems:"
-msgstr ""
+msgstr "Momentan unterstützt pyClanSphere die folgenden drei Cache-Systeme:"
 
 #: pyClanSphere/templates/admin/cache.html:31
 msgid ""
@@ -1085,6 +1245,12 @@ msgid ""
 "          lower the number or processes. If you have the chance to use a\n"
 "          memcached you should not use the simple cache."
 msgstr ""
+"<strong>Einfaches Caching</strong>: Der einfache Cache ist ein\n"
+"    sehr einfaches Caching im Arbeitsspeicher des Prozesses.  Dieser\n"
+"    Cache funktioniert nur, wenn du eine persistente Serverumgebung hast.\n"
+"    Vereinfacht gesagt funktioniert es umso besser, je mehr Theads\n"
+"    und je weniger Prozesse du hast.  Wenn du einen memcached Server\n"
+"    verwenden kannst, solltest du den einfachen Cache nicht nutzen."
 
 #: pyClanSphere/templates/admin/cache.html:37
 msgid ""
@@ -1094,6 +1260,10 @@ msgid ""
 "This\n"
 "          is useful for high traffic sites."
 msgstr ""
+"<strong>memcached</strong>: Dieser Cache nutzt einen oder mehrere\n"
+"    entfernte memcached Server um die Daten zu speichern.  Dies\n"
+"    erfordert zumindest einen memcache Daemon.  Diese Art des Caching\n"
+"    ist besonders für Seiten mit vielen Besuchern sinnvoll."
 
 #: pyClanSphere/templates/admin/cache.html:41
 msgid ""
@@ -1102,14 +1272,19 @@ msgid ""
 "          you should not use this cache. However for most of the cases the \n"
 "          filesystem it should be fast enough."
 msgstr ""
+"<strong>Dateisystem</strong>: Dieser Cache speichert die\n"
+"    Cache-Informationen auf dem Dateisystem.  Wenn IO das Problem\n"
+"    auf dem Server ist, sollte dieser Cache nicht verwendet werden.\n"
+"    In den meisten Fällen sollte das Dateisystem jedoch schnell\n"
+"    genug sein."
 
 #: pyClanSphere/templates/admin/cache.html:46
 msgid "Per default no cache system is active."
-msgstr ""
+msgstr "Standardmäßig ist kein Cache-System aktiv."
 
 #: pyClanSphere/templates/admin/cache.html:49
 msgid "Memcached Options"
-msgstr ""
+msgstr "Memcached Einstellungen"
 
 #: pyClanSphere/templates/admin/cache.html:50
 msgid ""
@@ -1126,6 +1301,17 @@ msgid ""
 "        >python-memcached</a> module.\n"
 "      "
 msgstr ""
+"\n"
+"    Um memcached verwenden zu können, muss die Adresse zum\n"
+"    memcached Server angegeben werden.  Für mehr Details\n"
+"    schau dir die <a href=\"http://www.danga.com/memcached/\">Webseite von\n"
+"    memcached</a> an.  Mehrere Adressen können mit Kommas getrennt\n"
+"    angegeben werden.  Die Unterstützung für memcached erfordert zudem\n"
+"    entweder das <a href=\"http://gijsbert.org/cmemcache/\"\n"
+"    >cmemcache</a> oder <a href=\"ftp://ftp.tummy.com/pub/python-"
+"memcached/\"\n"
+"    >python-memcached</a> Modul.\n"
+"    "
 
 #: pyClanSphere/templates/admin/cache.html:59
 msgid ""
@@ -1137,10 +1323,15 @@ msgid ""
 "        the following text field.\n"
 "      "
 msgstr ""
+"\n"
+"    Wenn du zum Beispiel einen memcached Server auf localhost (127.0.0.1),\n"
+"    Port 11211 laufen hast, müsstest du <code>127.0.0.1:11211</code> in\n"
+"    das Textfeld eingeben.\n"
+"    "
 
 #: pyClanSphere/templates/admin/cache.html:67
 msgid "Filesystem Options"
-msgstr ""
+msgstr "Dateisystem Optionen"
 
 #: pyClanSphere/templates/admin/cache.html:68
 msgid ""
@@ -1155,6 +1346,11 @@ msgid ""
 "        folder, pyClanSphere won't clean up the data left for you.\n"
 "      "
 msgstr ""
+"\n"
+"       Wenn der Dateisystem-Cache verwendet wird, kannst du einen Pfad\n"
+"       angeben, in dem pyClanSphere die Daten ablegt.  Beachte bitte, dass\n"
+"       das Ändern des Pfades die alten Cache-Dateien in diesem Ordner\n"
+"       nicht automatisch löscht."
 
 #: pyClanSphere/templates/admin/cache.html:75
 msgid ""
@@ -1171,10 +1367,18 @@ msgid ""
 "files.\n"
 "      "
 msgstr ""
+"\n"
+"    Außerdem muss beachtet werden, dass der Cache-Pfad ausschließlich\n"
+"    von pyClanSphere für Dateien verwendet wird.  pyClanSphere wird von Zeit"
+"\n"
+"    zu Zeit den Cache leeren und ohne Nachfrage alle Dateien in\n"
+"    diesem Ordner löschen.  Nutze also nicht einfach nur <code>/tmp</code>\n"
+"    für Caching, sondern immer einen Unterordner.\n"
+"   "
 
 #: pyClanSphere/templates/admin/cache.html:85
 msgid "General Cache Settings"
-msgstr ""
+msgstr "Generelle Cache Einstellungen"
 
 #: pyClanSphere/templates/admin/cache.html:86
 msgid ""
@@ -1187,22 +1391,32 @@ msgid ""
 "      cache a lot more but it will have visible side-effects.\n"
 "    "
 msgstr ""
+"\n"
+"    Die folgenden Werte sind vom Cache-System unabhängig.  Du kannst sie\n"
+"    verwenden, um das Caching im Detail zu beeinflussen.  Der Timeout\n"
+"    ist die Anzahl an Sekunden, die ein einzelner Eintrag im Cache\n"
+"    gespeichert wird.  Allerdings haben bestimmte Einträge einen Timeout,\n"
+"    der nicht von diesem Wert abhängt.  Wenn „Eager caching“ aktiviert ist,\n"
+"    wird das Cache-System wesentlich mehr Daten speichern - mit sichtbaren\n"
+"    Nebeneffekten.  Zum Beispiel werden neue Newsposts auf der Übersicht\n"
+"    oder in einem Newsfeed erst nach einiger Zeit erscheinen.\n"
+"   "
 
 #: pyClanSphere/templates/admin/cache.html:99
 msgid "Clear Cache"
-msgstr ""
+msgstr "Cache leeren"
 
 #: pyClanSphere/templates/admin/change_password.html:2
 #: pyClanSphere/templates/admin/change_password.html:4
 #: pyClanSphere/templates/admin/change_password.html:8
 msgid "Change Password"
-msgstr ""
+msgstr "Passwort ändern"
 
 #: pyClanSphere/templates/admin/configuration.html:2
 #: pyClanSphere/templates/admin/configuration.html:4
 #: pyClanSphere/views/admin.py:84
 msgid "Configuration Editor"
-msgstr ""
+msgstr "Konfigurationseditor"
 
 #: pyClanSphere/templates/admin/configuration.html:5
 msgid ""
@@ -1218,10 +1432,20 @@ msgid ""
 "    page (yet).\n"
 "  "
 msgstr ""
+"\n"
+"    Hier können alle bekannten Konfigurationswerte verändert werden.\n"
+"    Einige von ihnen (speziell die „core“ Einträge) können sehr leicht die\n"
+"    Installation zerstören, wenn sie auf ungültige Werte gestellt werden.\n"
+"    Verändere diese Werte nicht, wenn du nicht genau weißt, was sie "
+"bewirken.\n"
+"    Der Editor ist speziell dann nützlich, wenn du Werte von Plugins "
+"verändern\n"
+"    willst, die (noch) keine Konfigurationsseite besitzen.\n"
+"   "
 
 #: pyClanSphere/templates/admin/configuration.html:48
 msgid "Disable Editor"
-msgstr ""
+msgstr "Editor deaktivieren"
 
 #: pyClanSphere/templates/admin/configuration.html:51
 msgid ""
@@ -1231,15 +1455,19 @@ msgid ""
 "        to use it, click the button to proceed.\n"
 "      "
 msgstr ""
+"\n"
+"      Der Konfigurationseditor ist aus diesem Grund deaktiviert.  Wenn du\n"
+"      ihn wirklich aktivieren willst, klicke auf den Knopf.\n"
+"   "
 
 #: pyClanSphere/templates/admin/configuration.html:56
 msgid "Enable Editor"
-msgstr ""
+msgstr "Editor aktivieren"
 
 #: pyClanSphere/templates/admin/delete_group.html:2
 #: pyClanSphere/templates/admin/delete_group.html:4
 msgid "Delete Group"
-msgstr ""
+msgstr "Gruppe löschen"
 
 #: pyClanSphere/templates/admin/delete_group.html:6
 #, python-format
@@ -1248,6 +1476,9 @@ msgid ""
 "      Do you really want to delete the group “%(name)s”?\n"
 "    "
 msgstr ""
+"\n"
+"      Möchtest du wirklich die Gruppe „%(name)s“ löschen?\n"
+"   "
 
 #: pyClanSphere/templates/admin/delete_group.html:9
 msgid ""
@@ -1255,11 +1486,13 @@ msgid ""
 "      What should happen to the users assigned with this group?\n"
 "    "
 msgstr ""
+"\n"
+"    Was soll mit den Benutzern in dieser Gruppe geschehen?\n"
 
 #: pyClanSphere/templates/admin/delete_user.html:2
 #: pyClanSphere/templates/admin/delete_user.html:4
 msgid "Delete User"
-msgstr ""
+msgstr "Benutzer löschen"
 
 #: pyClanSphere/templates/admin/delete_user.html:6
 #, python-format
@@ -1268,24 +1501,27 @@ msgid ""
 "      Do you really want to delete the user “%(username)s”?\n"
 "    "
 msgstr ""
+"\n"
+"      Möchtest du wirklich den Benutzer „%(username)s“ löschen?\n"
+"   "
 
 #: pyClanSphere/templates/admin/edit_group.html:3
 #: pyClanSphere/templates/admin/manage_groups.html:22
 msgid "New Group"
-msgstr ""
+msgstr "Neue Gruppe"
 
 #: pyClanSphere/templates/admin/edit_group.html:3
 msgid "Edit Group"
-msgstr ""
+msgstr "Gruppe bearbeiten"
 
 #: pyClanSphere/templates/admin/edit_user.html:3
 #: pyClanSphere/templates/admin/manage_users.html:24
 msgid "New User"
-msgstr ""
+msgstr "Neuer Benutzer"
 
 #: pyClanSphere/templates/admin/edit_user.html:3
 msgid "Edit User"
-msgstr ""
+msgstr "Benutzer bearbeiten"
 
 #: pyClanSphere/templates/admin/help_404.html:6
 msgid ""
@@ -1293,29 +1529,31 @@ msgid ""
 "\t  <tt>build-documentation</tt> script from pyClanSphere's scripts\n"
 "\t  folder."
 msgstr ""
+"Möglicherweise musst du die Dokumentation erst mit dem Skript <tt>build-"
+"documentation</tt> im „scripts“-Ordner generieren."
 
 #: pyClanSphere/templates/admin/index.html:8
 #, python-format
 msgid "Howdy.  Welcome to the pyClanSphere administration interface %(user)s."
-msgstr ""
+msgstr "Hallo und Willkommen im pyClanSphere Administrationsbereich, %(user)s."
 
 #: pyClanSphere/templates/admin/index.html:14
 msgid "Configure pyClanSphere"
-msgstr ""
+msgstr "pyClanSphere konfigurieren"
 
 #: pyClanSphere/templates/admin/index.html:15
 msgid "Manage Plugins"
-msgstr ""
+msgstr "Plugins verwalten"
 
 #: pyClanSphere/templates/admin/index.html:16
 #: pyClanSphere/templates/admin/manage_users.html:2
 #: pyClanSphere/templates/admin/manage_users.html:4
 msgid "Manage Users"
-msgstr ""
+msgstr "Benutzer verwalten"
 
 #: pyClanSphere/templates/admin/index.html:17
 msgid "Get Help"
-msgstr ""
+msgstr "Hilfe ansehen"
 
 #: pyClanSphere/templates/admin/index.html:19
 #, python-format
@@ -1329,99 +1567,106 @@ msgid ""
 "        <a href=\"%(website)s\">pyClanSphere website</a>.\n"
 "      "
 msgstr ""
+"\n"
+"      Wenn du Hilfe benötigst, kannst du in die <a "
+"href=\"%(help)s\">Dokumentation</a> schauen.\n"
+"      Wenn das dein Problem nicht löst, findest du Antworten in der\n"
+"      <a href=\"%(support)s\">Support-Abteilung</a> von <a "
+"href=\"%(website)s\">pyClanSphere Webseite</a>.\n"
+"   "
 
 #: pyClanSphere/templates/admin/information.html:4
 #: pyClanSphere/templates/admin/information.html:20
 msgid "About The System"
-msgstr ""
+msgstr "Über das System"
 
 #: pyClanSphere/templates/admin/information.html:21
 msgid "pyClanSphere Environment"
-msgstr ""
+msgstr "pyClanSphere-Umgebung"
 
 #: pyClanSphere/templates/admin/information.html:23
 msgid "pyClanSphere Version"
-msgstr ""
+msgstr "pyClanSphere-Version"
 
 #: pyClanSphere/templates/admin/information.html:25
 msgid "Distribution Mode"
-msgstr ""
+msgstr "Distributionsmodus"
 
 #: pyClanSphere/templates/admin/information.html:27
 msgid "Package Location"
-msgstr ""
+msgstr "Pfad zum Python Package"
 
 #: pyClanSphere/templates/admin/information.html:29
 msgid "Shared Data"
-msgstr ""
+msgstr "Gemeinsam genutzte Daten"
 
 #: pyClanSphere/templates/admin/information.html:31
 msgid "Builtin Templates"
-msgstr ""
+msgstr "Mitgelieferte Vorlagen"
 
 #: pyClanSphere/templates/admin/information.html:33
 msgid "Builtin Plugins"
-msgstr ""
+msgstr "Mitgelieferte Plugins"
 
 #: pyClanSphere/templates/admin/information.html:35
 msgid "Builtin Translations"
-msgstr ""
+msgstr "Mitgelieferte Übersetzungen"
 
 #: pyClanSphere/templates/admin/information.html:37
 msgid "Path to Instance"
-msgstr ""
+msgstr "Pfad zur Instanz"
 
 #: pyClanSphere/templates/admin/information.html:39
 msgid "Database URI"
-msgstr ""
+msgstr "Datenbank-URI"
 
 #: pyClanSphere/templates/admin/information.html:42
 msgid "Hosting Environment"
-msgstr ""
+msgstr "Hosting-Umgebung"
 
 #: pyClanSphere/templates/admin/information.html:44
 msgid "Python Version"
-msgstr ""
+msgstr "Python-Version"
 
 #: pyClanSphere/templates/admin/information.html:46
 msgid "Platform"
-msgstr ""
+msgstr "Plattform"
 
 #: pyClanSphere/templates/admin/information.html:48
 msgid "Persistent Environment"
-msgstr ""
+msgstr "Persistente Umgebung"
 
 #: pyClanSphere/templates/admin/information.html:49
 #: pyClanSphere/templates/admin/information.html:59
 msgid "yes"
-msgstr ""
+msgstr "ja"
 
 #: pyClanSphere/templates/admin/information.html:49
 #: pyClanSphere/templates/admin/information.html:55
 #: pyClanSphere/templates/admin/information.html:59
 msgid "no"
-msgstr ""
+msgstr "nein"
 
 #: pyClanSphere/templates/admin/information.html:50
 msgid "Multithreaded"
-msgstr ""
+msgstr "Mehrere Threads"
 
 #: pyClanSphere/templates/admin/information.html:53
 #, python-format
 msgid "yes (%(count)s active threads)"
-msgstr ""
+msgstr "ja (%(count)s aktive Threads)"
 
 #: pyClanSphere/templates/admin/information.html:58
 msgid "Multiprocess"
-msgstr ""
+msgstr "Mehrere Prozesse"
 
 #: pyClanSphere/templates/admin/information.html:60
 msgid "WSGI Version"
-msgstr ""
+msgstr "WSGI-Version"
 
 #: pyClanSphere/templates/admin/information.html:63
 msgid "URL Endpoints"
-msgstr ""
+msgstr "URL-Endpunkte"
 
 #: pyClanSphere/templates/admin/information.html:64
 msgid ""
@@ -1429,10 +1674,13 @@ msgid ""
 "    The following endpoints are registered on this instance:\n"
 "  "
 msgstr ""
+"\n"
+"    Die folgenden URL-Endpunkte sind in dieser Instanz registriert:\n"
+"  "
 
 #: pyClanSphere/templates/admin/information.html:72
 msgid "Absolute URL Handlers"
-msgstr ""
+msgstr "Absolute URL-Handler"
 
 #: pyClanSphere/templates/admin/information.html:73
 msgid ""
@@ -1440,10 +1688,13 @@ msgid ""
 "    The following absolute URL handlers are registered on this instance:\n"
 "  "
 msgstr ""
+"\n"
+"    Die folgenden URL-Handler sind in dieser Instanz registriert:\n"
+"  "
 
 #: pyClanSphere/templates/admin/information.html:81
 msgid "View Handlers"
-msgstr ""
+msgstr "Handler anschauen"
 
 #: pyClanSphere/templates/admin/information.html:82
 msgid ""
@@ -1452,10 +1703,13 @@ msgid ""
 "instance:\n"
 "  "
 msgstr ""
+"\n"
+"    Die folgenden View-Handler sind in dieser Instanz registriert:\n"
+"  "
 
 #: pyClanSphere/templates/admin/information.html:90
 msgid "Content Types"
-msgstr ""
+msgstr "Inhaltstypen"
 
 #: pyClanSphere/templates/admin/information.html:91
 msgid ""
@@ -1463,6 +1717,9 @@ msgid ""
 "    The following content types are registered on this instance:\n"
 "  "
 msgstr ""
+"\n"
+"    Die folgenden Inhaltstypen sind in dieser Instanz registriert:\n"
+"  "
 
 #: pyClanSphere/templates/admin/information.html:103
 msgid ""
@@ -1470,10 +1727,12 @@ msgid ""
 "    The following privileges are known to the system:\n"
 "  "
 msgstr ""
+"\n"
+"    Die folgenden Privilegien sind dem System bekannt:\n"
 
 #: pyClanSphere/templates/admin/information.html:111
 msgid "Services"
-msgstr ""
+msgstr "Services"
 
 #: pyClanSphere/templates/admin/information.html:112
 msgid ""
@@ -1483,12 +1742,17 @@ msgid ""
 "    via one of the available services.\n"
 "    "
 msgstr ""
+"\n"
+"    Die folgenden Servicepunkte sind in dieser Instanz registriert und\n"
+"    von einem der Services aufrufbar.\n"
+"    "
 
 #: pyClanSphere/templates/admin/information.html:121
 msgid "Installed APIs"
-msgstr ""
+msgstr "Installierte APIs"
 
 #: pyClanSphere/templates/admin/information.html:122
+#, fuzzy
 msgid ""
 "\n"
 "    The following APIs are installed on this pyClanSphere instance. APIs "
@@ -1496,47 +1760,51 @@ msgid ""
 "    a star (*) are preferred.\n"
 "  "
 msgstr ""
+"\n"
+"    Die folgenden APIs sind in diesem Blog installiert.  APIs mit einem\n"
+"    Stern (*) werden bevorzugt.\n"
+"  "
 
 #: pyClanSphere/templates/admin/information.html:135
 #: pyClanSphere/views/admin.py:97
 msgid "Plugins"
-msgstr ""
+msgstr "Plugins"
 
 #: pyClanSphere/templates/admin/information.html:139
 msgid "active"
-msgstr ""
+msgstr "Aktiv"
 
 #: pyClanSphere/templates/admin/information.html:140
 msgid "UID"
-msgstr ""
+msgstr "UID"
 
 #: pyClanSphere/templates/admin/information.html:144
 msgid "Location"
-msgstr ""
+msgstr "Location"
 
 #: pyClanSphere/templates/admin/information.html:149
 msgid "Configuration Variables"
-msgstr ""
+msgstr "Konfigurationsvariablen"
 
 #: pyClanSphere/templates/admin/information.html:152
 msgid "Key"
-msgstr ""
+msgstr "Schlüssel"
 
 #: pyClanSphere/templates/admin/information.html:153
 msgid "Value"
-msgstr ""
+msgstr "Wert"
 
 #: pyClanSphere/templates/admin/information.html:154
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 #: pyClanSphere/templates/admin/information.html:164
 msgid "Template Globals"
-msgstr ""
+msgstr "Globale Templatevars"
 
 #: pyClanSphere/templates/admin/information.html:170
 msgid "Template Filters"
-msgstr ""
+msgstr "Templatefilter"
 
 #: pyClanSphere/templates/admin/information.html:177
 msgid ""
@@ -1546,20 +1814,26 @@ msgid ""
 "    information such as passwords.\n"
 "  "
 msgstr ""
+"\n"
+"    Du kannst diese Liste exportieren und für die Fehlersuche bereitstellen,"
+"\n"
+"    indem du den unten stehenden Button klickst.  Die entstehende Datei "
+"enthält\n"
+"    keine vertraulichen Informationen wie Passwörter.\n"
 
 #: pyClanSphere/templates/admin/information.html:185
 msgid "Export"
-msgstr ""
+msgstr "Exportieren"
 
 #: pyClanSphere/templates/admin/layout.html:18
-#, python-format
+#, fuzzy, python-format
 msgid "%(clan_title)s Administration"
-msgstr ""
+msgstr "%(clan_title)s Administration"
 
 #: pyClanSphere/templates/admin/log.html:2 pyClanSphere/templates/admin/log.html:4
 #: pyClanSphere/views/admin.py:98
 msgid "Log"
-msgstr ""
+msgstr "Log"
 
 #: pyClanSphere/templates/admin/log.html:5
 msgid ""
@@ -1568,38 +1842,42 @@ msgid ""
 "    problems happen, you can see it here.\n"
 "  "
 msgstr ""
+"\n"
+"    Der Log zeigt dir wichtige Informationen über dein System.  Wenn\n"
+"    Probleme auftreten, kannst du es hier sehen.\n"
 
 #: pyClanSphere/templates/admin/log.html:9
 msgid "Recorded Events"
-msgstr ""
+msgstr "Aufgezeichnete Events"
 
 #: pyClanSphere/templates/admin/log.html:20
 msgid "The logfile is empty"
-msgstr ""
+msgstr "Das Logfile ist leer"
 
 #: pyClanSphere/templates/admin/log.html:27
 msgid "▼ Down"
-msgstr ""
+msgstr "▼ Ab"
 
 #: pyClanSphere/templates/admin/log.html:32
 msgid "Up ▲"
-msgstr ""
+msgstr "Hoch ▲"
 
 #: pyClanSphere/templates/admin/log.html:36
 msgid "Log Settings"
-msgstr ""
+msgstr "Protkolleinstellungen"
 
 #: pyClanSphere/templates/admin/log.html:40
 #: pyClanSphere/templates/admin/plugins.html:58
 msgid "Apply"
-msgstr ""
+msgstr "Anwenden"
 
 #: pyClanSphere/templates/admin/maintenance.html:2
 #: pyClanSphere/templates/admin/maintenance.html:4 pyClanSphere/views/admin.py:96
 msgid "Maintenance"
-msgstr ""
+msgstr "Wartung"
 
 #: pyClanSphere/templates/admin/maintenance.html:5
+#, fuzzy
 msgid ""
 "\n"
 "    From here you can set your site into maintenance mode and do "
@@ -1614,37 +1892,45 @@ msgid ""
 "    message that says that the site is in maintenance mode.\n"
 "  "
 msgstr ""
+"\n"
+"    Von hier aus kann die Site in den Wartungsmodus geschaltet werden.\n"
+"    Es wird empfohlen, den Wartungsmodus zu aktivieren, bevor Plugins\n"
+"    installiert oder Daten importiert werden.  Zwar ist es nicht nötig,\n"
+"    aber es ist sinnvoll, Änderungen zu testen bevor sie online gehen.\n"
+"    Solange der Wartungsmodus aktiviert ist, sehen Benutzer einen\n"
+"    Hinweis, dass die Site im Wartungsmodus ist.\n"
+"  "
 
 #: pyClanSphere/templates/admin/maintenance.html:16
 msgid "Disable maintenance mode"
-msgstr ""
+msgstr "Wartungsmodus deaktivieren"
 
 #: pyClanSphere/templates/admin/maintenance.html:17
 msgid "Enable maintenance mode"
-msgstr ""
+msgstr "Wartungsmodus aktivieren"
 
 #: pyClanSphere/templates/admin/manage_groups.html:2
 #: pyClanSphere/templates/admin/manage_groups.html:4
 msgid "Manage Groups"
-msgstr ""
+msgstr "Gruppen verwalten"
 
 #: pyClanSphere/templates/admin/manage_groups.html:7
 #: pyClanSphere/templates/admin/manage_users.html:7
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: pyClanSphere/templates/admin/manage_groups.html:17
 msgid "No groups."
-msgstr ""
+msgstr "Keine Gruppen."
 
 #: pyClanSphere/templates/admin/manage_users.html:10
 msgid "Mail"
-msgstr ""
+msgstr "E-Mail"
 
 #: pyClanSphere/templates/admin/plugins.html:2
 #: pyClanSphere/templates/admin/plugins.html:4
 msgid "Plugin Management"
-msgstr ""
+msgstr "Plugin-Verwaltung"
 
 #: pyClanSphere/templates/admin/plugins.html:7
 msgid ""
@@ -1657,22 +1943,29 @@ msgid ""
 "      at the installation instructions of the plugin you've added.\n"
 "    "
 msgstr ""
+"\n"
+"    Plugins können die Funktionalität von pyClanSphere erweitern.  Aus "
+"Sicherheitsgründen müssen sie\n"
+"    von Hand aktiviert werden.  Einige Plugins arbeiten möglicherweise\n"
+"    nicht mit anderen Plugins zusammen.  Im Zweifelsfall schau bitte in\n"
+"    die Installationsanweisungen des Plugins.\n"
+"   "
 
 #: pyClanSphere/templates/admin/plugins.html:16
 msgid "Plugin"
-msgstr ""
+msgstr "Plugin"
 
 #: pyClanSphere/templates/admin/plugins.html:17
 msgid "Version"
-msgstr ""
+msgstr "Version"
 
 #: pyClanSphere/templates/admin/plugins.html:18
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: pyClanSphere/templates/admin/plugins.html:19
 msgid "Activate"
-msgstr ""
+msgstr "Aktivieren"
 
 #: pyClanSphere/templates/admin/plugins.html:28
 #, python-format
@@ -1681,6 +1974,9 @@ msgid ""
 "          By %(author)s\n"
 "          "
 msgstr ""
+"\n"
+"          Von %(author)s\n"
+"          "
 
 #: pyClanSphere/templates/admin/plugins.html:32
 #, python-format
@@ -1689,10 +1985,13 @@ msgid ""
 "            and %(contributors)s\n"
 "          "
 msgstr ""
+"\n"
+"            und %(contributors)s\n"
+"          "
 
 #: pyClanSphere/templates/admin/plugins.html:39
 msgid "Remove plugin"
-msgstr ""
+msgstr "Plugin entfernen"
 
 #: pyClanSphere/templates/admin/plugins.html:46
 msgid ""
@@ -1702,10 +2001,14 @@ msgid ""
 "      and upgraded as part of it.\n"
 "    "
 msgstr ""
+"      Mit <span class=\"bundlemarker\">*</span> markierte Plugins werden mit "
+"pyClanSphere geliefert\n"
+"      und auch aktualisiert.\n"
+"    "
 
 #: pyClanSphere/templates/admin/plugins.html:50
 msgid "Add New Plugin"
-msgstr ""
+msgstr "Neues Plugin hinzufügen"
 
 #: pyClanSphere/templates/admin/plugins.html:51
 msgid ""
@@ -1717,11 +2020,18 @@ msgid ""
 "      can also be completely removed.\n"
 "    "
 msgstr ""
+"\n"
+"     Wenn du ein Plugin als pyClanSphere <tt>.plugin</tt> Datei hast, kannst"
+"\n"
+"     du es in deine pyClanSphere-Instanz importieren, indem du es hier\n"
+"     hochlädst.  Plugins, die auf diese Weise hinzugefügt werden, können\n"
+"     auch wieder vollständig entfernt werden.\n"
+"    "
 
 #: pyClanSphere/templates/admin/remove_plugin.html:2
 #: pyClanSphere/templates/admin/remove_plugin.html:4
 msgid "Remove Plugin"
-msgstr ""
+msgstr "Plugin entfernen"
 
 #: pyClanSphere/templates/admin/remove_plugin.html:7
 #, python-format
@@ -1733,29 +2043,34 @@ msgid ""
 "      if you want to use it again.\n"
 "    "
 msgstr ""
+"\n"
+"      Möchtest du das Plugin „%(plugin_name)s“ permanent aus dem\n"
+"      Instanzordner entfernen?  Um das Plugin wieder zu aktivieren,\n"
+"      muss es zuvor wieder neu installiert werden.\n"
+"    "
 
 #: pyClanSphere/templates/admin/theme.html:2
 #: pyClanSphere/templates/admin/theme.html:4
 msgid "Theme Manager"
-msgstr ""
+msgstr "Designverwaltung"
 
 #: pyClanSphere/templates/admin/theme.html:12
 msgid "Select this theme"
-msgstr ""
+msgstr "Thema wählen"
 
 #: pyClanSphere/templates/admin/theme.html:20
 #, python-format
 msgid "by %(author)s"
-msgstr ""
+msgstr "von %(author)s"
 
 #: pyClanSphere/templates/admin/theme.html:31
 msgid "Configure Theme"
-msgstr ""
+msgstr "Design konfigurieren"
 
 #: pyClanSphere/templates/admin/url_options.html:2
 #: pyClanSphere/templates/admin/url_options.html:4
 msgid "URL Options"
-msgstr ""
+msgstr "URL-Einstellungen"
 
 #: pyClanSphere/templates/admin/url_options.html:5
 msgid ""
@@ -1767,190 +2082,196 @@ msgid ""
 "    want to move the administration to a different location.\n"
 "  "
 msgstr ""
+"\n"
+"    Hier kannst du einige grundlegende URL-Konfigurationen ändern. Das ist "
+"insbesondere\n"
+"    nützlich, wenn du Plugins installiert hast, die eine neue Index-Seite "
+"einfügen oder\n"
+"    wenn du die Administration an eine andere Stelle verlegen möchtest.\n"
 
 #: pyClanSphere/utils/account.py:29 pyClanSphere/utils/admin.py:36
 msgid "Error"
-msgstr ""
+msgstr "Fehler"
 
 #: pyClanSphere/utils/account.py:31 pyClanSphere/utils/admin.py:38
 msgid "Warning"
-msgstr ""
+msgstr "Warnung"
 
 #: pyClanSphere/utils/exceptions.py:59
 msgid "unkown file"
-msgstr ""
+msgstr "Unbekannte Datei"
 
 #: pyClanSphere/utils/forms.py:679
 msgid "No choices."
-msgstr ""
+msgstr "Keine Auswahl."
 
 #: pyClanSphere/utils/forms.py:779
 msgid "Submit"
-msgstr ""
+msgstr "Absenden"
 
 #: pyClanSphere/utils/forms.py:923
 msgid "This field is required."
-msgstr ""
+msgstr "Dieses Feld ist erforderlich."
 
 #: pyClanSphere/utils/forms.py:1091
 msgid "Invalid security token submitted."
-msgstr ""
+msgstr "Ungültiges Sicherheits-Token übermittelt."
 
 #: pyClanSphere/utils/forms.py:1144 pyClanSphere/utils/forms.py:1529
 #, python-format
 msgid "Please provide at least %d item."
 msgid_plural "Please provide at least %d items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Bitte gib zumindest %d Eintrag an."
+msgstr[1] "Bitte gib zumindest %d Einträge an."
 
 #: pyClanSphere/utils/forms.py:1151 pyClanSphere/utils/forms.py:1536
 #, python-format
 msgid "Please provide no more than %d item."
 msgid_plural "Please provide no more than %d items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Bitte nicht mehr als %d Eintrag angeben."
+msgstr[1] "Bitte nicht mehr als %d Einträge angeben."
 
 #: pyClanSphere/utils/forms.py:1266
 #, python-format
 msgid "Please enter at least %d character."
 msgid_plural "Please enter at least %d characters."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Bitte mindestens %d Zeichen angeben."
+msgstr[1] "Bitte mindestens %d Zeichen angeben."
 
 #: pyClanSphere/utils/forms.py:1273
 #, python-format
 msgid "Please enter no more than %d character."
 msgid_plural "Please enter no more than %d characters."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Bitte nicht mehr als %d Zeichen angeben."
+msgstr[1] "Bitte nicht mehr als %d Zeichen angeben."
 
 #: pyClanSphere/utils/forms.py:1297
 msgid "Please enter a valid date."
-msgstr ""
+msgstr "Du musst ein gültiges Datum angeben."
 
 #: pyClanSphere/utils/forms.py:1333
 #, python-format
 msgid "“%(value)s” does not exist"
-msgstr ""
+msgstr "„%(value)s“ existiert nicht."
 
 #: pyClanSphere/utils/forms.py:1392
 msgid "Invalid value."
-msgstr ""
+msgstr "Ungültiger Wert."
 
 #: pyClanSphere/utils/forms.py:1393
 msgid "Key does not exist."
-msgstr ""
+msgstr "Schlüssel existiert nicht."
 
 #: pyClanSphere/utils/forms.py:1463
 msgid "Please enter a valid choice."
-msgstr ""
+msgstr "Bitte eine Wahlmöglichkeit angeben."
 
 #: pyClanSphere/utils/forms.py:1523
 #, python-format
 msgid "“%s” is not a valid choice"
-msgstr ""
+msgstr "„%s” ist keine gültige Wahlmöglichkeit."
 
 #: pyClanSphere/utils/forms.py:1568
 msgid "Please enter a whole number."
-msgstr ""
+msgstr "Bitte eine ganze Zahl angeben."
 
 #: pyClanSphere/utils/forms.py:1594
 #, python-format
 msgid "Ensure this value is greater than or equal to %s."
-msgstr ""
+msgstr "Bitte einen Wert größer oder gleich %s angeben."
 
 #: pyClanSphere/utils/forms.py:1600
 #, python-format
 msgid "Ensure this value is less than or equal to %s."
-msgstr ""
+msgstr "Bitte einen Wert kleiner oder gleich %s angeben."
 
 #: pyClanSphere/utils/forms.py:1622
 msgid "True"
-msgstr ""
+msgstr "Wahr"
 
 #: pyClanSphere/utils/forms.py:1623
 msgid "False"
-msgstr ""
+msgstr "Falsch"
 
 #: pyClanSphere/utils/log.py:35
 msgid "critical"
-msgstr ""
+msgstr "Schwerer Fehler"
 
 #: pyClanSphere/utils/log.py:36
 msgid "error"
-msgstr ""
+msgstr "Fehler"
 
 #: pyClanSphere/utils/log.py:37
 msgid "warning"
-msgstr ""
+msgstr "Warnung"
 
 #: pyClanSphere/utils/log.py:38
 msgid "notice"
-msgstr ""
+msgstr "Bemerkung"
 
 #: pyClanSphere/utils/log.py:39
 msgid "info"
-msgstr ""
+msgstr "Information"
 
 #: pyClanSphere/utils/log.py:40
 msgid "debug"
-msgstr ""
+msgstr "Debug"
 
 #: pyClanSphere/utils/pagination.py:113 pyClanSphere/utils/pagination.py:116
 msgid "Next »"
-msgstr ""
+msgstr "Weiter »"
 
 #: pyClanSphere/utils/pagination.py:120 pyClanSphere/utils/pagination.py:123
 msgid "« Previous"
-msgstr ""
+msgstr "« Zurück"
 
 #: pyClanSphere/utils/validators.py:78
 msgid "You have to enter a valid e-mail address."
-msgstr ""
+msgstr "Du musst eine gültige E-Mail Adresse eingeben."
 
 #: pyClanSphere/utils/validators.py:99
 msgid "You have to enter a valid URL."
-msgstr ""
+msgstr "Du musst eine gültige URL angeben."
 
 #: pyClanSphere/utils/validators.py:117
 msgid "The slug is too long"
-msgstr ""
+msgstr "Der URL-Bezeichner ist zu lang."
 
 #: pyClanSphere/utils/validators.py:119
 msgid "The slug must not start with a slash"
-msgstr ""
+msgstr "Ein URL-Bezeichner darf nicht mit einem Slash beginnen."
 
 #: pyClanSphere/utils/validators.py:137 pyClanSphere/utils/validators.py:140
 msgid "You have to enter a valid net address."
-msgstr ""
+msgstr "Du musst eine gültige Netzwerkadresse angeben."
 
 #: pyClanSphere/utils/validators.py:142
 msgid "The port has to be numeric"
-msgstr ""
+msgstr "Der Port muss eine Zahl sein."
 
 #: pyClanSphere/utils/validators.py:150
 msgid "Invalid character, < or > are not allowed."
-msgstr ""
+msgstr "Fehlerhaftes Zeichen, < oder > sind nicht erlaubt."
 
 #: pyClanSphere/utils/validators.py:152
 msgid "URL prefix must not be a sole slash."
-msgstr ""
+msgstr "Ein URL-Präfix darf nicht ein einzelner Slash sein."
 
 #: pyClanSphere/utils/validators.py:155
 msgid "URL prefix must start with a slash."
-msgstr ""
+msgstr "Ein URL-Präfix muss mit einem Slash beginnen."
 
 #: pyClanSphere/utils/validators.py:157
 msgid "URL prefix must not end with a slash."
-msgstr ""
+msgstr "Ein URL-Präfix darf nicht mit einem Slash enden."
 
 #: pyClanSphere/utils/validators.py:179
 msgid "Invalid character, <, > or \\ are not allowed."
-msgstr ""
+msgstr "Fehlerhaftes Zeichen, <, > oder \\ sind nicht erlaubt."
 
 #: pyClanSphere/utils/validators.py:183
 msgid "URL format cannot start with a slash."
-msgstr ""
+msgstr "Ein URL-Format darf nicht mit einem Slash beginnen."
 
 #: pyClanSphere/utils/validators.py:185
 msgid "URL cannot contain //."
@@ -1967,63 +2288,63 @@ msgstr ""
 
 #: pyClanSphere/utils/validators.py:201
 msgid "The text must not be empty."
-msgstr ""
+msgstr "Der Text darf nicht leer sein."
 
 #: pyClanSphere/views/account.py:39
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 #: pyClanSphere/views/account.py:46
 msgid "About"
-msgstr ""
+msgstr "Über"
 
 #: pyClanSphere/views/account.py:50 pyClanSphere/views/admin.py:89
 msgid "Help"
-msgstr ""
+msgstr "Hilfe"
 
 #: pyClanSphere/views/account.py:52 pyClanSphere/views/admin.py:101
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #: pyClanSphere/views/account.py:173
 msgid "Your profile was updated successfully."
-msgstr ""
+msgstr "Dein Profil wurde aktualisiert."
 
 #: pyClanSphere/views/account.py:202
 msgid "Notification settings changed."
-msgstr ""
+msgstr "Benachrichtigungseinstellungen wurden geändert."
 
 #: pyClanSphere/views/admin.py:72
 msgid "Users and Groups"
-msgstr ""
+msgstr "Benutzer und Gruppen"
 
 #: pyClanSphere/views/admin.py:73
 msgid "Users"
-msgstr ""
+msgstr "Benutzer"
 
 #: pyClanSphere/views/admin.py:78
 msgid "Options"
-msgstr ""
+msgstr "Optionen"
 
 #: pyClanSphere/views/admin.py:79
 msgid "Basic"
-msgstr ""
+msgstr "Grundlagen"
 
 #: pyClanSphere/views/admin.py:80
 msgid "URLs"
-msgstr ""
+msgstr "URLs"
 
 #: pyClanSphere/views/admin.py:81
 msgid "Theme"
-msgstr ""
+msgstr "Design"
 
 #: pyClanSphere/views/admin.py:82
 msgid "Cache"
-msgstr ""
+msgstr "Cache"
 
 #: pyClanSphere/views/admin.py:94
 msgid "Information"
-msgstr ""
+msgstr "Information"
 
 #: pyClanSphere/views/admin.py:125
 #, python-format
@@ -2031,68 +2352,72 @@ msgid ""
 "pyClanSphere is in maintenance mode. Don't forget to <a href=\"%s\">turn it "
 "off again</a> once you finish your changes."
 msgstr ""
+"pyClanSphere ist im Wartungsmodus.  Vergiss nicht, ihn <a href=\"%s\">wieder"
+" zu deaktivieren</a>, wenn du fertig bist."
 
 #: pyClanSphere/views/admin.py:134
 #, python-format
 msgid "Could not activate plugin “%(name)s”: %(error)s"
-msgstr ""
+msgstr "Konnte das Plugin „%(name)s“ nicht aktivieren: %(error)s"
 
 #: pyClanSphere/views/admin.py:200
 msgid "Text here..."
-msgstr ""
+msgstr "Text hier..."
 
 #: pyClanSphere/views/admin.py:202
 msgid "Untitled Page"
-msgstr ""
+msgstr "Neue Seite"
 
 #: pyClanSphere/views/admin.py:264
 #, python-format
 msgid "User %s created successfully."
-msgstr ""
+msgstr "Der Benutzer %s wurde erstellt."
 
 #: pyClanSphere/views/admin.py:268
 #, python-format
 msgid "User %s edited successfully."
-msgstr ""
+msgstr "Der Benutzer %s wurde bearbeitet."
 
 #: pyClanSphere/views/admin.py:292
 msgid "You cannot delete yourself."
-msgstr ""
+msgstr "Du kannst dich selbst nicht löschen."
 
 #: pyClanSphere/views/admin.py:332
 #, python-format
 msgid "Group %s created successfully."
-msgstr ""
+msgstr "Die Gruppe %s wurde erstellt."
 
 #: pyClanSphere/views/admin.py:336
 #, python-format
 msgid "Group %s edited successfully."
-msgstr ""
+msgstr "Die Gruppe %s wurde bearbeitet."
 
 #: pyClanSphere/views/admin.py:388
 msgid "Configuration altered successfully."
-msgstr ""
+msgstr "Die Konfiguration wurde verändert."
 
 #: pyClanSphere/views/admin.py:415
 msgid "URL configuration changed."
-msgstr ""
+msgstr "Die URL-Konfiguration wurde geändert."
 
 #: pyClanSphere/views/admin.py:436
 msgid "Theme changed successfully."
-msgstr ""
+msgstr "Das Design wurde gewechselt."
 
 #: pyClanSphere/views/admin.py:452
 msgid "This theme is not configurable"
-msgstr ""
+msgstr "Dieses Design kann nicht konfiguriert werden"
 
 #: pyClanSphere/views/admin.py:464
 msgid "Plugin configuration changed"
-msgstr ""
+msgstr "Die Plugin-Konfiguration wurde geändert."
 
 #: pyClanSphere/views/admin.py:473
 #, python-format
 msgid "Plugin “%s” added successfully. You can now enable it in the plugin list."
 msgstr ""
+"Plugin „%s“ wurde erfolgreich hinzugefügt.  Du kannst das Plugin nun "
+"aktivieren."
 
 #: pyClanSphere/views/admin.py:500
 #, python-format
@@ -2100,39 +2425,42 @@ msgid ""
 "Could not remove the plugin “%s” because an IO error occurred. Wrong "
 "permissions?"
 msgstr ""
+"Konnte das Plugin „%s“ nicht entfernen, weil ein Fehler aufgetreten ist.  "
+"Falsche Zugriffsrechte?"
 
 #: pyClanSphere/views/admin.py:503
 #, python-format
 msgid "The plugin “%s” was removed from the instance successfully."
-msgstr ""
+msgstr "Das Plugin „%s“ wurde erfolgreich entfernt."
 
 #: pyClanSphere/views/admin.py:521
 msgid "The cache was cleared successfully."
-msgstr ""
+msgstr "Der Cache wurde erfolgreich geleert."
 
 #: pyClanSphere/views/admin.py:525
 msgid "Cache settings were changed successfully."
-msgstr ""
+msgstr "Cacheinstellungen wurden erfolgreich geändert."
 
 #: pyClanSphere/views/admin.py:549
 msgid "Configuration updated successfully."
-msgstr ""
+msgstr "Die Konfiguration wurde erfolgreich geändert."
 
 #: pyClanSphere/views/admin.py:552
 msgid "Could not save the configuration because the configuration is invalid."
-msgstr ""
+msgstr "Konnte die Konfiguration nicht speichern, da die Konfiguration ungültig ist."
 
 #: pyClanSphere/views/admin.py:569
+#, fuzzy
 msgid "Maintenance mode disabled.  The site is now publicly available."
-msgstr ""
+msgstr "Wartungsmodus deaktiviert.  Die Site ist nun öffentlich verfügbar."
 
 #: pyClanSphere/views/admin.py:667
 msgid "Log changes saved."
-msgstr ""
+msgstr "Protokolländerungen gespeichert."
 
 #: pyClanSphere/views/admin.py:684
 msgid "Password changed successfully."
-msgstr ""
+msgstr "Das Passwort wurde erfolgreich geändert."
 
 #: pyClanSphere/websetup/__init__.py:105
 #, python-format
@@ -2140,26 +2468,28 @@ msgid ""
 "Instance folder does not exist.  You have to create the folder “%s” before "
 "proceeding."
 msgstr ""
+"Der Instanz-Ordner existiert nicht.  Du musst den Ordner „%s“ erstellen, "
+"bevor das Setup weitermachen kann."
 
 #: pyClanSphere/websetup/__init__.py:127
 msgid "You have to provide a username."
-msgstr ""
+msgstr "Du musst einen Benutzernamen angeben."
 
 #: pyClanSphere/websetup/__init__.py:130
 msgid "You have to enter a mail address."
-msgstr ""
+msgstr "Du musst eine gültige E-Mail Adresse angeben."
 
 #: pyClanSphere/websetup/__init__.py:132
 msgid "The mail address is not valid."
-msgstr ""
+msgstr "Deine E-Mail Adresse ist nicht gültig."
 
 #: pyClanSphere/websetup/__init__.py:135
 msgid "You have to enter a password."
-msgstr ""
+msgstr "Du musst ein Passwort eingeben."
 
 #: pyClanSphere/websetup/__init__.py:137
 msgid "The two passwords do not match."
-msgstr ""
+msgstr "Die Passwörter stimmen nicht überein."
 
 #: pyClanSphere/websetup/__init__.py:206
 #, python-format
@@ -2167,10 +2497,12 @@ msgid ""
 "The configuration file (%s) could not be opened for writing. Please adjust "
 "your permissions and try again."
 msgstr ""
+"Die Konfigurationsdatei (%s) konnte nicht zum Schreiben geöffnet werden. "
+"Bitte passe die Zugriffsrechte an und probiere nochmal."
 
 #: pyClanSphere/websetup/templates/admin_account.html:3
 msgid "Administrator Account"
-msgstr ""
+msgstr "Administratorkonto"
 
 #: pyClanSphere/websetup/templates/admin_account.html:4
 msgid ""
@@ -2181,14 +2513,19 @@ msgid ""
 "    that user if you want.\n"
 "  "
 msgstr ""
+"\n"
+"    Um dich an anmelden zu können, musst du einen Namen\n"
+"    für den Administrator angeben.  Du kannst diesen später\n"
+"    umbenennen oder löschen.\n"
+"  "
 
 #: pyClanSphere/websetup/templates/admin_account.html:14
 msgid "Password (repeat)"
-msgstr ""
+msgstr "Passwort (wiederholen)"
 
 #: pyClanSphere/websetup/templates/database.html:3
 msgid "Database"
-msgstr ""
+msgstr "Datenbank"
 
 #: pyClanSphere/websetup/templates/database.html:4
 msgid ""
@@ -2204,11 +2541,11 @@ msgstr ""
 
 #: pyClanSphere/websetup/templates/database.html:11
 msgid "SQLite"
-msgstr ""
+msgstr "SQLite"
 
 #: pyClanSphere/websetup/templates/database.html:12
 msgid "sqlite://database.db"
-msgstr ""
+msgstr "sqlite://datenbank.db"
 
 #: pyClanSphere/websetup/templates/database.html:13
 msgid ""
@@ -2219,32 +2556,38 @@ msgid ""
 "        Windows system) or otherwise relative to the instance folder.\n"
 "      "
 msgstr ""
+"\n"
+"        Der Pfad zur SQLite Datenbank kann entweder absolut (beginnend mit\n"
+"        drei Schrägstrichen auf OS X / Linux oder zwei Schrägstrichen\n"
+"        gefolgt von einem Laufwerksbuchstaben auf Windows) oder relativ\n"
+"        zum Instanzordner angebenen werden.\n"
+"      "
 
 #: pyClanSphere/websetup/templates/database.html:18
 msgid "MySQL"
-msgstr ""
+msgstr "MySQL"
 
 #: pyClanSphere/websetup/templates/database.html:19
 msgid "mysql://username:password@host/database_name"
-msgstr ""
+msgstr "mysql://benutzername:passwort@server/datenbank_name"
 
 #: pyClanSphere/websetup/templates/database.html:20
 msgid "Postgres"
-msgstr ""
+msgstr "Postgres"
 
 #: pyClanSphere/websetup/templates/database.html:21
 msgid "postgres://username:password@host/database_name"
-msgstr ""
+msgstr "postgres://benutzername:passwort@server/datenbank_name"
 
 #: pyClanSphere/websetup/templates/error.html:3
 msgid "Setup Failed"
-msgstr ""
+msgstr "Einrichtung ist fehlgeschlagen"
 
 #: pyClanSphere/websetup/templates/error.html:4
 msgid ""
 "The websetup was not able to finish the pyClanSphere installation "
 "successfully."
-msgstr ""
+msgstr "Das Websetup konnte die Installation nicht erfolgreich beenden."
 
 #: pyClanSphere/websetup/templates/error.html:5
 msgid ""
@@ -2253,12 +2596,17 @@ msgid ""
 "    wepage that will be there once a beta is available :-)\n"
 "  "
 msgstr ""
+"\n"
+"    Wenn du Hilfe zur Installation von pyClanSphere brauchst, schau auf die\n"
+"    Support-Webseite (sobald die Beta erhältlich ist :-)\n"
+"  "
 
 #: pyClanSphere/websetup/templates/finished.html:3
 msgid "Setup Finished"
-msgstr ""
+msgstr "Einrichtung ist abgeschlossen"
 
 #: pyClanSphere/websetup/templates/finished.html:4
+#, fuzzy
 msgid ""
 "\n"
 "    The setup was finished successfully. You can now go to the\n"
@@ -2266,35 +2614,41 @@ msgid ""
 "    the maintenance mode after you finish your configuration.\n"
 "  "
 msgstr ""
+"\n"
+"    Das Setup wurde erfolgreich beendet.  Du kannst nun\n"
+"    zum Admin-Panel gehen und das Blogs konfigurieren.\n"
+"    Vergiss nicht, den Wartungsmodus zu deaktivieren, sobald du damit fertig"
+" bist.\n"
+"  "
 
 #: pyClanSphere/websetup/templates/finished.html:10
 msgid "Admin Panel"
-msgstr ""
+msgstr "Administration"
 
 #: pyClanSphere/websetup/templates/layout.html:5
 #: pyClanSphere/websetup/templates/layout.html:166
 msgid "pyClanSphere Setup"
-msgstr ""
+msgstr "pyClanSphere Setup"
 
 #: pyClanSphere/websetup/templates/layout.html:175
 msgid "An Error Occurred"
-msgstr ""
+msgstr "Ein Fehler ist aufgetreten"
 
 #: pyClanSphere/websetup/templates/layout.html:181
 msgid "Next"
-msgstr ""
+msgstr "Weiter"
 
 #: pyClanSphere/websetup/templates/layout.html:181
 msgid "Install"
-msgstr ""
+msgstr "Installieren"
 
 #: pyClanSphere/websetup/templates/layout.html:182
 msgid "Back"
-msgstr ""
+msgstr "Zurück"
 
 #: pyClanSphere/websetup/templates/start.html:3
 msgid "Welcome To The pyClanSphere Setup"
-msgstr ""
+msgstr "Willkommen zum Setup von pyClanSphere"
 
 #: pyClanSphere/websetup/templates/start.html:4
 msgid ""
@@ -2303,6 +2657,11 @@ msgid ""
 "    basic questions and setup pyClanSphere for you.\n"
 "  "
 msgstr ""
+"\n"
+"    Willkommen zur Installation von pyClanSphere.  Dieser Assistent wird\n"
+"    dir ein paar einfache Fragen stellen und pyClanSphere für dich "
+"konfigurieren.\n"
+"  "
 
 #: pyClanSphere/websetup/templates/start.html:8
 msgid ""
@@ -2312,10 +2671,15 @@ msgid ""
 "    language select it from the dropdown menu below and press next.\n"
 "  "
 msgstr ""
+"\n"
+"    Das Setup hat die Sprache aus deinen Browsereinstellungen übernommen.\n"
+"    Solltest du eine andere Sprache wünschen, kannst du sie in dieser\n"
+"    Liste auswählen.\n"
+"  "
 
 #: pyClanSphere/websetup/templates/summary.html:3
 msgid "Setup Starting"
-msgstr ""
+msgstr "Installation starten"
 
 #: pyClanSphere/websetup/templates/summary.html:4
 msgid ""
@@ -2331,4 +2695,8 @@ msgid ""
 "    shows that the site is in maintenance mode right now.\n"
 "  "
 msgstr ""
-
+"\n"
+"    pyClanSphere hat jetzt alle Informationen, die es benötigt, um die Site\n"
+"    anzulegen.  Nach der Installation wird pyClanSphere im Wartungsmodus online "
+"sein.\n"
+"    Solange dieser aktiviert ist, kannst nur du die Site betrachten.  "
