@@ -26,6 +26,12 @@ class Game(object):
         super(Game, self).__init__()
         self.name = name
 
+    def __repr__(self):
+        return "<%s %s>" % (
+            self.__class__.__name__,
+            self.name
+        )
+
 
 class Squad(object):
     """Basics for a Squad"""
@@ -35,6 +41,13 @@ class Squad(object):
         self.game = game
         self.name = name
         self.tag = tag
+
+    def __repr__(self):
+        return "<%s (%s, %s)>" % (
+            self.__class__.__name__,
+            self.name,
+            self.game.name
+        )
 
 
 class SquadMember(object):
@@ -54,6 +67,13 @@ class Level(object):
     def __init__(self, name):
         super(Level, self).__init__()
         self.name = name
+
+    def __repr__(self):
+        return "<%s (%r, %s)>" % (
+            self.__class__.__name__,
+            self.id,
+            self.name
+        )
 
 
 db.mapper(Game, games, properties={
