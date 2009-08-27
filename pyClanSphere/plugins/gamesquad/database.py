@@ -13,7 +13,7 @@ from pyClanSphere.database import db, metadata
 
 games = db.Table('games', metadata,
     db.Column('game_id', db.Integer, primary_key=True),
-    db.Column('name', db.String)
+    db.Column('name', db.String(50))
 )
 
 squads = db.Table('squads', metadata,
