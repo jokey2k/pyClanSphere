@@ -1,0 +1,7 @@
+Name: GameSquad
+Plugin URL: http://pyclansphere.digital-family.de/
+Author: Markus Ullmann <mail@markus-ullmann.de>
+Author URL: http://pyclansphere.digital-family.de/
+License: BSD
+Version: 0.1
+Description: Game / Squad / Member Group Management

@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}{{ _("Game Index") }}{% endblock %}
+{% block contents %}
+{%- for game in games %}
+  <div class="entry">
+    <h3>{{ game.name|e }}</h3>
+    <div class="text">
+    {%- for squad in game.squads %}
+      <span id="squad" style="text-decoration:underline;">{{ squad.name|e }}</span>
+      {%- for member in squad.members %}
+      <br>{{ member.display_name|e }}
+      {%- endfor %}      
+      <br>
+    {%- else %}
+      {% trans %}No Squads for this game (yet){% endtrans %}
+    {%- endfor %}
+    </div>
+  </div>
+{%- else %}
+  <div class="notification">
+    <p>{% trans %}So far there are no games yet.{% endtrans %}</p>
+  </div>
+{%- endfor %}
+{% endblock %}
