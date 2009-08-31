@@ -24,7 +24,6 @@ def _register(name, description, privilege_dependencies=None):
     globals()[name] = priv
     __all__.append(name)
 
-_register('SQUAD_CREATE', lazy_gettext(u'create new squads'), ENTER_ADMIN_PANEL)
-_register('GAME_CREATE', lazy_gettext(u'can add new games'), ENTER_ADMIN_PANEL)
-_register('LEVEL_ACCESS', lazy_gettext(u'can add, modify and delete levels'), ENTER_ADMIN_PANEL)
-_register('SQUAD_MANAGE', lazy_gettext(u'can manage squad members'), ENTER_ADMIN_PANEL)
+_register('GAME_MANAGE', lazy_gettext(u'can manage games'), ENTER_ADMIN_PANEL)
+_register('SQUAD_MANAGE_MEMBERS', lazy_gettext(u'can manage squad memberships'), ENTER_ADMIN_PANEL)
+_register('SQUAD_MANAGE', lazy_gettext(u'can manage squads'), SQUAD_MANAGE_MEMBERS)

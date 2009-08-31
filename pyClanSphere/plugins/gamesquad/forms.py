@@ -11,11 +11,12 @@
 
 from pyClanSphere.api import *
 from pyClanSphere.utils import forms
-from pyClanSphere.utils.validators import ValidationError
+from pyClanSphere.utils.validators import ValidationError, is_not_whitespace_only
 
+from pyClanSphere.plugins.gamesquad.models import Game, Squad
 
 class _GameBoundForm(forms.Form):
-"""Internal baseclass for games bound forms."""
+    """Internal baseclass for games bound forms."""
 
     def __init__(self, game, initial=None):
         forms.Form.__init__(self, initial)
@@ -72,8 +73,8 @@ class DeleteGameForm(_GameBoundForm):
     action = forms.ChoiceField(lazy_gettext(u'What should pyClanSphere do with squads '
                                             u'assigned to this group?'),
                               choices=[
-        ('delete_membership', lazy_gettext(u'Delete squad, remove squadmemberships')),
-        ('relocate', lazy_gettext(u'Move the squad to another game'))
+        ('delete_membership', lazy_gettext(u'Delete game, remove squads')),
+        ('relocate', lazy_gettext(u'Move the squads to another game'))
     ], widget=forms.RadioButtonGroup)
     relocate_to = forms.ModelField(Game, 'id', lazy_gettext(u'Relocate squad to'),
                                    widget=forms.SelectBox)
@@ -94,9 +95,9 @@ class DeleteGameForm(_GameBoundForm):
     def delete_game(self):
         """Deletes a game."""
         if self.data['action'] == 'relocate':
-            new_game = Game.query.filter_by(self.data['reassign_to'].id).first()
+            new_game = Game.query.filter_by(id=self.data['relocate_to'].id).first()
             for squad in self.game.squads:
-                user.games.append(new_game)
+                new_game.squads.append(squad)
         db.commit()
 
         emit_event('before-game-deleted', self.game, self.data)
@@ -104,7 +105,7 @@ class DeleteGameForm(_GameBoundForm):
 
 
 class _SquadBoundForm(forms.Form):
-"""Internal baseclass for squads bound forms."""
+    """Internal baseclass for squads bound forms."""
 
     def __init__(self, squad, initial=None):
         forms.Form.__init__(self, initial)
@@ -124,8 +125,10 @@ class EditSquadForm(_SquadBoundForm):
     squadname = forms.TextField(lazy_gettext(u'Squadname'), max_length=50,
                                 validators=[is_not_whitespace_only()],
                                 required=True)
-    game = forms.ModelField(Squad, 'game_id', lazy_gettext(u'Belongs to'),
+    game = forms.ModelField(Game, 'id', lazy_gettext(u'Belongs to'),
                             widget=forms.SelectBox)
+    tag = forms.TextField(lazy_gettext(u'Squad Tag'), max_length=20,
+                          validators=[is_not_whitespace_only()])
 
     def __init__(self, squad=None, initial=None):
         if squad is not None:
@@ -137,20 +140,13 @@ class EditSquadForm(_SquadBoundForm):
         _SquadBoundForm.__init__(self, squad, initial)
         self.game.choices = [(game.id, game.name) for game in Game.query.all()]
 
-    def validate_squadname(self, value):
-        query = Squad.query.filter_by(name=value)
-        if self.squad is not None:
-            query = query.filter(Squad.id != self.squad.id).filter(Squad.game_id != self.squad.game_id)
-        if query.first() is not None:
-            raise ValidationError(_('This squadname is already in use for this game'))
-
     def _set_common_attributes(self, squad):
+        squad.game = self.data['game']
         forms.set_fields(squad, self.data)
 
     def make_squad(self):
         """A helper function that creates a new squad object."""
-        
-        squad = Squad(self.data['squadname'])
+        squad = Squad(self.data['game'], self.data['squadname'])
         self._set_common_attributes(squad)
         self.squad = squad
         return squad
@@ -189,12 +185,11 @@ class DeleteSquadForm(_SquadBoundForm):
 
     def delete_squad(self):
         """Deletes a squad."""
-#FIXME This needs to work asap!
-#        if self.data['action'] == 'relocate':
-#            new_squad = Squad.query.filter_by(self.data['reassign_to'].id).first()
-#            for member in self.squad.members:
-#                if member not in new_squad.members:
-#                    user.squads.append(new_squad)
+        if self.data['action'] == 'relocate':
+            new_squad = Squad.query.filter_by(id=self.data['relocate_to'].id).first()
+            for squadmember in self.squad.squadmembers:
+                if squadmember not in new_squad.squadmembers:
+                    squadmember.squad_id = new_squad.squad_id
         db.commit()
 
         emit_event('before-squad-deleted', self.squad, self.data)

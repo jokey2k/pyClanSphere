@@ -17,6 +17,7 @@ from pyClanSphere.utils.text import build_tag_uri
 from pyClanSphere.utils.pagination import Pagination
 
 from pyClanSphere.plugins.gamesquad.database import games, squads, squadmembers, levels
+from pyClanSphere.plugins.gamesquad.privileges import GAME_MANAGE, SQUAD_MANAGE, SQUAD_MANAGE_MEMBERS
 
 
 class Game(object):
@@ -25,6 +26,14 @@ class Game(object):
     def __init__(self, name):
         super(Game, self).__init__()
         self.name = name
+
+    def can_edit(self, user=None):
+        """Checks if the given user (or current user) can edit this game."""
+
+        if user is None:
+            user = get_request().user
+
+        return user.has_privilege(GAME_MANAGE)
 
     def __repr__(self):
         return "<%s %s>" % (
@@ -41,6 +50,23 @@ class Squad(object):
         self.game = game
         self.name = name
         self.tag = tag
+
+    def can_edit(self, user=None):
+        """Checks if the given user (or current user) can edit this
+        squad (NOT manage members)."""
+
+        if user is None:
+            user = get_request().user
+
+        return user.has_privilege(SQUAD_MANAGE)
+
+    def can_manage(self, user=None):
+        """Checks if the given user (or current user) can manage memberships"""
+
+        if user is None:
+            user = get_request().user
+
+        return user.has_privilege(SQUAD_MANAGE_MEMBERS)
 
     def __repr__(self):
         return "<%s (%s, %s)>" % (
@@ -87,7 +113,8 @@ db.mapper(Squad, squads, properties={
     'members':      db.relation(User, lazy=True,
                                 secondary=squadmembers, collection_class=set,
                                 backref=db.backref('squads')
-                    )
+                    ),
+    'squadmembers': db.relation(SquadMember, lazy=True)
 })
 db.mapper(SquadMember, squadmembers, properties={
     'user':         db.relation(User, uselist=False, lazy=False),

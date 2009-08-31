@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}{{ _("Game Details for %s" % game.name) }}{% endblock %}
+{% block contents %}
+<div class="entry">
+  <h3>{{ game.name|e }}</h3>
+  <div class="text">
+  {%- for squad in game.squads %}
+    <a href="{{ url_for('squad/detail', squad_id=squad.id) }}">{{ squad.name|e }}</a><br>
+  {%- else %}
+    {% trans %}No Squads for this game{% endtrans %}
+  {%- endfor %}
+  </div>
+</div>
+{% endblock %}

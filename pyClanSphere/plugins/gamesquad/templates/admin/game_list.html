@@ -1,0 +1,37 @@
+{% extends "admin/layout.html" %}
+{% block title %}{{ _("Games Overview") }}{% endblock %}
+{% block contents %}
+  <h1>{{ _("Games Overview") }}</h1>
+  <table>
+    <tr>
+      <th>{{ _("Game") }}</th>
+      <th>{{ _("Squads") }}</th>
+    </tr>
+  {%- for game in games %}
+    <tr class="{{ loop.cycle('odd', 'even') }}">
+	  {%- if game.can_edit() %}
+      <td><a href="{{ url_for('admin/game_edit', game_id=game.id)|e }}">{{
+          game.name|e }}</a></td>
+      {%- else %}
+      <td>{{ game.name|e }}</td>
+	  {%- endif %}
+	  <td>
+	  {%- for squad in game.squads %}
+      {%- if not loop.first %},&nbsp;{%- endif %}{{ squad.name|e }}
+    {%- else %}
+      {{ _("No squads") }}
+	  {%- endfor %}
+    </td></tr>
+  {%- endfor %}
+  </table>
+  <form action="{{ url_for('admin/game_create')|e }}" method="get">
+    <div class="actions">
+      <input type="submit" value="{{ _('New Game') }}">
+    </div>
+  </form>
+  {%- if pagination.necessary %}
+  <div class="pagination">
+    {{ pagination.generate() }}
+  </div>
+  {%- endif %}
+{% endblock %}

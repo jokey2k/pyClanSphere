@@ -1,0 +1,19 @@
+{% extends "admin/layout.html" %}
+{% from "admin/_form_helpers.html" import render_formbox %}
+{% block title %}{{ _('New Game') if form.new else _('Edit Game') }}{% endblock %}
+{% block contents %}
+  {% call form() %}
+  <div class="formbox">
+    <h3>{{ form.gamename.label() }}</h3>
+    {{ form.gamename() }}
+  </div>
+    <div class="actions">
+      <input type="submit" name="save" value="{{ _('Save') }}">
+      <input type="submit" name="save_and_continue" value="{{ _('Save and continue editing') }}">
+      {%- if not form.new %}
+        <input type="submit" name="delete" value="{{ _('Delete') }}">
+      {%- endif %}
+      <input type="submit" name="cancel" value="{{ _('Cancel') }}">
+    </div>
+  {% endcall %}
+{% endblock %}

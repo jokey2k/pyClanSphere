@@ -1,0 +1,20 @@
+{% extends "admin/layout.html" %}
+{% block title %}{{ _("Delete Game") }}{% endblock %}
+{% block contents %}
+  <h1>{{ _("Delete Game") }}</h1>
+  {% call form() %}
+    <p>{% trans name=form.game.name|e %}
+      Do you really want to delete the game “{{ name }}”?
+    {% endtrans %}</p>
+    <p>{% trans %}
+      What should happen to the squad assigned with this game?
+    {% endtrans %}</p>
+    {{ form.action() }}
+
+    <p>{{ form.relocate_to.label() }}: {{ form.relocate_to() }}
+    <div class="actions">
+      <input type="submit" name="cancel" value="{{ _('No') }}">
+      <input type="submit" name="confirm" value="{{ _('Yes') }}">
+    </div>
+  {% endcall %}
+{% endblock %}

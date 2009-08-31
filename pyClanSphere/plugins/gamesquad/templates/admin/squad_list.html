@@ -1,0 +1,45 @@
+{% extends "admin/layout.html" %}
+{% block title %}{{ _("Squads Overview") }}{% endblock %}
+{% block contents %}
+  <h1>{{ _("Squads Overview") }}</h1>
+  <table>
+    <tr>
+      <th>{{ _("Game") }}</th>
+      <th>{{ _("Squad") }}</th>
+      <th>{{ _("Members") }}</th>
+      <th>{{ _("Edit") }}</th>
+    </tr>
+  {%- for squad in squads %}
+    <tr class="{{ loop.cycle('odd', 'even') }}">
+	  {%- if squad.can_edit() %}
+      <td><a href="{{ url_for('admin/squad_edit', squad_id=squad.id)|e }}">{{
+          squad.name|e }}</a></td>
+      {%- else %}
+      <td>{{ squad.name|e }}</td>
+	  {%- endif %}
+    <td>{{ squad.game.name|e }}</td>
+	  <td>
+      {%- for member in squad.members %}
+        {{ member.display_name|e }}{%- if not loop.last %}, {%- endif %}
+	    {%- else %}
+	      <i>{{ _("No members") }}</i>
+      {%- endfor %}
+	  </td>
+	  <td>
+	    {%- if squad.can_manage() %}
+	    <a href="{{ url_for("admin/squad_editmemberships", squad_id=squad.id)|e }}">{{ _("Edit Memberlist") }}</a>
+  	  {%- endif %}
+	  </td></tr>
+  {%- endfor %}
+  </table>
+  <form action="{{ url_for('admin/squad_create')|e }}" method="get">
+    <div class="actions">
+      <input type="submit" value="{{ _('New Squad') }}">
+    </div>
+  </form>
+  {%- if pagination.necessary %}
+  <div class="pagination">
+    {{ pagination.generate() }}
+  </div>
+  {%- endif %}
+{% endblock %}
