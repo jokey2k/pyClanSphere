@@ -14,7 +14,7 @@ from os.path import join, dirname
 from pyClanSphere.api import _, url_for
 
 from pyClanSphere.plugins.gamesquad.database import init_database
-from pyClanSphere.plugins.gamesquad.privileges import PLUGIN_PRIVILEGES, GAME_MANAGE, SQUAD_MANAGE
+from pyClanSphere.plugins.gamesquad.privileges import PLUGIN_PRIVILEGES, GAME_MANAGE
 from pyClanSphere.plugins.gamesquad import views
 
 TEMPLATE_FILES = join(dirname(__file__), 'templates')
@@ -24,20 +24,13 @@ def add_admin_links(request, navigation_bar):
 
     priv_check = request.user.has_privilege
 
-    entries = []
+    entries = [('squads', url_for('admin/squad_list'), _(u'Squads'))]
 
     if priv_check(GAME_MANAGE): 
-        entries.append(('games', url_for('admin/game_list'), _(u'Games')))
+        entries.insert(0,('games', url_for('admin/game_list'), _(u'Games')))
 
-    if priv_check(SQUAD_MANAGE): 
-        entries.append(('squads', url_for('admin/squad_list'), _(u'Squads')))
-
-    if entries:
-        navigation_bar.extend([
-            ('gamesquad', url_for('admin/game_list'), _(u'Games and Squads'), entries)
-        ])
+    navigation_bar.insert(1, ('gamesquad', url_for('admin/squad_list'), _(u'Games and Squads'), entries))
     
-
 def setup(app, plugin):
     """Init our needed stuff"""
 
@@ -59,19 +52,9 @@ def setup(app, plugin):
     app.add_url_rule('/squads/<int:squad_id>', endpoint='squad/detail', 
                      view=views.squad_detail)
                          
-    # Register news archive along with archive
-    # sub-urls to filter by year, month and day
-    #app.add_url_rule('/news/archive', endpoint='news/archive',
-    #                 view=views.archive)
-    #tmp = '/news/'
-    #for digits, part in zip((0, 0, 0), ('year', 'month', 'day')):
-    #    tmp += '<int(fixed_digits=%d):%s>/' % (digits, part)
-    #    app.add_url_rule(tmp, defaults={'page': 1}, endpoint='news/archive')
-    #    app.add_url_rule(tmp + 'page/<int:page>', endpoint='news/archive')
-
     # Register our admin views
     # Games
-    app.add_url_rule('/games', prefix='admin', defaults={'page': 1}, endpoint='admin/game_list', 
+    app.add_url_rule('/games/', prefix='admin', defaults={'page': 1}, endpoint='admin/game_list', 
                      view=views.game_list)
     app.add_url_rule('/games/new', prefix='admin', endpoint='admin/game_create', 
                      view=views.edit_game)
@@ -81,16 +64,21 @@ def setup(app, plugin):
                      view=views.delete_game)
 
     # Squads
-    app.add_url_rule('/squads', prefix='admin', defaults={'page': 1}, endpoint='admin/squad_list', 
+    app.add_url_rule('/squads/', prefix='admin', defaults={'page': 1}, endpoint='admin/squad_list', 
                      view=views.squad_list)
     app.add_url_rule('/squads/new', prefix='admin', endpoint='admin/squad_create', 
                      view=views.edit_squad)
     app.add_url_rule('/squads/<int:squad_id>', prefix='admin', endpoint='admin/squad_edit', 
                      view=views.edit_squad)
-    app.add_url_rule('/squads/<int:squad_id>/memberships', prefix='admin', endpoint='admin/squad_editmemberships', 
-                     view=views.edit_squadmemberships)
     app.add_url_rule('/squads/<int:squad_id>/delete', prefix='admin', endpoint='admin/squad_delete', 
                      view=views.delete_squad)
+    # Squadmembers
+    app.add_url_rule('/squads/<int:squad_id>/listmembers', prefix='admin', endpoint='admin/squad_listmembers', 
+                     view=views.list_squadmembers)
+    app.add_url_rule('/squads/<int:squad_id>/editmember/<int:user_id>', prefix='admin', endpoint='admin/squad_editmember', 
+                     view=views.edit_squadmembers)
+    app.add_url_rule('/squads/<int:squad_id>/newmember', prefix='admin', endpoint='admin/squad_newmember', 
+                     view=views.edit_squadmembers)
     
     # Add admin views to navigation bar
     app.connect_event('modify-admin-navigation-bar', add_admin_links)

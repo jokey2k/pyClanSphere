@@ -75,9 +75,40 @@ class Squad(object):
             self.game.name
         )
 
+class SquadMemberQuery(db.Query):
+    """Provide better prepared queries"""
+    
+    def get_list(self, squad, endpoint=None, page=1, per_page=None,
+                 url_args=None, raise_if_empty=True):
+        """Return a dict with pagination and the current members."""
+
+        if per_page is None:
+            per_page = 20
+
+        # send the query
+        offset = per_page * (page - 1)
+        memberlist = self.filter_by(squad_id=squad.id) \
+                         .order_by(SquadMember.level_id) \
+                         .offset(offset).limit(per_page).all()
+
+        # if raising exceptions is wanted, raise it
+        if raise_if_empty and (page != 1 and not memberlist):
+            raise NotFound()
+
+        pagination = Pagination(endpoint, page, per_page,
+                                self.count(), url_args)
+
+        return {
+            'squad':            squad,
+            'squadmembers':     memberlist,
+            'pagination':       pagination
+        }    
+
 
 class SquadMember(object):
     """Extends user with additional fields"""
+
+    query = db.query_property(SquadMemberQuery)
 
     def __init__(self, user, squad, level, othertasks=None):
         super(SquadMember, self).__init__()
@@ -86,6 +117,12 @@ class SquadMember(object):
         self.level = level        
         self.othertasks = othertasks
 
+    def __repr__(self):
+        return "<%s (%s, %s)>" % (
+            self.__class__.__name__,
+            self.user.username,
+            self.squad.name
+        )
 
 class Level(object):
     """Name Alias for Levels"""

@@ -10,10 +10,11 @@
 """
 
 from pyClanSphere.api import *
+from pyClanSphere.models import User
 from pyClanSphere.utils import forms
 from pyClanSphere.utils.validators import ValidationError, is_not_whitespace_only
 
-from pyClanSphere.plugins.gamesquad.models import Game, Squad
+from pyClanSphere.plugins.gamesquad.models import Game, Squad, SquadMember, Level
 
 class _GameBoundForm(forms.Form):
     """Internal baseclass for games bound forms."""
@@ -194,3 +195,48 @@ class DeleteSquadForm(_SquadBoundForm):
 
         emit_event('before-squad-deleted', self.squad, self.data)
         db.delete(self.squad)
+
+
+class EditSquadMemberForm(_SquadBoundForm):
+    """Decide whos in our squad."""
+
+    clanmember = forms.ModelField(User, 'id', lazy_gettext(u'Clanmember'),
+                                  widget=forms.SelectBox)
+    level = forms.ModelField(Level, 'id', lazy_gettext(u'Level'),
+                            widget=forms.SelectBox)
+    othertasks = forms.TextField(lazy_gettext(u'Other tasks'), max_length=100,
+                                 validators=[is_not_whitespace_only()])
+
+    def __init__(self, squad, squadmember=None, initial=None):
+        if squadmember is not None:
+            initial = forms.fill_dict(initial,
+                clanmember=squadmember.user,
+                level=squadmember.level,
+                othertasks=squadmember.othertasks
+            )
+        _SquadBoundForm.__init__(self, squad, initial)
+        self.squadmember = squadmember
+        self.clanmember.choices = [(user.id, user.display_name) for \
+                                   user in User.query.all() if user not in self.squad.members]
+        if self.squadmember:
+            self.clanmember.choices.insert(0,(squadmember.user.id, squadmember.user.display_name))
+        self.level.choices = [(level.id, level.name) for level in Level.query.all()]
+
+    def make_squadmember(self):
+        """A helper function that creates new SquadMember objects."""
+        
+        squadmember = SquadMember(self.data['clanmember'], self.squad,
+                                  self.data['level'], self.data['othertasks'])
+        self.new_squadmember = squadmember
+        return squadmember
+
+    def _set_common_attributes(self, squadmember):
+        squadmember.squad = self.squad
+        squadmember.clanmember = self.data['clanmember']
+        squadmember.level = self.data['level']
+        squadmember.othertasks = self.data['othertasks']
+
+    def save_changes(self):
+        """Apply the changes."""
+
+        self._set_common_attributes(self.squadmember)

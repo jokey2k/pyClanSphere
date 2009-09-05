@@ -1,0 +1,34 @@
+{% extends "admin/layout.html" %}
+{% block title %}{{ _("Squad Members for Squad %s" % squad.name)|e }}{% endblock %}
+{% block contents %}
+  <h1>{{ _("Members in Squad '%s'" % squad.name)|e }}</h1>
+  <table>
+    <tr>
+      <th>{{ _("Member") }}</th>
+      <th>{{ _("Level") }}</th>
+      <th>{{ _("Other Tasks") }}</th>
+    </tr>
+  {%- for member in squad.squadmembers %}
+    <tr class="{{ loop.cycle('odd', 'even') }}">
+      <td><a href="{{ url_for('admin/squad_editmember', squad_id=squad.id, user_id=member.user.id)|e }}">{{
+          member.user.display_name|e }}</a></td>
+	    <td>{{ member.level.name|e }}</td>
+	    <td>{{ member.othertasks|e }}</td>
+	  </tr>
+  {%- else %}
+    <tr class="even">
+      <td colspan="3"><i>{{ _("No Members") }}</i></td>
+	  </tr>
+  {%- endfor %}
+  </table>
+  <form action="{{ url_for('admin/squad_newmember', squad_id=squad.id)|e }}" method="get">
+    <div class="actions">
+      <input type="submit" value="{{ _('New Member') }}">
+    </div>
+  </form>
+  {%- if pagination.necessary %}
+  <div class="pagination">
+    {{ pagination.generate() }}
+  </div>
+  {%- endif %}
+{% endblock %}

@@ -4,10 +4,9 @@
   <h1>{{ _("Squads Overview") }}</h1>
   <table>
     <tr>
-      <th>{{ _("Game") }}</th>
       <th>{{ _("Squad") }}</th>
+      <th>{{ _("Game") }}</th>
       <th>{{ _("Members") }}</th>
-      <th>{{ _("Edit") }}</th>
     </tr>
   {%- for squad in squads %}
     <tr class="{{ loop.cycle('odd', 'even') }}">
@@ -19,17 +18,19 @@
 	  {%- endif %}
     <td>{{ squad.game.name|e }}</td>
 	  <td>
+	    {%- if squad.can_manage() %}
+	    <a href="{{ url_for("admin/squad_listmembers", squad_id=squad.id)|e }}">
+  	  {%- endif %}
       {%- for member in squad.members %}
         {{ member.display_name|e }}{%- if not loop.last %}, {%- endif %}
 	    {%- else %}
 	      <i>{{ _("No members") }}</i>
       {%- endfor %}
-	  </td>
-	  <td>
 	    {%- if squad.can_manage() %}
-	    <a href="{{ url_for("admin/squad_editmemberships", squad_id=squad.id)|e }}">{{ _("Edit Memberlist") }}</a>
+	    </a>
   	  {%- endif %}
-	  </td></tr>
+	  </td>
+	  </tr>
   {%- endfor %}
   </table>
   <form action="{{ url_for('admin/squad_create')|e }}" method="get">

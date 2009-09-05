@@ -28,7 +28,7 @@ from pyClanSphere.utils.redirects import lookup_redirect
 from pyClanSphere.views.admin import render_admin_response, PER_PAGE
 
 from pyClanSphere.plugins.gamesquad.forms import DeleteGameForm, EditGameForm, \
-     DeleteSquadForm, EditSquadForm
+     DeleteSquadForm, EditSquadForm, EditSquadMemberForm
 from pyClanSphere.plugins.gamesquad.models import Game, Squad, SquadMember, Level
 from pyClanSphere.plugins.gamesquad.privileges import GAME_MANAGE, SQUAD_MANAGE, SQUAD_MANAGE_MEMBERS
 
@@ -64,7 +64,7 @@ def game_detail(req, game_id=None):
     :URL endpoint: ``news/index``
     """
 
-    data = Game.query.filter_by(id=game_id).first()
+    data = Game.query.get(game_id)
     if data is None:
         raise NotFound()
 
@@ -83,7 +83,7 @@ def squad_detail(req, squad_id=None):
     :URL endpoint: ``news/index``
     """
 
-    data = Squad.query.filter_by(id=squad_id).first()
+    data = Squad.query.get(squad_id)
     if data is None:
         raise NotFound()
 
@@ -203,23 +203,60 @@ def edit_squad(request, squad_id=None):
     return render_admin_response('admin/squad_edit.html', 'gamesquad.squads',
                                  form=form.as_widget())
 
-@require_admin_privilege(SQUAD_MANAGE_MEMBERS)
-def edit_squadmemberships(request, squad_id=None):
-    """Manage Squadmemberships"""
+@require_admin_privilege()
+def list_squadmembers(request, squad_id=None):
+    """Show Squadmemberships"""
     
-    squad = None
-    if squad_id is not None:
-        squad = Squad.query.get(squad_id)
-        if squad is None:
-            raise NotFound()
-    form = EditSquadMemberShipForm(squad)
+    if squad_id is None:
+        raise NotFound()
+    squad = Squad.query.get(squad_id)
+    if squad is None:
+        raise NotFound()
 
+    data = SquadMember.query.get_list(squad)
+
+    return render_admin_response('admin/squad_listmembers.html', 'gamesquad.squads',
+                                 **data)
+
+@require_admin_privilege(SQUAD_MANAGE_MEMBERS)
+def edit_squadmembers(request, squad_id=None, user_id=None):
+    """Edit Squadmemberships"""
+
+    if squad_id is None:
+        raise NotFound()
+    squad = Squad.query.get(squad_id)
+    if squad is None:
+        raise NotFound()
+
+    squadmember = None
+    if user_id is not None:
+        squadmember = SquadMember.query.get((user_id,squad_id))
+        if squadmember is None:
+            raise NotFound()
+    form = EditSquadMemberForm(squad, squadmember)
+    
     if request.method == 'POST':
         if 'cancel' in request.form:
-            return form.redirect('admin/squad_list')
-    return render_admin_response('admin/squad_editmembership.html', 'gamesquad.squads',
-                                 form=form.as_widget())
+            return form.redirect('admin/squad_listmembers', squad_id=squad_id)
+        elif request.form.get('delete') and user_id is not None:
+            return redirect_to('admin/squad_deletemember', squad_id=squad_id, user_id=user_id)
+        elif form.validate(request.form):
+            if squadmember is None:
+                squadmember = form.make_squadmember()
+                msg = _('The squadmember %s was created successfully.')
+            else:
+                form.save_changes()
+                msg = _('The squadmember %s was updated successfully.')
 
+            flash(msg % (escape(squadmember.user.display_name)))
+
+            db.commit()
+            if 'save_and_continue' in request.form:
+                return redirect_to('admin/squad_editmember', squad_id=squad_id,
+                                   user_id=squadmember.user.id)
+            return form.redirect('admin/squad_listmembers', squad_id=squad_id)
+    return render_admin_response('admin/squad_editmember.html', 'gamesquad.squads',
+                                 form=form.as_widget(), squad=squad, squadmember=squadmember)
 
 @require_admin_privilege(SQUAD_MANAGE)
 def delete_squad(request, squad_id):

@@ -32,8 +32,7 @@ squadmembers = db.Table('squadmembers', metadata,
     db.Column('user_id', db.ForeignKey('users.user_id'), primary_key=True),
     db.Column('squad_id', db.ForeignKey('squads.squad_id'), primary_key=True),
     db.Column('level_id', db.ForeignKey('levels.level_id')),
-    db.Column('name', db.String(50)),
-    db.Column('tag', db.String(20))
+    db.Column('othertasks', db.String(50))
 )
 
 def init_database():
