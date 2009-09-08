@@ -203,6 +203,29 @@ def edit_squad(request, squad_id=None):
     return render_admin_response('admin/squad_edit.html', 'gamesquad.squads',
                                  form=form.as_widget())
 
+@require_admin_privilege(SQUAD_MANAGE)
+def delete_squad(request, squad_id):
+    """Deletes a squad."""
+
+    squad = Squad.query.get(squad_id)
+    if squad is None:
+        raise NotFound()
+    form = DeleteSquadForm(squad)
+
+    if request.method == 'POST':
+        if request.form.get('cancel'):
+            return form.redirect('admin/squad_edit', squad_id=squad.id)
+        elif request.form.get('confirm') and form.validate(request.form):
+            form.add_invalid_redirect_target('admin/squad_edit', squad_id=squad.id)
+            squadname = str(squad.name)
+            form.delete_squad()
+            db.commit()
+            flash(_('The squad %s was deleted successfully') % squadname)
+            return form.redirect('admin/squad_list')
+
+    return render_admin_response('admin/squad_delete.html', 'gamesquad.squads',
+                                 form=form.as_widget())
+
 @require_admin_privilege()
 def list_squadmembers(request, squad_id=None):
     """Show Squadmemberships"""
@@ -258,6 +281,33 @@ def edit_squadmembers(request, squad_id=None, user_id=None):
     return render_admin_response('admin/squad_editmember.html', 'gamesquad.squads',
                                  form=form.as_widget(), squad=squad, squadmember=squadmember)
 
+
+@require_admin_privilege(SQUAD_MANAGE_MEMBERS)
+def delete_squadmember(request, squad_id=None, user_id=None):
+    """Remove Member from Squad"""
+
+    if squad_id is None or user_id is None:
+        raise NotFound()
+    squadmember = SquadMember.query.get((user_id, squad_id))
+    if squadmember is None:
+        raise NotFound()
+    form = DeleteSquadMemberForm(squadmember)
+    
+    if request.method == 'POST':
+        if 'cancel' in request.form:
+            return form.redirect('admin/squad_listmembers', squad_id=squad_id)
+        elif request.form.get('confirm') and form.validate(request.form):
+            form.add_invalid_redirect_target('admin/squad_editmember', squad_id=squad.id)
+            membername = str(member.user.display_name)
+            squadname = str(member.squad.name)
+            form.delete_squadmember()
+            db.commit()
+            flash(_('Member %s removed from squad %s successfully') % (membername,  squadname))
+            return form.redirect('admin/squad_listmembers')
+
+    return render_admin_response('admin/squad_delete.html', 'gamesquad.squads',
+                                 form=form.as_widget())
+
 @require_admin_privilege(SQUAD_MANAGE)
 def delete_squad(request, squad_id):
     """Deletes a squad."""
@@ -280,5 +330,3 @@ def delete_squad(request, squad_id):
 
     return render_admin_response('admin/squad_delete.html', 'gamesquad.squads',
                                  form=form.as_widget())
-
-
