@@ -265,3 +265,88 @@ class DeleteSquadMemberForm(_SquadMemberBoundForm):
     def delete_member(self):
         """Deletes the user."""
         db.delete(self.squadmember)
+
+
+class _LevelBoundForm(forms.Form):
+    """Internal baseclass for levels bound forms."""
+
+    def __init__(self, level, initial=None):
+        forms.Form.__init__(self, initial)
+        self.app = get_application()
+        self.level = level
+
+    def as_widget(self):
+        widget = forms.Form.as_widget(self)
+        widget.level = self.level
+        widget.new = self.level is None
+        return widget
+
+        
+class EditLevelForm(_LevelBoundForm):
+    """Edit or create a level."""
+
+    levelname = forms.TextField(lazy_gettext(u'Levelname'), max_length=32,
+                                validators=[is_not_whitespace_only()],
+                                required=True)
+
+    def __init__(self, level=None, initial=None):
+        if level is not None:
+            initial = forms.fill_dict(initial,
+                levelname=level.name
+            )
+        _LevelBoundForm.__init__(self, level, initial)
+
+    def validate_levelname(self, value):
+        query = Level.query.filter_by(name=value)
+        if self.level is not None:
+            query = query.filter(Level.id != self.level.id)
+        if query.first() is not None:
+            raise ValidationError(_('This levelname is already in use'))
+
+    def _set_common_attributes(self, level):
+        forms.set_fields(level, self.data)
+
+    def make_level(self):
+        """A helper function that creates a new level object."""
+        level = Level(self.data['levelname'])
+        self._set_common_attributes(level)
+        self.level = level
+        return level
+
+    def save_changes(self):
+        """Apply the changes."""
+        self.level.name = self.data['levelname']
+        self._set_common_attributes(self.level)
+
+
+class DeleteLevelForm(_LevelBoundForm):
+    """Used to delete a level from the admin panel."""
+
+    relocate_to = forms.ModelField(Level, 'id', lazy_gettext(u'Reassign squadmembers to'),
+                                   widget=forms.SelectBox)
+
+    def __init__(self, level, initial=None):
+        self.relocate_to.choices = [('', u'')] + [
+            (g.id, g.name) for g in Level.query.filter(Level.id != level.id)
+        ]
+
+        _LevelBoundForm.__init__(self, level, forms.fill_dict(initial,
+            action='delete_membership'))
+
+    def context_validate(self, data):
+        if not data['relocate_to']:
+            raise ValidationError(_('You have to select a level which '
+                                    'the squadmembers get assigned to.'))
+
+    def delete_level(self):
+        """Deletes a level."""
+        
+        new_level = Level.query.filter_by(id=self.data['relocate_to'].id).first()
+        for squadmember in SquadMember.query.filter_by(level_id=self.level.id):
+            squadmember.level = new_level
+        db.commit()
+
+        emit_event('before-level-deleted', self.level, self.data)
+        db.delete(self.level)
+
+

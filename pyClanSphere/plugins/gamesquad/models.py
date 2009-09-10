@@ -17,7 +17,7 @@ from pyClanSphere.utils.text import build_tag_uri
 from pyClanSphere.utils.pagination import Pagination
 
 from pyClanSphere.plugins.gamesquad.database import games, squads, squadmembers, levels
-from pyClanSphere.plugins.gamesquad.privileges import GAME_MANAGE, SQUAD_MANAGE, SQUAD_MANAGE_MEMBERS
+from pyClanSphere.plugins.gamesquad.privileges import GAME_MANAGE, SQUAD_MANAGE, SQUAD_MANAGE_MEMBERS, LEVEL_MANAGE
 
 
 class Game(object):
@@ -130,6 +130,14 @@ class Level(object):
     def __init__(self, name):
         super(Level, self).__init__()
         self.name = name
+
+    def can_edit(self, user=None):
+        """Checks if the given user (or current user) can edit this level."""
+
+        if user is None:
+            user = get_request().user
+
+        return user.has_privilege(LEVEL_MANAGE)
 
     def __repr__(self):
         return "<%s (%r, %s)>" % (

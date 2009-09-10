@@ -28,9 +28,10 @@ from pyClanSphere.utils.redirects import lookup_redirect
 from pyClanSphere.views.admin import render_admin_response, PER_PAGE
 
 from pyClanSphere.plugins.gamesquad.forms import DeleteGameForm, EditGameForm, \
-     DeleteSquadForm, EditSquadForm, EditSquadMemberForm, DeleteSquadMemberForm
+     DeleteSquadForm, EditSquadForm, EditSquadMemberForm, DeleteSquadMemberForm, \
+     EditLevelForm, DeleteLevelForm
 from pyClanSphere.plugins.gamesquad.models import Game, Squad, SquadMember, Level
-from pyClanSphere.plugins.gamesquad.privileges import GAME_MANAGE, SQUAD_MANAGE, SQUAD_MANAGE_MEMBERS
+from pyClanSphere.plugins.gamesquad.privileges import GAME_MANAGE, SQUAD_MANAGE, SQUAD_MANAGE_MEMBERS, LEVEL_MANAGE
 
 #
 # Public views
@@ -322,3 +323,75 @@ def delete_squadmember(request, squad_id=None, user_id=None):
 
     return render_admin_response('admin/squad_deletemember.html', 'gamesquad.squads',
                                  form=form.as_widget())
+
+# level stuff
+
+@require_admin_privilege()
+def level_list(request, page):
+    """Show all games in a list."""
+
+    levels = Level.query.limit(PER_PAGE).offset(PER_PAGE * (page - 1)).all()
+    pagination = AdminPagination('admin/level_list', page, PER_PAGE,
+                                 Level.query.count())
+    if not levels and page != 1:
+        raise NotFound()
+    return render_admin_response('admin/level_list.html', 'gamesquad.levels',
+                                 levels=levels, pagination=pagination)
+
+@require_admin_privilege(LEVEL_MANAGE)
+def edit_level(request, level_id=None):
+    """Edit an existing level or create a new one."""
+    
+    level = None
+    if level_id is not None:
+        level = Level.query.get(level_id)
+        if level is None:
+            raise NotFound()
+    form = EditLevelForm(level)
+
+    if request.method == 'POST':
+        if 'cancel' in request.form:
+            return form.redirect('admin/level_list')
+        elif request.form.get('delete') and level:
+            return redirect_to('admin/level_delete', level_id=level_id)
+        elif form.validate(request.form):
+            if level is None:
+                level = form.make_level()
+                msg = _('The level %s was created successfully.')
+                icon = 'add'
+            else:
+                form.save_changes()
+                msg = _('The level %s was updated successfully.')
+                icon = 'info'
+            flash(msg % (escape(level.name)), icon)
+
+            db.commit()
+            if 'save_and_continue' in request.form:
+                return redirect_to('admin/level_edit', level_id=level.id)
+            return form.redirect('admin/level_list')
+    return render_admin_response('admin/level_edit.html', 'levelsquad.levels',
+                                 form=form.as_widget())
+
+@require_admin_privilege(LEVEL_MANAGE)
+def delete_level(request, level_id):
+    """Deletes a level."""
+
+    level = Level.query.get(level_id)
+    if level is None:
+        raise NotFound()
+    form = DeleteLevelForm(level)
+
+    if request.method == 'POST':
+        if request.form.get('cancel'):
+            return form.redirect('admin/level_edit', level_id=level.id)
+        elif request.form.get('confirm') and form.validate(request.form):
+            form.add_invalid_redirect_target('admin/level_edit', level_id=level.id)
+            levelname = str(level.name)
+            form.delete_level()
+            db.commit()
+            flash(_('The level %s was deleted successfully') % levelname, 'remove')
+            return form.redirect('admin/level_list')
+
+    return render_admin_response('admin/level_delete.html', 'levelsquad.levels',
+                                 form=form.as_widget())
+

@@ -29,6 +29,8 @@ def add_admin_links(request, navigation_bar):
     if priv_check(GAME_MANAGE): 
         entries.insert(0,('games', url_for('admin/game_list'), _(u'Games')))
 
+    entries.append(('levels', url_for('admin/level_list'), _(u'Levels')))
+
     navigation_bar.insert(1, ('gamesquad', url_for('admin/squad_list'), _(u'Games and Squads'), entries))
     
 def setup(app, plugin):
@@ -62,7 +64,6 @@ def setup(app, plugin):
                      view=views.edit_game)
     app.add_url_rule('/games/<int:game_id>/delete', prefix='admin', endpoint='admin/game_delete', 
                      view=views.delete_game)
-
     # Squads
     app.add_url_rule('/squads/', prefix='admin', defaults={'page': 1}, endpoint='admin/squad_list', 
                      view=views.squad_list)
@@ -81,6 +82,15 @@ def setup(app, plugin):
                      view=views.edit_squadmember)
     app.add_url_rule('/squads/<int:squad_id>/deletemember/<int:user_id>', prefix='admin', endpoint='admin/squad_deletemember', 
                      view=views.delete_squadmember)
+    # Levels
+    app.add_url_rule('/levels/', prefix='admin', defaults={'page': 1}, endpoint='admin/level_list', 
+                     view=views.level_list)
+    app.add_url_rule('/levels/new', prefix='admin', endpoint='admin/level_create', 
+                     view=views.edit_level)
+    app.add_url_rule('/levels/<int:level_id>', prefix='admin', endpoint='admin/level_edit', 
+                     view=views.edit_level)
+    app.add_url_rule('/levels/<int:level_id>/delete', prefix='admin', endpoint='admin/level_delete', 
+                     view=views.delete_level)
     
     # Add admin views to navigation bar
     app.connect_event('modify-admin-navigation-bar', add_admin_links)

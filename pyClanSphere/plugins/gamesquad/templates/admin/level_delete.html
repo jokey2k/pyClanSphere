@@ -1,0 +1,15 @@
+{% extends "admin/layout.html" %}
+{% block title %}{{ _("Delete Level") }}{% endblock %}
+{% block contents %}
+  <h1>{{ _("Delete Level") }}</h1>
+  {% call form() %}
+    <p>{% trans name=form.level.name|e %}
+      Do you really want to delete the level “{{ name }}”?
+    {% endtrans %}</p>
+    <p>{{ form.relocate_to.label() }}: {{ form.relocate_to() }}
+    <div class="actions">
+      <input type="submit" name="cancel" value="{{ _('No') }}">
+      <input type="submit" name="confirm" value="{{ _('Yes') }}">
+    </div>
+  {% endcall %}
+{% endblock %}

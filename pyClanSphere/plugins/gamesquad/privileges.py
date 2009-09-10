@@ -27,3 +27,4 @@ def _register(name, description, privilege_dependencies=None):
 _register('GAME_MANAGE', lazy_gettext(u'can manage games'), ENTER_ADMIN_PANEL)
 _register('SQUAD_MANAGE_MEMBERS', lazy_gettext(u'can manage squad memberships'), ENTER_ADMIN_PANEL)
 _register('SQUAD_MANAGE', lazy_gettext(u'can manage squads'), SQUAD_MANAGE_MEMBERS)
+_register('LEVEL_MANAGE', lazy_gettext(u'can add/edit/remove memberlevel groups'), ENTER_ADMIN_PANEL)
