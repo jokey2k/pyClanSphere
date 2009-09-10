@@ -197,7 +197,22 @@ class DeleteSquadForm(_SquadBoundForm):
         db.delete(self.squad)
 
 
-class EditSquadMemberForm(_SquadBoundForm):
+class _SquadMemberBoundForm(forms.Form):
+    """Internal baseclass for squadmember bound forms."""
+
+    def __init__(self, squadmember, initial=None):
+        forms.Form.__init__(self, initial)
+        self.app = get_application()
+        self.squadmember = squadmember
+
+    def as_widget(self):
+        widget = forms.Form.as_widget(self)
+        widget.squadmember = self.squadmember
+        widget.new = self.squadmember is None
+        return widget
+
+
+class EditSquadMemberForm(_SquadMemberBoundForm):
     """Decide whos in our squad."""
 
     clanmember = forms.ModelField(User, 'id', lazy_gettext(u'Clanmember'),
@@ -214,8 +229,10 @@ class EditSquadMemberForm(_SquadBoundForm):
                 level=squadmember.level,
                 othertasks=squadmember.othertasks
             )
-        _SquadBoundForm.__init__(self, squad, initial)
-        self.squadmember = squadmember
+        _SquadMemberBoundForm.__init__(self, squadmember, initial)
+        self.squad = squad
+        # Need access to squad here, as the member might be new and thus there is no
+        # member.squad relation yet.
         self.clanmember.choices = [(user.id, user.display_name) for \
                                    user in User.query.all() if user not in self.squad.members]
         if self.squadmember:
@@ -240,3 +257,11 @@ class EditSquadMemberForm(_SquadBoundForm):
         """Apply the changes."""
 
         self._set_common_attributes(self.squadmember)
+
+
+class DeleteSquadMemberForm(_SquadMemberBoundForm):
+    """Used to remove a member from a squad."""
+
+    def delete_member(self):
+        """Deletes the user."""
+        db.delete(self.squadmember)
