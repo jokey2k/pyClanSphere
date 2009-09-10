@@ -76,9 +76,11 @@ def setup(app, plugin):
     app.add_url_rule('/squads/<int:squad_id>/listmembers', prefix='admin', endpoint='admin/squad_listmembers', 
                      view=views.list_squadmembers)
     app.add_url_rule('/squads/<int:squad_id>/editmember/<int:user_id>', prefix='admin', endpoint='admin/squad_editmember', 
-                     view=views.edit_squadmembers)
+                     view=views.edit_squadmember)
     app.add_url_rule('/squads/<int:squad_id>/newmember', prefix='admin', endpoint='admin/squad_newmember', 
-                     view=views.edit_squadmembers)
+                     view=views.edit_squadmember)
+    app.add_url_rule('/squads/<int:squad_id>/deletemember/<int:user_id>', prefix='admin', endpoint='admin/squad_deletemember', 
+                     view=views.delete_squadmember)
     
     # Add admin views to navigation bar
     app.connect_event('modify-admin-navigation-bar', add_admin_links)
