@@ -3,9 +3,9 @@
 {% block title %}{{ _('New Squadmember') if form.new else _('Edit Squadmember') }}{% endblock %}
 {% block contents %}
   {% call form() %}
-  {{ render_formbox(form.clanmember, collapsed=false) }}
+  {{ render_formbox(form.clanmember, collapsed=false, disabled=(not form.new)) }}
   {{ render_formbox(form.level, collapsed=false) }}
-  {{ render_formbox(form.othertasks) }}
+  {{ render_formbox(form.othertasks, collapsed=false) }}
     <div class="actions">
       <input type="submit" name="save" value="{{ _('Save') }}">
       <input type="submit" name="save_and_continue" value="{{ _('Save and continue editing') }}">
