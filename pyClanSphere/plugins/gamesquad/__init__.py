@@ -14,7 +14,7 @@ from os.path import join, dirname
 from pyClanSphere.api import _, url_for
 
 from pyClanSphere.plugins.gamesquad.database import init_database
-from pyClanSphere.plugins.gamesquad.privileges import PLUGIN_PRIVILEGES, GAME_MANAGE
+from pyClanSphere.plugins.gamesquad.privileges import PLUGIN_PRIVILEGES, GAME_MANAGE, LEVEL_MANAGE
 from pyClanSphere.plugins.gamesquad import views
 
 TEMPLATE_FILES = join(dirname(__file__), 'templates')
@@ -29,7 +29,8 @@ def add_admin_links(request, navigation_bar):
     if priv_check(GAME_MANAGE): 
         entries.insert(0,('games', url_for('admin/game_list'), _(u'Games')))
 
-    entries.append(('levels', url_for('admin/level_list'), _(u'Levels')))
+    if priv_check(LEVEL_MANAGE): 
+        entries.append(('levels', url_for('admin/level_list'), _(u'Levels')))
 
     navigation_bar.insert(1, ('gamesquad', url_for('admin/squad_list'), _(u'Games and Squads'), entries))
     
