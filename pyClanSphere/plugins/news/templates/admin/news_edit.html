@@ -4,7 +4,7 @@
 {% block contents %}
   <h1>{{ self.title()|e }}</h1>
   {% call form() %}
-  {{ render_formbox(form.title) }}
+  {{ render_formbox(form.title, collapsed=(not form.new)) }}
   <div class="formbox">
     <h3>{{ form.text.label() }}</h3>
     {{ form.text(rows=1, class='resizable') }}
