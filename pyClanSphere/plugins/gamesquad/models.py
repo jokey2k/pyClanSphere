@@ -42,8 +42,31 @@ class Game(object):
         )
 
 
+class SquadQuery(db.Query):
+    """Provide better prepared queries"""
+
+    def manageable_squads(self, grouped=False, user=None):
+        """Return a dict for the given (or current) user-manageable squads"""
+        
+        if user is None:
+            user = get_request().user
+        
+        squads = [squad for squad in self.all() if squad.can_manage(user)]
+        if not grouped:
+            return squads
+        else:
+            grouped_squads = {}
+            for squad in squads:
+                if squad.game not in grouped_squads:
+                    grouped_squads[game] = []
+                grouped_squads[game].append(squad)
+            return grouped_squads
+
+
 class Squad(object):
     """Basics for a Squad"""
+
+    query = db.query_property(SquadQuery)
 
     def __init__(self, game, name, tag=None):
         super(Squad, self).__init__()
