@@ -1,16 +1,18 @@
 {% extends "layout.html" %}
 {% block title %}{{ _("Game Index") }}{% endblock %}
 {% block contents %}
-  <div class="entry">
-    <h3>Games</h3>
-    <div class="text">
-    {%- for game in games %}
-      <a href="{{ url_for('game/detail', game_id=game.id) }}">{{ game.name|e }}</a><br>
-    {%- else %}
-      <div class="notification">
-        <p>{% trans %}So far there are no games.{% endtrans %}</p>
-      </div>
-    {%- endfor %}
-    </div>
-  </div>
+<div class="post">
+  <h1>Games</h1>
+  <p>
+  {%- for game in games %}
+    {% if loop.first %}
+    (click on game name to see squads for it)<br/>
+    {% endif %}
+    <a href="{{ url_for('game/detail', game_id=game.id) }}">{{ game.name|e }}</a><br/>
+  {%- else %}
+    {% trans %}So far there are no games.{% endtrans %}
+  {%- endfor %}
+  </p>
+</div>
 {% endblock %}
+

@@ -1,15 +1,27 @@
 {% extends "layout.html" %}
 {% block title %}{{ _("Squad Details for %s - %s" % (squad.game.name, squad.name)) }}{% endblock %}
 {% block contents %}
-<div class="entry">
-  <h3>{{ squad.game.name|e }} - {{ squad.name|e }}</h3>
-  <div class="text">
+<div class="post">
+  <h1>Members in Squad {{ squad.name|e }} playing <a href="{{ url_for('game/detail', game_id=squad.game.id) }}">{{ squad.game.name|e }}</a></h1>
   {%- for member in squad.squadmembers %}
-    {{ member.user.display_name|e }}: {{ member.level.name|e }}
-    {%- if member.othertasks %}, {{ member.othertasks }}{%- endif %}<br>
+    {%- if loop.first %}
+  	<table>
+  	<tr>
+  		<th class="first">{{ _("Member") }}</th>
+  		<th>{{ _("Level") }}</th>
+  		<th>{{ _("Other Tasks") }}</th>
+  	</tr>
+    {%- endif %}
+  	<tr class="{{ loop.cycle('odd', 'even') }}">
+  		<td class="first">{{ member.user.display_name|e }}</td>
+  		<td>{{ member.level.name|e }}</td>
+  		<td>{%- if member.othertasks %}{{ member.othertasks }}{%- else %}<div class="align-center">--</div>{%- endif %}</td>
+  	</tr>
+    {%- if loop.last %}
+    </table>
+    {%- endif %}
   {%- else %}
-    {% trans %}No Members in this squad{% endtrans %}
+    {% trans %}<p><strong>No Members in this squad</strong></p>{% endtrans %}
   {%- endfor %}
-  </div>
 </div>
 {% endblock %}
