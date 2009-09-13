@@ -23,7 +23,7 @@ from pyClanSphere.utils.pagination import Pagination
 from pyClanSphere.utils.crypto import gen_pwhash, check_pwhash
 from pyClanSphere.utils.http import make_external_url
 from pyClanSphere.privileges import Privilege, _Privilege, privilege_attribute, \
-     add_admin_privilege, ENTER_ADMIN_PANEL, CLAN_ADMIN
+     add_admin_privilege, ENTER_ADMIN_PANEL, CLAN_ADMIN, ENTER_ACCOUNT_PANEL
 from pyClanSphere.application import get_application, get_request, url_for
 
 from pyClanSphere.i18n import to_clan_timezone
@@ -74,6 +74,10 @@ class User(object):
     @property
     def is_manager(self):
         return self.has_privilege(ENTER_ADMIN_PANEL)
+
+    @property
+    def has_profile_access(self):
+        return self.has_privilege(ENTER_ACCOUNT_PANEL)
 
     @property
     def is_admin(self):
