@@ -326,7 +326,7 @@ def delete_squadmember(request, squad_id=None, user_id=None):
 
 # level stuff
 
-@require_admin_privilege()
+@require_admin_privilege(LEVEL_MANAGE)
 def level_list(request, page):
     """Show all games in a list."""
 
