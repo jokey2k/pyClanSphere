@@ -30,9 +30,7 @@ def add_admin_links(request, navigation_bar):
     if priv_check(NEWS_CREATE) or priv_check(NEWS_EDIT): 
         entries.append(('edit', url_for('admin/news_create'), _(u'Write')))
 
-    navigation_bar.extend([
-        ('news', url_for('admin/news_list'), _(u'News'), entries)
-    ])
+    navigation_bar.insert(1,(('news', url_for('admin/news_list'), _(u'News'), entries)))
     
 
 def setup(app, plugin):
