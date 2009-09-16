@@ -170,14 +170,24 @@ session = orm.scoped_session(lambda: orm.create_session(get_engine(),
                              autoflush=True, autocommit=False),
                              local_manager.get_ident)
 
+# Session.mapper is deprecated in SQL Alchemy 0.5.5 and above
+def session_mapper(scoped_session):
+    def mapper(cls, *arg, **kw):
+        if cls.__init__ is object.__init__:
+            def __init__(self, **kwargs):
+                for key, value in kwargs.items():
+                    setattr(self, key, value)
+            cls.__init__ = __init__
+        if not hasattr(cls,'query'):
+            cls.query = scoped_session.query_property()
+        return orm.mapper(cls, *arg, **kw)
+    return mapper
 
 # configure a declarative base.  This is unused in the code but makes it easier
 # for plugins to work with the database.
 class ModelBase(object):
     """Internal baseclass for `Model`."""
-Model = declarative_base(name='Model', cls=ModelBase, mapper=session.mapper)
-ModelBase.query = session.query_property(Query)
-
+Model = declarative_base(name='Model', cls=ModelBase, mapper=session_mapper(session))
 
 #: create a new module for all the database related functions and objects
 sys.modules['pyClanSphere.database.db'] = db = ModuleType('db')
@@ -200,7 +210,7 @@ db.Query = Query
 db.get_engine = get_engine
 db.create_engine = create_engine
 db.session = session
-db.mapper = session.mapper
+db.mapper = session_mapper(session)
 db.association_proxy = association_proxy
 db.attribute_loaded = attribute_loaded
 db.AttributeExtension = AttributeExtension
