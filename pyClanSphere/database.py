@@ -170,7 +170,18 @@ session = orm.scoped_session(lambda: orm.create_session(get_engine(),
                              autoflush=True, autocommit=False),
                              local_manager.get_ident)
 
-# Session.mapper is deprecated in SQL Alchemy 0.5.5 and above
+# Session.mapper is deprecated in SQL Alchemy 0.5.5 and above´
+# New mapper doesn't auto-add, so put together a MapperExtension
+# that allows emulating that behaviour (it's added automatically
+# unless you specify extenion=... in your mapper() call)
+class AutoAddExt(orm.MapperExtension):
+    def init_instance(self, mapper, class_, oldinit, instance, args, kwargs):
+        session = kwargs.pop('_sa_session', None)
+        if session is None:
+            session = db.session
+        session.add(instance)
+        return orm.EXT_CONTINUE
+
 def session_mapper(scoped_session):
     def mapper(cls, *arg, **kw):
         if cls.__init__ is object.__init__:
@@ -180,6 +191,8 @@ def session_mapper(scoped_session):
             cls.__init__ = __init__
         if not hasattr(cls,'query'):
             cls.query = scoped_session.query_property()
+        if not 'extension' in kw:
+            kw['extension'] = AutoAddExt()
         return orm.mapper(cls, *arg, **kw)
     return mapper
 
@@ -207,6 +220,7 @@ for name in 'delete', 'save', 'flush', 'execute', 'begin', 'mapper', \
 #: and finally hook our own implementations of various objects in
 db.Model = Model
 db.Query = Query
+db.AutoAddExt = AutoAddExt
 db.get_engine = get_engine
 db.create_engine = create_engine
 db.session = session
