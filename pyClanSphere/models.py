@@ -16,7 +16,7 @@ from werkzeug.exceptions import NotFound
 
 from pyClanSphere.database import users, groups, group_users, \
      privileges, user_privileges, group_privileges, \
-     notification_subscriptions, db
+     notification_subscriptions, imaccounts, db
 from pyClanSphere.utils.text import gen_slug, gen_timestamped_slug, build_tag_uri, \
      increment_string
 from pyClanSphere.utils.pagination import Pagination
@@ -198,6 +198,23 @@ class NotificationSubscription(object):
         )
 
 
+class IMAccount(object):
+    """Basics for an IMAccount"""
+
+    def __init__(self, user=None, service=None, account=None):
+        super(Game, self).__init__()
+        self.user = user
+        self.service = service
+        self.account = account
+
+    def __repr__(self):
+        return "<%s (%s, %s)>" % (
+            self.__class__.__name__,
+            self.game,
+            self.user
+        )
+
+
 # connect the tables.
 db.mapper(User, users, properties={
     'id':               users.c.user_id,
@@ -205,6 +222,8 @@ db.mapper(User, users, properties={
     '_own_privileges':  db.relation(_Privilege, lazy=True,
                                     secondary=user_privileges,
                                     collection_class=set,
+                                    cascade='all, delete'),
+    'imaccounts':       db.relation(IMAccount, lazy=True,
                                     cascade='all, delete')
 })
 db.mapper(Group, groups, properties={
@@ -227,4 +246,7 @@ db.mapper(NotificationSubscription, notification_subscriptions, properties={
                                                lazy='dynamic'
                             )
                         )
+})
+db.mapper(IMAccount, imaccounts, properties={
+    'id':           imaccounts.c.account_id
 })

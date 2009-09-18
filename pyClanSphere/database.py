@@ -293,6 +293,13 @@ notification_subscriptions = db.Table('notification_subscriptions', metadata,
     db.UniqueConstraint('user_id', 'notification_system', 'notification_id')
 )
 
+imaccounts = db.Table('imaccounts', metadata,
+    db.Column('account_id', db.Integer, primary_key=True),
+    db.Column('user_id', db.ForeignKey('users.user_id')),
+    db.Column('service', db.String(32)),
+    db.Column('account', db.String(64))
+)
+
 def init_database(engine):
     """This is called from the websetup which explains why it takes an engine
     and not a pyClanSphere application.
