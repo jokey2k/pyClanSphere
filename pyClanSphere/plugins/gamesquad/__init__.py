@@ -33,6 +33,11 @@ def add_admin_links(request, navigation_bar):
         entries.append(('levels', url_for('admin/level_list'), _(u'Levels')))
 
     navigation_bar.insert(1, ('gamesquad', url_for('admin/squad_list'), _(u'Games and Squads'), entries))
+
+def add_account_links(request, navigation_bar):
+    """Add our views to the account interface"""
+
+    navigation_bar.insert(1, ('gameaccounts', url_for('account/gameaccount_list'), _(u'Gameaccounts')))
     
 def setup(app, plugin):
     """Init our needed stuff"""
@@ -92,6 +97,21 @@ def setup(app, plugin):
                      view=views.edit_level)
     app.add_url_rule('/levels/<int:level_id>/delete', prefix='admin', endpoint='admin/level_delete', 
                      view=views.delete_level)
+ 
+    # account views
+    
+    # Gameaccounts
+    # app.add_url_rule('/gameaccounts/', prefix='account', defaults={'page': 1}, endpoint='account/gameaccount_list', 
+    #                  view=views.gameaccount_list)
+    # app.add_url_rule('/gameaccounts/new', prefix='account', endpoint='account/gameaccount_new', 
+    #                  view=views.gameaccount_edit)
+    # app.add_url_rule('/gameaccounts/<int:account_id>', prefix='account', endpoint='account/gameaccount_edit', 
+    #                  view=views.gameaccount_edit)
+    # app.add_url_rule('/gameaccounts/<int:account_id>/delete', prefix='account', endpoint='account/gameaccount_delete', 
+    #                  view=views.gameaccount_delete)
     
     # Add admin views to navigation bar
     app.connect_event('modify-admin-navigation-bar', add_admin_links)
+
+    # Add account views to navigation bar
+    # app.connect_event('modify-account-navigation-bar', add_account_links)

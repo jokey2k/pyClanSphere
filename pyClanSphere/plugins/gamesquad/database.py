@@ -35,6 +35,13 @@ squadmembers = db.Table('squadmembers', metadata,
     db.Column('othertasks', db.String(50))
 )
 
+gameaccounts = db.Table('gameaccounts', metadata,
+    db.Column('account_id', db.Integer, primary_key=True),
+    db.Column('game_id', db.ForeignKey('games.game_id')),
+    db.Column('user_id', db.ForeignKey('users.user_id')),
+    db.Column('account', db.String(64))
+)
+
 def init_database():
     """ This is for inserting our new table"""
     from pyClanSphere.application import get_application
