@@ -75,7 +75,8 @@ __all__ = ['_', 'gettext', 'ngettext', 'lazy_gettext', 'lazy_ngettext']
 
 
 DATE_FORMATS = ['%m/%d/%Y', '%d/%m/%Y', '%Y%m%d', '%d. %m. %Y',
-                '%m/%d/%y', '%d/%m/%y', '%d%m%y', '%m%d%y', '%y%m%d']
+                '%m/%d/%y', '%d/%m/%y', '%d%m%y', '%m%d%y', '%y%m%d',
+                '%d.%m.%Y']
 TIME_FORMATS = ['%H:%M', '%H:%M:%S', '%I:%M %p', '%I:%M:%S %p']
 
 
@@ -463,7 +464,7 @@ def has_timezone(tz):
     return True
 
 
-def parse_datetime(string, rebase=True):
+def parse_datetime(string, rebase=True, dateonly=False):
     """Parses a string into a datetime object.  Per default a conversion
     from the given timezone to UTC is performed but returned as naive
     datetime object (that is tzinfo being None).  If rebasing is disabled
@@ -515,6 +516,16 @@ def parse_datetime(string, rebase=True):
             return convert(fmt)
         except ValueError:
             pass
+
+    # We're allowed to retry with date-only
+    if dateonly:
+        for d_fmt in DATE_FORMATS:
+            try:
+                val = convert(fmt)
+            except ValueError:
+                pass        
+            return to_utc(datetime.utcnow().replace(year=val.year,
+                          month=val.month, day=val.day, microsecond=0))
 
     raise ValueError('invalid date format')
 
