@@ -962,8 +962,8 @@ import sys
 from subprocess import call
 
 REQUIREMENTS = [
-    'Werkzeug>=0.4',
-    'Jinja2>=2.1',
+    'Werkzeug==dev',
+    'Jinja2==dev',
     'SQLAlchemy==dev',
     'pytz',
     'Babel>=0.9.4'
