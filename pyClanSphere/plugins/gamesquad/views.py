@@ -37,7 +37,7 @@ from pyClanSphere.plugins.gamesquad.privileges import GAME_MANAGE, SQUAD_MANAGE,
 # Public views
 #
 
-@cache.response()
+@cache.response(vary=('user',))
 def game_index(req):
     """Render the most recent posts.
 
@@ -54,7 +54,7 @@ def game_index(req):
 
     return render_response('game_index.html', games=data)
 
-@cache.response()
+@cache.response(vary=('user',))
 def game_detail(req, game_id=None):
     """Show a game in detail.
 
@@ -73,7 +73,7 @@ def game_detail(req, game_id=None):
 
     return render_response('game_detail.html', game=data)
 
-@cache.response()
+@cache.response(vary=('user',))
 def squad_detail(req, squad_id=None):
     """Show a game in detail.
 
