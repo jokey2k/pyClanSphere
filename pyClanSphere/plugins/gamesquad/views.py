@@ -21,7 +21,7 @@ from pyClanSphere.application import url_for, render_response, emit_event, \
      Response, get_application
 from pyClanSphere.i18n import _
 from pyClanSphere.privileges import assert_privilege
-from pyClanSphere.utils.admin import flash, require_admin_privilege
+from pyClanSphere.utils.admin import require_admin_privilege, flash as admin_flash
 from pyClanSphere.utils.pagination import AdminPagination
 from pyClanSphere.utils.http import redirect_to
 from pyClanSphere.utils.redirects import lookup_redirect
@@ -135,7 +135,7 @@ def edit_game(request, game_id=None):
                 form.save_changes()
                 msg = _('The game %s was updated successfully.')
                 icon = 'info'
-            flash(msg % (escape(game.name)), icon)
+            admin_flash(msg % (escape(game.name)), icon)
 
             db.commit()
             if 'save_and_continue' in request.form:
@@ -161,7 +161,7 @@ def delete_game(request, game_id):
             gamename = str(game.name)
             form.delete_game()
             db.commit()
-            flash(_('The game %s was deleted successfully') % gamename, 'remove')
+            admin_flash(_('The game %s was deleted successfully') % gamename, 'remove')
             return form.redirect('admin/game_list')
 
     return render_admin_response('admin/game_delete.html', 'gamesquad.games',
@@ -206,7 +206,7 @@ def edit_squad(request, squad_id=None):
                 form.save_changes()
                 msg = _('The squad %s was updated successfully.')
                 icon = 'info'
-            flash(msg % (escape(squad.name)), icon)
+            admin_flash(msg % (escape(squad.name)), icon)
 
             db.commit()
             if 'save_and_continue' in request.form:
@@ -232,7 +232,7 @@ def delete_squad(request, squad_id):
             squadname = str(squad.name)
             form.delete_squad()
             db.commit()
-            flash(_('%s was deleted successfully') % squadname, 'remove')
+            admin_flash(_('%s was deleted successfully') % squadname, 'remove')
             return form.redirect('admin/squad_list')
 
     return render_admin_response('admin/squad_delete.html', 'gamesquad.squads',
@@ -287,7 +287,7 @@ def edit_squadmember(request, squad_id=None, user_id=None):
                 msg = _('The squadmember %s was updated successfully.')
                 icon = 'info'
 
-            flash(msg % (escape(squadmember.user.display_name)),icon)
+            admin_flash(msg % (escape(squadmember.user.display_name)),icon)
 
             db.commit()
             if 'save_and_continue' in request.form:
@@ -318,7 +318,7 @@ def delete_squadmember(request, squad_id=None, user_id=None):
             squadname = str(member.squad.name)
             form.delete_member()
             db.commit()
-            flash(_('Member %s removed from %s') % (membername,  squadname), 'remove')
+            admin_flash(_('Member %s removed from %s') % (membername,  squadname), 'remove')
             return form.redirect('admin/squad_listmembers', squad_id=squad_id)
 
     return render_admin_response('admin/squad_deletemember.html', 'gamesquad.squads',
@@ -363,7 +363,7 @@ def edit_level(request, level_id=None):
                 form.save_changes()
                 msg = _('The level %s was updated successfully.')
                 icon = 'info'
-            flash(msg % (escape(level.name)), icon)
+            admin_flash(msg % (escape(level.name)), icon)
 
             db.commit()
             if 'save_and_continue' in request.form:
@@ -389,7 +389,7 @@ def delete_level(request, level_id):
             levelname = str(level.name)
             form.delete_level()
             db.commit()
-            flash(_('The level %s was deleted successfully') % levelname, 'remove')
+            admin_flash(_('The level %s was deleted successfully') % levelname, 'remove')
             return form.redirect('admin/level_list')
 
     return render_admin_response('admin/level_delete.html', 'levelsquad.levels',
