@@ -11,9 +11,11 @@
     :license: BSD, see LICENSE for more details.
 """
 
+from pyClanSphere import cache
 from pyClanSphere.api import *
 from pyClanSphere.i18n import _, ngettext
 
+@cache.response()
 def index(request):
     """Just show the pyClanSphere license and some other legal stuff."""
     return render_response('index.html')
