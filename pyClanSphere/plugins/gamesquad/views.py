@@ -20,11 +20,13 @@ from pyClanSphere.database import db
 from pyClanSphere.application import url_for, render_response, emit_event, \
      Response, get_application
 from pyClanSphere.i18n import _
-from pyClanSphere.privileges import assert_privilege
+from pyClanSphere.privileges import CLAN_ADMIN
 from pyClanSphere.utils.admin import require_admin_privilege, flash as admin_flash
+from pyClanSphere.utils.account import require_account_privilege, flash as account_flash
 from pyClanSphere.utils.pagination import AdminPagination
 from pyClanSphere.utils.http import redirect_to
 from pyClanSphere.utils.redirects import lookup_redirect
+from pyClanSphere.views.account import render_account_response
 from pyClanSphere.views.admin import render_admin_response, PER_PAGE
 
 from pyClanSphere.plugins.gamesquad.forms import DeleteGameForm, EditGameForm, \
@@ -395,3 +397,48 @@ def delete_level(request, level_id):
     return render_admin_response('admin/level_delete.html', 'levelsquad.levels',
                                  form=form.as_widget())
 
+@require_account_privilege()
+def acc_delete_gameaccount(request, gameaccount_id):
+    """Delete an InGame Account from user-account panel"""
+    
+    gameaccount = GameAccount.query.get(gameaccount_id)
+    if gameaccount is None:
+        raise NotFound()
+    form = DeleteGameAccountForm(gameaccount)
+    if gameaccount.user != request.user:
+        raise Forbidden()
+
+    if request.method == 'POST':
+        if request.form.get('cancel'):
+            return form.redirect('account/gameaccount_list')
+        elif request.form.get('confirm') and form.validate(request.form):
+            account = str(gameaccount.account)
+            form.delete_account()
+            db.commit()
+            admin_flash(_('The gameaccount %s was deleted successfully') % account, 'remove')
+            return form.redirect('account/gameaccount_list')
+    
+    return render_account_response('account/gameaccount_delete.html', 'gameaccounts',
+                                   form=form.as_widget())
+
+@require_admin_privilege(CLAN_ADMIN)
+def adm_delete_gameaccount(request, gameaccount_id):
+    """Delete an InGame Account from admin panel"""
+
+    gameaccount = GameAccount.query.get(gameaccount_id)
+    if gameaccount is None:
+        raise NotFound()
+    form = DeleteGameAccountForm(gameaccount)
+
+    if request.method == 'POST':
+        if request.form.get('cancel'):
+            return form.redirect('admin/edit_user', user_id=gameaccount.user.id)
+        elif request.form.get('confirm') and form.validate(request.form):
+            account = str(gameaccount.account)
+            form.delete_account()
+            db.commit()
+            admin_flash(_('The gameaccount %s was deleted successfully') % account, 'remove')
+            return form.redirect('admin/edit_user', user_id=gameaccount.user.id)
+
+    return render_admin_response('account/gameaccount_delete', 'users',
+                                   form=form.as_widget())

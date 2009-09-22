@@ -350,3 +350,19 @@ class DeleteLevelForm(_LevelBoundForm):
         db.delete(self.level)
 
 
+class DeleteGameAccountForm(forms.Form):
+    """Used to remove a member from a squad."""
+
+    def __init__(self, gameaccount, initial=None):
+        forms.Form.__init__(self, initial)
+        self.app = get_application()
+        self.gameaccount = gameaccount
+
+    def as_widget(self):
+        widget = forms.Form.as_widget(self)
+        widget.gameaccount = self.gameaccount
+        return widget
+
+    def delete_member(self):
+        """Deletes the user."""
+        db.delete(self.gameaccount)
