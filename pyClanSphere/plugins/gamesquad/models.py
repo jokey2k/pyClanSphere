@@ -173,11 +173,12 @@ class Level(object):
 class GameAccount(object):
     """Basics for a GameAccount"""
 
-    def __init__(self, game=None, user=None, account=None):
+    def __init__(self, game=None, user=None, account=None, ingameaccess=False):
         super(Game, self).__init__()
         self.game = game
         self.user = user
         self.account = account
+        self.ingameaccess = ingameaccess
 
     def __repr__(self):
         return "<%s (%s, %s)>" % (
