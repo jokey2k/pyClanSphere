@@ -7,7 +7,7 @@
     <h3>{{ form.squadname.label() }}</h3>
     {{ form.squadname() }}
   </div>
-  {{ render_formbox(form.game) }}
+  {{ render_formbox(form.game, collapsed=(not form.new)) }}
   {{ render_formbox(form.tag) }}
     <div class="actions">
       <input type="submit" name="save" value="{{ _('Save') }}">
