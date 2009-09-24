@@ -1,29 +1,16 @@
 {% extends "account/layout.html" %}
-{% from "admin/_form_helpers.html" import render_formbox %}
-{% block title %}{{ _('Edit Profile') }}{% endblock %}
+{% from "admin/_form_helpers.html" import render_formbox, render_formmultibox %}
+{% block title %}{{ _('Edit my profile') }}{% endblock %}
 {% block contents %}
   <h1>{{ self.title()|e }}</h1>
   {% call form() %}
-    {{ render_formbox(form.username, toggleable=false, disabled=true) }}
-    {{ render_formbox(form.real_name, toggleable=false) }}
-    <div class="formbox toggleable collapsed">
-      <h3>{{ form.password.label() }}</h3>
-      {{ form.password() }}
-      {{ form.password_confirm() }} <span class="explanation">{{ form.password_confirm.help_text }}</span>
-    </div>
-    {{ render_formbox(form.email) }}
-    {{ render_formbox(form.www) }}
-    {{ render_formbox(form.display_name) }}
-    {{ render_formbox(form.gender_male) }}
-    {{ render_formbox(form.birthday) }}
-    {{ render_formbox(form.height) }}
-    {{ render_formbox(form.address) }}
-    {{ render_formbox(form.zip) }}
-    {{ render_formbox(form.city) }}
-    {{ render_formbox(form.country) }}
+  {{ render_formmultibox([form.display_name, form.password, form.password_confirm, 
+                          form.email], _("Core account data"), toggleable=false) }}
+  {{ render_formmultibox([form.real_name, form.address, form.zip,
+                          form.city, form.country, form.www, form.gender_male,
+                          form.birthday, form.height], _("About me")) }}
     <div class="actions">
       <input type="submit" name="save" value="{{ _('Update Profile') }}">
-      <input type="submit" name="delete" value="{{ _('Delete Account') }}">
       <input type="submit" name="cancel" value="{{ _('Cancel') }}">
     </div>
   {% endcall %}
