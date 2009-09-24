@@ -83,7 +83,6 @@ msgstr ""
 "URL umzieht."
 
 #: pyClanSphere/config.py:50
-#, fuzzy
 msgid ""
 "The email address given here is used by the notification system to send "
 "mails from.  Also plugins that send mails will use this address as sender "
@@ -105,12 +104,10 @@ msgstr ""
 "Zeitzone zu ändern, nachdem Einträge erstellt wurden."
 
 #: pyClanSphere/config.py:60
-#, fuzzy
 msgid "If set to true the site enables the maintainance mode."
 msgstr "Der Wartungsmodus wird aktiviert, wenn Haken gesetzt."
 
 #: pyClanSphere/config.py:63
-#, fuzzy
 msgid ""
 "If there are multiple pyClanSphere installations on the same host the cookie"
 " name should be set to something different for each one."
@@ -119,7 +116,6 @@ msgstr ""
 "sollte der Cookie-Name für jedes Blog auf einen anderen Wert gesetzt werden."
 
 #: pyClanSphere/config.py:67
-#, fuzzy
 msgid ""
 "The secret key is used for vairous security related tasks in the system.  "
 "For example the cookie is signed with this value."
@@ -128,7 +124,6 @@ msgstr ""
 "verwendet.  Zum Beispiel wird das Cookie mit diesem Wert signiert."
 
 #: pyClanSphere/config.py:73
-#, fuzzy
 msgid ""
 "The iid uniquely identifies the pyClanSphere instance.  Currently this value"
 " is unused, but once set you should not modify it."
@@ -522,7 +517,7 @@ msgstr "kann das Adminpanel öffnen"
 
 #: pyClanSphere/privileges.py:205
 msgid "can administer everything"
-msgstr "kann die Site administrieren"
+msgstr "kann die komplette Site administrieren"
 
 #: pyClanSphere/docs/__init__.py:67
 msgid "no documented plugins installed."
@@ -673,7 +668,7 @@ msgstr "kann Squads verwalten"
 
 #: pyClanSphere/plugins/gamesquad/privileges.py:30
 msgid "can add/edit/remove memberlevel groups"
-msgstr "kann Mitgliedslevel verwalten"
+msgstr "kann Mitgliedslevel erzeugen/verwalten"
 
 #: pyClanSphere/plugins/gamesquad/views.py:134
 #, python-format
@@ -747,7 +742,7 @@ msgstr "Das Spielekonto %s wurde aktualisiert."
 
 #: pyClanSphere/plugins/gamesquad/views.py:464
 #: pyClanSphere/plugins/gamesquad/views.py:486
-#, fuzzy, python-format
+#, python-format
 msgid "The game account %s was deleted successfully"
 msgstr "Das Spielekonto %s wurde erfolgreich gelöscht."
 
@@ -824,12 +819,10 @@ msgid "Yes"
 msgstr "Ja"
 
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_edit.html:3
-#, fuzzy
 msgid "New Game Account"
 msgstr "Neues Spielekonto"
 
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_edit.html:3
-#, fuzzy
 msgid "Edit Game Account"
 msgstr "Spielekonto bearbeiten"
 
@@ -888,12 +881,10 @@ msgstr "Abbrechen"
 
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_list.html:2
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_list.html:4
-#, fuzzy
 msgid "Registered Game accounts"
 msgstr "Registrierte Spielekonten"
 
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_list.html:8
-#, fuzzy
 msgid "Accountname"
 msgstr "Kontoname"
 
@@ -968,9 +959,8 @@ msgstr "Spiel bearbeiten"
 
 #: pyClanSphere/plugins/gamesquad/templates/admin/game_list.html:2
 #: pyClanSphere/plugins/gamesquad/templates/admin/game_list.html:4
-#, fuzzy
 msgid "Games Overview"
-msgstr "Übersicht"
+msgstr "Spieleübersicht"
 
 #: pyClanSphere/plugins/gamesquad/templates/admin/game_list.html:22
 msgid "No squads"
@@ -1098,7 +1088,7 @@ msgstr "Keine Mitglieder"
 
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_listmembers.html:26
 msgid "New Member"
-msgstr "An Konto erinnern"
+msgstr "Neues Mitglied"
 
 #: pyClanSphere/plugins/news/__init__.py:28
 msgid "Overview"
@@ -1211,7 +1201,6 @@ msgid "News Index"
 msgstr "Newsübersicht"
 
 #: pyClanSphere/plugins/news/templates/news_index.html:9
-#, fuzzy
 msgid "So far there are no news entries here."
 msgstr "Momentan gibt es keine Newseinträge."
 
@@ -1226,9 +1215,8 @@ msgstr "News bearbeiten"
 
 #: pyClanSphere/plugins/news/templates/admin/news_list.html:2
 #: pyClanSphere/plugins/news/templates/admin/news_list.html:4
-#, fuzzy
 msgid "News Overview"
-msgstr "Übersicht"
+msgstr "Newsübersicht"
 
 #: pyClanSphere/plugins/news/templates/admin/news_list.html:8
 #: pyClanSphere/templates/admin/information.html:142
@@ -1291,12 +1279,10 @@ msgid "Quicklinks"
 msgstr ""
 
 #: pyClanSphere/plugins/shockg_theme_new/templates/admin/index.html:14
-#, fuzzy
 msgid "Write News"
 msgstr "kann neue News anlegen"
 
 #: pyClanSphere/plugins/shockg_theme_new/templates/admin/index.html:15
-#, fuzzy
 msgid "Manage Squad(member)s"
 msgstr "kann Squadmitgliedschaften verwalten"
 
@@ -1385,7 +1371,6 @@ msgstr ""
 "    in der <a href=\"%(index_link)s\">Übersicht</a>, was du gesucht hast."
 
 #: pyClanSphere/templates/500.html:2
-#, fuzzy
 msgid "PyClanSphere Internal Server Error"
 msgstr "pyClanSphere interner Serverfehler"
 
@@ -1523,9 +1508,8 @@ msgid "Welcome"
 msgstr "Willkommen"
 
 #: pyClanSphere/templates/index.html:5
-#, fuzzy
 msgid "So far there are no entries here."
-msgstr "Momentan gibt es keine Einträge in diesem Blog."
+msgstr "Momentan gibt es keine Einträge."
 
 #: pyClanSphere/templates/internal_error.html:2
 msgid "pyClanSphere Internal Error"
@@ -1553,7 +1537,6 @@ msgstr ""
 "  "
 
 #: pyClanSphere/templates/internal_error.html:17
-#, fuzzy
 msgid ""
 "\n"
 "    This error is only visible to site administrators.  If a regular user\n"
@@ -1568,7 +1551,7 @@ msgstr ""
 "  "
 
 #: pyClanSphere/templates/layout.html:20
-#, fuzzy, python-format
+#, python-format
 msgid "Empowered by %(pyClanSphere)s."
 msgstr "%(pyClanSphere)s unter der Haube."
 
@@ -1577,7 +1560,6 @@ msgid "Maintenance Mode"
 msgstr "Wartungsmodus"
 
 #: pyClanSphere/templates/maintenance.html:41
-#, fuzzy
 msgid ""
 "\n"
 "      This pyClanSphere instance is currently in maintenance mode.\n"
@@ -1612,14 +1594,12 @@ msgstr ""
 "\"(Dieser Schritt ist endgültig)"
 
 #: pyClanSphere/templates/account/edit_profile.html:3
-#, fuzzy
 msgid "Edit my profile"
 msgstr "Profil Bearbeiten"
 
 #: pyClanSphere/templates/account/edit_profile.html:11
-#, fuzzy
 msgid "About me"
-msgstr "Über"
+msgstr "Über mich"
 
 #: pyClanSphere/templates/account/edit_profile.html:13
 #: pyClanSphere/templates/account/index.html:14
@@ -1656,13 +1636,12 @@ msgid "My Account"
 msgstr "Mein Benutzerprofil"
 
 #: pyClanSphere/templates/account/layout.html:16
-#, fuzzy, python-format
+#, python-format
 msgid "%(clan_title)s &mdash; My Account"
 msgstr "%(clan_title)s &mdash; Mein Benutzerprofil"
 
 #: pyClanSphere/templates/account/layout.html:18
 #: pyClanSphere/templates/admin/layout.html:20
-#, fuzzy
 msgid "View Startpage"
 msgstr "Startseite anzeigen"
 
@@ -1684,7 +1663,6 @@ msgid "Login"
 msgstr "Anmelden"
 
 #: pyClanSphere/templates/account/login.html:11
-#, fuzzy
 msgid "&laquo; back to the startpage"
 msgstr "&laquo; zurück zur Startseite"
 
@@ -1706,7 +1684,6 @@ msgid "Bye"
 msgstr "Auf Wiedersehen"
 
 #: pyClanSphere/templates/account/sorry_to_see_you_go.html:11
-#, fuzzy
 msgid "&laquo; back to the site index"
 msgstr "&laquo; zurück zur Startseite"
 
@@ -1720,7 +1697,6 @@ msgid "Basic Options"
 msgstr "Grundeinstellungen"
 
 #: pyClanSphere/templates/admin/basic_options.html:5
-#, fuzzy
 msgid ""
 "\n"
 "    From here you can configure the basic site settings like the\n"
@@ -2356,7 +2332,7 @@ msgid "Export"
 msgstr "Exportieren"
 
 #: pyClanSphere/templates/admin/layout.html:18
-#, fuzzy, python-format
+#, python-format
 msgid "%(clan_title)s Administration"
 msgstr "%(clan_title)s Administration"
 
@@ -2979,7 +2955,6 @@ msgid "Could not save the configuration because the configuration is invalid."
 msgstr "Konnte die Konfiguration nicht speichern, da die Konfiguration ungültig ist."
 
 #: pyClanSphere/views/admin.py:569
-#, fuzzy
 msgid "Maintenance mode disabled.  The site is now publicly available."
 msgstr "Wartungsmodus deaktiviert.  Die Site ist nun öffentlich verfügbar."
 
@@ -3135,7 +3110,6 @@ msgid "Setup Finished"
 msgstr "Einrichtung ist abgeschlossen"
 
 #: pyClanSphere/websetup/templates/finished.html:4
-#, fuzzy
 msgid ""
 "\n"
 "    The setup was finished successfully. You can now go to the\n"
