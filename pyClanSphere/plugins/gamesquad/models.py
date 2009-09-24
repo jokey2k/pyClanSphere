@@ -174,7 +174,7 @@ class GameAccount(object):
     """Basics for a GameAccount"""
 
     def __init__(self, game=None, user=None, account=None, ingameaccess=False):
-        super(Game, self).__init__()
+        super(GameAccount, self).__init__()
         self.game = game
         self.user = user
         self.account = account
