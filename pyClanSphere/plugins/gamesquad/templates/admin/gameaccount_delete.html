@@ -1,0 +1,15 @@
+{% extends "admin/layout.html" %}
+{% block title %}{{ _("Remove game account registration") }}{% endblock %}
+{% block contents %}
+  <h1>{{ _("Remove game account registration") }}</h1>
+  {% call form() %}
+    <p>{% trans username=form.gameaccount.user.display_name|e, game=form.gameaccount.game.name|e, account=form.gameaccount.account|e  %}
+      Game: <b>{{ game }}</b><br>Account: <b>{{ account }}</b><br>&nbsp;<br>
+      Do you really want to remove this game account registration from “{{ username }}”?
+    {% endtrans %}</p>
+    <div class="actions">
+      <input type="submit" name="cancel" value="{{ _('No') }}">
+      <input type="submit" name="confirm" value="{{ _('Yes') }}">
+    </div>
+  {% endcall %}
+{% endblock %}

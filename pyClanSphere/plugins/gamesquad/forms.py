@@ -363,6 +363,6 @@ class DeleteGameAccountForm(forms.Form):
         widget.gameaccount = self.gameaccount
         return widget
 
-    def delete_member(self):
+    def delete_account(self):
         """Deletes the user."""
         db.delete(self.gameaccount)
