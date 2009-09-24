@@ -7,7 +7,19 @@
   </div>
 {% endmacro %}
 
-{% macro render_post_actions(form) %}
+{% macro render_formmultibox(fields, boxlabel, class, toggleable=true, collapsed=true, disabled=false) %}
+  <div class="formbox{{ " " + class if class }}{{ " toggleable" if toggleable
+    }}{{ " collapsed" if collapsed and toggleable }}">
+    <h3>{{ boxlabel }}</h3>
+    <table>
+    {% for field in fields %}
+    <tr><td>{{ field.label() }}</td><td width="100%">{{ caller(disabled=disabled) if caller else field(disabled=disabled) }}</td></tr>
+    {% endfor %}
+    </table>
+  </div>
+{% endmacro %}
+
+{% macro render_actions(form) %}
   <div class="actions">
     <input type="submit" name="save" value="{{ _('Save') }}">
     <input type="submit" name="save_and_continue" value="{{ _('Save and continue editing') }}">
@@ -15,6 +27,5 @@
       <input type="submit" name="delete" value="{{ _('Delete') }}">
     {%- endif %}
     <input type="submit" name="cancel" value="{{ _('Cancel') }}">
-    <input type="submit" name="preview" value="{{ _('Preview') }}">
   </div>
 {% endmacro %}

@@ -1,38 +1,15 @@
 {% extends "admin/layout.html" %}
-{% from "admin/_form_helpers.html" import render_formbox %}
+{% from "admin/_form_helpers.html" import render_formmultibox, render_actions %}
 {% block title %}{{ _('New User') if form.new else _('Edit User') }}{% endblock %}
 {% block contents %}
   <h1>{{ self.title()|e }}</h1>
   {% call form() %}
-    <div class="formbox">
-      <h3>{{ form.username.label() }}</h3>
-      {{ form.username(size=30) }}
-    </div>
-    {{ render_formbox(form.real_name, toggleable=false) }}
-    <div class="formbox toggleable collapsed">
-      <h3>{{ form.password.label() }}</h3>
-      {{ form.password() }}
-      {{ form.password_confirm() }} <span class="explanation">{{ form.password_confirm.help_text }}</span>
-    </div>
-    {{ render_formbox(form.email) }}
-    {{ render_formbox(form.www) }}
-    {{ render_formbox(form.gender_male) }}
-    {{ render_formbox(form.birthday) }}
-    {{ render_formbox(form.height) }}
-    {{ render_formbox(form.address) }}
-    {{ render_formbox(form.zip) }}
-    {{ render_formbox(form.city) }}
-    {{ render_formbox(form.country) }}
-    {{ render_formbox(form.display_name) }}
-    {{ render_formbox(form.groups) }}
-    {{ render_formbox(form.privileges) }}
-    <div class="actions">
-      <input type="submit" name="save" value="{{ _('Save') }}">
-      <input type="submit" name="save_and_continue" value="{{ _('Save and continue editing') }}">
-      {%- if not form.new %}
-        <input type="submit" name="delete" value="{{ _('Delete') }}">
-      {%- endif %}
-      <input type="submit" name="cancel" value="{{ _('Cancel') }}">
-    </div>
+    {{ render_formmultibox([form.username, form.password, form.password_confirm, 
+                            form.email], _("Core account data"), toggleable=false) }}
+    {{ render_formmultibox([form.real_name, form.display_name, form.address, form.zip,
+                            form.city, form.country, form.www, form.gender_male,
+                            form.birthday, form.height], _("About the user")) }}
+    {{ render_formmultibox([form.groups, form.privileges], _("Privileges")) }}
+    {{ render_actions(form) }}
   {% endcall %}
 {% endblock %}
