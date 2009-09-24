@@ -1298,11 +1298,12 @@ class DateTimeField(Field):
 
     def __init__(self, label=None, help_text=None, required=False,
                  rebase=True, validators=None, widget=None, messages=None,
-                 default=missing, dateonly=False):
+                 default=missing):
         Field.__init__(self, label, help_text, validators, widget, messages,
                        default)
         self.required = required
         self.rebase = rebase
+        self.dateonly = False
 
     def convert(self, value):
         if isinstance(value, datetime):
@@ -1313,14 +1314,24 @@ class DateTimeField(Field):
                 raise ValidationError(self.messages['required'])
             return None
         try:
-            return parse_datetime(value, rebase=self.rebase, dateonly=dateonly)
+            return parse_datetime(value, rebase=self.rebase, dateonly=self.dateonly)
         except ValueError:
             raise ValidationError(self.messages['invalid_date'])
 
     def to_primitive(self, value):
         if isinstance(value, datetime):
-            value = format_system_datetime(value, rebase=self.rebase)
+            value = format_system_datetime(value, rebase=self.rebase, dateonly=self.dateonly)
         return value
+
+
+class DateField(DateTimeField):
+    """A Field, where dates without time is okay, overriding for convenience"""
+    def __init__(self, label=None, help_text=None, required=False,
+                 rebase=True, validators=None, widget=None, messages=None,
+                 default=missing):
+        DateTimeField.__init__(self, label, help_text, required, rebase,
+                      validators, widget, messages, default)
+        self.dateonly=True
 
 
 class ModelField(Field):

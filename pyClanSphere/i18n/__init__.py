@@ -76,7 +76,7 @@ __all__ = ['_', 'gettext', 'ngettext', 'lazy_gettext', 'lazy_ngettext']
 
 DATE_FORMATS = ['%m/%d/%Y', '%d/%m/%Y', '%Y%m%d', '%d. %m. %Y',
                 '%m/%d/%y', '%d/%m/%y', '%d%m%y', '%m%d%y', '%y%m%d',
-                '%d.%m.%Y']
+                '%d.%m.%Y', '%d.%m.%y']
 TIME_FORMATS = ['%H:%M', '%H:%M:%S', '%I:%M %p', '%I:%M:%S %p']
 
 
@@ -369,20 +369,27 @@ def format_datetime(datetime=None, format='medium', rebase=True):
     return _date_format(dates.format_datetime, datetime, format, rebase)
 
 
-def format_system_datetime(datetime=None, rebase=True):
+def format_system_datetime(datetime=None, rebase=True, dateonly=False):
     """Formats a system datetime.  This is the format the admin
     panel uses by default.  (Format: YYYY-MM-DD hh:mm and in the
     user timezone unless rebase is disabled)
     """
     if rebase:
         datetime = to_clan_timezone(datetime)
-    return u'%d-%02d-%02d %02d:%02d' % (
-        datetime.year,
-        datetime.month,
-        datetime.day,
-        datetime.hour,
-        datetime.minute
-    )
+    if not dateonly:
+        return u'%d-%02d-%02d %02d:%02d' % (
+            datetime.year,
+            datetime.month,
+            datetime.day,
+            datetime.hour,
+            datetime.minute
+        )
+    else:
+        return u'%d-%02d-%02d' % (
+            datetime.year,
+            datetime.month,
+            datetime.day
+        )
 
 
 def format_date(date=None, format='medium', rebase=True):
@@ -519,13 +526,14 @@ def parse_datetime(string, rebase=True, dateonly=False):
 
     # We're allowed to retry with date-only
     if dateonly:
+        print "YES"
         for d_fmt in DATE_FORMATS:
             try:
-                val = convert(fmt)
+                val = convert(d_fmt)
+                return to_utc(datetime.utcnow().replace(year=val.year,
+                              month=val.month, day=val.day, hour=0, minute=0, second=0,microsecond=0))
             except ValueError:
                 pass        
-            return to_utc(datetime.utcnow().replace(year=val.year,
-                          month=val.month, day=val.day, microsecond=0))
 
     raise ValueError('invalid date format')
 
