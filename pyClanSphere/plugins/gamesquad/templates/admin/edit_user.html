@@ -14,12 +14,12 @@
       <h3>{{ _("Registered Game Accounts") }}</h3>
       <table>
       {% for group in form.user.gameaccounts|groupby('game') %}
+      {% for gameaccount in group.list %}
         <tr>
-          <td rowcount="{{ group.list|count }}">{{ group.grouper.name }}</td>
-          {% for gameaccount in group.list %}
+          {% if loop.first %}<td rowspan="{{ group.list|count }}">{{ group.grouper.name }}</td>{% endif %}
           <td>{{ gameaccount.account }}</td><td width="100%"><a href="{{ url_for('admin/gameaccount_delete', account_id=gameaccount.id) }}">remove this</a></td>
-          {% endfor %}
         </tr>
+        {% endfor %}
       {% else %}
         <tr><td>{{ _("No accounts") }}</td></tr>
       {% endfor %}

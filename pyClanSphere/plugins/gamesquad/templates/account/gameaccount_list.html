@@ -1,0 +1,31 @@
+{% extends "account/layout.html" %}
+{% block title %}{{ _("Registered Game accounts") }}{% endblock %}
+{% block contents %}
+  <h1>{{ _("Registered Game accounts") }}</h1>
+  <table>
+    <tr>
+      <th>{{ _("Game") }}</th>
+      <th>{{ _("Accountname") }}</th>
+    </tr>
+    {% for group in gameaccounts|groupby('game') %}
+      {% for gameaccount in group.list %}
+      <tr class="{{ loop.cycle('odd', 'even') }}">
+        {% if loop.first %}<td valign="top" rowspan="{{ group.list|count }}">{{ group.grouper.name }}</td>{%- endif %}
+        <td width="100%"><a href="{{ url_for('account/gameaccount_edit', account_id=gameaccount.id) }}">{{ gameaccount.account }}</td>
+      </tr>
+      {% endfor %}
+    {% else %}
+      <tr><td colspan="2">{{ _("No accounts") }}</td></tr>
+    {% endfor %}
+  </table>
+  <form action="{{ url_for('account/gameaccount_new') }}" method="get">
+    <div class="actions">
+      <input type="submit" value="{{ _('New Account') }}">
+    </div>
+  </form>
+  {%- if pagination.necessary %}
+  <div class="pagination">
+    {{ pagination.generate() }}
+  </div>
+  {%- endif %}
+{% endblock %}

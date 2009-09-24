@@ -14,7 +14,7 @@ from pyClanSphere.models import User
 from pyClanSphere.utils import forms
 from pyClanSphere.utils.validators import ValidationError, is_not_whitespace_only
 
-from pyClanSphere.plugins.gamesquad.models import Game, Squad, SquadMember, Level
+from pyClanSphere.plugins.gamesquad.models import Game, Squad, SquadMember, Level, GameAccount
 
 class _GameBoundForm(forms.Form):
     """Internal baseclass for games bound forms."""
@@ -349,9 +349,8 @@ class DeleteLevelForm(_LevelBoundForm):
         emit_event('before-level-deleted', self.level, self.data)
         db.delete(self.level)
 
-
-class DeleteGameAccountForm(forms.Form):
-    """Used to remove a member from a squad."""
+class _GameAccountBoundForm(forms.Form):
+    """Internal baseclass for game account bound forms."""
 
     def __init__(self, gameaccount, initial=None):
         forms.Form.__init__(self, initial)
@@ -363,6 +362,54 @@ class DeleteGameAccountForm(forms.Form):
         widget.gameaccount = self.gameaccount
         return widget
 
+
+class EditGameAccountForm(_GameAccountBoundForm):
+    """Update Players' Game Accounts."""
+
+    game = forms.ModelField(Game, 'id', lazy_gettext(u'Game'),
+                                  widget=forms.SelectBox)
+    account = forms.TextField(lazy_gettext(u'Account ID'), max_length=100,
+                              validators=[is_not_whitespace_only()])
+
+    def __init__(self, user, gameaccount=None, initial=None):
+        if gameaccount is not None:
+            initial = forms.fill_dict(initial,
+                game=gameaccount.game,
+                account=gameaccount.account
+            )
+        _GameAccountBoundForm.__init__(self, gameaccount, initial)
+        self.user = user
+        self.game.choices = [(game.id, game.name) for game in Game.query.all()]
+
+    def make_gameaccount(self):
+        """A helper function that creates new GameAccount objects."""
+
+        gameaccount = GameAccount(self.data['game'], self.user,
+                                  self.data['account'])
+        self.gameaccount = gameaccount
+        return gameaccount
+
+    def context_validate(self, data):
+        query = GameAccount.query.filter_by(game_id=data['game'].id).filter_by(account=data['account'])
+        if self.gameaccount is not None:
+            query = query.filter(GameAccount.id != self.gameaccount.id)
+        if query.first() is not None:
+            raise ValidationError(_('This account is already registered'))
+    
+    def _set_common_attributes(self, gameaccount):
+        gameaccount.user = self.user
+        gameaccount.game = self.data['game']
+        gameaccount.account = self.data['account']
+
+    def save_changes(self):
+        """Apply the changes."""
+
+        self._set_common_attributes(self.gameaccount)
+
+
+class DeleteGameAccountForm(_GameAccountBoundForm):
+    """Used to remove a member from a squad."""
+
     def delete_account(self):
-        """Deletes the user."""
+        """Deletes the game account."""
         db.delete(self.gameaccount)

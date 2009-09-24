@@ -1,0 +1,17 @@
+{% extends "account/layout.html" %}
+{% from "admin/_form_helpers.html" import render_formbox %}
+{% block title %}{{ _('New Game Account') if form.new else _('Edit Game Account') }}{% endblock %}
+{% block contents %}
+  {% call form() %}
+  {{ render_formbox(form.game, collapsed=false) }}
+  {{ render_formbox(form.account, collapsed=false) }}
+    <div class="actions">
+      <input type="submit" name="save" value="{{ _('Save') }}">
+      <input type="submit" name="save_and_continue" value="{{ _('Save and continue editing') }}">
+      {%- if not form.new %}
+        <input type="submit" name="delete" value="{{ _('Delete') }}">
+      {%- endif %}
+      <input type="submit" name="cancel" value="{{ _('Cancel') }}">
+    </div>
+  {% endcall %}
+{% endblock %}

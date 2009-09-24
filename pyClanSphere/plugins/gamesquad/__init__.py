@@ -37,7 +37,7 @@ def add_admin_links(request, navigation_bar):
 def add_account_links(request, navigation_bar):
     """Add our views to the account interface"""
 
-    navigation_bar.insert(1, ('gameaccounts', url_for('account/gameaccount_list'), _(u'Gameaccounts')))
+    navigation_bar.insert(2, ('gameaccounts', url_for('account/gameaccount_list'), _(u'Gameaccounts'),[]))
     
 def setup(app, plugin):
     """Init our needed stuff"""
@@ -103,17 +103,17 @@ def setup(app, plugin):
                       view=views.adm_delete_gameaccount)
     
     # Gameaccounts
-    # app.add_url_rule('/gameaccounts/', prefix='account', defaults={'page': 1}, endpoint='account/gameaccount_list', 
-    #                  view=views.gameaccount_list)
-    # app.add_url_rule('/gameaccounts/new', prefix='account', endpoint='account/gameaccount_new', 
-    #                  view=views.gameaccount_edit)
-    # app.add_url_rule('/gameaccounts/<int:account_id>', prefix='account', endpoint='account/gameaccount_edit', 
-    #                  view=views.gameaccount_edit)
-    # app.add_url_rule('/gameaccounts/<int:account_id>/delete', prefix='account', endpoint='account/gameaccount_delete', 
-    #                  view=views.gameaccount_delete)
+    app.add_url_rule('/gameaccounts/', prefix='account', defaults={'page': 1}, endpoint='account/gameaccount_list', 
+                     view=views.gameaccount_list)
+    app.add_url_rule('/gameaccounts/new', prefix='account', endpoint='account/gameaccount_new', 
+                     view=views.gameaccount_edit)
+    app.add_url_rule('/gameaccounts/<int:account_id>', prefix='account', endpoint='account/gameaccount_edit', 
+                     view=views.gameaccount_edit)
+    app.add_url_rule('/gameaccounts/<int:account_id>/delete', prefix='account', endpoint='account/gameaccount_delete', 
+                     view=views.acc_delete_gameaccount)
     
     # Add admin views to navigation bar
     app.connect_event('modify-admin-navigation-bar', add_admin_links)
 
     # Add account views to navigation bar
-    # app.connect_event('modify-account-navigation-bar', add_account_links)
+    app.connect_event('modify-account-navigation-bar', add_account_links)

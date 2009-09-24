@@ -31,7 +31,7 @@ from pyClanSphere.views.admin import render_admin_response, PER_PAGE
 
 from pyClanSphere.plugins.gamesquad.forms import DeleteGameForm, EditGameForm, \
      DeleteSquadForm, EditSquadForm, EditSquadMemberForm, DeleteSquadMemberForm, \
-     EditLevelForm, DeleteLevelForm, DeleteGameAccountForm
+     EditLevelForm, DeleteLevelForm, DeleteGameAccountForm, EditGameAccountForm
 from pyClanSphere.plugins.gamesquad.models import Game, Squad, SquadMember, Level, GameAccount
 from pyClanSphere.plugins.gamesquad.privileges import GAME_MANAGE, SQUAD_MANAGE, SQUAD_MANAGE_MEMBERS, LEVEL_MANAGE
 
@@ -398,6 +398,52 @@ def delete_level(request, level_id):
                                  form=form.as_widget())
 
 @require_account_privilege()
+def gameaccount_list(request, page):
+    """List all registered gameaccounts"""
+    gameaccounts = GameAccount.query.filter_by(user=request.user).limit(PER_PAGE).offset(PER_PAGE * (page - 1)).all()
+    pagination = AdminPagination('account/gameaccount_list', page, PER_PAGE,
+                                 GameAccount.query.filter_by(user=request.user).count())
+    if not gameaccounts and page != 1:
+        raise NotFound()
+
+    return render_account_response('account/gameaccount_list.html', 'gameaccounts',
+                                   gameaccounts=gameaccounts, pagination=pagination)
+
+@require_account_privilege()
+def gameaccount_edit(request, account_id=None):
+    """Edit an existing game account or create a new one."""
+
+    gameaccount = None
+    if account_id is not None:
+        gameaccount = GameAccount.query.get(account_id)
+        if gameaccount is None:
+            raise NotFound()
+    form = EditGameAccountForm(request.user, gameaccount)
+
+    if request.method == 'POST':
+        if 'cancel' in request.form:
+            return form.redirect('account/gameaccount_list')
+        elif request.form.get('delete') and gameaccount:
+            return redirect_to('account/gameaccount_delete', account_id=account_id)
+        elif form.validate(request.form):
+            if gameaccount is None:
+                gameaccount = form.make_gameaccount()
+                msg = _('The game account %s was registered successfully.')
+                icon = 'add'
+            else:
+                form.save_changes()
+                msg = _('The game account %s was updated successfully.')
+                icon = 'info'
+            account_flash(msg % (escape(gameaccount.account)), icon)
+
+            db.commit()
+            if 'save_and_continue' in request.form:
+                return redirect_to('account/gameaccount_edit', account_id=gameaccount.id)
+            return form.redirect('account/gameaccount_list')
+    return render_account_response('account/gameaccount_edit.html', 'gameaccounts',
+                                    form=form.as_widget())
+
+@require_account_privilege()
 def acc_delete_gameaccount(request, account_id):
     """Delete an InGame Account from user-account panel"""
     
@@ -412,11 +458,11 @@ def acc_delete_gameaccount(request, account_id):
         if request.form.get('cancel'):
             return form.redirect('account/gameaccount_list')
         elif request.form.get('confirm') and form.validate(request.form):
-            account = str(gameaccount.account)
+            accountname = str(gameaccount.account)
             form.delete_account()
             db.commit()
-            admin_flash(_('The gameaccount %s was deleted successfully') % account, 'remove')
-            return form.redirect('account/gameaccount_list')
+            account_flash(_('The game account %s was deleted successfully') % accountname, 'remove')
+            return redirect_to('account/gameaccount_list')
     
     return render_account_response('account/gameaccount_delete.html', 'gameaccounts',
                                    form=form.as_widget())
@@ -437,7 +483,7 @@ def adm_delete_gameaccount(request, account_id):
             account = str(gameaccount.account)
             form.delete_account()
             db.commit()
-            admin_flash(_('The gamea ccount %s was removed successfully') % account, 'remove')
+            admin_flash(_('The game account %s was deleted successfully') % account, 'remove')
             return form.redirect('admin/edit_user', user_id=gameaccount.user.id)
 
     return render_admin_response('admin/gameaccount_delete.html', 'users_groups.users',
