@@ -76,7 +76,7 @@ __all__ = ['_', 'gettext', 'ngettext', 'lazy_gettext', 'lazy_ngettext']
 
 DATE_FORMATS = ['%m/%d/%Y', '%d/%m/%Y', '%Y%m%d', '%d. %m. %Y',
                 '%m/%d/%y', '%d/%m/%y', '%d%m%y', '%m%d%y', '%y%m%d',
-                '%d.%m.%Y', '%d.%m.%y']
+                '%d.%m.%Y', '%d.%m.%y', '%Y-%m-%d']
 TIME_FORMATS = ['%H:%M', '%H:%M:%S', '%I:%M %p', '%I:%M:%S %p']
 
 
