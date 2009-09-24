@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pyClanSphere 0.1\n"
 "Report-Msgid-Bugs-To: armin.ronacher@active-4.com\n"
 "POT-Creation-Date: 2009-08-22 19:19+0200\n"
-"PO-Revision-Date: 2009-09-24 19:05+0200\n"
+"PO-Revision-Date: 2009-09-24 19:44+0200\n"
 "Last-Translator: Markus Ullmann <mail@markus-ullmann.de>\n"
 "Language-Team: de <pyclansphere@digital-family.de>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -89,9 +89,9 @@ msgid ""
 "mails from.  Also plugins that send mails will use this address as sender "
 "address."
 msgstr ""
-"Diese E-Mail Adresse wird vom Benachrichtigungssystem verwendet um "
-"E-Mails zu versenden.  Plugins, die E-Mails versenden, verwenden diese "
-"Adresse als Absender."
+"Diese E-Mail Adresse wird vom Benachrichtigungssystem verwendet um E-Mails "
+"zu versenden.  Plugins, die E-Mails versenden, verwenden diese Adresse als "
+"Absender."
 
 #: pyClanSphere/config.py:55
 msgid ""
@@ -746,14 +746,10 @@ msgid "The game account %s was updated successfully."
 msgstr "Das Spielekonto %s wurde aktualisiert."
 
 #: pyClanSphere/plugins/gamesquad/views.py:464
-#, python-format
-msgid "The gameaccount %s was deleted successfully"
-msgstr "Das Spielekonto %s wurde erfolgreich gelöscht."
-
 #: pyClanSphere/plugins/gamesquad/views.py:486
-#, python-format
-msgid "The game account %s was removed successfully"
-msgstr "Der Eintrag %s wurde erfolgreich erstellt."
+#, fuzzy, python-format
+msgid "The game account %s was deleted successfully"
+msgstr "Das Spielekonto %s wurde erfolgreich gelöscht."
 
 #: pyClanSphere/plugins/gamesquad/templates/game_detail.html:12
 msgid "<strong>No Squads for this game</strong>"
@@ -843,7 +839,6 @@ msgstr "Spielekonto bearbeiten"
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_edit.html:13
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_editmember.html:10
 #: pyClanSphere/plugins/news/templates/admin/news_edit.html:15
-#: pyClanSphere/plugins/shockg_theme_new/templates/admin/configure_vessel_theme.html:11
 #: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:11
 #: pyClanSphere/templates/account/notification_settings.html:28
 #: pyClanSphere/templates/admin/_form_helpers.html:24
@@ -883,7 +878,6 @@ msgstr "Löschen"
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_edit.html:18
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_editmember.html:15
 #: pyClanSphere/plugins/news/templates/admin/news_edit.html:20
-#: pyClanSphere/plugins/shockg_theme_new/templates/admin/configure_vessel_theme.html:12
 #: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:12
 #: pyClanSphere/templates/account/edit_profile.html:14
 #: pyClanSphere/templates/admin/_form_helpers.html:29
@@ -894,7 +888,8 @@ msgstr "Abbrechen"
 
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_list.html:2
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_list.html:4
-msgid "Registered game accounts"
+#, fuzzy
+msgid "Registered Game accounts"
 msgstr "Registrierte Spielekonten"
 
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_list.html:8
@@ -991,7 +986,8 @@ msgid ""
 "    "
 msgstr ""
 "      Spiel: <b>%(game)s</b><br>Konto ID: <b>%(account)s</b><br>&nbsp;<br>\n"
-"      Soll die Spielekontenregistrierung von „%(username)s” wirklich gelöscht werden?\n"
+"      Soll die Spielekontenregistrierung von „%(username)s” wirklich "
+"gelöscht werden?\n"
 "    "
 
 #: pyClanSphere/plugins/gamesquad/templates/admin/level_delete.html:2
@@ -1274,22 +1270,8 @@ msgstr "%(pyClanSphere)s unter der Haube."
 msgid "Proudly powered by %(pyClanSphere)s, Theme copyright by Armin Ronacher."
 msgstr "%(pyClanSphere)s unter der Haube, %(theme)s designed von %(author)s."
 
-#: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:2
-#: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:4
-msgid "Configure Vessel Theme"
-msgstr "Vessel-Design konfigurieren"
-
-#: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:5
-msgid ""
-"\n"
-"    This theme comes with various color variations you can choose from.\n"
-"  "
-msgstr ""
-"\n"
-"    Dieses Design hat mehrere Farbvarianten, von denen du eine auswählen "
-"kannst.\n"
-"  "
-
+#: pyClanSphere/plugins/shockg_theme_new/templates/admin/index.html:2
+#: pyClanSphere/plugins/shockg_theme_new/templates/admin/index.html:5
 #: pyClanSphere/templates/account/index.html:2
 #: pyClanSphere/templates/account/index.html:5
 #: pyClanSphere/templates/admin/index.html:2
@@ -1298,10 +1280,25 @@ msgstr ""
 msgid "Dashboard"
 msgstr "Dashboard"
 
+#: pyClanSphere/plugins/shockg_theme_new/templates/admin/index.html:8
 #: pyClanSphere/templates/admin/index.html:8
 #, python-format
 msgid "Howdy.  Welcome to the pyClanSphere administration interface %(user)s."
 msgstr "Hallo und Willkommen im pyClanSphere Administrationsbereich, %(user)s."
+
+#: pyClanSphere/plugins/shockg_theme_new/templates/admin/index.html:12
+msgid "Quicklinks"
+msgstr ""
+
+#: pyClanSphere/plugins/shockg_theme_new/templates/admin/index.html:14
+#, fuzzy
+msgid "Write News"
+msgstr "kann neue News anlegen"
+
+#: pyClanSphere/plugins/shockg_theme_new/templates/admin/index.html:15
+#, fuzzy
+msgid "Manage Squad(member)s"
+msgstr "kann Squadmitgliedschaften verwalten"
 
 #: pyClanSphere/plugins/vessel_theme/__init__.py:25
 msgid "Blue"
@@ -1322,6 +1319,22 @@ msgstr "Farbvariante"
 #: pyClanSphere/plugins/vessel_theme/__init__.py:62
 msgid "Color variation changed successfully."
 msgstr "Farbvariante wurde erfolgreich geändert."
+
+#: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:2
+#: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:4
+msgid "Configure Vessel Theme"
+msgstr "Vessel-Design konfigurieren"
+
+#: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:5
+msgid ""
+"\n"
+"    This theme comes with various color variations you can choose from.\n"
+"  "
+msgstr ""
+"\n"
+"    Dieses Design hat mehrere Farbvarianten, von denen du eine auswählen "
+"kannst.\n"
+"  "
 
 #: pyClanSphere/shared/js/pyClanSphere.js:31
 #, python-format

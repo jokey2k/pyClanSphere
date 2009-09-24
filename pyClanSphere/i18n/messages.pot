@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: pyClanSphere@digital-family.de\n"
-"POT-Creation-Date: 2009-09-24 19:05+0200\n"
+"POT-Creation-Date: 2009-09-24 19:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -690,13 +690,9 @@ msgid "The game account %s was updated successfully."
 msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/views.py:464
-#, python-format
-msgid "The gameaccount %s was deleted successfully"
-msgstr ""
-
 #: pyClanSphere/plugins/gamesquad/views.py:486
 #, python-format
-msgid "The gamea ccount %s was removed successfully"
+msgid "The game account %s was deleted successfully"
 msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/templates/game_detail.html:12
@@ -781,7 +777,6 @@ msgstr ""
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_edit.html:13
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_editmember.html:10
 #: pyClanSphere/plugins/news/templates/admin/news_edit.html:15
-#: pyClanSphere/plugins/shockg_theme_new/templates/admin/configure_vessel_theme.html:11
 #: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:11
 #: pyClanSphere/templates/account/notification_settings.html:28
 #: pyClanSphere/templates/admin/_form_helpers.html:24
@@ -821,7 +816,6 @@ msgstr ""
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_edit.html:18
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_editmember.html:15
 #: pyClanSphere/plugins/news/templates/admin/news_edit.html:20
-#: pyClanSphere/plugins/shockg_theme_new/templates/admin/configure_vessel_theme.html:12
 #: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:12
 #: pyClanSphere/templates/account/edit_profile.html:14
 #: pyClanSphere/templates/admin/_form_helpers.html:29
@@ -832,7 +826,7 @@ msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_list.html:2
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_list.html:4
-msgid "Registered game accounts"
+msgid "Registered Game accounts"
 msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_list.html:8
@@ -1013,11 +1007,8 @@ msgid "Members"
 msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_list.html:27
-msgid "No members"
-msgstr ""
-
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_listmembers.html:20
-msgid "No Members"
+msgid "No members"
 msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_listmembers.html:26
@@ -1190,21 +1181,6 @@ msgstr ""
 msgid "Proudly powered by %(pyClanSphere)s, Theme copyright by Armin Ronacher."
 msgstr ""
 
-#: pyClanSphere/plugins/shockg_theme_new/templates/admin/configure_vessel_theme.html:2
-#: pyClanSphere/plugins/shockg_theme_new/templates/admin/configure_vessel_theme.html:4
-#: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:2
-#: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:4
-msgid "Configure Vessel Theme"
-msgstr ""
-
-#: pyClanSphere/plugins/shockg_theme_new/templates/admin/configure_vessel_theme.html:5
-#: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:5
-msgid ""
-"\n"
-"    This theme comes with various color variations you can choose from.\n"
-"  "
-msgstr ""
-
 #: pyClanSphere/plugins/shockg_theme_new/templates/admin/index.html:2
 #: pyClanSphere/plugins/shockg_theme_new/templates/admin/index.html:5
 #: pyClanSphere/templates/account/index.html:2
@@ -1251,6 +1227,18 @@ msgstr ""
 
 #: pyClanSphere/plugins/vessel_theme/__init__.py:62
 msgid "Color variation changed successfully."
+msgstr ""
+
+#: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:2
+#: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:4
+msgid "Configure Vessel Theme"
+msgstr ""
+
+#: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:5
+msgid ""
+"\n"
+"    This theme comes with various color variations you can choose from.\n"
+"  "
 msgstr ""
 
 #: pyClanSphere/shared/js/pyClanSphere.js:31
