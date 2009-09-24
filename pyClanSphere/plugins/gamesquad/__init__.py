@@ -98,7 +98,9 @@ def setup(app, plugin):
     app.add_url_rule('/levels/<int:level_id>/delete', prefix='admin', endpoint='admin/level_delete', 
                      view=views.delete_level)
  
-    # account views
+    # admin views
+    app.add_url_rule('/gameaccounts/<int:account_id>/delete', prefix='admin', endpoint='admin/gameaccount_delete', 
+                      view=views.adm_delete_gameaccount)
     
     # Gameaccounts
     # app.add_url_rule('/gameaccounts/', prefix='account', defaults={'page': 1}, endpoint='account/gameaccount_list', 
