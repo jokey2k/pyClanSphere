@@ -79,3 +79,4 @@ class NewsForm(forms.Form):
     def save_changes(self):
         """Apply the changes."""
         self._set_common_attributes(self.news)
+        self.news.touch_times(self.data['pub_date'])
