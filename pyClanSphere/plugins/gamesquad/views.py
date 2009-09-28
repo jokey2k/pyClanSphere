@@ -180,8 +180,13 @@ def squad_list(request, page):
                                  Squad.query.count())
     if not squads and page != 1:
         raise NotFound()
+    
+    user = request.user
+    create_option = Squad.can_create(user)
+    
     return render_admin_response('admin/squad_list.html', 'gamesquad.squads',
-                                 squads=squads, pagination=pagination)
+                                 squads=squads, pagination=pagination,
+                                 create_option=create_option)
 
 @require_admin_privilege(SQUAD_MANAGE)
 def edit_squad(request, squad_id=None):

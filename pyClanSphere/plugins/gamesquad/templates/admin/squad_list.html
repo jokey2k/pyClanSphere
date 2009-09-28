@@ -33,11 +33,13 @@
 	  </tr>
   {%- endfor %}
   </table>
+  {% if create_option %}
   <form action="{{ url_for('admin/squad_create')|e }}" method="get">
     <div class="actions">
       <input type="submit" value="{{ _('New Squad') }}">
     </div>
   </form>
+  {% endif %}
   {%- if pagination.necessary %}
   <div class="pagination">
     {{ pagination.generate() }}

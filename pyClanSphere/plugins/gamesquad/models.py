@@ -74,6 +74,15 @@ class Squad(object):
         self.name = name
         self.tag = tag
 
+    @staticmethod
+    def can_create(user=None):
+        """Checks if the given user (or current user) can create new ones"""
+        
+        if user is None:
+            user=get_request().user
+        
+        return user.has_privilege(SQUAD_MANAGE)
+
     def can_edit(self, user=None):
         """Checks if the given user (or current user) can edit this
         squad (NOT manage members)."""
