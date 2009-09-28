@@ -15,6 +15,7 @@ from pyClanSphere.utils.validators import ValidationError
 
 from pyClanSphere.plugins.news.models import News, \
      STATUS_DRAFT, STATUS_PUBLISHED
+from pyClanSphere.plugins.news.privileges import NEWS_DELETE
 
 class NewsForm(forms.Form):
     """The form for news writing."""
@@ -74,6 +75,11 @@ class NewsForm(forms.Form):
         widget = forms.Form.as_widget(self)
         widget.news = self.news
         widget.new = self.news is None
+
+        req = get_request()
+        if req and req.user:
+            widget.user_can_delete = req.user.has_privilege(NEWS_DELETE)
+
         return widget
 
     def save_changes(self):

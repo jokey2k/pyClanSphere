@@ -99,8 +99,12 @@ def news_list(request, page):
                                  News.query.count())
     if not newsitems and page != 1:
         raise NotFound()
+
+    can_create = request.user.has_privilege(NEWS_CREATE)
+    
     return render_admin_response('admin/news_list.html', 'news.list',
-                                 newsitems=newsitems, pagination=pagination)
+                                 newsitems=newsitems, pagination=pagination,
+                                 can_create=can_create)
 
 
 def edit_news(request, news_id=None):

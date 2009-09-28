@@ -14,7 +14,7 @@
     <div class="actions">
       <input type="submit" name="save" value="{{ _('Save') }}">
       <input type="submit" name="save_and_continue" value="{{ _('Save and continue editing') }}">
-      {%- if not form.new %}
+      {%- if not form.new and form.user_can_delete %}
         <input type="submit" name="delete" value="{{ _('Delete') }}">
       {%- endif %}
       <input type="submit" name="cancel" value="{{ _('Cancel') }}">

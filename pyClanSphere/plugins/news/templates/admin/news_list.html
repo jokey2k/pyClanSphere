@@ -25,11 +25,13 @@
     </tr>
   {%- endfor %}
   </table>
+  {% if can_create %}
   <form action="{{ url_for('admin/news_create')|e }}" method="get">
     <div class="actions">
       <input type="submit" value="{{ _('New News') }}">
     </div>
   </form>
+  {% endif %}
   {%- if pagination.necessary %}
   <div class="pagination">
     {{ pagination.generate() }}
