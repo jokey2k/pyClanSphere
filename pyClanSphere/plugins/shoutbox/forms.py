@@ -45,7 +45,7 @@ class ShoutboxEntryForm(_ShoutboxBoundForm):
                 text=text,
                 author=author
             )
-        _ShoutboxBoundForm(entry, initial)
+        _ShoutboxBoundForm.__init__(self, entry, initial)
 
     @property
     def captcha_protected(self):
