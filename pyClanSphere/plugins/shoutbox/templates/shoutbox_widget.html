@@ -1,0 +1,12 @@
+{% extends 'widgets/base.html' %}
+{% block body %}
+<ul class="sidemenu">
+{% for entry in widget.entries %}
+<li>{{ entry.author }}:{{ entry.text }}<br>
+  <span class="postdate">({{ entry.postdate|datetimeformat }})</span><br><hr></li>
+{% endfor %}
+</ul>
+{% if not widget.hide_note %}
+  <center><a href="{{ url_for('shoutbox/post') }}">Shout!</a></center>
+{% endif %}
+{% endblock %}

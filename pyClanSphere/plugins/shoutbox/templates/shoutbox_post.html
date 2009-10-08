@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block title %}{{ _("Make shoutbox entry") }}{% endblock %}
+{% block contents %}
+{% call form() %}
+  <center>{% if not request.user.is_somebody %}{{ form.author() }}<br>{% endif %}{{ form.text(rows=5, cols=20) }}<br>
+  {{ form.captcha or '' }}
+  <input type="submit" name="save" value="{{ _('Shout!') }}"></center>
+{% endcall %}
+{% endblock %}
