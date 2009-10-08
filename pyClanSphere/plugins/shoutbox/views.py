@@ -60,6 +60,7 @@ def delete_shoutbox_entry(request, entry_id):
         if 'cancel' in request.form:
             return form.redirect('core/index')
         if form.validate(request.form):
+            form.add_invalid_redirect_target('shoutbox/delete', entry_id=entry.id)
             form.delete_entry()
             db.commit()
             # as this affects pretty much all visible pages, we flush cache here
