@@ -8,6 +8,8 @@
     :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
+from werkzeug.exceptions import NotFound
+
 from pyClanSphere.api import db
 from pyClanSphere.application import render_response
 from pyClanSphere.privileges import assert_privilege
@@ -39,6 +41,8 @@ def make_shoutbox_entry(request):
         if form.validate(request.form):
             entry = form.make_entry()
             db.commit()
+            # as this affects pretty much all visible pages, we flush cache here
+            request.app.cache.clear()
             return form.redirect('core/index')
 
     return render_response('shoutbox_post.html', form=form.as_widget(),
@@ -58,6 +62,8 @@ def delete_shoutbox_entry(request, entry_id):
         if form.validate(request.form):
             form.delete_entry()
             db.commit()
+            # as this affects pretty much all visible pages, we flush cache here
+            request.app.cache.clear()
             return form.redirect('core/index')
 
     return render_response('shoutbox_delete.html', form=form.as_widget())
