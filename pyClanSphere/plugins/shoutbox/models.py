@@ -49,9 +49,9 @@ class ShoutboxEntryQuery(db.Query):
 
 class ShoutboxEntry(object):
     """Represents a shoutbox entry"""
-    
+
     query = db.query_property(ShoutboxEntryQuery)
-    
+
     def __init__(self, author=u'', user=None, existing_user=False, ip=None, postdate=None, text=u''):
         super(ShoutboxEntry, self).__init__()
         self.ip = ip
@@ -61,7 +61,7 @@ class ShoutboxEntry(object):
             self.set_user(user)
         else:
             self.set_author(author)
-    
+
     def __repr__(self):
         return "<%s (%s, '%s', %s)>" % (
             self.__class__.__name__,
@@ -76,20 +76,20 @@ class ShoutboxEntry(object):
         self.user = None
         self.existing_user = False
         self.author = author
-    
+
     def set_user(self, user):
         """Set author to an existing user"""
-        
+
         self.user_id = user.id
         self.existing_user = True
         self.author = user.display_name
-    
+
     def touch_time(self, date=None):
         """Touches the time for this post.  If the date is given the
         `date` is changed to the given date.  If it's not given the
         current time is assumed.
         """
-        
+
         if date is None:
             self.postdate = datetime.utcnow()
         else:

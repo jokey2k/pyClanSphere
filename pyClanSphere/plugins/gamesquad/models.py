@@ -47,10 +47,10 @@ class SquadQuery(db.Query):
 
     def manageable_squads(self, grouped=False, user=None):
         """Return a dict for the given (or current) user-manageable squads"""
-        
+
         if user is None:
             user = get_request().user
-        
+
         squads = [squad for squad in self.all() if squad.can_manage(user)]
         if not grouped:
             return squads
@@ -77,10 +77,10 @@ class Squad(object):
     @staticmethod
     def can_create(user=None):
         """Checks if the given user (or current user) can create new ones"""
-        
+
         if user is None:
             user=get_request().user
-        
+
         return user.has_privilege(SQUAD_MANAGE)
 
     def can_edit(self, user=None):
@@ -109,7 +109,7 @@ class Squad(object):
 
 class SquadMemberQuery(db.Query):
     """Provide better prepared queries"""
-    
+
     def get_list(self, squad, endpoint=None, page=1, per_page=None,
                  url_args=None, raise_if_empty=True):
         """Return a dict with pagination and the current members."""
@@ -134,7 +134,7 @@ class SquadMemberQuery(db.Query):
             'squad':            squad,
             'squadmembers':     memberlist,
             'pagination':       pagination
-        }    
+        }
 
 
 class SquadMember(object):
@@ -146,7 +146,7 @@ class SquadMember(object):
         super(SquadMember, self).__init__()
         self.user = user
         self.squad = squad
-        self.level = level        
+        self.level = level
         self.othertasks = othertasks
 
     def __repr__(self):

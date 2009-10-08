@@ -533,7 +533,7 @@ def parse_datetime(string, rebase=True, dateonly=False):
                 return to_utc(datetime.utcnow().replace(year=val.year,
                               month=val.month, day=val.day, hour=0, minute=0, second=0,microsecond=0))
             except ValueError:
-                pass        
+                pass
 
     raise ValueError('invalid date format')
 

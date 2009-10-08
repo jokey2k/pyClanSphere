@@ -36,7 +36,7 @@ def open_url(url, data=None, timeout=None,
     """
     app = get_application()
     if timeout is None:
-        timeout = app.cfg['default_network_timeout'] 
+        timeout = app.cfg['default_network_timeout']
     parts = urlparse.urlsplit(url)
     if app is not None:
         clan_url = urlparse.urlsplit(app.cfg['clan_url'])

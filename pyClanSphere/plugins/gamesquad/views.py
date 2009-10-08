@@ -51,7 +51,7 @@ def game_index(req):
     :Template name: ``index.html``
     :URL endpoint: ``news/index``
     """
-    
+
     data = Game.query.all()
 
     return render_response('game_index.html', games=data)
@@ -115,7 +115,7 @@ def game_list(request, page):
 @require_admin_privilege(GAME_MANAGE)
 def edit_game(request, game_id=None):
     """Edit an existing game or create a new one."""
-    
+
     game = None
     if game_id is not None:
         game = Game.query.get(game_id)
@@ -180,10 +180,10 @@ def squad_list(request, page):
                                  Squad.query.count())
     if not squads and page != 1:
         raise NotFound()
-    
+
     user = request.user
     create_option = Squad.can_create(user)
-    
+
     return render_admin_response('admin/squad_list.html', 'gamesquad.squads',
                                  squads=squads, pagination=pagination,
                                  create_option=create_option)
@@ -191,7 +191,7 @@ def squad_list(request, page):
 @require_admin_privilege(SQUAD_MANAGE)
 def edit_squad(request, squad_id=None):
     """Edit an existing squad or create a new one."""
-    
+
     squad = None
     if squad_id is not None:
         squad = Squad.query.get(squad_id)
@@ -250,7 +250,7 @@ def delete_squad(request, squad_id):
 @require_admin_privilege()
 def list_squadmembers(request, squad_id=None):
     """Show Squadmemberships"""
-    
+
     if squad_id is None:
         raise NotFound()
     squad = Squad.query.get(squad_id)
@@ -278,7 +278,7 @@ def edit_squadmember(request, squad_id=None, user_id=None):
         if squadmember is None:
             raise NotFound()
     form = EditSquadMemberForm(squad, squadmember)
-    
+
     if request.method == 'POST':
         if 'cancel' in request.form:
             return form.redirect('admin/squad_listmembers', squad_id=squad_id)
@@ -315,7 +315,7 @@ def delete_squadmember(request, squad_id=None, user_id=None):
     if member is None:
         raise NotFound()
     form = DeleteSquadMemberForm(member)
-    
+
     if request.method == 'POST':
         if 'cancel' in request.form:
             return form.redirect('admin/squad_editmember', squad_id=squad_id, user_id=user_id)
@@ -348,7 +348,7 @@ def level_list(request, page):
 @require_admin_privilege(LEVEL_MANAGE)
 def edit_level(request, level_id=None):
     """Edit an existing level or create a new one."""
-    
+
     level = None
     if level_id is not None:
         level = Level.query.get(level_id)
@@ -451,7 +451,7 @@ def gameaccount_edit(request, account_id=None):
 @require_account_privilege()
 def acc_delete_gameaccount(request, account_id):
     """Delete an InGame Account from user-account panel"""
-    
+
     gameaccount = GameAccount.query.get(account_id)
     if gameaccount is None:
         raise NotFound()
@@ -468,7 +468,7 @@ def acc_delete_gameaccount(request, account_id):
             db.commit()
             account_flash(_('The game account %s was deleted successfully') % accountname, 'remove')
             return redirect_to('account/gameaccount_list')
-    
+
     return render_account_response('account/gameaccount_delete.html', 'gameaccounts',
                                    form=form.as_widget())
 

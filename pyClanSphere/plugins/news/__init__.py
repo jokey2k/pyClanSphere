@@ -27,11 +27,11 @@ def add_admin_links(request, navigation_bar):
 
     entries = [('list', url_for('admin/news_list'), _(u'Overview'))]
 
-    if priv_check(NEWS_CREATE) or priv_check(NEWS_EDIT): 
+    if priv_check(NEWS_CREATE) or priv_check(NEWS_EDIT):
         entries.append(('edit', url_for('admin/news_create'), _(u'Write')))
 
     navigation_bar.insert(1,(('news', url_for('admin/news_list'), _(u'News'), entries)))
-    
+
 
 def setup(app, plugin):
     """Init our needed stuff"""
@@ -47,9 +47,9 @@ def setup(app, plugin):
     app.add_template_searchpath(TEMPLATE_FILES)
 
     # Register news main page
-    app.add_url_rule('/news/', endpoint='news/index', 
+    app.add_url_rule('/news/', endpoint='news/index',
                      view=views.index)
-                     
+
     # Register news archive along with archive
     # sub-urls to filter by year, month and day
     app.add_url_rule('/news/archive', endpoint='news/archive',
@@ -61,13 +61,13 @@ def setup(app, plugin):
         app.add_url_rule(tmp + 'page/<int:page>', endpoint='news/archive')
 
     # Register our admin views
-    app.add_url_rule('/news', prefix='admin', defaults={'page': 1}, endpoint='admin/news_list', 
+    app.add_url_rule('/news', prefix='admin', defaults={'page': 1}, endpoint='admin/news_list',
                      view=views.news_list)
-    app.add_url_rule('/news/edit/<int:news_id>', prefix='admin', endpoint='admin/news_edit', 
+    app.add_url_rule('/news/edit/<int:news_id>', prefix='admin', endpoint='admin/news_edit',
                      view=views.edit_news)
-    app.add_url_rule('/news/new', prefix='admin', endpoint='admin/news_create', 
+    app.add_url_rule('/news/new', prefix='admin', endpoint='admin/news_create',
                      view=views.edit_news)
-    
+
     # Add admin views to navigation bar
     app.connect_event('modify-admin-navigation-bar', add_admin_links)
-    
+

@@ -132,7 +132,7 @@ DEFAULT_VARS = {
         u'separated paths here that are searched for plugins.  If the '
         u'is not absolute, it\'s considered relative to the instance '
         u'folder.')),
-    
+
     # reCAPTCHA settings
     'recaptcha_enable':         BooleanField(default=False, help_text=lazy_gettext(
         u'If you want to protect forms that non-logged in users or guests can fill out,'

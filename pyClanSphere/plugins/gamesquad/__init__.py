@@ -26,10 +26,10 @@ def add_admin_links(request, navigation_bar):
 
     entries = [('squads', url_for('admin/squad_list'), _(u'Squads'))]
 
-    if priv_check(GAME_MANAGE): 
+    if priv_check(GAME_MANAGE):
         entries.insert(0,('games', url_for('admin/game_list'), _(u'Games')))
 
-    if priv_check(LEVEL_MANAGE): 
+    if priv_check(LEVEL_MANAGE):
         entries.append(('levels', url_for('admin/level_list'), _(u'Levels')))
 
     navigation_bar.insert(1, ('gamesquad', url_for('admin/squad_list'), _(u'Games and Squads'), entries))
@@ -38,7 +38,7 @@ def add_account_links(request, navigation_bar):
     """Add our views to the account interface"""
 
     navigation_bar.insert(2, ('gameaccounts', url_for('account/gameaccount_list'), _(u'Gameaccounts'),[]))
-    
+
 def setup(app, plugin):
     """Init our needed stuff"""
 
@@ -53,65 +53,65 @@ def setup(app, plugin):
     app.add_template_searchpath(TEMPLATE_FILES)
 
     # Register pages page
-    app.add_url_rule('/games/', endpoint='game/index', 
+    app.add_url_rule('/games/', endpoint='game/index',
                      view=views.game_index)
-    app.add_url_rule('/games/<int:game_id>', endpoint='game/detail', 
+    app.add_url_rule('/games/<int:game_id>', endpoint='game/detail',
                      view=views.game_detail)
-    app.add_url_rule('/squads/<int:squad_id>', endpoint='squad/detail', 
+    app.add_url_rule('/squads/<int:squad_id>', endpoint='squad/detail',
                      view=views.squad_detail)
-                         
+
     # Register our admin views
     # Games
-    app.add_url_rule('/games/', prefix='admin', defaults={'page': 1}, endpoint='admin/game_list', 
+    app.add_url_rule('/games/', prefix='admin', defaults={'page': 1}, endpoint='admin/game_list',
                      view=views.game_list)
-    app.add_url_rule('/games/new', prefix='admin', endpoint='admin/game_create', 
+    app.add_url_rule('/games/new', prefix='admin', endpoint='admin/game_create',
                      view=views.edit_game)
-    app.add_url_rule('/games/<int:game_id>', prefix='admin', endpoint='admin/game_edit', 
+    app.add_url_rule('/games/<int:game_id>', prefix='admin', endpoint='admin/game_edit',
                      view=views.edit_game)
-    app.add_url_rule('/games/<int:game_id>/delete', prefix='admin', endpoint='admin/game_delete', 
+    app.add_url_rule('/games/<int:game_id>/delete', prefix='admin', endpoint='admin/game_delete',
                      view=views.delete_game)
     # Squads
-    app.add_url_rule('/squads/', prefix='admin', defaults={'page': 1}, endpoint='admin/squad_list', 
+    app.add_url_rule('/squads/', prefix='admin', defaults={'page': 1}, endpoint='admin/squad_list',
                      view=views.squad_list)
-    app.add_url_rule('/squads/new', prefix='admin', endpoint='admin/squad_create', 
+    app.add_url_rule('/squads/new', prefix='admin', endpoint='admin/squad_create',
                      view=views.edit_squad)
-    app.add_url_rule('/squads/<int:squad_id>', prefix='admin', endpoint='admin/squad_edit', 
+    app.add_url_rule('/squads/<int:squad_id>', prefix='admin', endpoint='admin/squad_edit',
                      view=views.edit_squad)
-    app.add_url_rule('/squads/<int:squad_id>/delete', prefix='admin', endpoint='admin/squad_delete', 
+    app.add_url_rule('/squads/<int:squad_id>/delete', prefix='admin', endpoint='admin/squad_delete',
                      view=views.delete_squad)
     # Squadmembers
-    app.add_url_rule('/squads/<int:squad_id>/listmembers', prefix='admin', endpoint='admin/squad_listmembers', 
+    app.add_url_rule('/squads/<int:squad_id>/listmembers', prefix='admin', endpoint='admin/squad_listmembers',
                      view=views.list_squadmembers)
-    app.add_url_rule('/squads/<int:squad_id>/editmember/<int:user_id>', prefix='admin', endpoint='admin/squad_editmember', 
+    app.add_url_rule('/squads/<int:squad_id>/editmember/<int:user_id>', prefix='admin', endpoint='admin/squad_editmember',
                      view=views.edit_squadmember)
-    app.add_url_rule('/squads/<int:squad_id>/newmember', prefix='admin', endpoint='admin/squad_newmember', 
+    app.add_url_rule('/squads/<int:squad_id>/newmember', prefix='admin', endpoint='admin/squad_newmember',
                      view=views.edit_squadmember)
-    app.add_url_rule('/squads/<int:squad_id>/deletemember/<int:user_id>', prefix='admin', endpoint='admin/squad_deletemember', 
+    app.add_url_rule('/squads/<int:squad_id>/deletemember/<int:user_id>', prefix='admin', endpoint='admin/squad_deletemember',
                      view=views.delete_squadmember)
     # Levels
-    app.add_url_rule('/levels/', prefix='admin', defaults={'page': 1}, endpoint='admin/level_list', 
+    app.add_url_rule('/levels/', prefix='admin', defaults={'page': 1}, endpoint='admin/level_list',
                      view=views.level_list)
-    app.add_url_rule('/levels/new', prefix='admin', endpoint='admin/level_create', 
+    app.add_url_rule('/levels/new', prefix='admin', endpoint='admin/level_create',
                      view=views.edit_level)
-    app.add_url_rule('/levels/<int:level_id>', prefix='admin', endpoint='admin/level_edit', 
+    app.add_url_rule('/levels/<int:level_id>', prefix='admin', endpoint='admin/level_edit',
                      view=views.edit_level)
-    app.add_url_rule('/levels/<int:level_id>/delete', prefix='admin', endpoint='admin/level_delete', 
+    app.add_url_rule('/levels/<int:level_id>/delete', prefix='admin', endpoint='admin/level_delete',
                      view=views.delete_level)
- 
+
     # admin views
-    app.add_url_rule('/gameaccounts/<int:account_id>/delete', prefix='admin', endpoint='admin/gameaccount_delete', 
+    app.add_url_rule('/gameaccounts/<int:account_id>/delete', prefix='admin', endpoint='admin/gameaccount_delete',
                       view=views.adm_delete_gameaccount)
-    
+
     # Gameaccounts
-    app.add_url_rule('/gameaccounts/', prefix='account', defaults={'page': 1}, endpoint='account/gameaccount_list', 
+    app.add_url_rule('/gameaccounts/', prefix='account', defaults={'page': 1}, endpoint='account/gameaccount_list',
                      view=views.gameaccount_list)
-    app.add_url_rule('/gameaccounts/new', prefix='account', endpoint='account/gameaccount_new', 
+    app.add_url_rule('/gameaccounts/new', prefix='account', endpoint='account/gameaccount_new',
                      view=views.gameaccount_edit)
-    app.add_url_rule('/gameaccounts/<int:account_id>', prefix='account', endpoint='account/gameaccount_edit', 
+    app.add_url_rule('/gameaccounts/<int:account_id>', prefix='account', endpoint='account/gameaccount_edit',
                      view=views.gameaccount_edit)
-    app.add_url_rule('/gameaccounts/<int:account_id>/delete', prefix='account', endpoint='account/gameaccount_delete', 
+    app.add_url_rule('/gameaccounts/<int:account_id>/delete', prefix='account', endpoint='account/gameaccount_delete',
                      view=views.acc_delete_gameaccount)
-    
+
     # Add admin views to navigation bar
     app.connect_event('modify-admin-navigation-bar', add_admin_links)
 

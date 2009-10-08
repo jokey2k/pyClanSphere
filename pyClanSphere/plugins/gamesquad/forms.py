@@ -30,7 +30,7 @@ class _GameBoundForm(forms.Form):
         widget.new = self.game is None
         return widget
 
-        
+
 class EditGameForm(_GameBoundForm):
     """Edit or create a game."""
 
@@ -154,7 +154,7 @@ class EditSquadForm(_SquadBoundForm):
 
     def save_changes(self):
         """Apply the changes."""
-        
+
         self.squad.name = self.data['squadname']
         self._set_common_attributes(self.squad)
 
@@ -241,7 +241,7 @@ class EditSquadMemberForm(_SquadMemberBoundForm):
 
     def make_squadmember(self):
         """A helper function that creates new SquadMember objects."""
-        
+
         squadmember = SquadMember(self.data['clanmember'], self.squad,
                                   self.data['level'], self.data['othertasks'])
         self.new_squadmember = squadmember
@@ -281,7 +281,7 @@ class _LevelBoundForm(forms.Form):
         widget.new = self.level is None
         return widget
 
-        
+
 class EditLevelForm(_LevelBoundForm):
     """Edit or create a level."""
 
@@ -340,7 +340,7 @@ class DeleteLevelForm(_LevelBoundForm):
 
     def delete_level(self):
         """Deletes a level."""
-        
+
         new_level = Level.query.filter_by(id=self.data['relocate_to'].id).first()
         for squadmember in SquadMember.query.filter_by(level_id=self.level.id):
             squadmember.level = new_level
@@ -395,7 +395,7 @@ class EditGameAccountForm(_GameAccountBoundForm):
             query = query.filter(GameAccount.id != self.gameaccount.id)
         if query.first() is not None:
             raise ValidationError(_('This account is already registered'))
-    
+
     def _set_common_attributes(self, gameaccount):
         gameaccount.user = self.user
         gameaccount.game = self.data['game']

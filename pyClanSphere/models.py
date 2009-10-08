@@ -36,7 +36,7 @@ class UserQuery(db.Query):
 
     def authors(self):
         return self.filter_by(is_author=True)
-                
+
 
 class User(object):
     """Represents an user.

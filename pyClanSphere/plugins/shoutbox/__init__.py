@@ -31,12 +31,12 @@ def setup(app, plugin):
 
     # Add our templates to the path
     app.add_template_searchpath(TEMPLATE_FILES)
-    
+
     # Register shoutbox widget
     app.add_widget(views.ShoutboxWidget)
 
     # Shoutbox entry post page
-    app.add_url_rule('/shoutbox/new', endpoint='shoutbox/post', 
+    app.add_url_rule('/shoutbox/new', endpoint='shoutbox/post',
                      view=views.make_shoutbox_entry)
-    app.add_url_rule('/shoutbox/<int:entry_id>/delete', endpoint='shoutbox/delete', 
+    app.add_url_rule('/shoutbox/<int:entry_id>/delete', endpoint='shoutbox/delete',
                      view=views.delete_shoutbox_entry)

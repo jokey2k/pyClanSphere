@@ -52,7 +52,7 @@ class NewsForm(forms.Form):
 
     def validate_status(self, status):
         """Users without NEWS_PUBLIC are not allowed to switch status flag"""
-        
+
         if not self.news and status == STATUS_PUBLISHED:
             raise ValidationError(_(u'Initially news should always be drafts'))
 

@@ -19,10 +19,10 @@ from pyClanSphere.plugins.shoutbox.models import ShoutboxEntry
 
 class ShoutboxWidget(Widget):
     """Show Entries in Widget format"""
-    
+
     name = 'Shoutbox'
     template = 'shoutbox_widget.html'
-    
+
     def __init__(self, show_title=True, title=u'Shoutbox', hide_form=False):
         super(ShoutboxWidget, self).__init__()
         self.title = title
@@ -33,13 +33,13 @@ class ShoutboxWidget(Widget):
 
 def make_shoutbox_entry(request):
     form = ShoutboxEntryForm()
-    
+
     if request.method == 'POST':
         if form.validate(request.form):
             entry = form.make_entry()
             db.commit()
             return form.redirect('core/index')
-    
+
     return render_response('shoutbox_post.html', form=form.as_widget(),
                            widgetoptions=['hide_shoutbox_note'])
 
@@ -47,14 +47,14 @@ def delete_shoutbox_entry(request, entry_id):
     entry = ShoutboxEntry.query.get(entry_id)
     if entry is None:
         raise NotFound()
-    
+
     assert_privilege(SHOUTBOX_MANAGE)
-    
+
     if request.method == 'POST':
         if 'cancel' in request.form:
             return form.redirect(url_for('core/index'))
         if form.validate(request.form):
             db.delete(entry)
             db.commit()
-    
+
     return render_response('shoutbox_delete.html', form=form.as_widget())

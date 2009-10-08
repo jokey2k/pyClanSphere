@@ -50,7 +50,7 @@ def index(req, page=1):
     :Template name: ``index.html``
     :URL endpoint: ``news/index``
     """
-    
+
     data = News.query.published().published() \
                .get_list(endpoint='news/index', page=page)
 
@@ -73,7 +73,7 @@ def archive(req, year=None, month=None, day=None, page=1):
     :Template name: ``archive.html``
     :URL endpoint: ``news/archive``
     """
-    
+
     if not year:
         return render_response('news_archive.html', month_list=True,
                                **News.query.published() \
@@ -101,7 +101,7 @@ def news_list(request, page):
         raise NotFound()
 
     can_create = request.user.has_privilege(NEWS_CREATE)
-    
+
     return render_admin_response('admin/news_list.html', 'news.list',
                                  newsitems=newsitems, pagination=pagination,
                                  can_create=can_create)
@@ -109,7 +109,7 @@ def news_list(request, page):
 
 def edit_news(request, news_id=None):
     """Edit an existing entry or create a new one."""
-    
+
     newsitem = None
     if news_id is not None:
         newsitem = News.query.get(news_id)
