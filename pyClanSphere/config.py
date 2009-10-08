@@ -132,11 +132,21 @@ DEFAULT_VARS = {
         u'separated paths here that are searched for plugins.  If the '
         u'is not absolute, it\'s considered relative to the instance '
         u'folder.')),
+    
+    # reCAPTCHA settings
+    'recaptcha_enable':         BooleanField(default=False, help_text=lazy_gettext(
+        u'If you want to protect forms that non-logged in users or guests can fill out,'
+        u' enable it and get your api keys from http://recaptcha.net. Heavily recommended,'
+        u' just not enabled per default as you need to get api keys yourself')),
+    'recaptcha_use_ssl':        BooleanField(default=True, help_text=lazy_gettext(
+        u'Secure communication between this app and recaptcha over ssl')),
+    'recaptcha_public_key':     TextField(default=u''),
+    'recaptcha_private_key':    TextField(default=u'')
 }
 
 HIDDEN_KEYS = set(('iid', 'secret_key', 'pyclansphere_auth_token',
-                   'smtp_password'))
-
+                   'smtp_password', 'recaptcha_public_key',
+                   'recaptcha_private_key'))
 
 def unquote_value(value):
     """Unquote a configuration value."""

@@ -24,15 +24,16 @@ try:
 except ImportError:
     from sha import new as sha1
 
-from werkzeug import html, escape, MultiDict
+from werkzeug import cached_property, html, escape, MultiDict
 
 from pyClanSphere.application import get_request, url_for
 from pyClanSphere.database import db
 from pyClanSphere.i18n import _, ngettext, lazy_gettext, parse_datetime, \
      format_system_datetime
 from pyClanSphere.utils.http import get_redirect_target, _redirect, redirect_to
-from pyClanSphere.utils.validators import ValidationError
 from pyClanSphere.utils.datastructures import OrderedDict, missing
+from pyClanSphere.utils.recaptcha import get_recaptcha_html, validate_recaptcha
+from pyClanSphere.utils.validators import ValidationError
 
 
 _last_position_hint = -1
@@ -762,6 +763,12 @@ class FormWidget(MappingWidget):
         return u''.join(html.input(type='hidden', name=name, value=value)
                         for name, value in self.get_hidden_fields())
 
+    @cached_property
+    def captcha(self):
+        """The captcha if one exists for this form."""
+        if self._field.form.captcha_protected:
+            return get_recaptcha_html()
+
     @property
     def csrf_token(self):
         """Forward the CSRF check token for templates."""
@@ -1089,6 +1096,14 @@ class FormMapping(Mapping):
             token = self.form.request.values.get('_csrf_token')
             if token != self.form.csrf_token:
                 raise ValidationError(_(u'Invalid security token submitted.'))
+        if self.form.captcha_protected:
+            request = self.form.request
+            if request is None:
+                raise RuntimeError('captcha protected forms need a request')
+            if not validate_recaptcha(request.values.get('recaptcha_challenge_field'),
+                                      request.values.get('recaptcha_response_field'),
+                                      request.remote_addr):
+                raise ValidationError(_('You entered an invalid captcha.'))
         return Mapping.convert(self, value)
 
 
@@ -1832,6 +1847,7 @@ class Form(object):
 
     csrf_protected = True
     redirect_tracking = True
+    captcha_protected = False
 
     def __init__(self, initial=None):
         self.request = get_request()
