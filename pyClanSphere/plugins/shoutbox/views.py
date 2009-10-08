@@ -14,8 +14,9 @@ from pyClanSphere.privileges import assert_privilege
 from pyClanSphere.utils.recaptcha import get_recaptcha_html, validate_recaptcha
 from pyClanSphere.widgets import Widget
 
-from pyClanSphere.plugins.shoutbox.forms import ShoutboxEntryForm
+from pyClanSphere.plugins.shoutbox.forms import ShoutboxEntryForm, DeleteShoutboxEntryForm
 from pyClanSphere.plugins.shoutbox.models import ShoutboxEntry
+from pyClanSphere.plugins.shoutbox.privileges import SHOUTBOX_MANAGE
 
 class ShoutboxWidget(Widget):
     """Show Entries in Widget format"""
@@ -48,13 +49,15 @@ def delete_shoutbox_entry(request, entry_id):
     if entry is None:
         raise NotFound()
 
+    form = DeleteShoutboxEntryForm(entry)
     assert_privilege(SHOUTBOX_MANAGE)
 
     if request.method == 'POST':
         if 'cancel' in request.form:
-            return form.redirect(url_for('core/index'))
+            return form.redirect('core/index')
         if form.validate(request.form):
-            db.delete(entry)
+            form.delete_entry()
             db.commit()
+            return form.redirect('core/index')
 
     return render_response('shoutbox_delete.html', form=form.as_widget())

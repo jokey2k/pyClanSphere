@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}{{ _("Delete Shoutbox Entry") }}{% endblock %}
+{% block contents %}
+  <h1>{{ _("Delete Shoutbox Entry") }}</h1>
+  {% call form() %}
+    <p>{% trans name=form.entry.author|e %}
+      Do you really want to delete the entry from “{{ name }}”?
+    {% endtrans %}</p>
+    <div class="actions">
+      <input type="submit" name="cancel" value="{{ _('No') }}">
+      <input type="submit" name="confirm" value="{{ _('Yes') }}">
+    </div>
+  {% endcall %}
+{% endblock %}

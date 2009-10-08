@@ -15,7 +15,22 @@ from pyClanSphere.utils.validators import ValidationError, is_not_whitespace_onl
 
 from pyClanSphere.plugins.shoutbox.models import ShoutboxEntry
 
-class ShoutboxEntryForm(forms.Form):
+
+class _ShoutboxBoundForm(forms.Form):
+    """Base for Shoutbox related forms"""
+    def __init__(self, entry=None, initial=None):
+        forms.Form.__init__(self, initial)
+        self.app = get_application()
+        self.entry = entry
+
+    def as_widget(self):
+        widget = forms.Form.as_widget(self)
+        widget.entry = self.entry
+        widget.new = self.entry is None
+        return widget
+
+
+class ShoutboxEntryForm(_ShoutboxBoundForm):
     """Post a new entry to the shoutbox."""
 
     author = forms.TextField(lazy_gettext(u'Author'), max_length=50,
@@ -30,20 +45,12 @@ class ShoutboxEntryForm(forms.Form):
                 text=text,
                 author=author
             )
-        forms.Form.__init__(self, initial)
-        self.app = get_application()
-        self.entry = entry
+        _ShoutboxBoundForm(entry, initial)
 
     @property
     def captcha_protected(self):
         """We're protected if no user is logged in and config says so."""
         return not self.request.user.is_somebody and self.app.cfg['recaptcha_enable']
-
-    def as_widget(self):
-        widget = forms.Form.as_widget(self)
-        widget.entry = self.entry
-        widget.new = self.entry is None
-        return widget
 
     def _set_common_attributes(self, entry):
         forms.set_fields(entry, self.data, 'text')
@@ -64,3 +71,11 @@ class ShoutboxEntryForm(forms.Form):
     def save_changes(self, user):
         """Apply the changes."""
         self._set_common_attributes(self.entry)
+
+
+class DeleteShoutboxEntryForm(_ShoutboxBoundForm):
+    """Delete a Shoutbox Entry."""
+
+    def delete_entry(self):
+        """Deletes the user."""
+        db.delete(self.entry)

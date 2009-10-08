@@ -15,6 +15,7 @@ from pyClanSphere.models import User, AnonymousUser
 from pyClanSphere.utils.pagination import Pagination
 
 from pyClanSphere.plugins.shoutbox.database import shoutboxentries
+from pyClanSphere.plugins.shoutbox.privileges import SHOUTBOX_MANAGE
 
 
 class ShoutboxEntryQuery(db.Query):
@@ -69,6 +70,14 @@ class ShoutboxEntry(object):
             self.author,
             self.postdate,
         )
+
+    def can_manage(self, user=None):
+        """Check if given (or current) user can manage this entry"""
+        
+        if user is None:
+            user = get_request().user
+        
+        return user.has_privilege(SHOUTBOX_MANAGE)
 
     def set_author(self, author):
         """Set author to an anonymous name"""
