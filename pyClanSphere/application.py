@@ -741,7 +741,7 @@ class pyClanSphere(object):
             shared_url=shared_url,
             emit_event=self._event_manager.template_emit,
             request=local('request'),
-            render_widgets=lambda: render_template('_widgets.html'),
+            render_widgets=lambda x: render_template('_widgets.html', widgetoptions=x),
             get_page_metadata=self.get_page_metadata,
             widgets=self.widgets,
             pyClanSphere={
