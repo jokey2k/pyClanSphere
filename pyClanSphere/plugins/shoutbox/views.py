@@ -24,14 +24,15 @@ class ShoutboxWidget(Widget):
     """Show Entries in Widget format"""
 
     name = 'Shoutbox'
-    template = 'shoutbox_widget.html'
+    template = 'widgets/shoutbox.html'
 
-    def __init__(self, show_title=True, title=u'Shoutbox', hide_form=False):
+    def __init__(self, show_title=True, title=u'Shoutbox', entrycount=10, hide_form=False):
         super(ShoutboxWidget, self).__init__()
         self.title = title
         self.show_title = show_title
         self.hide_form = hide_form
-        self.entries = ShoutboxEntry.query.order_by(ShoutboxEntry.postdate.desc()).limit(10).all()
+        self.entries = ShoutboxEntry.query.order_by(ShoutboxEntry.postdate.desc()) \
+                                    .limit(entrycount).all()
 
 
 def make_shoutbox_entry(request):
