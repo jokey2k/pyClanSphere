@@ -25,8 +25,13 @@ SSL_API_SERVER = 'https://api-secure.recaptcha.net/'
 VERIFY_SERVER = 'http://api-verify.recaptcha.net/verify'
 
 
-def get_recaptcha_html(error=None):
+def get_recaptcha_html(error=None, theme=None):
     """Returns the recaptcha input HTML."""
+
+    # reCAPTCHA wants this protected
+    if theme == None and theme not in ['red', 'white', 'blackglass', 'clean', 'custom']:
+        theme = 'red'
+
     app = get_application()
     server = app.cfg['recaptcha_use_ssl'] and SSL_API_SERVER or API_SERVER
     options = dict(k=app.cfg['recaptcha_public_key'])
@@ -45,7 +50,7 @@ def get_recaptcha_html(error=None):
         script_url='%schallenge?%s' % (server, query),
         frame_url='%snoscript?%s' % (server, query),
         options=dumps({
-            'theme':    'clean',
+            'theme':    theme,
             'custom_translations': {
                 'visual_challenge': _("Get a visual challenge"),
                 'audio_challenge': _("Get an audio challenge"),

@@ -764,10 +764,10 @@ class FormWidget(MappingWidget):
                         for name, value in self.get_hidden_fields())
 
     @cached_property
-    def captcha(self):
+    def captcha(self, theme='red'):
         """The captcha if one exists for this form."""
         if self._field.form.captcha_protected:
-            return get_recaptcha_html()
+            return get_recaptcha_html(theme=theme)
 
     @property
     def csrf_token(self):
