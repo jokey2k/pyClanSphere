@@ -135,7 +135,7 @@ class NewsQuery(db.Query):
 
     def latest(self, ignore_privileges=False):
         """Filter for the latest n posts."""
-        return self.published(ignore_privileges=ignore_privileges)
+        return self.published(ignore_privileges=ignore_privileges).order_by(News.pub_date.desc())
 
     def date_filter(self, year, month=None, day=None):
         """Filter all the items that match the given date."""
