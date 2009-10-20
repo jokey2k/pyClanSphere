@@ -20,12 +20,12 @@
       </tr>
     {%- for plugin in plugins %}
       <tr class="plugin-{{ 'active' if plugin.active else 'inactive' }}">
-        <td class="plugin">{{ plugin.html_display_name }}
+        <td class="plugin">{{ plugin.html_display_name|safe }}
           {%- if plugin.is_bundled %} <span class="bundlemarker">*</span>{% endif %}
-        <td class="version">{{ (plugin.version or '?')|e }}
+        <td class="version">{{ (plugin.version or '?') }}
         <td class="description">{{ plugin.description }}
           <span class="author">
-          {% trans author=plugin.html_author_info %}
+          {% trans author=plugin.html_author_info|safe %}
           By {{ author }}
           {% endtrans %}
           {% if plugin.contributors %}
@@ -39,7 +39,7 @@
               }}">{{ _("Remove plugin") }}</a>]
           {% endif -%}
         </td>
-        <td class="active">{{ form.active_plugins[plugin.name]() }}</td>
+        <td class="active">{{ form.active_plugins[plugin.name]()|safe }}</td>
       </tr>
     {%- endfor %}
     </table>

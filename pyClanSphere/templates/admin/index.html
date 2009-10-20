@@ -5,16 +5,16 @@
     <h1>{{ _("Dashboard") }}</h1>
     <div class="panel">
       <div class="text">
-        <p>{% trans user=request.user.display_name|e -%}
+        <p>{% trans user=request.user.display_name -%}
           Howdy.  Welcome to the pyClanSphere administration interface {{ user }}.
         {%- endtrans %}
       </div>
       <h2>{{ _('Quickstart') }}</h2>
       <ul>
-        <li><a href="{{ url_for('admin/options')|e }}">{{ _("Configure pyClanSphere") }}</a>
-        <li><a href="{{ url_for('admin/plugins')|e }}">{{ _("Manage Plugins") }}</a>
-        <li><a href="{{ url_for('admin/manage_users')|e }}">{{ _("Manage Users") }}</a>
-        <li><a href="{{ url_for('admin/help')|e }}">{{ _("Get Help") }}</a>
+        <li><a href="{{ url_for('admin/options') }}">{{ _("Configure pyClanSphere") }}</a>
+        <li><a href="{{ url_for('admin/plugins') }}">{{ _("Manage Plugins") }}</a>
+        <li><a href="{{ url_for('admin/manage_users') }}">{{ _("Manage Users") }}</a>
+        <li><a href="{{ url_for('admin/help') }}">{{ _("Get Help") }}</a>
       </ul>
       <p>{% trans help=url_for('admin/help'), support='http://pyClanSphere.digital-family.de/support/',
             website='http://pyClanSphere.digital-family.de/' %}

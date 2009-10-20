@@ -3,7 +3,7 @@
 {% block contents %}
   <h1>{{ _("Delete Shoutbox Entry") }}</h1>
   {% call form() %}
-    <p>{% trans name=form.entry.author|e %}
+    <p>{% trans name=form.entry.author %}
       Do you really want to delete the entry from “{{ name }}”?
     {% endtrans %}</p>
     <div class="actions">

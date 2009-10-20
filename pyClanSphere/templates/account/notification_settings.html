@@ -9,14 +9,14 @@
         <tr>
           <th>&nbsp;
           {%- for system in systems %}
-          <th>{{ system.name|e }}
+          <th>{{ system.name }}
           {%- endfor %}
         </tr>
       </thead>
       <tbody>
       {%- for type in notification_types %}
         <tr>
-          <th>{{ type.description|e }}
+          <th>{{ type.description }}
           {%- for system in systems %}
           <td>{{ form.subscriptions[type.name][system.key]() }}
           {%- endfor %}

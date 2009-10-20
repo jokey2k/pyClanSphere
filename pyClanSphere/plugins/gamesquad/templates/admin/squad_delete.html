@@ -3,7 +3,7 @@
 {% block contents %}
   <h1>{{ _("Delete Squad") }}</h1>
   {% call form() %}
-    <p>{% trans name=form.squad.name|e %}
+    <p>{% trans name=form.squad.name %}
       Do you really want to delete the squad “{{ name }}”?
     {% endtrans %}</p>
     <p>{% trans %}

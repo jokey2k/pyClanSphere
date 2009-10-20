@@ -1,11 +1,11 @@
 {% macro render_entry(entry) -%}
   <div class="entry">
     {{ emit_event('before-entry-rendered', entry) }}
-    <h3>{{ entry.title|e }}</h3>
+    <h3>{{ entry.title }}</h3>
     <p class="meta">
-      {%- trans author='<a href="%s">%s</a>' %
-        (url_for(entry.author), entry.author.display_name|e),
-        pub_date=entry.pub_date|datetimeformat|e -%}
+      {%- trans author='<a href="%s">%s</a>'|safe %
+        (url_for(entry.author), entry.author.display_name),
+        pub_date=entry.pub_date|datetimeformat-%}
           written by {{ author }}, on {{ pub_date }}.
       {%- endtrans %}
       {%- if entry.is_scheduled %}<br>[ {% trans
@@ -15,7 +15,7 @@
       ]{% endif -%}
     </p>
     <div class="text">
-      {{ entry.text|e }}
+      {{ entry.text }}
     </div>
     {{ emit_event('after-entry-rendered', entry) }}
   </div>

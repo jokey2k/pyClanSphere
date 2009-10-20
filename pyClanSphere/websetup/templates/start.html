@@ -12,7 +12,7 @@
   {% endtrans %}</p>
   <p><select name="_lang" onchange="this.form.submit()">
   {%- for code, name in languages %}
-    <option value="{{ code }}"{% if code == lang %} selected{% endif %}>{{ name|e }}</option>
+    <option value="{{ code }}"{% if code == lang %} selected{% endif %}>{{ name }}</option>
   {%- endfor %}
   </select></p>
 {% endblock %}

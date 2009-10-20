@@ -9,15 +9,15 @@
   {%- for level in levels %}
     <tr class="{{ loop.cycle('odd', 'even') }}">
 	  {%- if level.can_edit() %}
-      <td><a href="{{ url_for('admin/level_edit', level_id=level.id)|e }}">{{
-          level.name|e }}</a></td>
+      <td><a href="{{ url_for('admin/level_edit', level_id=level.id) }}">{{
+          level.name}}</a></td>
       {%- else %}
-      <td>{{ level.name|e }}</td>
+      <td>{{ level.name }}</td>
 	  {%- endif %}
 	</tr>
   {%- endfor %}
   </table>
-  <form action="{{ url_for('admin/level_create')|e }}" method="get">
+  <form action="{{ url_for('admin/level_create') }}" method="get">
     <div class="actions">
       <input type="submit" value="{{ _('New Level') }}">
     </div>

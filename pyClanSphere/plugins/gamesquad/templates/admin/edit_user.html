@@ -2,7 +2,7 @@
 {% from "admin/_form_helpers.html" import render_formmultibox, render_actions %}
 {% block title %}{{ _('New User') if form.new else _('Edit User') }}{% endblock %}
 {% block contents %}
-  <h1>{{ self.title()|e }}</h1>
+  <h1>{{ self.title() }}</h1>
   {% call form() %}
     {{ render_formmultibox([form.username, form.password, form.password_confirm, 
                             form.email], _("Core account data"), toggleable=false) }}

@@ -7,7 +7,7 @@
     <ul>
     {%- for item in months %}
       <li><a href="{{ url_for('news/archive', year=item.year,
-        month=item.month)|e }}">{{ item|monthformat }}</a></li>
+        month=item.month) }}">{{ item|monthformat }}</a></li>
     {%- else %}
       <li><em>{{ _("empty archive") }}</em></li>
     {%- endfor %}

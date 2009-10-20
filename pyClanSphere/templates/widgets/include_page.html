@@ -1,5 +1,5 @@
 {% extends 'widgets/base.html' %}
-{% block title %}{{ widget.page.title|e if widget.exists }}{% endblock %}
+{% block title %}{{ widget.page.title if widget.exists }}{% endblock %}
 {% block body %}
   <div class="included-page">
     {{ widget.page.body }}

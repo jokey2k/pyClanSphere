@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-  <title>{{ _('Login') }} &mdash; {{ cfg.clan_title|e }}</title>
+  <title>{{ _('Login') }} &mdash; {{ cfg.clan_title }}</title>
   <link rel="stylesheet" type="text/css" href="{{ url_for('core/shared', filename='admin/style.css') }}">
   {{ get_page_metadata() }}
 </head>
@@ -14,7 +14,7 @@
   <div class="login-box">
     <h2><span>{{ _("Login") }}</span></h2>
     {%- if form.all_errors %}
-      <div class="error">{{ form.all_errors[0]|e }}</div>
+      <div class="error">{{ form.all_errors[0] }}</div>
     {%- endif %}
     {# we use render rather than just calling because we want
        our own stylish error reporting on this page.  Also the

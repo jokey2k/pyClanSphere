@@ -11,18 +11,18 @@
   {%- for squad in squads %}
     <tr class="{{ loop.cycle('odd', 'even') }}">
 	  {%- if squad.can_edit() %}
-      <td><a href="{{ url_for('admin/squad_edit', squad_id=squad.id)|e }}">{{
-          squad.name|e }}</a></td>
+      <td><a href="{{ url_for('admin/squad_edit', squad_id=squad.id) }}">{{
+          squad.name }}</a></td>
       {%- else %}
-      <td>{{ squad.name|e }}</td>
+      <td>{{ squad.name }}</td>
 	  {%- endif %}
-    <td>{{ squad.game.name|e }}</td>
+    <td>{{ squad.game.name }}</td>
 	  <td>
 	    {%- if squad.can_manage() %}
-	    <a href="{{ url_for("admin/squad_listmembers", squad_id=squad.id)|e }}">
+	    <a href="{{ url_for("admin/squad_listmembers", squad_id=squad.id) }}">
   	  {%- endif %}
       {%- for member in squad.members %}
-        {{ member.display_name|e }}{%- if not loop.last %}, {%- endif %}
+        {{ member.display_name }}{%- if not loop.last %}, {%- endif %}
 	    {%- else %}
 	      <i>{{ _("No members") }}</i>
       {%- endfor %}
@@ -34,7 +34,7 @@
   {%- endfor %}
   </table>
   {% if create_option %}
-  <form action="{{ url_for('admin/squad_create')|e }}" method="get">
+  <form action="{{ url_for('admin/squad_create') }}" method="get">
     <div class="actions">
       <input type="submit" value="{{ _('New Squad') }}">
     </div>

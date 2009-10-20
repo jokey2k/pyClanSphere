@@ -2,7 +2,7 @@
 {% from "admin/_form_helpers.html" import render_formbox %}
 {% block title %}{{ _('New News') if form.new else _('Edit News') }}{% endblock %}
 {% block contents %}
-  <h1>{{ self.title()|e }}</h1>
+  <h1>{{ self.title() }}</h1>
   {% call form() %}
   {{ render_formbox(form.title, collapsed=(not form.new)) }}
   <div class="formbox">

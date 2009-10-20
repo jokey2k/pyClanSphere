@@ -28,7 +28,7 @@
         {%- for field in category %}
         <tr class="value {% if field['value'].help_text or
           field['value'].errors %} has_followup{% endif %}">
-          <td>{{ field.localname|e }}
+          <td>{{ field.localname }}
           <td>{{ field['value'].render() }}
           <td class="default">{{ field.use_default() }}
         </tr>
@@ -38,7 +38,7 @@
         {%- endif %}
         {%- if field['value'].help_text %}
         <tr class="help_text"><td>&nbsp;<td class="text">{{
-          field['value'].help_text|e }}<td>&nbsp;
+          field['value'].help_text }}<td>&nbsp;
         {%- endif %}
         {%- endfor %}
       {% endfor %}

@@ -3,7 +3,7 @@
 {% block contents %}
   <h1>{{ _("Remove game account registration") }}</h1>
   {% call form() %}
-    <p>{% trans username=form.gameaccount.user.display_name|e, game=form.gameaccount.game.name|e, account=form.gameaccount.account|e  %}
+    <p>{% trans username=form.gameaccount.user.display_name, game=form.gameaccount.game.name, account=form.gameaccount.account %}
       Game: <b>{{ game }}</b><br>Account: <b>{{ account }}</b><br>&nbsp;<br>
       Do you really want to remove this game account registration from “{{ username }}”?
     {% endtrans %}</p>

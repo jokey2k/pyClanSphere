@@ -3,7 +3,7 @@
 {% block contents %}
   <h1>{{ _("Delete Group") }}</h1>
   {% call form() %}
-    <p>{% trans name=form.group.name|e %}
+    <p>{% trans name=form.group.name %}
       Do you really want to delete the group “{{ name }}”?
     {% endtrans %}</p>
     <p>{% trans %}

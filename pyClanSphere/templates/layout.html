@@ -1,15 +1,15 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
   "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="{{ cfg.language|e }}">
+<html lang="{{ cfg.language }}">
 <head>
-  <title>{% block title %}{% endblock %} &mdash; {{ cfg.clan_title|e }}</title>
-  <meta name="DC.title" content="{{ self.title() }} &mdash; {{ cfg.clan_title|e }}">
+  <title>{% block title %}{% endblock %} &mdash; {{ cfg.clan_title }}</title>
+  <meta name="DC.title" content="{{ self.title() }} &mdash; {{ cfg.clan_title }}">
   {{- get_page_metadata() }}
   {%- block head %}{% endblock %}
 </head>
 <body>
   <div class="header">
-    <h1>{{ cfg.clan_title|e }}</h1>
+    <h1>{{ cfg.clan_title }}</h1>
     <p class="description">{{ cfg.clan_tagline }}</p>
   </div>
   <div class="contents">
@@ -17,7 +17,7 @@
     {% block contents %}{% endblock %}
     {{ emit_event('after-contents-rendered') }}
   </div>
-  <div class="footer">{% trans pyClanSphere='<a href="http://pyclansphere.digital-family.de/">pyClanSphere</a>'
+  <div class="footer">{% trans pyClanSphere='<a href="http://pyclansphere.digital-family.de/">pyClanSphere</a>'|safe
     %}Empowered by {{ pyClanSphere }}.{% endtrans %}</div>
   </div>
 </body>

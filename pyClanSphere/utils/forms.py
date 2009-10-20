@@ -26,6 +26,8 @@ except ImportError:
 
 from werkzeug import cached_property, html, escape, MultiDict
 
+from jinja2 import Markup
+
 from pyClanSphere.application import get_request, url_for
 from pyClanSphere.database import db
 from pyClanSphere.i18n import _, ngettext, lazy_gettext, parse_datetime, \
@@ -465,7 +467,7 @@ class Widget(_Renderable):
         rv.append(html.dd(self(**attrs)))
         if self.help_text:
             rv.append(html.dd(self.help_text, class_='explanation'))
-        return u''.join(rv)
+        return Markup(u''.join(rv))
 
     def _attr_setdefault(self, attrs):
         """Add an ID to the attrs if there is none."""
@@ -486,7 +488,7 @@ class Label(_Renderable):
 
     def render(self, **attrs):
         attrs.setdefault('for', self.linked_to)
-        return html.label(escape(self.text), **attrs)
+        return Markup(html.label(escape(self.text), **attrs))
 
 
 class InternalWidget(Widget):
@@ -511,8 +513,8 @@ class Input(Widget):
         value = self.value
         if self.hide_value:
             value = u''
-        return html.input(name=self.name, value=value, type=self.type,
-                          **attrs)
+        return Markup(html.input(name=self.name, value=value, type=self.type,
+                          **attrs))
 
 
 class TextInput(Input):
@@ -541,7 +543,7 @@ class Textarea(Widget):
 
     def render(self, **attrs):
         self._attr_setdefault(attrs)
-        return html.textarea(self.value, name=self.name, **attrs)
+        return Markup(html.textarea(self.value, name=self.name, **attrs))
 
 
 class Checkbox(Widget):
@@ -555,8 +557,8 @@ class Checkbox(Widget):
         """Render the checkbox with help text."""
         data = self(**attrs)
         if self.help_text:
-            data += u' ' + html.label(self.help_text, class_='explanation',
-                                      for_=self.id)
+            data += Markup(u' ' + html.label(self.help_text, class_='explanation',
+                                             for_=self.id))
         return data
 
     def as_dd(self, **attrs):
@@ -566,7 +568,7 @@ class Checkbox(Widget):
         if label:
             rv.append(html.dt(label()))
         rv.append(html.dd(self.with_help_text()))
-        return u''.join(rv)
+        return Markup(u''.join(rv))
 
     def as_li(self, **attrs):
         """Return a li item."""
@@ -576,12 +578,12 @@ class Checkbox(Widget):
         if self.help_text:
             rv.append(html.div(self.help_text, class_='explanation'))
         rv.append(self.errors())
-        return html.li(u''.join(rv))
+        return Markup(html.li(u''.join(rv)))
 
     def render(self, **attrs):
         self._attr_setdefault(attrs)
-        return html.input(name=self.name, type='checkbox',
-                          checked=self.checked, **attrs)
+        return Markup(html.input(name=self.name, type='checkbox',
+                                 checked=self.checked, **attrs))
 
 
 class SelectBox(Widget):
@@ -602,7 +604,7 @@ class SelectBox(Widget):
             selected = _is_choice_selected(self._field, self.value, key)
             items.append(html.option(unicode(value), value=unicode(key),
                                      selected=selected))
-        return html.select(name=self.name, *items, **attrs)
+        return Markup(html.select(name=self.name, *items, **attrs))
 
 
 class _InputGroupMember(InternalWidget):
@@ -683,11 +685,11 @@ class _InputGroup(Widget):
 
     def as_ul(self, **attrs):
         """Render the radio buttons widget as <ul>"""
-        return self._as_list(html.ul, attrs)
+        return Markup(self._as_list(html.ul, attrs))
 
     def as_ol(self, **attrs):
         """Render the radio buttons widget as <ol>"""
-        return self._as_list(html.ol, attrs)
+        return Markup(self._as_list(html.ol, attrs))
 
     def as_table(self, **attrs):
         """Render the radio buttons widget as <table>"""
@@ -730,7 +732,7 @@ class MappingWidget(Widget):
         return subwidget
 
     def as_dl(self, **attrs):
-        return html.dl(*[x.as_dd() for x in self], **attrs)
+        return Markup(html.dl(*[x.as_dd() for x in self], **attrs))
 
     def __call__(self, *args, **kwargs):
         return self.as_dl(*args, **kwargs)
@@ -760,14 +762,14 @@ class FormWidget(MappingWidget):
     @property
     def hidden_fields(self):
         """The hidden fields as string."""
-        return u''.join(html.input(type='hidden', name=name, value=value)
-                        for name, value in self.get_hidden_fields())
+        return Markup(u''.join(html.input(type='hidden', name=name, value=value)
+                        for name, value in self.get_hidden_fields()))
 
     @cached_property
     def captcha(self, theme='red'):
         """The captcha if one exists for this form."""
         if self._field.form.captcha_protected:
-            return get_recaptcha_html(theme=theme)
+            return Markup(get_recaptcha_html(theme=theme))
 
     @property
     def csrf_token(self):
@@ -785,7 +787,7 @@ class FormWidget(MappingWidget):
         if label is None:
             label = _('Submit')
         attrs.setdefault('class', 'actions')
-        return html.div(html.input(type='submit', value=label), **attrs)
+        return Markup(html.div(html.input(type='submit', value=label), **attrs))
 
     def render(self, action='', method='post', **attrs):
         self._attr_setdefault(attrs)
@@ -863,7 +865,7 @@ class ListWidget(Widget):
         return len(self._value)
 
     def __call__(self, *args, **kwargs):
-        return self.as_ul(*args, **kwargs)
+        return Markup(self.as_ul(*args, **kwargs))
 
 
 class ErrorList(_Renderable, list):

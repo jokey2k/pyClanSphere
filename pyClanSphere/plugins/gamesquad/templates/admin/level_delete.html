@@ -3,7 +3,7 @@
 {% block contents %}
   <h1>{{ _("Delete Level") }}</h1>
   {% call form() %}
-    <p>{% trans name=form.level.name|e %}
+    <p>{% trans name=form.level.name %}
       Do you really want to delete the level “{{ name }}”?
     {% endtrans %}</p>
     <p>{{ form.relocate_to.label() }}: {{ form.relocate_to() }}

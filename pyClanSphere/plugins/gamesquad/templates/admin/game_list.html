@@ -10,21 +10,21 @@
   {%- for game in games %}
     <tr class="{{ loop.cycle('odd', 'even') }}">
 	  {%- if game.can_edit() %}
-      <td><a href="{{ url_for('admin/game_edit', game_id=game.id)|e }}">{{
-          game.name|e }}</a></td>
+      <td><a href="{{ url_for('admin/game_edit', game_id=game.id) }}">{{
+          game.name }}</a></td>
       {%- else %}
-      <td>{{ game.name|e }}</td>
+      <td>{{ game.name }}</td>
 	  {%- endif %}
 	  <td>
 	  {%- for squad in game.squads %}
-      {%- if not loop.first %},&nbsp;{%- endif %}{{ squad.name|e }}
+      {%- if not loop.first %},&nbsp;{%- endif %}{{ squad.name }}
     {%- else %}
       {{ _("No squads") }}
 	  {%- endfor %}
     </td></tr>
   {%- endfor %}
   </table>
-  <form action="{{ url_for('admin/game_create')|e }}" method="get">
+  <form action="{{ url_for('admin/game_create') }}" method="get">
     <div class="actions">
       <input type="submit" value="{{ _('New Game') }}">
     </div>

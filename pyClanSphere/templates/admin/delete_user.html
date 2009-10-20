@@ -3,7 +3,7 @@
 {% block contents %}
   <h1>{{ _("Delete User") }}</h1>
   {% call form() %}
-    <p>{% trans username=form.user.username|e %}
+    <p>{% trans username=form.user.username %}
       Do you really want to delete the user “{{ username }}”?
     {% endtrans %}</p>
     <div class="actions">

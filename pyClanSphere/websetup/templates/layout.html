@@ -173,7 +173,7 @@
       {% if error %}
         <div class="error">
           <h3>{{ _('An Error Occurred') }}</h3>
-          <p>{{ error|e }}</p>
+          <p>{{ error }}</p>
         </div>
       {% endif %}
       {% if not finished %}
@@ -185,11 +185,11 @@
           <div class="hidden">
             {%- if values %}
               {%- for key, value in values|dictsort %}
-              <input type="hidden" name="{{ key|e }}" value="{{ value|e }}">
+              <input type="hidden" name="{{ key }}" value="{{ value }}">
               {%- endfor %}
             {%- endif %}
-            <input type="hidden" name="_current" value="{{ current|e }}">
-            <input type="hidden" name="_lang" value="{{ lang|e }}">
+            <input type="hidden" name="_current" value="{{ current }}">
+            <input type="hidden" name="_lang" value="{{ lang }}">
           </div>
         </form>
       {% endif %}

@@ -23,7 +23,7 @@ from StringIO import StringIO
 
 from babel import Locale
 
-from jinja2 import Environment, BaseLoader, TemplateNotFound
+from jinja2 import Environment, BaseLoader, TemplateNotFound, Markup
 
 from sqlalchemy.exceptions import SQLAlchemyError
 
@@ -732,7 +732,7 @@ class pyClanSphere(object):
         # init the template system with the core stuff
         from pyClanSphere import models
         env = Environment(loader=ThemeLoader(self),
-                          extensions=['jinja2.ext.i18n'])
+                          extensions=['jinja2.ext.i18n'], autoescape=True)
         env.globals.update(
             cfg=self.cfg,
             theme=self.theme,
@@ -741,7 +741,7 @@ class pyClanSphere(object):
             shared_url=shared_url,
             emit_event=self._event_manager.template_emit,
             request=local('request'),
-            render_widgets=lambda x=[]: render_template('_widgets.html', widgetoptions=x),
+            render_widgets=lambda x=[]: Markup(render_template('_widgets.html', widgetoptions=x)),
             get_page_metadata=self.get_page_metadata,
             widgets=self.widgets,
             pyClanSphere={
@@ -1066,8 +1066,7 @@ class pyClanSphere(object):
         base_url = self.cfg['clan_url'].rstrip('/')
         request = get_request()
         javascript = [
-            'pyClanSphere.ROOT_URL = %s' % dump_json(base_url),
-            'pyClanSphere.CLAN_URL = %s' % dump_json(base_url + self.cfg['clan_url_prefix'])
+            'pyClanSphere.ROOT_URL = %s' % dump_json(base_url)
         ]
         if request is None or request.user.is_manager:
             javascript.append('pyClanSphere.ADMIN_URL = %s' %
@@ -1082,7 +1081,7 @@ class pyClanSphere(object):
         #! the list of already collected metadata.  You can extend the
         #! list in place to add some more html snippets to the page header.
         emit_event('before-metadata-assembled', result)
-        return u'\n'.join(result)
+        return Markup(u'\n'.join(result))
 
     def handle_not_found(self, request, exception):
         """Handle a not found exception.  This also dispatches to plugins

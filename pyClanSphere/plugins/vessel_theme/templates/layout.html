@@ -1,17 +1,17 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
   "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="{{ cfg.language|e }}">
+<html lang="{{ cfg.language }}">
 <head>
-  <title>{% block title %}{% endblock %} &mdash; {{ cfg.clan_title|e }}</title>
-  <meta name="DC.title" content="{{ self.title() }} &mdash; {{ cfg.clan_title|e }}">
+  <title>{% block title %}{% endblock %} &mdash; {{ cfg.clan_title }}</title>
+  <meta name="DC.title" content="{{ self.title() }} &mdash; {{ cfg.clan_title }}">
   <link rel="stylesheet" type="text/css" href="{{ shared_url('vessel_theme::style.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ shared_url(cfg['vessel_theme/variation']) }}">
-  {{ get_page_metadata() }}
+  {{ get_page_metadata()|safe }}
 </head>
 <body>
   <div class="page">
     <div class="header">
-      <h1><a href="{{ url_for('core/index')|e }}">{{ cfg.clan_title|e }}</a></h1>
+      <h1><a href="{{ url_for('core/index') }}">{{ cfg.clan_title }}</a></h1>
       <p class="description">{{ cfg.clan_tagline }}</p>
     </div>
     <div class="contentwrapper">
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="footer">
-      <p>{% trans pyClanSphere='<a href="http://pyclansphere.digital-family.de/">pyClanSphere</a>'
+      <p>{% trans pyClanSphere='<a href="http://pyclansphere.digital-family.de/">pyClanSphere</a>'|safe
         %}Proudly powered by {{ pyClanSphere }}, Theme copyright by Armin Ronacher.{% endtrans %}</p>
     </div>
   </div>

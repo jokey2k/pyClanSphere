@@ -21,30 +21,30 @@
   <h2>{{ _('pyClanSphere Environment') }}</h2>
   <dl>
     <dt>{{ _('pyClanSphere Version') }}</dt>
-    <dd>{{ pyClanSphere_version|e }}</dd>
+    <dd>{{ pyClanSphere_version }}</dd>
     <dt>{{ _('Distribution Mode') }}</dt>
     <dd>{{ pyClanSphere_env.MODE }}</dd>
     <dt>{{ _('Package Location') }}</dt>
-    <dd>{{ pyClanSphere_env.PACKAGE_LOCATION|e }}</dd>
+    <dd>{{ pyClanSphere_env.PACKAGE_LOCATION }}</dd>
     <dt>{{ _('Shared Data') }}</dt>
-    <dd>{{ pyClanSphere_env.SHARED_DATA|e }}</dd>
+    <dd>{{ pyClanSphere_env.SHARED_DATA }}</dd>
     <dt>{{ _('Builtin Templates') }}</dt>
-    <dd>{{ pyClanSphere_env.BUILTIN_TEMPLATE_PATH|e }}</dd>
+    <dd>{{ pyClanSphere_env.BUILTIN_TEMPLATE_PATH }}</dd>
     <dt>{{ _('Builtin Plugins') }}</dt>
-    <dd>{{ pyClanSphere_env.BUILTIN_PLUGIN_FOLDER|e }}</dd>
+    <dd>{{ pyClanSphere_env.BUILTIN_PLUGIN_FOLDER }}</dd>
     <dt>{{ _('Builtin Translations') }}</dt>
-    <dd>{{ pyClanSphere_env.LOCALE_PATH|e }}</dd>
+    <dd>{{ pyClanSphere_env.LOCALE_PATH }}</dd>
     <dt>{{ _('Path to Instance') }}</dt>
-    <dd>{{ instance_path|e }}</dd>
+    <dd>{{ instance_path }}</dd>
     <dt>{{ _('Database URI') }}</dt>
-    <dd>{{ database_uri|e }}</dd>
+    <dd>{{ database_uri }}</dd>
   </dl>
   <h2>{{ _("Hosting Environment") }}</h2>
   <dl>
     <dt>{{ _('Python Version') }}</dt>
     <dd>{{ python_version }}</dd>
     <dt>{{ _('Platform') }}</dt>
-    <dd>{{ platform|e }}</dd>
+    <dd>{{ platform }}</dd>
     <dt>{{ _('Persistent Environment') }}</dt>
     <dd>{{ _('yes') if hosting_env.persistent else _('no') }}</dd>
     <dt>{{ _('Multithreaded') }}</dt>
@@ -58,7 +58,7 @@
     <dt>{{ _('Multiprocess') }}</dt>
     <dd>{{ _('yes') if hosting_env.multiprocess else _('no') }}</dd>
     <dt>{{ _('WSGI Version') }}</dt>
-    <dd>{{ hosting_env.wsgi_version|e }}</dd>
+    <dd>{{ hosting_env.wsgi_version }}</dd>
   </dl>
   <h2>{{ _("URL Endpoints") }}</h2>
   <p>{% trans %}
@@ -66,7 +66,7 @@
   {% endtrans %}</p>
   <ul>
   {%- for endpoint in endpoints %}
-    <li><strong>{{ endpoint.name|e }}</strong> -&gt; <small>{{ endpoint.rule|e }}</small></li>
+    <li><strong>{{ endpoint.name }}</strong> -&gt; <small>{{ endpoint.rule }}</small></li>
   {%- endfor %}
   </ul>
   <h2>{{ _("Absolute URL Handlers") }}</h2>
@@ -75,7 +75,7 @@
   {% endtrans %}</p>
   <ul>
   {%- for handler in absolute_url_handlers %}
-    <li><code>{{ handler|e }}</code>
+    <li><code>{{ handler }}</code>
   {%- endfor %}
   </ul>
   <h2>{{ _("View Handlers") }}</h2>
@@ -84,7 +84,7 @@
   {% endtrans %}</p>
   <ul>
   {%- for view in views %}
-    <li><strong>{{ view.endpoint|e }}</strong> by <code>{{ view.handler|e }}</code></li>
+    <li><strong>{{ view.endpoint }}</strong> by <code>{{ view.handler }}</code></li>
   {%- endfor %}
   </ul>
   <h2>{{ _("Content Types") }}</h2>
@@ -93,7 +93,7 @@
   {% endtrans %}</p>
   <ul>
   {%- for type in content_types %}
-    <li><strong>{{ type.name|e }}</strong><ul>
+    <li><strong>{{ type.name }}</strong><ul>
       {% for action, handler in type|dictsort if action != 'name' %}
         <li><code>{{ handler }}</code> [{{ action }}]</li>
       {% endfor %}</ul></li>
@@ -105,7 +105,7 @@
   {% endtrans %}</p>
   <ul>
   {%- for id, explanation in privileges %}
-    <li><code>{{ id }}</code> &mdash; {{ explanation|e }}</li>
+    <li><code>{{ id }}</code> &mdash; {{ explanation }}</li>
   {%- endfor %}
   </ul>
   <h2>{{ _("Services") }}</h2>
@@ -115,7 +115,7 @@
     {% endtrans %}</p>
   <ul>
   {%- for service in servicepoints %}
-    <li><strong>{{ service.name|e }}</strong> by <code>{{ service.handler }}</code>
+    <li><strong>{{ service.name }}</strong> by <code>{{ service.handler }}</code>
   {%- endfor %}
   </ul>
   <h2>{{ _("Installed APIs") }}</h2>
@@ -125,8 +125,8 @@
   {% endtrans %}</p>
   <ul>
   {%- for api in apis %}
-    <li><strong>{{ api.name|e }}</strong>
-      <small>(provided by {{ api.endpoint|e }})</small> {% if api.preferred %}*{% endif %}
+    <li><strong>{{ api.name }}</strong>
+      <small>(provided by {{ api.endpoint }})</small> {% if api.preferred %}*{% endif %}
     </li>
   {%- else %}
     <li><em>no APIs installed</em></li>
@@ -135,14 +135,14 @@
   <h2>{{ _("Plugins") }}</h2>
   <ul class="plugin-table">
   {%- for plugin in plugins %}
-    <li><h3>{{ plugin.metadata.name|e }}{% if plugin.active
+    <li><h3>{{ plugin.metadata.name }}{% if plugin.active
       %} [{{_('active') }}]{% endif %}</h3><dl>
       <dt>{{ _("UID") }}</dt>
       <dd>{{ plugin.name }}</dd>
       <dt>{{ _("Author") }}</dt>
-      <dd>{{ plugin.metadata.author|e }}</dd>
+      <dd>{{ plugin.metadata.author }}</dd>
       <dt>{{ _("Location") }}</dt>
-      <dd class="location">{{ plugin.path|e }}</dd>
+      <dd class="location">{{ plugin.path }}</dd>
     </dl></li>
   {%- endfor %}
   </ul>
@@ -155,22 +155,22 @@
     </tr>
   {%- for item in configuration %}
     <tr>
-      <td><strong>{{ item.key|e }}</strong></td>
-      <td>{{ item.value|e }}</td>
-      <td><small>{{ item.default|e }}</small></td>
+      <td><strong>{{ item.key }}</strong></td>
+      <td>{{ item.value }}</td>
+      <td><small>{{ item.default }}</small></td>
     </tr>
   {%- endfor %}
   </table>
   <h2>{{ _("Template Globals") }}</h2>
   <ul>
   {%- for global in template_globals %}
-    <li><strong>{{ global|e }}</strong></li>
+    <li><strong>{{ global }}</strong></li>
   {%- endfor %}
   </ul>
   <h2>{{ _("Template Filters") }}</h2>
   <ul>
   {%- for filter_ in template_filters %}
-    <li><strong>{{ filter_|e }}</strong></li>
+    <li><strong>{{ filter_ }}</strong></li>
   {%- endfor %}
   </ul>
   {%- if not export %}
@@ -182,7 +182,7 @@
   <form action="" method="get">
     <div class="actions">
       <input type="hidden" name="do" value="export">
-      <input type="submit" value="{{ _('Export')|e }}">
+      <input type="submit" value="{{ _('Export') }}">
     </div>
   </form>
   {%- endif %}

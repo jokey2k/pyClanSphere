@@ -1,7 +1,7 @@
 {% extends "admin/layout.html" %}
-{% block title %}{{ _("Squad Members for Squad %s" % squad.name)|e }}{% endblock %}
+{% block title %}{{ _("Squad Members for Squad %s" % squad.name) }}{% endblock %}
 {% block contents %}
-  <h1>{{ _("Members in Squad '%s'" % squad.name)|e }}</h1>
+  <h1>{{ _("Members in Squad '%s'" % squad.name) }}</h1>
   <table>
     <tr>
       <th>{{ _("Member") }}</th>
@@ -10,10 +10,10 @@
     </tr>
   {%- for member in squad.squadmembers %}
     <tr class="{{ loop.cycle('odd', 'even') }}">
-      <td><a href="{{ url_for('admin/squad_editmember', squad_id=squad.id, user_id=member.user.id)|e }}">{{
-          member.user.display_name|e }}</a></td>
-	    <td>{{ member.level.name|e }}</td>
-	    <td>{{ member.othertasks|e }}</td>
+      <td><a href="{{ url_for('admin/squad_editmember', squad_id=squad.id, user_id=member.user.id) }}">{{
+          member.user.display_name }}</a></td>
+	    <td>{{ member.level.name }}</td>
+	    <td>{{ member.othertasks }}</td>
 	  </tr>
   {%- else %}
     <tr class="even">
@@ -21,7 +21,7 @@
 	  </tr>
   {%- endfor %}
   </table>
-  <form action="{{ url_for('admin/squad_newmember', squad_id=squad.id)|e }}" method="get">
+  <form action="{{ url_for('admin/squad_newmember', squad_id=squad.id) }}" method="get">
     <div class="actions">
       <input type="submit" value="{{ _('New Member') }}">
     </div>

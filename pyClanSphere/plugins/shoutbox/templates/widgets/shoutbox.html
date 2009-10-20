@@ -4,7 +4,7 @@
 {% for entry in widget.entries %}
 <li>{{ entry.author }}:{{ entry.text }}<br>
   <span class="postdate">({{ entry.postdate|datetimeformat }})</span><br><hr></li>
-  {% if entry.can_manage() %}<a href="{{ url_for('shoutbox/delete', entry_id=entry.id)|e }}">delete this</a>{% endif -%}
+  {% if entry.can_manage() %}<a href="{{ url_for('shoutbox/delete', entry_id=entry.id) }}">delete this</a>{% endif -%}
 {% endfor %}
 </ul>
 {% if not widget.hide_note %}

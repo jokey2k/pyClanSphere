@@ -3,7 +3,7 @@
 <html>
 <head>
   {%- block html_head %}
-  <title>{% block title %}{% endblock %} &mdash; {{ cfg.clan_title|e }} &mdash; {{ _("My Account") }}</title>
+  <title>{% block title %}{% endblock %} &mdash; {{ cfg.clan_title }} &mdash; {{ _("My Account") }}</title>
   <link rel="stylesheet" type="text/css" href="{{ url_for('core/shared', filename='admin/style.css') }}">
   {{ get_page_metadata() }}
   <script type="text/javascript" src="{{ url_for('core/shared', filename='js/jquery.autocomplete.js') }}"></script>
@@ -13,11 +13,11 @@
 </head>
 <body>
   <div class="header">
-    <div class="title">{% trans clan_title=cfg.clan_title|e %}{{ clan_title }} &mdash; My Account{% endtrans %}</div>
+    <div class="title">{% trans clan_title=cfg.clan_title %}{{ clan_title }} &mdash; My Account{% endtrans %}</div>
     <div class="metanav">
-      <a href="{{ url_for('core/index')|e }}">{{ _("View Startpage") }}</a> |
+      <a href="{{ url_for('core/index') }}">{{ _("View Startpage") }}</a> |
       {% if account.user_can_enter_admin_panel -%}
-      <a href="{{ url_for('admin/index')|e }}">{{ _("Administration") }}</a> |
+      <a href="{{ url_for('admin/index') }}">{{ _("Administration") }}</a> |
       {%- endif %}
       <a href="{{ url_for('account/logout') }}">{{ _("Logout") }}</a>
       {% if request.user.is_admin -%} |
@@ -29,14 +29,14 @@
     <ul class="navbar{% if not account.ctxnavbar %} standalonebar{% endif %}">
     {%- for item in account.navbar %}
       <li{% if item.active %} class="active"{% endif
-        %}><a href="{{ item.url|e }}">{{ item.title|e }}</a></li>
+        %}><a href="{{ item.url }}">{{ item.title }}</a></li>
     {%- endfor %}
     </ul>
     {%- if account.ctxnavbar %}
     <ul class="ctxnavbar">
     {%- for item in account.ctxnavbar %}
       <li{% if item.active %} class="active"{% endif
-        %}><a href="{{ item.url|e }}">{{ item.title|e }}</a></li>
+        %}><a href="{{ item.url }}">{{ item.title }}</a></li>
     {%- endfor %}
     </ul>
     {%- endif %}
@@ -52,7 +52,7 @@
   <div class="footer">
     <p>{% trans pyClanSphere='<a href="http://pyClanSphere.digital-family.de/">pyClanSphere</a>',
       version=pyClanSphere.version -%}Powered by {{ pyClanSphere }} {{ version }}.{% endtrans %} |
-      &copy; {{ pyClanSphere.copyright|e }}</p>
+      &copy; {{ pyClanSphere.copyright }}</p>
   </div>
 </body>
 </html>

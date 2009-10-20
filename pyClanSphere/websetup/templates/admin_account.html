@@ -8,12 +8,12 @@
   {% endtrans %}
   <dl>
     <dt>{{ _('Username') }}
-    <dd><input type="text" name="admin_username" value="{{ values.admin_username|e }}">
+    <dd><input type="text" name="admin_username" value="{{ values.admin_username }}">
     <dt>{{ _('Password') }}
     <dd><input type="password" name="admin_password">
     <dt>{{ _('Password (repeat)') }}
     <dd><input type="password" name="admin_password2">
     <dt>{{ _('E-Mail') }}
-    <dd><input type="text" name="admin_email" value="{{ values.admin_email|e }}">
+    <dd><input type="text" name="admin_email" value="{{ values.admin_email }}">
   </dl>
 {% endblock %}
