@@ -189,7 +189,7 @@ class WebSetup(object):
             t = cfg.edit()
             t.update(
                 maintenance_mode=environment.MODE != 'development',
-                clan_url=request.url_root,
+                site_url=request.url_root,
                 secret_key=gen_secret_key(),
                 database_uri=database_uri,
                 language=request.translations.language,

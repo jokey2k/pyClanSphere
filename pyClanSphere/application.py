@@ -778,7 +778,7 @@ class pyClanSphere(object):
         del self._url_rules
 
         # and create a url adapter
-        scheme, netloc, script_name = urlparse(self.cfg['clan_url'])[:3]
+        scheme, netloc, script_name = urlparse(self.cfg['site_url'])[:3]
         self.url_adapter = self.url_map.bind(netloc, script_name,
                                              url_scheme=scheme)
 
@@ -1063,7 +1063,7 @@ class pyClanSphere(object):
 
         # the url information.  Only expose the admin url for admin users
         # or calls to this method without a request.
-        base_url = self.cfg['clan_url'].rstrip('/')
+        base_url = self.cfg['site_url'].rstrip('/')
         request = get_request()
         javascript = [
             'pyClanSphere.ROOT_URL = %s' % dump_json(base_url)
@@ -1281,7 +1281,7 @@ class pyClanSphere(object):
         def make_request():
             try:
                 client = Client(self, response_wrapper)
-                response.append(client.open(path, self.cfg['clan_url'],
+                response.append(client.open(path, self.cfg['site_url'],
                                             method=method, data=data,
                                             query_string=url_encode(query),
                                             input_stream=input_stream))

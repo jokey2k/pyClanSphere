@@ -18,8 +18,8 @@ from pyClanSphere.utils.http import make_external_url
 def _strip_url(url):
     """Strip an URL so that only the path is left."""
     cfg = get_application().cfg
-    if url.startswith(cfg['clan_url']):
-        url = url[len(cfg['clan_url']):]
+    if url.startswith(cfg['site_url']):
+        url = url[len(cfg['site_url']):]
     return url.lstrip('/')
 
 

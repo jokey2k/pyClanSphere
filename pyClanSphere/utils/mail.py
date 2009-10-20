@@ -62,7 +62,7 @@ class EMail(object):
         self.text = text
         from_addr = app.cfg['clan_email']
         if not from_addr:
-            from_addr = 'noreply@' + urlparse(app.cfg['clan_url']) \
+            from_addr = 'noreply@' + urlparse(app.cfg['site_url']) \
                     [1].split(':')[0]
         self.from_addr = u'%s <%s>' % (
             app.cfg['clan_title'],

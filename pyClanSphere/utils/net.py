@@ -39,12 +39,12 @@ def open_url(url, data=None, timeout=None,
         timeout = app.cfg['default_network_timeout']
     parts = urlparse.urlsplit(url)
     if app is not None:
-        clan_url = urlparse.urlsplit(app.cfg['clan_url'])
+        site_url = urlparse.urlsplit(app.cfg['site_url'])
         if allow_internal_requests and \
            parts.scheme in ('http', 'https') and \
-           clan_url.netloc == parts.netloc and \
-           parts.path.startswith(clan_url.path):
-            path = parts.path[len(clan_url.path):].lstrip('/')
+           site_url.netloc == parts.netloc and \
+           parts.path.startswith(site_url.path):
+            path = parts.path[len(site_url.path):].lstrip('/')
             method = kwargs.pop('method', None)
             if method is None:
                 method = data is not None and 'POST' or 'GET'

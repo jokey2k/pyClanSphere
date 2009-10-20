@@ -456,11 +456,11 @@ class URLOptionsForm(_ConfigForm):
                 if old != value:
                     t[key] = value
 
-        # update the clan_url based on the force_https flag.
-        clan_url = (t['force_https'] and 'https' or 'http') + \
-                   ':' + t['clan_url'].split(':', 1)[1]
-        if clan_url != t['clan_url']:
-            t['clan_url'] = clan_url
+        # update the site_url based on the force_https flag.
+        site_url = (t['force_https'] and 'https' or 'http') + \
+                   ':' + t['site_url'].split(':', 1)[1]
+        if site_url != t['site_url']:
+            t['site_url'] = site_url
 
 
 class ThemeOptionsForm(_ConfigForm):

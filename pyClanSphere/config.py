@@ -42,7 +42,7 @@ DEFAULT_VARS = {
         u'to the bottom of the page for easier debugging')),
     'clan_title':               TextField(default=lazy_gettext(u'My Clan Page')),
     'clan_tagline':             TextField(default=lazy_gettext(u'just another Clan page')),
-    'clan_url':                 TextField(default=u'', help_text=lazy_gettext(
+    'site_url':                 TextField(default=u'', help_text=lazy_gettext(
         u'The base URL of the site.  This has to be set to a full canonical URL '
         u'(including http or https).  If not set the application will behave '
         u'confusingly.  Remember to change this value if you move your site '

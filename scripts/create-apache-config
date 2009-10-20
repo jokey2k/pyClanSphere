@@ -43,7 +43,7 @@ def main():
 
     app = setup(instance)
     
-    prefix = urlparse(app.cfg['clan_url'])[2].rstrip('/')
+    prefix = urlparse(app.cfg['site_url'])[2].rstrip('/')
 
     for alias, dst in app._shared_exports.iteritems():
         dst = abspath(dst)

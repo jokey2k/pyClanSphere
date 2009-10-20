@@ -23,7 +23,7 @@ def main():
     parser = OptionParser(usage='%prog [path]')
     parser.add_option('--username', '-u', dest='username', default='admin')
     parser.add_option('--password', '-p', dest='password', default='default')
-    parser.add_option('--clan-url', dest='clan_url', default='http://localhost:4000/')
+    parser.add_option('--clan-url', dest='site_url', default='http://localhost:4000/')
     parser.add_option('--database', dest='database_uri', default='sqlite:///pyClanSphere.db')
     parser.add_option('--language', dest='lang', default='en')
     parser.add_option('--keep-plugins', default=False, action='store_true')
@@ -63,7 +63,7 @@ def main():
     t = cfg.edit()
     t.update(
         maintenance_mode=False,
-        clan_url=options.clan_url,
+        site_url=options.site_url,
         secret_key=gen_secret_key(),
         database_uri=options.database_uri,
         language=options.lang,

@@ -95,7 +95,7 @@ def build_tag_uri(app, date, resource, identifier):
        The tag URI must obey the ABNF defined in
        http://www.faqs.org/rfcs/rfc4151.html """
 
-    host, path = urlparse(app.cfg['clan_url'])[1:3]
+    host, path = urlparse(app.cfg['site_url'])[1:3]
     if ':' in host:
         host = host.split(':', 1)[0]
     path = path.strip('/')

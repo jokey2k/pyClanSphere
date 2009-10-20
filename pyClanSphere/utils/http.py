@@ -21,9 +21,9 @@ def check_external_url(app, url):
     """Check if a URL is on the application server and return the canonical
     URL (eg: it externalizes a passed in path)
     """
-    clan_url = app.cfg['clan_url']
-    check_url = urljoin(clan_url, url)
-    if urlparse(clan_url)[:2] != urlparse(check_url)[:2]:
+    site_url = app.cfg['site_url']
+    check_url = urljoin(site_url, url)
+    if urlparse(site_url)[:2] != urlparse(check_url)[:2]:
         raise ValueError('The URL %s is not on the same server' % check_url)
     return check_url
 
@@ -48,9 +48,9 @@ def get_redirect_target(invalid_targets=(), request=None):
     # otherwise drop the leading slash
     check_target = check_target.lstrip('/')
 
-    clan_url = request.app.cfg['clan_url']
-    clan_parts = urlparse(clan_url)
-    check_parts = urlparse(urljoin(clan_url, check_target))
+    site_url = request.app.cfg['site_url']
+    clan_parts = urlparse(site_url)
+    check_parts = urlparse(urljoin(site_url, check_target))
 
     # if the jump target is on a different server we probably have
     # a security problem and better try to use the target url.
@@ -60,14 +60,14 @@ def get_redirect_target(invalid_targets=(), request=None):
     # if the jump url is the same url as the current url we've had
     # a bad redirect before and use the target url to not create a
     # infinite redirect.
-    current_parts = urlparse(urljoin(clan_url, request.path))
+    current_parts = urlparse(urljoin(site_url, request.path))
     if check_parts[:5] == current_parts[:5]:
         return
 
     # if the `check_target` is one of the invalid targets we also
     # fall back.
     for invalid in invalid_targets:
-        if check_parts[:5] == urlparse(urljoin(clan_url, invalid))[:5]:
+        if check_parts[:5] == urlparse(urljoin(site_url, invalid))[:5]:
             return
 
     return check_target
@@ -75,7 +75,7 @@ def get_redirect_target(invalid_targets=(), request=None):
 
 def make_external_url(path):
     """Return an external url for the given path."""
-    return urljoin(get_application().cfg['clan_url'], path.lstrip('/'))
+    return urljoin(get_application().cfg['site_url'], path.lstrip('/'))
 
 
 def redirect(url, code=302, allow_external_redirect=False,
@@ -107,7 +107,7 @@ def redirect(url, code=302, allow_external_redirect=False,
             raise BadRequest()
 
     # keep the current URL schema if we have an active request if we
-    # should.  If https enforcement is set we suppose that the clan_url
+    # should.  If https enforcement is set we suppose that the site_url
     # is already set to an https value.
     request = get_request()
     if request and not force_scheme_change and \
