@@ -26,6 +26,7 @@ from copy import deepcopy
 import sqlalchemy
 from sqlalchemy import orm
 from sqlalchemy.interfaces import ConnectionProxy
+from sqlalchemy.orm.collections import attribute_mapped_collection
 from sqlalchemy.orm.interfaces import AttributeExtension
 from sqlalchemy.exc import ArgumentError
 from sqlalchemy.ext.declarative import declarative_base
@@ -228,6 +229,7 @@ db.mapper = session_mapper(session)
 db.association_proxy = association_proxy
 db.attribute_loaded = attribute_loaded
 db.AttributeExtension = AttributeExtension
+db.attribute_mapped_collection = attribute_mapped_collection
 
 #: called at the end of a request
 cleanup_session = session.remove
