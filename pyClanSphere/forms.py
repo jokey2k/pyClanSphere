@@ -21,7 +21,7 @@ from pyClanSphere.utils import forms, log, dump_json
 from pyClanSphere.utils.http import redirect_to
 from pyClanSphere.utils.validators import ValidationError, is_valid_email, \
      is_valid_url, is_valid_slug, is_netaddr, is_not_whitespace_only
-from pyClanSphere.utils.redirects import register_redirect, change_url_prefix
+from pyClanSphere.utils.redirects import register_redirect
 
 
 def config_field(cfgvar, label=None, **kwargs):
@@ -443,8 +443,6 @@ class URLOptionsForm(_ConfigForm):
     though seems to only operate on the config.  Make sure to commit.
     """
 
-    clan_url_prefix = config_field('clan_url_prefix',
-                                   lazy_gettext(u'clanindex URL prefix'))
     admin_url_prefix = config_field('admin_url_prefix',
                                     lazy_gettext(u'Admin URL prefix'))
     account_url_prefix = config_field('account_url_prefix',
@@ -456,8 +454,6 @@ class URLOptionsForm(_ConfigForm):
             if key not in skip:
                 old = t[key]
                 if old != value:
-                    if key == 'clan_url_prefix':
-                        change_url_prefix(old, value)
                     t[key] = value
 
         # update the clan_url based on the force_https flag.

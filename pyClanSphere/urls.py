@@ -13,7 +13,7 @@ from werkzeug.routing import Rule, Submount
 
 def make_urls(app):
     """Make the URLs for a new pyClanSphere application."""
-    clan_urls = [
+    base_urls = [
         Rule('/', endpoint='core/index'),
         Submount(app.cfg['account_url_prefix'], [
             Rule('/', endpoint='account/index'),
@@ -60,6 +60,6 @@ def make_urls(app):
     ]
 
     return [
-        Submount(app.cfg['clan_url_prefix'], clan_urls),
+        Submount('', base_urls),
         Submount(app.cfg['admin_url_prefix'], admin_urls)
     ] + other_urls

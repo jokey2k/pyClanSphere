@@ -90,8 +90,6 @@ DEFAULT_VARS = {
         u'useful for plugin and core development.')),
 
     # url settings
-    'clan_url_prefix':          TextField(default=u'',
-                                          validators=[is_valid_url_prefix()]),
     'account_url_prefix':       TextField(default=u'/account',
                                           validators=[is_valid_url_prefix()]),
     'admin_url_prefix':         TextField(default=u'/admin',

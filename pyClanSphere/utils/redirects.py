@@ -55,30 +55,3 @@ def get_redirect_map():
     """Return a dict of all redirects."""
     return dict((row.original, make_external_url(row.new)) for row in
                 db.execute(redirects.select()))
-
-
-def change_url_prefix(old, new):
-    """Changes a URL prefix from `old` to `new`.  This does not update the
-    configuration but renames all slugs there were below the old one and
-    puts it to the new and also registers redirects.
-    """
-    from pyClanSphere.models import Post
-
-    def _rewrite(s):
-        s = s.strip('/')
-        if s:
-            s += '/'
-        return s
-
-    old = _rewrite(old)
-    new = _rewrite(new)
-    cut_off = len(old)
-
-    posts = Post.query.filter(
-        Post.slug.like(old.replace('%', '%%') + '%')
-    ).all()
-
-    for post in posts:
-        new_slug = new + post.slug[cut_off:]
-        register_redirect(post.slug, new_slug)
-        post.slug = new_slug

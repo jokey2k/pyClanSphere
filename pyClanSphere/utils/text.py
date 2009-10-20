@@ -51,35 +51,6 @@ def gen_unicode_slug(text, delim=u'-'):
     return unicode(delim.join(_punctuation_re.split(text.lower())))
 
 
-def gen_timestamped_slug(slug, content_type, pub_date=None):
-    """Generate a timestamped slug, suitable for use as final URL path."""
-    from pyClanSphere.application import get_application
-    from pyClanSphere.i18n import to_clan_timezone
-    cfg = get_application().cfg
-    if pub_date is None:
-        pub_date = datetime.utcnow()
-    pub_date = to_clan_timezone(pub_date)
-
-    prefix = cfg['clan_url_prefix'].strip(u'/')
-    if prefix:
-        prefix += u'/'
-
-    if content_type == 'entry':
-        fixed = cfg['fixed_url_date_digits']
-        def handle_match(match):
-            name = match.group()
-            handler = _slug_parts.get(match.group(1))
-            if handler is None:
-                return match.group(0)
-            return handler(pub_date, slug, fixed)
-
-        full_slug = prefix + _placeholder_re.sub(
-            handle_match, cfg['post_url_format'])
-    else:
-        full_slug = u'%s%s' % (prefix, slug)
-    return full_slug
-
-
 def increment_string(string):
     """Increment a string by one:
 

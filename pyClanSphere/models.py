@@ -17,7 +17,7 @@ from werkzeug.exceptions import NotFound
 from pyClanSphere.database import users, groups, group_users, \
      privileges, user_privileges, group_privileges, \
      notification_subscriptions, imaccounts, db
-from pyClanSphere.utils.text import gen_slug, gen_timestamped_slug, build_tag_uri, \
+from pyClanSphere.utils.text import gen_slug, build_tag_uri, \
      increment_string
 from pyClanSphere.utils.pagination import Pagination
 from pyClanSphere.utils.crypto import gen_pwhash, check_pwhash
