@@ -17,7 +17,7 @@
         <div class="detail">
           <blockquote><p>{{ theme.description }}</p></blockquote>
           {%- if theme.has_author %}
-            <p class="author">{% trans author=theme.html_author_info %}by {{ author }}{% endtrans %}</p>
+            <p class="author">{% trans author=theme.html_author_info|safe %}by {{ author }}{% endtrans %}</p>
           {%- endif %}
         </div>
       </div>
