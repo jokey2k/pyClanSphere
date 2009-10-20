@@ -34,7 +34,8 @@ class ShoutboxEntryForm(_ShoutboxBoundForm):
     """Post a new entry to the shoutbox."""
 
     author = forms.TextField(lazy_gettext(u'Author'), max_length=50,
-                           validators=[is_not_whitespace_only()])
+                           validators=[is_not_whitespace_only()],
+                           required=True)
     text = forms.TextField(lazy_gettext(u'Text'), max_length=255,
                            validators=[is_not_whitespace_only()],
                            widget=forms.Textarea,required=True)
@@ -46,6 +47,10 @@ class ShoutboxEntryForm(_ShoutboxBoundForm):
                 author=author
             )
         _ShoutboxBoundForm.__init__(self, entry, initial)
+
+    def disable_author(self):
+        """Disable author requirement (in case of call by a known user)"""
+        self.author.required=False
 
     @property
     def captcha_protected(self):

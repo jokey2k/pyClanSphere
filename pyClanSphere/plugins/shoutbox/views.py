@@ -39,6 +39,8 @@ def make_shoutbox_entry(request):
     form = ShoutboxEntryForm()
 
     if request.method == 'POST':
+        if request.user.is_somebody:
+            form.disable_author()
         if form.validate(request.form):
             entry = form.make_entry()
             db.commit()
