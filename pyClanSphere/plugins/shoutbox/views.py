@@ -13,7 +13,6 @@ from werkzeug.exceptions import NotFound
 from pyClanSphere.api import db
 from pyClanSphere.application import render_response
 from pyClanSphere.privileges import assert_privilege
-from pyClanSphere.utils.recaptcha import get_recaptcha_html, validate_recaptcha
 from pyClanSphere.widgets import Widget
 
 from pyClanSphere.plugins.shoutbox.forms import ShoutboxEntryForm, DeleteShoutboxEntryForm

@@ -23,7 +23,7 @@ from pyClanSphere.i18n import _
 from pyClanSphere.utils.pagination import AdminPagination
 from pyClanSphere.privileges import assert_privilege
 from pyClanSphere.utils import dump_json, ClosingIterator, log
-from pyClanSphere.utils.account import flash
+from pyClanSphere.utils.admin import flash
 from pyClanSphere.utils.text import build_tag_uri
 from pyClanSphere.utils.http import redirect_to, redirect
 from pyClanSphere.utils.redirects import lookup_redirect
