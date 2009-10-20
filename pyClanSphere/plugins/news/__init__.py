@@ -13,7 +13,7 @@ from os.path import join, dirname
 
 from pyClanSphere.api import _, url_for
 
-from pyClanSphere.plugins.news.database import newsitems, init_database
+from pyClanSphere.plugins.news.database import init_database
 from pyClanSphere.plugins.news.models import News
 from pyClanSphere.plugins.news.privileges import PLUGIN_PRIVILEGES, NEWS_CREATE, NEWS_EDIT, NEWS_DELETE
 from pyClanSphere.plugins.news import views
