@@ -13,7 +13,7 @@
     <h3>{{ boxlabel }}</h3>
     <table>
     {% for field in fields %}
-    <tr><td>{{ field.label() }}</td><td width="100%">{{ caller(disabled=disabled) if caller else field(disabled=disabled) }}</td></tr>
+    <tr><td>{{ field.label() }}</td><td width="100%">{{ caller(disabled=disabled) if caller else field(disabled=disabled) }}{%- if field.help_text %}<br><span class="explanation">{{ field.help_text }}</span>{% endif %}</td></tr>
     {% endfor %}
     </table>
   </div>
