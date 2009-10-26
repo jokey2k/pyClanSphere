@@ -634,8 +634,8 @@ class _InputGroupMember(InternalWidget):
 
     def render(self, **attrs):
         self._attr_setdefault(attrs)
-        return html.input(type=self.type, name=self.name, value=self.value,
-                          checked=self.checked, **attrs)
+        return Markup(html.input(type=self.type, name=self.name, value=self.value,
+                          checked=self.checked, **attrs))
 
 
 class RadioButton(_InputGroupMember):
