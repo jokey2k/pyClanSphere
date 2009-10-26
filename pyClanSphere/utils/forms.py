@@ -476,7 +476,7 @@ class Widget(_Renderable):
 
     def __call__(self, **attrs):
         """The default display is the form + error list as ul if needed."""
-        return self.render(**attrs) + self.errors()
+        return self.render(**attrs) + Markup(self.errors())
 
 
 class Label(_Renderable):
@@ -1224,7 +1224,7 @@ class CommaSeparated(Multiple):
 
 
 class LineSeparated(CommaSeparated):
-    r"""Works like `CommaSeparated` but uses multiple lines:
+    """Works like `CommaSeparated` but uses multiple lines:
 
     >>> field = LineSeparated(IntegerField())
     >>> field(u'1\n2\n3')

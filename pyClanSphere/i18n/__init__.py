@@ -526,7 +526,6 @@ def parse_datetime(string, rebase=True, dateonly=False):
 
     # We're allowed to retry with date-only
     if dateonly:
-        print "YES"
         for d_fmt in DATE_FORMATS:
             try:
                 val = convert(d_fmt)

@@ -52,20 +52,15 @@ class EditGameForm(_GameBoundForm):
         if query.first() is not None:
             raise ValidationError(_('This gamename is already in use'))
 
-    def _set_common_attributes(self, game):
-        forms.set_fields(game, self.data)
-
     def make_game(self):
         """A helper function that creates a new game object."""
         game = Game(self.data['gamename'])
-        self._set_common_attributes(game)
         self.game = game
         return game
 
     def save_changes(self):
         """Apply the changes."""
         self.game.name = self.data['gamename']
-        self._set_common_attributes(self.game)
 
 
 class DeleteGameForm(_GameBoundForm):
