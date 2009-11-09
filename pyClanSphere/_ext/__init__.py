@@ -8,7 +8,10 @@
 
     Why these libraries are here:
 
-    None at the moment. YEY!
+    GBXChallengeReader
+    ------------------
+    Small enough to not put it up as separate package, used to parse Trackmania's
+    Challenge Files as war maps.
 
     :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
