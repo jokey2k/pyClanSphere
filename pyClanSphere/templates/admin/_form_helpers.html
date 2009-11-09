@@ -7,6 +7,23 @@
   </div>
 {% endmacro %}
 
+{% macro render_filefield(fieldname, label, class, toggleable=true, collapsed=true, disabled=false, existing_label=None, existing_bool=False) %}
+  <div class="formbox{{ " " + class if class }}{{ " toggleable" if toggleable
+    }}{{ " collapsed" if collapsed and toggleable }}">
+    <h3>{{ label }}</h3>
+    <table>
+    {% if existing_label %}
+    <tr>
+      <td nowrap>{{ existing_label }}:</td><td width="100%">{{ _("Yes") if existing_bool else _("No") }}</td>
+    </tr>
+    <tr><td colspan="2"><input type="file" name="{{ fieldname }}"></td></tr>
+    {% else %}
+    <tr><td><input type="file" name="{{ fieldname }}"></td></tr>
+    {% endif %}
+    </table>
+  </div>
+{% endmacro %}
+
 {% macro render_formmultibox(fields, boxlabel, class, toggleable=true, collapsed=true, disabled=false) %}
   <div class="formbox{{ " " + class if class }}{{ " toggleable" if toggleable
     }}{{ " collapsed" if collapsed and toggleable }}">
