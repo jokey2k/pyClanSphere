@@ -205,11 +205,11 @@ db.mapper(Squad, squads, properties={
     'game':         db.relation(Game, uselist=False, lazy=False,
                                 backref=db.backref('squads', lazy='dynamic')
                     ),
-    'members':      db.relation(User, lazy=True,
+    'members':      db.relation(User,
                                 secondary=squadmembers, collection_class=set,
                                 backref=db.backref('squads')
                     ),
-    'squadmembers': db.relation(SquadMember, lazy=True)
+    'squadmembers': db.relation(SquadMember)
 })
 db.mapper(SquadMember, squadmembers, properties={
     'user':         db.relation(User, uselist=False, lazy=False),
