@@ -1,0 +1,14 @@
+{% extends "admin/layout.html" %}
+{% block title %}{{ _("Delete war map") }}{% endblock %}
+{% block contents %}
+  <h1>{{ _("Delete war map") }}</h1>
+  {% call form() %}
+    <p>{% trans name=form.warmap.name%}
+      Do you really want to delete the war map “{{ name }}”?
+    {% endtrans %}</p>
+    <div class="actions">
+      <input type="submit" name="cancel" value="{{ _('No') }}">
+      <input type="submit" name="confirm" value="{{ _('Yes') }}">
+    </div>
+  {% endcall %}
+{% endblock %}

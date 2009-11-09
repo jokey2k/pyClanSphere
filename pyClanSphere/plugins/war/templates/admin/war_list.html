@@ -1,0 +1,33 @@
+{% extends "admin/layout.html" %}
+{% block title %}{{ _("Wars Overview") }}{% endblock %}
+{% block contents %}
+  <h1>{{ _("Wars Overview") }}</h1>
+  <table>
+    <tr>
+      <th>{{ _("Opponent") }}</th>
+      <th>{{ _("Date") }}</th>
+      <th>{{ _("State") }}</th>
+    </tr>
+  {%- for war in wars %}
+    <tr class="{{ loop.cycle('odd', 'even') }}">
+	  {%- if war.can_edit() %}
+      <td><a href="{{ url_for('admin/war_edit', war_id=war.id) }}">{{
+          war.clanname }}</a></td>
+      {%- else %}
+      <td>{{ war.clanname }}</td>
+	  {%- endif %}
+	  <td>{{ war.date|datetimeformat }}</td>
+	  <td>{{ warstates[war.status] }}</tr>
+  {%- endfor %}
+  </table>
+  <form action="{{ url_for('admin/war_create')}}" method="get">
+    <div class="actions">
+      <input type="submit" value="{{ _('New War') }}">
+    </div>
+  </form>
+  {%- if pagination.necessary %}
+  <div class="pagination">
+    {{ pagination.generate() }}
+  </div>
+  {%- endif %}
+{% endblock %}

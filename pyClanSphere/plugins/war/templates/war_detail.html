@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block title %}{{ _("War Details for %s on %s" % (war.clanname,war.date|datetimeformat)) }}{% endblock %}
+{% block contents %}
+<div class="post">
+  <h1>War details</h1>
+  <p>Name: {{ war.clanname }}</p>
+  <p>Date: {{ war.date|datetimeformat }}</p>
+  <p>Server: {{ war.server }}</p>
+  <p>Mode: {{ war.mode.name }}</p>
+  {% if war.playerchangecount %}<p>Playerchangecount: {{ war.playerchangecount }}</p>{% endif %}
+  <p>{{ _("War contacts") }}
+    <ul>
+      <li>{{ _("Our clan") }} : {{ war.orgamember.display_name }}</li>
+      <li>{{ _("Opponent") }} : {{ war.contact }}</li>
+    </ul>
+  </p>
+  <p>Status: {{ warstates[war.status] }}</p>
+  <p>Maps:
+    <ul>
+      {% for map in war.maps %}
+        <li>{{ map.name }}</li>
+      {% endfor %}
+    </ul>
+  </p>
+  {% if request.user.is_somebody %}
+  <p>{{ _("Participating members") }}:
+    <ul>
+      {% for (member, status) in war.memberstatus|dictsort(true, 'value') %}
+        <li>{{ member.display_name}}: {{ memberstates[status] }}</li>
+      {% endfor %}
+    </ul>
+  </p>    
+  <p>Notes: {{ war.notes }}<p>
+  {% endif %}
+</div>
+{% endblock %}

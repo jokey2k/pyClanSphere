@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}{{ _("War Index") }}{% endblock %}
+{% block contents %}
+<div class="post">
+  <h1>Wars</h1>
+  <p>
+  {%- for war in wars %}
+    {% if loop.first %}
+    (click on war to see details)<br/>
+    {% endif %}
+    <a href="{{ url_for('war/detail', war_id=war.id)  }}">{{ war.clanname}}</a> ({{ war.date|datetimeformat }})<br/>
+  {%- else %}
+    {% trans %}So far there are no wars.{% endtrans %}
+  {%- endfor %}
+  </p>
+</div>
+{% endblock %}

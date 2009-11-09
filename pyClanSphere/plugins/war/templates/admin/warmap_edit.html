@@ -1,0 +1,12 @@
+{% extends "admin/layout.html" %}
+{% from "admin/_form_helpers.html" import render_formmultibox, render_filefield, render_actions %}
+{% block title %}{{ _('New War') if form.new else _('Edit War') }}{% endblock %}
+{% block contents %}
+  <h1>{{ self.title() }}</h1>
+  {% call form(enctype="multipart/form-data") %}
+    {{ render_formmultibox([form.mapname, form.squad],
+                           _("Map basics"), toggleable=false) }}
+    {% if not form.new %}{{ render_filefield("mapfile", _("Upload Mapfile"), existing_label=_("Map file uploaded before"), existing_bool=form.warmap.has_file()) }}{% endif %}
+    {{ render_actions(form) }}
+  {% endcall %}
+{% endblock %}

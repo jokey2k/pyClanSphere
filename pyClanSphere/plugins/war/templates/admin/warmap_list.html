@@ -1,0 +1,38 @@
+{% extends "admin/layout.html" %}
+{% block title %}{{ _("Available war maps") }}{% endblock %}
+{% block contents %}
+  <h1>{{ _("Available war maps") }}</h1>
+  <table>
+    <tr>
+      <th>{{ _("Squad") }}</th>
+      <th>{{ _("Map") }}</th>
+      <th>{{ _("File uploaded") }}</th>
+    </tr>
+    {% for group in warmaps|groupby('squad') %}
+      {% for warmap in group.list %}
+      <tr class="{{ loop.cycle('odd', 'even') }}">
+        {% if loop.first %}<td valign="top" rowspan="{{ group.list|count }}">{{ group.grouper.name }}</td>{%- endif %}
+    	  {%- if warmap.can_edit() %}
+          <td><a href="{{ url_for('admin/warmap_edit', warmap_id=warmap.id) }}">{{
+              warmap.name }}</a></td>
+          {%- else %}
+          <td>{{ warmap.name }}</td>
+    	  {%- endif %}
+    	  <td>{{ _("Yes") if warmap.has_file() else _("No") }}</td>
+      </tr>
+      {% endfor %}
+    {% else %}
+      <tr><td colspan="2">{{ _("No maps") }}</td></tr>
+    {% endfor %}
+  </table>
+  <form action="{{ url_for('admin/warmap_create')}}" method="get">
+    <div class="actions">
+      <input type="submit" value="{{ _('New war map') }}">
+    </div>
+  </form>
+  {%- if pagination.necessary %}
+  <div class="pagination">
+    {{ pagination.generate() }}
+  </div>
+  {%- endif %}
+{% endblock %}

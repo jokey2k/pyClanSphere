@@ -1,0 +1,18 @@
+{% extends "admin/layout.html" %}
+{% from "admin/_form_helpers.html" import render_formmultibox, render_formbox, render_actions %}
+{% block title %}{{ _('New War') if form.new else _('Edit War') }}{% endblock %}
+{% block contents %}
+  <h1>{{ self.title() }}</h1>
+  {% call form() %}
+    {{ render_formmultibox([form.clanname, form.date, form.orgamember, form.contact, form.status],
+                           _("War coordination data"), toggleable=false) }}
+    {{ render_formmultibox([form.mode, form.server, form.playerchangecount], _("Details")) }}
+    {% if form.removemaps %}
+      {{ render_formmultibox([form.removemaps, form.newmap], _("Maps")) }}
+    {% else %}
+      {{ render_formmultibox([form.newmap], _("Maps")) }}
+    {% endif %}
+    {{ render_formbox(form.notes) }}
+    {{ render_actions(form) }}
+  {% endcall %}
+{% endblock %}

@@ -1,0 +1,73 @@
+# -*- coding: utf-8 -*-
+"""
+    pyClanSphere.plugins.war_module
+    ~~~~~~~~~~~~~~~~~~~~~~~
+
+    Plugin implementation description goes here.
+
+    :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
+    :license: BSD, see LICENSE for more details.
+"""
+
+from datetime import date
+
+from pyClanSphere.database import db, metadata
+
+# Mapping these out from db module to increases readability further down
+# As this module is only part-imported by the models and init module, it should be safe to do so
+for var in ['Table', 'Column', 'String', 'Integer', 'Boolean', 'DateTime', 'ForeignKey', 'Text']:
+    globals()[var] = getattr(db,var)
+
+wars = Table('wars', metadata,
+    Column('war_id', Integer, primary_key=True),
+    Column('clanname', String(64)),
+    Column('date', DateTime),
+    Column('server', String(64)),
+    Column('warmode_id', ForeignKey('warmodes.warmode_id')),
+    Column('playerchangecount', Integer),
+    Column('contact', String(250)),
+    Column('orgamember_id', ForeignKey('users.user_id')),
+    Column('checked', String(250)),
+    Column('status', Integer),
+    Column('notes', Text)
+)
+
+warmembers = Table('warmembers', metadata,
+    Column('war_id', ForeignKey('wars.war_id'), primary_key=True),
+    Column('user_id', ForeignKey('users.user_id'), primary_key=True),
+    Column('status', Integer)
+)
+
+war_maps = Table('war_maps', metadata,
+    Column('war_id', ForeignKey('wars.war_id'), primary_key=True),
+    Column('map_id', ForeignKey('warmaps.map_id'), primary_key=True)
+)
+
+warmodes = Table('warmodes', metadata,
+    Column('warmode_id', Integer, primary_key=True),
+    Column('name', String(64)),
+    Column('game_id', ForeignKey('games.game_id')),
+    Column('free1', String(128)),
+    Column('free2', String(128)),
+    Column('free3', String(128))
+)
+
+warmaps = Table('warmaps', metadata,
+    Column('map_id', Integer, primary_key=True),
+    Column('name', String(64)),
+    Column('squad_id', ForeignKey('squads.squad_id')),
+    Column('metadata_timestamp', DateTime),
+    Column('metadata_cache', Text)
+)
+
+warresults = Table('warresults', metadata,
+    Column('war_id', ForeignKey('wars.war_id'), primary_key=True),
+    Column('our_points', Integer),
+    Column('enemy_points', Integer)
+)
+
+def init_database():
+    """ This is for inserting our new table"""
+    from pyClanSphere.application import get_application
+    engine = get_application().database_engine
+    metadata.create_all(engine)
