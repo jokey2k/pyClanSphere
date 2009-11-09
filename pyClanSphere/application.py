@@ -460,6 +460,9 @@ class InternalError(UserException):
 class Request(RequestBase):
     """This class holds the incoming request data."""
 
+    # Limit total upload filesize to 16 MB
+    max_content_length = 1024 * 1024 * 16
+
     def __init__(self, environ, app=None):
         RequestBase.__init__(self, environ)
         self.queries = []
