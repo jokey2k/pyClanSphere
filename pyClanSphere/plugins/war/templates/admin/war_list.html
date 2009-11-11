@@ -18,6 +18,8 @@
 	  {%- endif %}
 	  <td>{{ war.date|datetimeformat }}</td>
 	  <td>{{ warstates[war.status] }}</tr>
+  {% else %}
+    <td colspan="3">{{ _("No wars") }}
   {%- endfor %}
   </table>
   <form action="{{ url_for('admin/war_create')}}" method="get">
