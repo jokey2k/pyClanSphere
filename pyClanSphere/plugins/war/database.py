@@ -71,7 +71,8 @@ warmap_results = Table('warmap_results', metadata,
 warresults = Table('warresults', metadata,
     Column('war_id', ForeignKey('wars.war_id'), primary_key=True),
     Column('our_points', Integer),
-    Column('enemy_points', Integer)
+    Column('enemy_points', Integer),
+    Column('comment', Text)
 )
 
 def init_database():
