@@ -6,14 +6,14 @@
   {% call form() %}
     {{ render_formmultibox([form.clanname, form.date, form.orgamember, form.contact, form.status],
                            _("War coordination data"), toggleable=false) }}
-    {{ render_formmultibox([form.mode, form.server, form.playerchangecount], _("Details")) }}
+    {{ render_formmultibox([form.mode, form.server, form.playerchangecount], _("Details"), toggleable=false) }}
     {% if form.removemaps %}
-      {{ render_formmultibox([form.removemaps, form.newmap], _("Maps")) }}
+      {{ render_formmultibox([form.removemaps, form.newmap], _("Maps"), toggleable=false) }}
     {% else %}
       {{ render_formmultibox([form.newmap], _("Maps")) }}
     {% endif %}
     {% if form.removemembers %}
-      {{ render_formmultibox([form.removemembers, form.newmember, form.newmemberstatus], _("Members")) }}
+      {{ render_formmultibox([form.removemembers, form.newmember, form.newmemberstatus], _("Members"), toggleable=false) }}
     {% else %}
       {{ render_formmultibox([form.newmember, form.newmemberstatus], _("Members")) }}
     {% endif %}
