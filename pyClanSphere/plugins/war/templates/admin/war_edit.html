@@ -4,20 +4,61 @@
 {% block contents %}
   <h1>{{ self.title() }}</h1>
   {% call form() %}
+    {% if form.war.result %}
+    <p>{% trans %}
+      The war is over and has a result, so just the details about it. Delete result if you want to modify it again.
+    {% endtrans %}</p>
+    <h2>{{ _('War coordination data') }}</h2>
+    <dl>
+      <dt>{{ form.clanname.label.text }}</dt><dd>{{ form.war.clanname }}</dd>
+      <dt>{{ form.date.label.text }}</dt><dd>{{ form.war.date|datetimeformat }}</dd>
+      <dt>{{ form.orgamember.label.text }}</dt><dd>{{ form.war.orgamember.display_name }}</dd>
+      <dt>{{ form.contact.label.text }}</dt><dd>{{ form.war.contact }}</dd>
+      <dt>{{ form.status.label.text }}</dt><dd>{{ warstates[form.war.status] }}</dd>
+    </dl>
+    <h2>{{ _('Details') }}</h2>
+    <dl>
+      <dt>{{ form.mode.label.text }}</dt><dd>{{ form.war.mode.name }}</dd>
+      <dt>{{ form.server.label.text }}</dt><dd>{{ form.war.server }}</dd>
+      <dt>{{ form.playerchangecount.label.text }}</dt><dd>{{ form.war.playerchangecount }}</dd>
+    </dl>
+    <h2>{{ _('Memberparticipation') }}</h2>
+    <dl>
+      {% for status in memberstates.keys()|sort(reverse=True) %}
+        {% for member in form.war.members if form.war.memberstatus[member] == status %}
+          {% if loop.first %}<dt>{{ memberstates[status] }}</dt>{% endif %}
+          <dd>{{ member.display_name }}</dd>
+        {% endfor %}
+      {% endfor %}
+    </dl>
+    {% else %}
     {{ render_formmultibox([form.clanname, form.date, form.orgamember, form.contact, form.status],
                            _("War coordination data"), toggleable=false) }}
     {{ render_formmultibox([form.mode, form.server, form.playerchangecount], _("Details"), toggleable=false) }}
-    {% if form.removemaps %}
+    {% if form.removemaps and form.war.maps %}
       {{ render_formmultibox([form.removemaps, form.newmap], _("Maps"), toggleable=false) }}
     {% else %}
-      {{ render_formmultibox([form.newmap], _("Maps")) }}
+      {{ render_formmultibox([form.newmap], _("Maps"), toggleable=false) }}
     {% endif %}
-    {% if form.removemembers %}
+    {% if form.removemembers and form.war.members %}
       {{ render_formmultibox([form.removemembers, form.newmember, form.newmemberstatus], _("Members"), toggleable=false) }}
     {% else %}
-      {{ render_formmultibox([form.newmember, form.newmemberstatus], _("Members")) }}
+      {{ render_formmultibox([form.newmember, form.newmemberstatus], _("Members"), toggleable=false) }}
+    {% endif %}
     {% endif %}
     {{ render_formbox(form.notes) }}
-    {{ render_actions(form) }}
+    <div class="actions">
+      <input type="submit" name="save" value="{{ _('Save') }}">
+      <input type="submit" name="save_and_continue" value="{{ _('Save and continue editing') }}">
+      {%- if not form.new %}
+        {%- if not form.war.result %}
+        <input type="submit" name="result" value="{{ _('Write result') }}">
+        {%- else %}
+        <input type="submit" name="result" value="{{ _('Edit result') }}">
+        {%- endif %}
+        <input type="submit" name="delete" value="{{ _('Delete') }}">
+      {%- endif %}
+      <input type="submit" name="cancel" value="{{ _('Cancel') }}">
+    </div>
   {% endcall %}
 {% endblock %}

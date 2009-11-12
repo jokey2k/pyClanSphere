@@ -23,7 +23,7 @@ from pyClanSphere.views.account import render_account_response
 from pyClanSphere.views.admin import render_admin_response, PER_PAGE
 
 from pyClanSphere.plugins.war import forms
-from pyClanSphere.plugins.war.models import War, WarMap, warstates, memberstates
+from pyClanSphere.plugins.war.models import War, WarMap, WarResult, warstates, memberstates
 from pyClanSphere.plugins.war.privileges import WAR_MANAGE
 
 # Frontend stuff
@@ -113,7 +113,7 @@ def war_edit(request, war_id=None):
                 return redirect_to('admin/war_edit', war_id=war.id)
             return form.redirect('admin/war_list')
     return render_admin_response('admin/war_edit.html', 'war.wars',
-                                    form=form.as_widget())
+                                 form=form.as_widget(), memberstates=memberstates, warstates=warstates)
 
 @require_admin_privilege(WAR_MANAGE)
 def war_delete(request, war_id=None):
