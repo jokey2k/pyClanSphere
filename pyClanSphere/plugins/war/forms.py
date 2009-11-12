@@ -18,7 +18,7 @@ from pyClanSphere.utils.validators import ValidationError, is_not_whitespace_onl
 
 from pyClanSphere.plugins.gamesquad.models import Squad
 
-from pyClanSphere.plugins.war.models import War, WarMode, WarMap, WarMember, warstates, memberstates
+from pyClanSphere.plugins.war.models import War, WarMode, WarMap, WarMember, WarResult, warstates, memberstates
 
 
 class _WarBoundForm(forms.Form):
@@ -60,7 +60,7 @@ class EditWarForm(_WarBoundForm):
                                         widget=forms.CheckboxGroup)
     newmember = forms.ChoiceField(lazy_gettext(u'Add member'),
                                   widget=forms.SelectBox)
-    newmemberstatus = forms.ChoiceField(lazy_gettext(u'Status for to be added member'),
+    newmemberstatus = forms.ChoiceField(lazy_gettext(u'Status for newly added member'),
                                         widget=forms.SelectBox)
     removemembers = forms.MultiChoiceField(lazy_gettext(u'Check to remove'),
                                            widget=forms.CheckboxGroup)
@@ -202,3 +202,47 @@ class DeleteWarMapForm(_WarMapBoundForm):
         """Deletes the warmap‚"""
         self.warmap.remove_map_file()
         db.delete(self.warmap)
+
+class EditWarResultForm(forms.Form):
+
+    our_points = forms.IntegerField(lazy_gettext(u'Our Points'))
+    enemy_points = forms.IntegerField(lazy_gettext(u'Enemy Points'))
+    comment = forms.TextField(lazy_gettext(u'Comment'), max_length=65000,
+                              widget=forms.Textarea)
+    status = forms.ChoiceField(lazy_gettext(u'State'), required=True)
+
+    def __init__(self, war, warresult=None, initial=None):
+        if warresult is not None:
+            initial = forms.fill_dict(initial,
+                our_points = warresult.our_points,
+                enemy_points = warresult.enemy_points,
+                comment = warresult.comment
+            )
+        forms.Form.__init__(self, initial)
+        self.app = get_application()
+        self.warresult = warresult
+        self.war = war
+        self.status.choices = [(k, v) for k, v in warstates.iteritems()]
+
+    def _set_common_attributes(self, warresult):
+        forms.set_fields(warresult, self.data, 'our_points', 'enemy_points', 'comment')
+        self.war.status = self.data['status']
+
+    def save_changes(self):
+        """Apply the changes."""
+        self._set_common_attributes(self.warresult)
+
+    def make_warresult(self):
+        """A helper function that creates a new user object."""
+        warresult = WarResult(self.war)
+        self._set_common_attributes(warresult)
+        self.warresult = warresult
+        return warresult
+
+    def as_widget(self):
+        widget = forms.Form.as_widget(self)
+        widget.warresult = self.warresult
+        widget.war = self.war
+        widget.new = self.war is None
+        return widget
+

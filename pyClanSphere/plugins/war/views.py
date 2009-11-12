@@ -95,6 +95,8 @@ def war_edit(request, war_id=None):
     if request.method == 'POST':
         if 'cancel' in request.form:
             return form.redirect('admin/war_list')
+        elif 'result' in request.form:
+            return form.redirect('admin/warresult_edit', war_id=war_id)
         elif request.form.get('delete') and war:
             return redirect_to('admin/war_delete', war_id=war_id)
         elif form.validate(request.form):
@@ -211,3 +213,42 @@ def warmap_delete(request, warmap_id=None):
     
     return render_admin_response('admin/warmap_delete.html', 'war.maps',
                                  form=form.as_widget())
+
+@require_admin_privilege(WAR_MANAGE)
+def warresult_edit(request, war_id=None):
+    war = None
+    if war_id is not None:
+        war = War.query.get(war_id)
+        if war is None:
+            raise NotFound()
+    warresult = WarResult.query.get(war_id)
+    form = forms.EditWarResultForm(war, warresult)
+    
+    if request.method == 'POST':
+        if request.form.get('cancel'):
+            return form.redirect('admin/war_edit', war_id=war_id)
+        elif request.form.get('delete'):
+            if warresult is not None:
+                db.delete(warresult)
+                db.commit()
+                admin_flash(_('The result for %s was deleted successfully') % war.clanname, 'remove')
+            return form.redirect('admin/war_edit', war_id=war_id)
+        elif form.validate(request.form):
+            if warresult is None:
+                warresult = form.make_warresult()
+                msg = _('The result for war %s was created successfully.')
+                icon = 'add'
+            else:
+                form.save_changes()
+                msg = _('The result for war %s was updated successfully.')
+                icon = 'info'
+
+            admin_flash(msg % (war.clanname), icon)
+
+            db.commit()
+
+            if 'save_and_continue' in request.form:
+                return redirect_to('admin/warresult_edit', war_id=war_id)
+            return form.redirect('admin/war_edit', war_id=war_id)
+    return render_admin_response('admin/warresult_edit.html', 'war.wars',
+                                    form=form.as_widget())

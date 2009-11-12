@@ -60,6 +60,8 @@ def setup(app, plugin):
                      view=views.war_edit)
     app.add_url_rule('/wars/<int:war_id>/delete', prefix='admin', endpoint='admin/war_delete',
                      view=views.war_delete)
+    app.add_url_rule('/wars/<int:war_id>/result', prefix='admin', endpoint='admin/warresult_edit',
+                     view=views.warresult_edit)
 
     app.add_url_rule('/warmaps/', prefix='admin', defaults={'page': 1}, endpoint='admin/warmap_list',
                      view=views.warmap_list)
