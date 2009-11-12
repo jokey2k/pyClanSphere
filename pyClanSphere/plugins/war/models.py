@@ -18,7 +18,8 @@ from pyClanSphere.models import User
 from pyClanSphere.utils.pagination import Pagination
 
 from pyClanSphere.plugins.gamesquad.models import Game, Squad
-from pyClanSphere.plugins.war.database import wars, war_maps, warmembers, warmodes, warmaps, warresults
+from pyClanSphere.plugins.war.database import wars, war_maps, warmembers, \
+     warmodes, warmaps, warresults, warmap_results
 
 try:
     import cPickle as Pickle
@@ -304,5 +305,7 @@ mapper(WarMap, warmaps, properties={
                                  backref=backref('warmaps'))
 })
 mapper(WarResult, warresults, properties={
-    'war':              relation(War, uselist=False, backref=backref('result', uselist=False))
+    'id':               warresults.c.war_id,
+    'war':              relation(War, uselist=False, backref=backref('result', uselist=False)),
+    'maps':             relation(WarMap, secondary=warmap_results)
 })

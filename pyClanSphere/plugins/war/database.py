@@ -60,6 +60,14 @@ warmaps = Table('warmaps', metadata,
     Column('metadata_cache', Text)
 )
 
+warmap_results = Table('warmap_results', metadata,
+    Column('war_id', ForeignKey('warresults.war_id'), primary_key=True),
+    Column('map_id', ForeignKey('warmaps.map_id'), primary_key=True),
+    Column('our_points', Integer),
+    Column('enemy_points', Integer),
+    Column('comment', String(128))
+)
+
 warresults = Table('warresults', metadata,
     Column('war_id', ForeignKey('wars.war_id'), primary_key=True),
     Column('our_points', Integer),
