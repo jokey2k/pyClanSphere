@@ -26,18 +26,18 @@ except:
     import Pickle
 
 warstates = {
-    1:_('incomplete'),
-    2:_('planned'),
-    3:_('running'),
-    4:_('finished'),
-    5:_('aborted'),
-    6:_('cancelled')
+    1:_('Incomplete'),
+    2:_('Planned'),
+    3:_('Running'),
+    4:_('Finished'),
+    5:_('Aborted'),
+    6:_('Cancelled')
 }
 
 memberstates = {
-    1:_('no'),
-    2:_('maybe'),
-    3:_('yes')
+    1:_('No'),
+    2:_('Maybe'),
+    3:_('Yes')
 }
 
 def _create_warmember(member, status):
