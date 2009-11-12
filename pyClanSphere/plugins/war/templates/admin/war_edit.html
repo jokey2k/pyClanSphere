@@ -12,6 +12,11 @@
     {% else %}
       {{ render_formmultibox([form.newmap], _("Maps")) }}
     {% endif %}
+    {% if form.removemembers %}
+      {{ render_formmultibox([form.removemembers, form.newmember, form.newmemberstatus], _("Members")) }}
+    {% else %}
+      {{ render_formmultibox([form.newmember, form.newmemberstatus], _("Members")) }}
+    {% endif %}
     {{ render_formbox(form.notes) }}
     {{ render_actions(form) }}
   {% endcall %}

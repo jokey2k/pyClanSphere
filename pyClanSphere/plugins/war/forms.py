@@ -18,7 +18,7 @@ from pyClanSphere.utils.validators import ValidationError, is_not_whitespace_onl
 
 from pyClanSphere.plugins.gamesquad.models import Squad
 
-from pyClanSphere.plugins.war.models import War, WarMode, WarMap, warstates
+from pyClanSphere.plugins.war.models import War, WarMode, WarMap, WarMember, warstates, memberstates
 
 
 class _WarBoundForm(forms.Form):
@@ -40,7 +40,7 @@ class EditWarForm(_WarBoundForm):
     clanname = forms.TextField(lazy_gettext(u'Opponent'), max_length=64,
                                 validators=[is_not_whitespace_only()],
                                 required=True)
-    date = forms.DateField(lazy_gettext(u'Date'))
+    date = forms.DateTimeField(lazy_gettext(u'Date'))
     server = forms.TextField(lazy_gettext(u'Server'), max_length=64)
     mode = forms.ModelField(WarMode, 'id', lazy_gettext(u'Warmode'),
                             widget=forms.SelectBox)
@@ -58,6 +58,12 @@ class EditWarForm(_WarBoundForm):
                               widget=forms.SelectBox)
     removemaps = forms.MultiChoiceField(lazy_gettext(u'Check to remove'),
                                         widget=forms.CheckboxGroup)
+    newmember = forms.ChoiceField(lazy_gettext(u'Add member'),
+                                  widget=forms.SelectBox)
+    newmemberstatus = forms.ChoiceField(lazy_gettext(u'Status for to be added member'),
+                                        widget=forms.SelectBox)
+    removemembers = forms.MultiChoiceField(lazy_gettext(u'Check to remove'),
+                                           widget=forms.CheckboxGroup)
     
     def __init__(self, war=None, initial=None):
         if war is not None:
@@ -76,13 +82,22 @@ class EditWarForm(_WarBoundForm):
         self.status.choices = [(k, v) for k, v in warstates.iteritems()]
         self.orgamember.choices = [(user.id, user.display_name) for user in User.query.all()]
         self.mode.choices = [(mode.id, mode.name) for mode in WarMode.query.all()]
+        self.newmemberstatus.choices = [(k, v) for k, v in memberstates.iteritems()]
         if war is not None:
+            self.removemembers.choices = [(member.id, '%s (%s)' % \
+                                          (member.display_name, memberstates[war.memberstatus[member]]))
+                                          for member in war.members]
+            self.newmember.choices = [(-1, u'')] + [(member.id, member.display_name)
+                                      for member in User.query.all() if member not in war.members]
             self.removemaps.choices = [(map.id, map.name) for map in war.maps]
             self.newmap.choices = [(-1, u'')] + [(map.id, map.name)
                                    for map in WarMap.query.all() if map not in war.maps]
         else:
+            self.newmember.choices = [(-1, u'')] + [(member.id, member.display_name)
+                                   for member in User.query.all()]
             self.newmap.choices = [(-1, u'')] + [(map.id, map.name)
                                    for map in WarMap.query.all()]
+            del self.removemembers
             del self.removemaps
 
     def _set_common_attributes(self, war):
@@ -94,6 +109,11 @@ class EditWarForm(_WarBoundForm):
             newmap = WarMap.query.get(newmap_id)
             if newmap is not None:
                 war.maps.append(newmap)
+        newmember_id =  self.data['newmember']
+        if newmember_id != -1:
+            newmember = User.query.get(newmember_id)
+            if newmember is not None:
+                war.memberstatus[newmember] = self.data['newmemberstatus']
                          
     def save_changes(self):
         """Apply the changes."""
@@ -103,6 +123,11 @@ class EditWarForm(_WarBoundForm):
                 delmap = WarMap.query.get(mapid)
                 if delmap is not None:
                     self.war.maps.remove(delmap)
+        if 'removemembers' in self.data:
+            for memberid in self.data['removemembers']:
+                member = WarMember.query.get((self.war.id,memberid))
+                if member is not None:
+                    db.delete(member)
 
     def make_war(self):
         """A helper function that creates a new user object."""
