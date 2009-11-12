@@ -142,8 +142,12 @@ class DeleteWarForm(_WarBoundForm):
 
     def delete_war(self):
         """Deletes the war"""
-        self.war.maps.clear()
-        self.war.members.clear()
+        for warmap in self.war.maps:
+            db.delete(warmap)
+        for member in self.war.members:
+            db.delete(member)
+        if self.war.result:
+            db.delete(self.war.result)
         db.delete(self.war)
 
 
