@@ -76,11 +76,13 @@ class EditWarForm(_WarBoundForm):
         self.status.choices = [(k, v) for k, v in warstates.iteritems()]
         self.orgamember.choices = [(user.id, user.display_name) for user in User.query.all()]
         self.mode.choices = [(mode.id, mode.name) for mode in WarMode.query.all()]
-        self.newmap.choices = [(-1, u'')] + [(map.id, map.name)
-                               for map in WarMap.query.all() if map not in war.maps]
-        if war.maps:
+        if war is not None:
             self.removemaps.choices = [(map.id, map.name) for map in war.maps]
+            self.newmap.choices = [(-1, u'')] + [(map.id, map.name)
+                                   for map in WarMap.query.all() if map not in war.maps]
         else:
+            self.newmap.choices = [(-1, u'')] + [(map.id, map.name)
+                                   for map in WarMap.query.all()]
             del self.removemaps
 
     def _set_common_attributes(self, war):
