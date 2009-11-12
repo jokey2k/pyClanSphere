@@ -251,7 +251,8 @@ class WarMap(object):
 class WarResult(object):
     """Details on the result"""
     
-    def __init__(self, our_points=0, enemy_points=0):
+    def __init__(self, war, our_points=0, enemy_points=0):
+        self.id = war.id
         self.our_points = our_points
         self.enemy_points = enemy_points
 
@@ -264,6 +265,8 @@ class NullWarResult(WarResult):
     """Empty War Result"""
 
     points = "--:--"
+    def __init__(self):
+        self.id = -1
 
 
 class NullWar(War):
