@@ -259,7 +259,6 @@ def edit_user(request, user_id=None):
             return redirect_to('admin/delete_user', user_id=user.id)
         elif form.validate(request.form):
             if user is None:
-                print "User is none"
                 user = form.make_user()
                 msg = _(u'User %s created successfully.')
                 icon = 'add'
