@@ -172,6 +172,8 @@ class EditWarMapForm(_WarMapBoundForm):
                             required=True)
     squad = forms.ChoiceField(lazy_gettext(u'Owning squad'),
                               widget=forms.SelectBox)
+    readmapname = forms.BooleanField(lazy_gettext(u'Use name from file metadata as internal mapname'),
+                      help_text=lazy_gettext(u'Read map metadata and set internal mapname to name from mapfile'))
     
     def __init__(self, warmap=None, initial=None):
         if warmap is not None:
@@ -198,6 +200,9 @@ class EditWarMapForm(_WarMapBoundForm):
         self.warmap = warmap
         return warmap
 
+    @property
+    def overwrite_mapname(self):
+        return self.data['readmapname']
 
 class DeleteWarMapForm(_WarMapBoundForm):
     """Used to delete a warmap from the admin panel."""

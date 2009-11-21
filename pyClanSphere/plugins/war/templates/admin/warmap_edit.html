@@ -6,7 +6,20 @@
   {% call form(enctype="multipart/form-data") %}
     {{ render_formmultibox([form.mapname, form.squad],
                            _("Map basics"), toggleable=false) }}
-    {% if not form.new %}{{ render_filefield("mapfile", _("Upload Mapfile"), existing_label=_("Map file uploaded before"), existing_bool=form.warmap.has_file()) }}{% endif %}
+    {% if not form.new %}
+      <div class="formbox toggleable collapsed">
+        <h3>{{ _("Upload Mapfile") }}</h3>
+        <table>
+        <tr>
+          <td nowrap>{{ form.readmapname.label() }}:</td><td width="100%">{{ form.readmapname() }}</td>
+        </tr>
+        <tr>
+          <td nowrap>{{ _("Map file uploaded before") }}:</td><td width="100%">{{ _("Yes") if form.warmap.has_file() else _("No") }}</td>
+        </tr>
+        <tr><td colspan="2"><input type="file" name="{{ fieldname }}"></td></tr>
+        </table>
+      </div>
+    {% endif %}
     {{ render_actions(form) }}
   {% endcall %}
 {% endblock %}

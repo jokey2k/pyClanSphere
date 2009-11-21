@@ -182,6 +182,9 @@ def warmap_edit(request, warmap_id=None):
             mapfile = request.files.get('mapfile')
             if mapfile:
                 warmap.place_file(mapfile)
+                if form.overwrite_mapname and warmap.metadata is not None:
+                    warmap.name = warmap.metadata.name
+                    db.commit()
             
             if 'save_and_continue' in request.form:
                 return redirect_to('admin/warmap_edit', warmap_id=warmap.id)
