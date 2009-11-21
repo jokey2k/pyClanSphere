@@ -209,7 +209,7 @@ class DeleteWarMapForm(_WarMapBoundForm):
 
     def delete_warmap(self):
         """Deletes the warmap‚"""
-        self.warmap.remove_map_file()
+        self.warmap.remove_file()
         db.delete(self.warmap)
 
 class EditWarResultForm(forms.Form):
