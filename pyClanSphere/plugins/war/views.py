@@ -2,9 +2,9 @@
 """
     pyClanSphere.plugins.gamesquad.views
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    
+
     This module implements all the views for the gamesquad module.
-    
+
     :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
@@ -30,35 +30,35 @@ from pyClanSphere.plugins.war.privileges import WAR_MANAGE
 # Frontend stuff
 def war_index(request, page):
     """List wars in frontend"""
-    
+
     data = War.query.get_list(page=page)
-    
+
     return render_response('war_index.html', **data)
 
 def war_detail(request, war_id=None):
     """Show details of a specific war"""
-    
+
     if war_id is None:
         raise NotFound()
-    
+
     # mark all detail field eagerload as they're needed in the template either way
     # and lazyload is just sloooow in this case
     query = War.query
     for field in ['mode','orgamember','members','maps']:
         query = query.options(db.eagerload(field))
-    
+
     war = query.get(war_id)
     if war is None:
         raise NotFound()
-    
+
     return render_response('war_detail.html', war=war, result=war.result,
                            warstates=warstates, memberstates=memberstates)
 
 def warmap_list(request, page):
     """List all entered warmaps"""
-    
+
     data = WarMap.query.get_list(page=page)
-    
+
     return render_response('war_mapindex.html', **data)
 
 def warmap_details(request, warmap_id=None):
@@ -67,7 +67,7 @@ def warmap_details(request, warmap_id=None):
     warmap = WarMap.query.get(warmap_id)
     if warmap is None:
         raise NotFound()
-    
+
     return render_response('war_mapdetail.html', warmap=warmap)
 
 # Backend stuff
@@ -75,24 +75,24 @@ def warmap_details(request, warmap_id=None):
 @require_admin_privilege(WAR_MANAGE)
 def war_list(request, page):
     """List wars in backend"""
-    
+
     data = War.query.get_list(per_page=PER_PAGE, page=page,
                               paginator=AdminPagination)
-    
+
     return render_admin_response('admin/war_list.html', 'war.wars',
                                  **data)
 
 @require_admin_privilege(WAR_MANAGE)
 def war_edit(request, war_id=None):
     """Edit an existing war or create a new one."""
-    
+
     war = None
     if war_id is not None:
         war = War.query.get(war_id)
         if war is None:
             raise NotFound()
     form = forms.EditWarForm(war)
-    
+
     if request.method == 'POST':
         if 'cancel' in request.form:
             return form.redirect('admin/war_list')
@@ -110,7 +110,7 @@ def war_edit(request, war_id=None):
                 msg = _('The war %s was updated successfully.')
                 icon = 'info'
             admin_flash(msg % (war.clanname), icon)
-            
+
             db.commit()
             if 'save_and_continue' in request.form:
                 return redirect_to('admin/war_edit', war_id=war.id)
@@ -127,7 +127,7 @@ def war_delete(request, war_id=None):
         if war is None:
             raise NotFound()
     form = forms.DeleteWarForm(war)
-    
+
     if request.method == 'POST':
         if request.form.get('cancel'):
             return form.redirect('admin/war_edit', war_id=war_id)
@@ -137,14 +137,14 @@ def war_delete(request, war_id=None):
             db.commit()
             admin_flash(_('The war %s was deleted successfully') % warname, 'remove')
             return form.redirect('admin/war_list')
-    
+
     return render_admin_response('admin/war_delete.html', 'war.wars',
                                  form=form.as_widget())
 
 @require_admin_privilege(WAR_MANAGE)
 def warmap_list(request, page):
     """List warmaps in backend"""
-    
+
     data = WarMap.query.get_list(per_page=PER_PAGE, page=page,
                                  paginator=AdminPagination)
 
@@ -154,14 +154,14 @@ def warmap_list(request, page):
 @require_admin_privilege(WAR_MANAGE)
 def warmap_edit(request, warmap_id=None):
     """Edit an existing warmap or create a new one."""
-    
+
     warmap = None
     if warmap_id is not None:
         warmap = WarMap.query.get(warmap_id)
         if warmap is None:
             raise NotFound()
     form = forms.EditWarMapForm(warmap)
-    
+
     if request.method == 'POST':
         if 'cancel' in request.form:
             return form.redirect('admin/warmap_list')
@@ -176,18 +176,16 @@ def warmap_edit(request, warmap_id=None):
                 form.save_changes()
                 msg = _('Warmap %s was updated successfully.')
                 icon = 'info'
-            
-            
             db.commit()
-            
+
             mapfile = request.files.get('mapfile')
             if mapfile:
                 warmap.place_file(mapfile)
                 if form.overwrite_mapname and hasattr(warmap.metadata, 'name'):
                     warmap.name = unicode(warmap.metadata.name)
                     db.commit()
-            
             admin_flash(msg % (warmap.name), icon)
+
             if 'save_and_continue' in request.form:
                 return redirect_to('admin/warmap_edit', warmap_id=warmap.id)
             return form.redirect('admin/warmap_list')
@@ -202,7 +200,7 @@ def warmap_delete(request, warmap_id=None):
         if warmap is None:
             raise NotFound()
     form = forms.DeleteWarMapForm(warmap)
-    
+
     if request.method == 'POST':
         if request.form.get('cancel'):
             return form.redirect('admin/warmap_edit', warmap_id=warmap_id)
@@ -214,7 +212,7 @@ def warmap_delete(request, warmap_id=None):
             db.commit()
             admin_flash(_('Warmap %s was deleted successfully') % name, 'remove')
             return form.redirect('admin/warmap_list')
-    
+
     return render_admin_response('admin/warmap_delete.html', 'war.maps',
                                  form=form.as_widget())
 
@@ -229,7 +227,7 @@ def warresult_edit(request, war_id=None):
         raise NotFound()
     warresult = WarResult.query.get(war_id)
     form = forms.EditWarResultForm(war, warresult)
-    
+
     if request.method == 'POST':
         if request.form.get('cancel'):
             return form.redirect('admin/war_edit', war_id=war_id)

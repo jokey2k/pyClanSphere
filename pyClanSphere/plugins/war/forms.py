@@ -36,7 +36,7 @@ class _WarBoundForm(forms.Form):
 
 
 class EditWarForm(_WarBoundForm):
-                 
+
     clanname = forms.TextField(lazy_gettext(u'Opponent'), max_length=64,
                                 validators=[is_not_whitespace_only()],
                                 required=True)
@@ -46,7 +46,7 @@ class EditWarForm(_WarBoundForm):
                             widget=forms.SelectBox)
     squad = forms.ModelField(Squad, 'id', lazy_gettext(u'Squad'),
                              widget=forms.SelectBox, required=True)
-    playerchangecount = forms.IntegerField(lazy_gettext(u'Player Changes'), 
+    playerchangecount = forms.IntegerField(lazy_gettext(u'Player Changes'),
                       help_text=lazy_gettext(u'How many playerchanges are allowed each mapchange'))
     contact = forms.TextField(lazy_gettext(u'Opponent contact'), max_length=250,
                               validators=[is_not_whitespace_only()],
@@ -66,7 +66,7 @@ class EditWarForm(_WarBoundForm):
                                         widget=forms.SelectBox)
     removemembers = forms.MultiChoiceField(lazy_gettext(u'Check to remove'),
                                            widget=forms.CheckboxGroup)
-    
+
     def __init__(self, war=None, initial=None):
         if war is not None:
             initial = forms.fill_dict(initial,
@@ -117,7 +117,7 @@ class EditWarForm(_WarBoundForm):
             newmember = User.query.get(newmember_id)
             if newmember is not None:
                 war.memberstatus[newmember] = self.data['newmemberstatus']
-                         
+
     def save_changes(self):
         """Apply the changes."""
         self._set_common_attributes(self.war)
@@ -169,7 +169,7 @@ class _WarMapBoundForm(forms.Form):
 
 
 class EditWarMapForm(_WarMapBoundForm):
-                 
+
     mapname = forms.TextField(lazy_gettext(u'Internal Mapname'), max_length=64,
                             validators=[is_not_whitespace_only()],
                             required=True)
@@ -177,7 +177,7 @@ class EditWarMapForm(_WarMapBoundForm):
                               widget=forms.SelectBox)
     readmapname = forms.BooleanField(lazy_gettext(u'Use name from file metadata as internal mapname'),
                       help_text=lazy_gettext(u'Read map metadata and set internal mapname to name from mapfile'))
-    
+
     def __init__(self, warmap=None, initial=None):
         if warmap is not None:
             initial = forms.fill_dict(initial,
@@ -191,7 +191,7 @@ class EditWarMapForm(_WarMapBoundForm):
         warmap.name = self.data['mapname']
         warmap.squad = Squad.query.get(self.data['squad'])
         #forms.set_fields(warmap, self.data,'name')
-                         
+
     def save_changes(self):
         """Apply the changes."""
         self._set_common_attributes(self.warmap)

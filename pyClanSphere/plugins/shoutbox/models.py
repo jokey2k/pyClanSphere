@@ -73,10 +73,10 @@ class ShoutboxEntry(object):
 
     def can_manage(self, user=None):
         """Check if given (or current) user can manage this entry"""
-        
+
         if user is None:
             user = get_request().user
-        
+
         return user.has_privilege(SHOUTBOX_MANAGE)
 
     def set_author(self, author):

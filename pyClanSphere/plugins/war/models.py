@@ -81,10 +81,10 @@ class WarQuery(db.Query):
         """Return a filter for upcoming wars only"""
 
         return self.filter_by(status=2)
-        
+
     def past(self):
         """Return a filter for past played wars only"""
-        
+
         return self.filter_by(status=4)
 
     def get_list(self, endpoint=None, page=1, per_page=None,
@@ -111,7 +111,7 @@ class WarQuery(db.Query):
             'pagination':       pagination,
             'warstates':        warstates
         }
-        
+
 
 class War(object):
     """One Coordinated war"""
@@ -153,7 +153,7 @@ class War(object):
 
 class WarMember(object):
     """Memberstatus for a war"""
-    
+
     def __init__(self, war=None, member=None, status=1):
         self.war = war
         self.member = member
@@ -186,14 +186,14 @@ class WarMap(object):
     """A war map"""
 
     query = db.query_property(WarMetaQuery)
-    
+
     def __init__(self, name=u'', squad=None, metadata_timestamp=None, metadata_cache=None):
         self.name = name
         self.squad = squad
         self.metadata_timestamp = metadata_timestamp
         self.metadata_cache = metadata_cache
-    
-    def generate_filename(self):   
+
+    def generate_filename(self):
         from pyClanSphere.api import get_application
         app = get_application()
         self.map_folder = os.path.join(app.instance_folder, 'warmaps')
@@ -216,7 +216,7 @@ class WarMap(object):
     @property
     def metadata(self):
         """Return map metadata"""
-        
+
         if not self.has_file():
             return None
 
@@ -234,14 +234,14 @@ class WarMap(object):
                 have_metadata = True
             except GBXWrongFileTypeException:
                 pass
-            
+
             if have_metadata:
                 self.metadata_cache = Pickle.dumps(data)
                 self.metadata_timestamp = filetime
                 return data
 
             return None
-            
+
     def place_file(self, newfile):
         """Move war map file to instance subfolder and generate appropriate filename"""
 
@@ -252,19 +252,19 @@ class WarMap(object):
 
     def remove_file(self):
         """Remove a war map file"""
-        
+
         if os.path.exists(self.map_filename):
             os.remove(self.map_filename)
-    
+
     def has_file(self):
         """True/False if we have something"""
-        
+
         return os.path.exists(self.map_filename)
-    
+
 
 class WarResult(object):
     """Details on the result"""
-    
+
     def __init__(self, war, our_points=0, enemy_points=0):
         self.id = war.id
         self.our_points = our_points
@@ -289,7 +289,7 @@ class NullWar(War):
     """
     id = -1
     clanname = "--"
-    server = "--"        
+    server = "--"
     date = None
     result = NullWarResult()
 
