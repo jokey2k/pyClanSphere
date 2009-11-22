@@ -46,6 +46,33 @@ def _create_warmember(member, status):
     return WarMember(member=member, status=status)
 
 
+class WarMetaQuery(db.Query):
+    """Meta-Addon methods for querying on war-related classes"""
+
+    def get_list(self, endpoint=None, page=1, per_page=None,
+                 url_args=None, raise_if_empty=True, paginator=Pagination):
+        """Return a dict with pagination and wars."""
+
+        if per_page is None:
+            per_page = 20
+
+        # send the query
+        offset = per_page * (page - 1)
+        mylist = self.offset(offset).limit(per_page).all()
+
+        # if raising exceptions is wanted, raise it
+        if raise_if_empty and (page != 1 and not mylist):
+            raise NotFound()
+
+        pagination = paginator(endpoint, page, per_page,
+                                self.count(), url_args)
+
+        return {
+            'datalist':         mylist,
+            'pagination':       pagination
+        }
+
+
 class WarQuery(db.Query):
     """Addon methods for querying wars"""
 
@@ -147,38 +174,17 @@ class WarMode(object):
         # This is used for serversettings, do not touch otherwise!
         self.remotedata = remotedata
 
+    def can_create(self, user=None):
+        return True
 
-class WarMapQuery(db.Query):
-    """Addon methods for querying wars"""
-
-    def get_list(self, endpoint=None, page=1, per_page=None,
-                 url_args=None, raise_if_empty=True, paginator=Pagination):
-        """Return a dict with pagination and wars."""
-
-        if per_page is None:
-            per_page = 20
-
-        # send the query
-        offset = per_page * (page - 1)
-        warmaplist = self.offset(offset).limit(per_page).all()
-
-        # if raising exceptions is wanted, raise it
-        if raise_if_empty and (page != 1 and not warlist):
-            raise NotFound()
-
-        pagination = paginator(endpoint, page, per_page,
-                                self.count(), url_args)
-
-        return {
-            'warmaps':          warmaplist,
-            'pagination':       pagination
-        }
+    def can_edit(self, user=None):
+        return True
 
 
 class WarMap(object):
     """A war map"""
 
-    query = db.query_property(WarMapQuery)
+    query = db.query_property(WarMetaQuery)
     
     def __init__(self, name=u'', squad=None, metadata_timestamp=None, metadata_cache=None):
         self.name = name
