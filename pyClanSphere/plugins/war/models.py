@@ -68,7 +68,7 @@ class WarQuery(db.Query):
 
         # send the query
         offset = per_page * (page - 1)
-        warlist = self.order_by(War.date) \
+        warlist = self.order_by(db.desc(War.date)) \
                          .offset(offset).limit(per_page).all()
 
         # if raising exceptions is wanted, raise it
