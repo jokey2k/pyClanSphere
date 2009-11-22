@@ -1,6 +1,6 @@
 {% extends "admin/layout.html" %}
 {% from "admin/_form_helpers.html" import render_formmultibox, render_filefield, render_actions %}
-{% block title %}{{ _('New War') if form.new else _('Edit War') }}{% endblock %}
+{% block title %}{{ _('New warmap') if form.new else _('Edit warmap') }}{% endblock %}
 {% block contents %}
   <h1>{{ self.title() }}</h1>
   {% call form(enctype="multipart/form-data") %}

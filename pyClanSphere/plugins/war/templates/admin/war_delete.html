@@ -1,7 +1,7 @@
 {% extends "admin/layout.html" %}
 {% block title %}{{ _("Delete War") }}{% endblock %}
 {% block contents %}
-  <h1>{{ _("Delete War") }}</h1>
+  <h1>{{ self.title() }}</h1>
   {% call form() %}
     <p>{% trans name=form.war.clanname, date=form.war.date|datetimeformat %}
       Do you really want to delete the war “{{ name }} on {{ date }}”?
