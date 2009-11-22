@@ -13,6 +13,7 @@ from time import time
 from itertools import islice
 from datetime import datetime
 
+from jinja2 import Markup
 from werkzeug import url_quote
 
 from pyClanSphere.privileges import ENTER_ADMIN_PANEL, require_privilege
@@ -38,7 +39,7 @@ def flash(msg, type='info'):
         msg = (u'<strong>%s:</strong> ' % _('Warning')) + msg
 
     local.request.session.setdefault('admin/flashed_messages', []).\
-            append((type, msg))
+            append((type, Markup(msg)))
 
 
 def require_admin_privilege(expr=None):
