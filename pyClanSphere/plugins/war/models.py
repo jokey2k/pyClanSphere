@@ -10,6 +10,7 @@
 """
 
 import os
+from datetime import datetime
 
 from werkzeug import FileStorage
 
@@ -220,7 +221,8 @@ class WarMap(object):
             return None
 
         statinfo = os.stat(self.map_filename)
-        if self.metadata_timestamp and statinfo.st_mtime <= self.metadata_timestamp:
+        filetime = datetime.fromtimestamp(statinfo.st_mtime)
+        if self.metadata_timestamp and filetime <= self.metadata_timestamp:
             return Pickle.loads(self.metadata_cache)
         else:
             have_metadata = False
@@ -235,7 +237,7 @@ class WarMap(object):
             
             if have_metadata:
                 self.metadata_cache = Pickle.dumps(data)
-                self.metadata_timestamp = statinfo.st_mtime
+                self.metadata_timestamp = filetime
                 return data
 
             return None
