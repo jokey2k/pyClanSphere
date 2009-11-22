@@ -29,7 +29,8 @@ def add_admin_links(request, navigation_bar):
         return
 
     entries = [('wars', url_for('admin/war_list'), _(u'Wars')),
-               ('maps', url_for('admin/warmap_list'), _(u'Maps'))]
+               ('maps', url_for('admin/warmap_list'), _(u'Maps')),
+               ('modes', url_for('admin/warmode_list'), _(u'Modes'))]
 
     navigation_bar.insert(-3, ('war', url_for('admin/war_list'), _(u'War Management'), entries))
 
@@ -71,6 +72,15 @@ def setup(app, plugin):
                      view=views.warmap_edit)
     app.add_url_rule('/warmaps/<int:warmap_id>/delete', prefix='admin', endpoint='admin/warmap_delete',
                      view=views.warmap_delete)
+
+    app.add_url_rule('/warmodes/', prefix='admin', defaults={'page': 1}, endpoint='admin/warmode_list',
+                     view=views.warmode_list)
+    app.add_url_rule('/warmodes/new', prefix='admin', endpoint='admin/warmode_create',
+                     view=views.warmode_edit)
+    app.add_url_rule('/warmodes/<int:warmode_id>', prefix='admin', endpoint='admin/warmode_edit',
+                     view=views.warmode_edit)
+    app.add_url_rule('/warmodes/<int:warmode_id>/delete', prefix='admin', endpoint='admin/warmode_delete',
+                     view=views.warmode_delete)
 
     # Add admin views to navigation bar
     app.connect_event('modify-admin-navigation-bar', add_admin_links)

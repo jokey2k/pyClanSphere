@@ -263,3 +263,63 @@ class EditWarResultForm(forms.Form):
         widget.new = self.war is None
         return widget
 
+class _WarModeBoundForm(forms.Form):
+    """Base class for WarMode related forms"""
+    def __init__(self, warmode, initial=None):
+        forms.Form.__init__(self, initial)
+        self.app = get_application()
+        self.warmode = warmode
+
+    def as_widget(self):
+        widget = forms.Form.as_widget(self)
+        widget.warmode = self.warmode
+        widget.new = self.warmode is None
+        return widget
+
+
+class EditWarModeForm(_WarModeBoundForm):
+
+    modename = forms.TextField(lazy_gettext(u'Modename'), max_length=64,
+                            validators=[is_not_whitespace_only()],
+                            required=True)
+    game = forms.ChoiceField(lazy_gettext(u'Game'), widget=forms.SelectBox)
+    free1 = forms.TextField(lazy_gettext(u'Free field 1'), max_length=128)
+    free2 = forms.TextField(lazy_gettext(u'Free field 2'), max_length=128)
+    free3 = forms.TextField(lazy_gettext(u'Free field 3'), max_length=128)
+
+    def __init__(self, warmode=None, initial=None):
+        if warmode is not None:
+            initial = forms.fill_dict(initial,
+                name = warmode.name,
+                game = warmode.game,
+                free1 = warmode.free1,
+                free2 = warmode.free2,
+                free3 = warmode.free3
+            )
+        _WarModeBoundForm.__init__(self, warmode, initial)
+        self.game.choices = [('','')] + [(game.id, game.name) for game in Game.query.all()]
+
+    def _set_common_attributes(self, warmode):
+        forms.set_fields(warmode, self.data, 'free1', 'free2', 'free3')
+        warmode.name = self.data['modename']
+        warmode.game = Game.query.get(self.data['game'])
+
+    def save_changes(self):
+        """Apply the changes."""
+        self._set_common_attributes(self.warmode)
+
+    def make_warmode(self):
+        """A helper function that creates a new user object."""
+        warmode = WarMode()
+        self._set_common_attributes(warmode)
+        self.warmode = warmode
+        return warmode
+
+
+class DeleteWarModeForm(_WarModeBoundForm):
+    """Used to delete a warmode from the admin panel."""
+
+    def delete_warmode(self):
+        """Deletes the warmode‚"""
+        db.delete(self.warmode)
+

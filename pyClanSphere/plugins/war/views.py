@@ -9,7 +9,7 @@
     :license: BSD, see LICENSE for more details.
 """
 
-import os
+import os, datetime
 
 from werkzeug.exceptions import NotFound, Forbidden
 
@@ -21,9 +21,10 @@ from pyClanSphere.utils.http import redirect_to
 from pyClanSphere.utils.pagination import AdminPagination
 from pyClanSphere.views.account import render_account_response
 from pyClanSphere.views.admin import render_admin_response, PER_PAGE
+from werkzeug import escape
 
 from pyClanSphere.plugins.war import forms
-from pyClanSphere.plugins.war.models import War, WarMap, WarResult, warstates, memberstates
+from pyClanSphere.plugins.war.models import War, WarMap, WarMode, WarResult, warstates, memberstates
 from pyClanSphere.plugins.war.privileges import WAR_MANAGE
 
 # Frontend stuff
@@ -258,3 +259,74 @@ def warresult_edit(request, war_id=None):
             return form.redirect('admin/war_edit', war_id=war_id)
     return render_admin_response('admin/warresult_edit.html', 'war.wars',
                                     form=form.as_widget())
+
+@require_admin_privilege(WAR_MANAGE)
+def warmode_list(request, page):
+    """List warmodes in backend"""
+
+    data = WarMode.query.get_list(per_page=PER_PAGE, page=page,
+                                 paginator=AdminPagination)
+
+    return render_admin_response('admin/warmode_list.html', 'war.modes',
+                                  **data)
+
+@require_admin_privilege(WAR_MANAGE)
+def warmode_edit(request, warmode_id=None):
+    """Edit an existing warmode or create a new one."""
+
+    warmode = None
+    if warmode_id is not None:
+        warmode = WarMode.query.get(warmode_id)
+        if warmode is None:
+            raise NotFound()
+    form = forms.EditWarModeForm(warmode)
+
+    if request.method == 'POST':
+        if 'cancel' in request.form:
+            return form.redirect('admin/warmode_list')
+        elif request.form.get('delete') and warmode:
+            return redirect_to('admin/warmode_delete', warmode_id=warmode_id)
+        elif form.validate(request.form):
+            if warmode is None:
+                warmode = form.make_warmode()
+                msg = _('Warmode %s was created successfully.')
+                icon = 'add'
+            else:
+                form.save_changes()
+                msg = _('Warmode %s was updated successfully.')
+                icon = 'info'
+
+            admin_flash(msg % (warmode.name), icon)
+
+            db.commit()
+
+            if 'save_and_continue' in request.form:
+                return redirect_to('admin/warmode_edit', warmode_id=warmode.id)
+            return form.redirect('admin/warmode_list')
+    return render_admin_response('admin/warmode_edit.html', 'war.modes',
+                                    form=form.as_widget())
+
+@require_admin_privilege(WAR_MANAGE)
+def warmode_delete(request, warmode_id=None):
+    warmode = None
+    if warmode_id is not None:
+        warmode = WarMode.query.get(warmode_id)
+        if warmode is None:
+            raise NotFound()
+    form = forms.DeleteWarModeForm(warmode)
+
+    if request.method == 'POST':
+        if request.form.get('cancel'):
+            return form.redirect('admin/warmode_edit', warmode_id=warmode_id)
+        elif request.form.get('confirm') and form.validate(request.form):
+            form.add_invalid_redirect_target('admin/warmode_edit', warmode_id=warmode_id)
+            form.add_invalid_redirect_target('admin/warmode_delete', warmode_id=warmode_id)
+            name = str(warmode.name)
+            form.delete_warmode()
+            db.commit()
+            admin_flash(_('Warmode %s was deleted successfully') % name, 'remove')
+            return form.redirect('admin/warmode_list')
+
+    return render_admin_response('admin/warmode_delete.html', 'war.modes',
+                                 form=form.as_widget())
+

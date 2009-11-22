@@ -1,0 +1,11 @@
+{% extends "admin/layout.html" %}
+{% from "admin/_form_helpers.html" import render_formmultibox, render_filefield, render_actions %}
+{% block title %}{{ _('New warmode') if form.new else _('Edit warmode') }}{% endblock %}
+{% block contents %}
+  <h1>{{ self.title() }}</h1>
+  {% call form() %}
+  {{ render_formmultibox([form.modename, form.game], _("Mode basics"), toggleable=false) }}
+  {{ render_formmultibox([form.free1, form.free2, form.free3], _("Free fields"), toggleable=false) }}
+  {{ render_actions(form) }}
+  {% endcall %}
+{% endblock %}
