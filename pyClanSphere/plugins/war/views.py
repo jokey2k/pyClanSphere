@@ -177,7 +177,6 @@ def warmap_edit(request, warmap_id=None):
                 msg = _('Warmap %s was updated successfully.')
                 icon = 'info'
             
-            admin_flash(msg % (warmap.name), icon)
             
             db.commit()
             
@@ -188,6 +187,7 @@ def warmap_edit(request, warmap_id=None):
                     warmap.name = unicode(warmap.metadata.name)
                     db.commit()
             
+            admin_flash(msg % (warmap.name), icon)
             if 'save_and_continue' in request.form:
                 return redirect_to('admin/warmap_edit', warmap_id=warmap.id)
             return form.redirect('admin/warmap_list')

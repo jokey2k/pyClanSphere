@@ -254,7 +254,7 @@ class WarMap(object):
         """Remove a war map file"""
         
         if os.path.exists(self.map_filename):
-            os.remove(map_path)
+            os.remove(self.map_filename)
     
     def has_file(self):
         """True/False if we have something"""
