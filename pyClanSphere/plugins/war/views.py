@@ -184,8 +184,8 @@ def warmap_edit(request, warmap_id=None):
             mapfile = request.files.get('mapfile')
             if mapfile:
                 warmap.place_file(mapfile)
-                if form.overwrite_mapname and warmap.metadata is not None:
-                    warmap.name = warmap.metadata.name
+                if form.overwrite_mapname and hasattr(warmap.metadata, 'name'):
+                    warmap.name = unicode(warmap.metadata.name)
                     db.commit()
             
             if 'save_and_continue' in request.form:
@@ -193,7 +193,6 @@ def warmap_edit(request, warmap_id=None):
             return form.redirect('admin/warmap_list')
     return render_admin_response('admin/warmap_edit.html', 'war.maps',
                                     form=form.as_widget())
-
 
 @require_admin_privilege(WAR_MANAGE)
 def warmap_delete(request, warmap_id=None):
