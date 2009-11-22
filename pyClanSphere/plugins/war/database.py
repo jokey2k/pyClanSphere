@@ -27,6 +27,7 @@ wars = Table('wars', metadata,
     Column('playerchangecount', Integer),
     Column('contact', String(250)),
     Column('orgamember_id', ForeignKey('users.user_id')),
+    Column('squad_id', ForeignKey('squads.squad_id')),
     Column('checked', String(250)),
     Column('status', Integer),
     Column('notes', Text)

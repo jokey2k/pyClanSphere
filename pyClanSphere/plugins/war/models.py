@@ -94,11 +94,12 @@ class War(object):
     def __init__(self, clanname=u'', date=None, server=None, mode=None,
                  members=None, maps=None, playerchangecount=0,
                  contact=None, orgamember=None, checked=False, status=1,
-                 notes=None, result=None):
+                 notes=None, result=None, squad=None):
         super(War, self).__init__()
         self.clanname = clanname
         self.date = date
         self.server = server
+        self.squad = squad
         self.mode = mode
         self.playerchangecount = playerchangecount
         self.contact = contact
@@ -290,6 +291,8 @@ mapper(War, wars, properties={
     'by_member':        relation(WarMember,
                         collection_class=db.attribute_mapped_collection('member')),
     'maps':             relation(WarMap, secondary=war_maps),
+    'squad':            relation(Squad, uselist=False,
+                                 backref=backref('wars')),
     'members':          relation(User, secondary=warmembers),
     'orgamember':       relation(User, uselist=False),
     'mode':             relation(WarMode, uselist=False)

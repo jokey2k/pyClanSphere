@@ -16,7 +16,7 @@ from pyClanSphere.models import User
 from pyClanSphere.utils import forms
 from pyClanSphere.utils.validators import ValidationError, is_not_whitespace_only
 
-from pyClanSphere.plugins.gamesquad.models import Squad
+from pyClanSphere.plugins.gamesquad.models import Game, Squad
 
 from pyClanSphere.plugins.war.models import War, WarMode, WarMap, WarMember, WarResult, warstates, memberstates
 
@@ -44,6 +44,8 @@ class EditWarForm(_WarBoundForm):
     server = forms.TextField(lazy_gettext(u'Server'), max_length=64)
     mode = forms.ModelField(WarMode, 'id', lazy_gettext(u'Warmode'),
                             widget=forms.SelectBox)
+    squad = forms.ModelField(Squad, 'id', lazy_gettext(u'Squad'),
+                             widget=forms.SelectBox, required=True)
     playerchangecount = forms.IntegerField(lazy_gettext(u'Player Changes'), 
                       help_text=lazy_gettext(u'How many playerchanges are allowed each mapchange'))
     contact = forms.TextField(lazy_gettext(u'Opponent contact'), max_length=250,
@@ -83,6 +85,7 @@ class EditWarForm(_WarBoundForm):
         self.orgamember.choices = [(user.id, user.display_name) for user in User.query.all()]
         self.mode.choices = [(mode.id, mode.name) for mode in WarMode.query.all()]
         self.newmemberstatus.choices = [(k, v) for k, v in memberstates.iteritems()]
+        self.squad.choices = [(squad.id, '%s (%s)' % (squad.name, squad.game.name)) for squad in Squad.query.all()]
         if war is not None:
             self.removemembers.choices = [(member.id, '%s (%s)' % \
                                           (member.display_name, memberstates[war.memberstatus[member]]))
@@ -103,7 +106,7 @@ class EditWarForm(_WarBoundForm):
     def _set_common_attributes(self, war):
         forms.set_fields(war, self.data, 'clanname', 'date', 'server',
                          'mode', 'playerchangecount', 'contact', 'orgamember',
-                         'status', 'notes')
+                         'status', 'notes', 'squad')
         newmap_id =  self.data['newmap']
         if newmap_id != -1:
             newmap = WarMap.query.get(newmap_id)

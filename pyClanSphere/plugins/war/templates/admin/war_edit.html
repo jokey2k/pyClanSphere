@@ -13,6 +13,7 @@
       <dt>{{ form.clanname.label.text }}</dt><dd>{{ form.war.clanname }}</dd>
       <dt>{{ form.date.label.text }}</dt><dd>{{ form.war.date|datetimeformat }}</dd>
       <dt>{{ form.orgamember.label.text }}</dt><dd>{{ form.war.orgamember.display_name }}</dd>
+      <dt>{{ form.squad.label.text }}</dt><dd>{{ form.war.squad.name }} ({{ form.war.squad.game.name }})</dd>
       <dt>{{ form.contact.label.text }}</dt><dd>{{ form.war.contact }}</dd>
       <dt>{{ form.status.label.text }}</dt><dd>{{ warstates[form.war.status] }}</dd>
     </dl>
