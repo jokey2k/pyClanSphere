@@ -217,8 +217,8 @@ class DeleteWarMapForm(_WarMapBoundForm):
 
 class EditWarResultForm(forms.Form):
 
-    our_points = forms.IntegerField(lazy_gettext(u'Our Points'))
-    enemy_points = forms.IntegerField(lazy_gettext(u'Enemy Points'))
+    our_points = forms.IntegerField(lazy_gettext(u'Our Points'), required=True)
+    enemy_points = forms.IntegerField(lazy_gettext(u'Enemy Points'), required=True)
     comment = forms.TextField(lazy_gettext(u'Comment'), max_length=65000,
                               widget=forms.Textarea)
     status = forms.ChoiceField(lazy_gettext(u'State'), required=True)
@@ -228,13 +228,18 @@ class EditWarResultForm(forms.Form):
             initial = forms.fill_dict(initial,
                 our_points = warresult.our_points,
                 enemy_points = warresult.enemy_points,
-                comment = warresult.comment
+                comment = warresult.comment,
+                status = war.status
+            )
+        else:
+            initial = forms.fill_dict(initial,
+                status = war.status if war.status > 3 else 4
             )
         forms.Form.__init__(self, initial)
         self.app = get_application()
         self.warresult = warresult
         self.war = war
-        self.status.choices = [(k, v) for k, v in warstates.iteritems()]
+        self.status.choices = [(k, v) for k, v in warstates.iteritems() if k > 3]
 
     def _set_common_attributes(self, warresult):
         forms.set_fields(warresult, self.data, 'our_points', 'enemy_points', 'comment')
