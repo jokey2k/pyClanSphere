@@ -290,8 +290,8 @@ class EditWarModeForm(_WarModeBoundForm):
     def __init__(self, warmode=None, initial=None):
         if warmode is not None:
             initial = forms.fill_dict(initial,
-                name = warmode.name,
-                game = warmode.game,
+                modename = warmode.name,
+                game = warmode.game.id,
                 free1 = warmode.free1,
                 free2 = warmode.free2,
                 free3 = warmode.free3
