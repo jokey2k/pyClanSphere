@@ -6,9 +6,9 @@
     {% if toc %}
     <div class="toc">
       <h4>{{ _('Table Of Contents') }}</h4>
-      <ul>{{ toc }}</ul>
+      <ul>{{ toc|safe }}</ul>
     </div>
     {% endif %}
-    {{ body }}
+    {{ body|safe }}
   </div>
 {% endmacro %}
