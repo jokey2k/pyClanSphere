@@ -1,0 +1,25 @@
+{% extends "admin/layout.html" %}
+{% from "admin/_form_helpers.html" import render_actions %}
+{% block title %}{{ _('Write Result') if form.new else _('Edit Result') }}{% endblock %}
+{% block contents %}
+  <h1>{{ self.title() }}</h1>
+  <p>{% trans %}
+    Now that the war is over, please enter some details about it.
+  {% endtrans %}</p>
+  <h2>War details</h2>
+  <dl>
+    <dt>{{ _('Opponent') }}</dt><dd>{{ form.war.clanname }}</dd>
+    <dt>{{ _('Squad') }}</dt><dd>{{ form.war.squad.name }} ({{ form.war.squad.game.name }})</dd>
+    <dt>{{ _('Date') }}</dt><dd>{{ form.war.date|datetimeformat }}</dd>
+  </dl>
+  <h2>Result</h2>
+  {% call form() %}
+  <dl>
+    {{ form.status.as_dd() }}
+    {{ form.our_points.as_dd() }}
+    {{ form.enemy_points.as_dd() }}
+    {{ form.comment.as_dd() }}
+  </dl>
+  {{ render_actions(form) }}
+  {% endcall %}
+{% endblock %}
