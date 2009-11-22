@@ -16,7 +16,7 @@
         <tr>
           <td nowrap>{{ _("Map file uploaded before") }}:</td><td width="100%">{{ _("Yes") if form.warmap.has_file() else _("No") }}</td>
         </tr>
-        <tr><td colspan="2"><input type="file" name="{{ fieldname }}"></td></tr>
+        <tr><td colspan="2"><input type="file" name="mapfile"></td></tr>
         </table>
       </div>
     {% endif %}
