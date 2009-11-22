@@ -7,19 +7,22 @@
       <th>{{ _("Opponent") }}</th>
       <th>{{ _("Date") }}</th>
       <th>{{ _("State") }}</th>
+      <th>{{ _("Result") }}</th>
     </tr>
   {%- for war in wars %}
     <tr class="{{ loop.cycle('odd', 'even') }}">
 	  {%- if war.can_edit() %}
       <td><a href="{{ url_for('admin/war_edit', war_id=war.id) }}">{{
           war.clanname }}</a></td>
-      {%- else %}
+    {%- else %}
       <td>{{ war.clanname }}</td>
 	  {%- endif %}
-	  <td>{{ war.date|datetimeformat }}</td>
-	  <td>{{ warstates[war.status] }}</tr>
+	    <td>{{ war.date|datetimeformat }}</td>
+	    <td>{{ warstates[war.status] }}</td>
+	    <td>{% if war.status >= 4 %}{{ _('Yes') if war.result else _('No') }}{% else %}&mdash;{% endif %}</td>
+	  </tr>
   {% else %}
-    <td colspan="3">{{ _("No wars") }}
+    <tr><td colspan="4">{{ _("No wars") }}</td></tr>
   {%- endfor %}
   </table>
   <form action="{{ url_for('admin/war_create')}}" method="get">

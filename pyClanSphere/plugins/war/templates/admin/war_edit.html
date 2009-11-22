@@ -5,8 +5,8 @@
   <h1>{{ self.title() }}</h1>
   {% call form() %}
     {% if form.war.result %}
-    <p>{% trans %}
-      The war is over and has a result, so just the details about it. Delete result if you want to modify it again.
+    <p>{% trans link=url_for('admin/warresult_edit', war_id=form.war.id) %}
+      The war is over and has a <a href="%(link)s">result</a>, so here are just the details about it. Delete result if you want to modify it again.
     {% endtrans %}</p>
     <h2>{{ _('War coordination data') }}</h2>
     <dl>
@@ -27,13 +27,17 @@
     <dl>
       {% for status in memberstates.keys()|sort(reverse=True) %}
         {% for member in form.war.members if form.war.memberstatus[member] == status %}
-          {% if loop.first %}<dt>{{ memberstates[status] }}</dt>{% endif %}
-          <dd>{{ member.display_name }}</dd>
+          <dd>{{ member.display_name }}: {{ memberstates[status] }}</dd>
         {% endfor %}
       {% endfor %}
     </dl>
     {% else %}
-    {{ render_formmultibox([form.clanname, form.date, form.orgamember, form.contact, form.status],
+    {% if not form.new %}
+    <p>{% trans link=url_for('admin/warresult_edit', war_id=form.war.id) %}
+      When the war is over, please <a href="%(link)s">write a result</a>
+    {% endtrans %}</p>
+    {% endif %}
+    {{ render_formmultibox([form.clanname, form.date, form.orgamember, form.squad, form.contact, form.status],
                            _("War coordination data"), toggleable=false) }}
     {{ render_formmultibox([form.mode, form.server, form.playerchangecount], _("Details"), toggleable=false) }}
     {% if form.removemaps and form.war.maps %}
@@ -52,11 +56,6 @@
       <input type="submit" name="save" value="{{ _('Save') }}">
       <input type="submit" name="save_and_continue" value="{{ _('Save and continue editing') }}">
       {%- if not form.new %}
-        {%- if not form.war.result %}
-        <input type="submit" name="result" value="{{ _('Write result') }}">
-        {%- else %}
-        <input type="submit" name="result" value="{{ _('Edit result') }}">
-        {%- endif %}
         <input type="submit" name="delete" value="{{ _('Delete') }}">
       {%- endif %}
       <input type="submit" name="cancel" value="{{ _('Cancel') }}">
