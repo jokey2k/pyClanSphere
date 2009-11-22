@@ -50,7 +50,8 @@ warmodes = Table('warmodes', metadata,
     Column('game_id', ForeignKey('games.game_id')),
     Column('free1', String(128)),
     Column('free2', String(128)),
-    Column('free3', String(128))
+    Column('free3', String(128)),
+    Column('remotedata', Text)
 )
 
 warmaps = Table('warmaps', metadata,

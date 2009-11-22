@@ -135,12 +135,17 @@ class WarMember(object):
 class WarMode(object):
     """Pre-defined war modes, has free fields for game-dependent infos"""
 
-    def __init__(self, name=u'', game=None, free1=None, free2=None, free3=None):
+    query = db.query_property(WarMetaQuery)
+
+    def __init__(self, name=u'', game=None, free1=None, free2=None, free3=None, remotedata=None):
         self.name = name
         self.game = game
         self.free1 = free1
         self.free2 = free2
         self.free3 = free3
+
+        # This is used for serversettings, do not touch otherwise!
+        self.remotedata = remotedata
 
 
 class WarMapQuery(db.Query):
