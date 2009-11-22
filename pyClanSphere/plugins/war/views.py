@@ -114,6 +114,7 @@ def war_edit(request, war_id=None):
             if 'save_and_continue' in request.form:
                 return redirect_to('admin/war_edit', war_id=war.id)
             return form.redirect('admin/war_list')
+
     return render_admin_response('admin/war_edit.html', 'war.wars',
                                  form=form.as_widget(), memberstates=memberstates, warstates=warstates)
 
@@ -145,7 +146,7 @@ def warmap_list(request, page):
     
     data = WarMap.query.get_list(per_page=PER_PAGE, page=page,
                                  paginator=AdminPagination)
-    
+
     return render_admin_response('admin/warmap_list.html', 'war.maps',
                                   **data)
 
@@ -168,11 +169,11 @@ def warmap_edit(request, warmap_id=None):
         elif form.validate(request.form):
             if warmap is None:
                 warmap = form.make_warmap()
-                msg = _('The warmap %s was created successfully.')
+                msg = _('Warmap %s was created successfully.')
                 icon = 'add'
             else:
                 form.save_changes()
-                msg = _('The war map %s was updated successfully.')
+                msg = _('Warmap %s was updated successfully.')
                 icon = 'info'
             
             admin_flash(msg % (warmap.name), icon)
@@ -211,7 +212,7 @@ def warmap_delete(request, warmap_id=None):
             name = str(warmap.name)
             form.delete_warmap()
             db.commit()
-            admin_flash(_('The war map %s was deleted successfully') % name, 'remove')
+            admin_flash(_('Warmap %s was deleted successfully') % name, 'remove')
             return form.redirect('admin/warmap_list')
     
     return render_admin_response('admin/warmap_delete.html', 'war.maps',
@@ -224,6 +225,8 @@ def warresult_edit(request, war_id=None):
         war = War.query.get(war_id)
         if war is None:
             raise NotFound()
+    else:
+        raise NotFound()
     warresult = WarResult.query.get(war_id)
     form = forms.EditWarResultForm(war, warresult)
     
