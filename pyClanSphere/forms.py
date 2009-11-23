@@ -231,8 +231,7 @@ class _UserBoundForm(forms.Form):
     password = forms.TextField(lazy_gettext(u'Password'),
                                widget=forms.PasswordInput)
     password_confirm = forms.TextField(lazy_gettext(u'Confirm password'),
-                                       widget=forms.PasswordInput,
-                                       help_text=lazy_gettext(u'Confirm password'))
+                                       widget=forms.PasswordInput)
     gender_male = forms.ChoiceField(lazy_gettext(u'Gender'))
     birthday = forms.DateField(lazy_gettext(u'Day of Birth'))
     height = forms.IntegerField(lazy_gettext(u'Height in full cm'))
