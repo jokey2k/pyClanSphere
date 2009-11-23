@@ -182,7 +182,13 @@ class EditWarMapForm(_WarMapBoundForm):
         if warmap is not None:
             initial = forms.fill_dict(initial,
                 mapname = warmap.name,
-                squad = warmap.squad
+                squad = warmap.squad.id if warmap.squad else None,
+                readmapname = 1
+            )
+        else:
+            initial = forms.fill_dict(initial,
+                mapname = _('MapName'),
+                readmapname = 1
             )
         _WarMapBoundForm.__init__(self, warmap, initial)
         self.squad.choices = [('','')] + [(squad.id, squad.name) for squad in Squad.query.all()]

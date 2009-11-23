@@ -18,7 +18,7 @@
           {%- else %}
           <td>{{ warmap.name }}</td>
     	  {%- endif %}
-    	  <td>{{ _("Yes") if warmap.has_file() else _("No") }}</td>
+    	  <td>{{ _("Yes") if warmap.has_file else _("No") }}</td>
       </tr>
       {% endfor %}
     {% else %}

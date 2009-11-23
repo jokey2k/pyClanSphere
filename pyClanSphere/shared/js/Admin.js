@@ -33,24 +33,6 @@ $(function() {
     });
   });
 
-  // If we're on a new-post/edit-post page we can update the
-  // page title dynamically based on the text field.
-  (function() {
-    var input_box = $('#post_form #f_title');
-    if (input_box.length == 0)
-      return;
-
-    // windows browser put the invisible space directly into the
-    // window manager title which causes a question mark to show
-    // up.  Because of that we fire the change() event right away
-    // to force an updated title without the invisble space.
-    var title = document.title.split(/\u200B/, 2)[1];
-    input_box.bind('change', function() {
-      var arg = input_box.val();
-      document.title = (arg ? arg + ' — ' : '') + title;
-    }).change();
-  })();
-
   // Make some textareas resizable
   (function() {
     var ta = $('textarea.resizable');
@@ -78,4 +60,32 @@ $(function() {
     if (height != null)
       ta.css('height', height + 'px');
   })();
+});
+
+// optional field clear on focus
+// restores content on blur without change
+// usage: <input class="clearMeOnFocus">
+$(document).ready(function(){
+  var clearMeBefore = '';
+
+  $('.clearMeOnFocus').focus(function()
+  {
+    if(clearMeBefore=='')
+    {
+      clearMeBefore = $(this).val();
+    }
+    if($(this).val()!='' && $(this).val()==clearMeBefore)
+    {
+      clearMeBefore = $(this).val();
+      $(this).val('');
+    }
+  });
+
+  $('.clearMeOnFocus').blur(function()
+  {
+    if($(this).val()=='')
+    {
+      $(this).val(clearMeBefore);
+    }
+  });
 });

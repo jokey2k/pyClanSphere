@@ -217,7 +217,7 @@ class WarMap(object):
     def metadata(self):
         """Return map metadata"""
 
-        if not self.has_file():
+        if not self.has_file:
             return None
 
         statinfo = os.stat(self.map_filename)
@@ -256,6 +256,7 @@ class WarMap(object):
         if os.path.exists(self.map_filename):
             os.remove(self.map_filename)
 
+    @property
     def has_file(self):
         """True/False if we have something"""
 
