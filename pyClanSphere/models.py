@@ -198,11 +198,50 @@ class NotificationSubscription(object):
         )
 
 
+class IMAccountQuery(db.Query):
+    """Meta-Addon methods for querying IM accounts"""
+
+    def get_list(self, endpoint=None, page=1, per_page=None,
+                 url_args=None, raise_if_empty=True, paginator=Pagination):
+        """Return a dict with pagination and datalist."""
+
+        if per_page is None:
+            per_page = 20
+
+        # send the query
+        offset = per_page * (page - 1)
+        mylist = self.offset(offset).limit(per_page).all()
+
+        # if raising exceptions is wanted, raise it
+        if raise_if_empty and (page != 1 and not mylist):
+            raise NotFound()
+
+        pagination = paginator(endpoint, page, per_page,
+                                self.count(), url_args)
+
+        return {
+            'imaccounts':         mylist,
+            'pagination':       pagination
+        }
+
+
 class IMAccount(object):
-    """Basics for an IMAccount"""
+    """An IM account"""
+
+    known_services = {
+        1: u'ICQ',
+        2: u'MSN'
+    }
+
+    query = db.query_property(IMAccountQuery)
+
+    @property
+    def named_service(self):
+        if self.service:
+            return self.known_services[self.service]
+        return None
 
     def __init__(self, user=None, service=None, account=None):
-        super(Game, self).__init__()
         self.user = user
         self.service = service
         self.account = account
@@ -210,7 +249,7 @@ class IMAccount(object):
     def __repr__(self):
         return "<%s (%s, %s)>" % (
             self.__class__.__name__,
-            self.game,
+            self.named_service,
             self.user
         )
 
@@ -224,7 +263,8 @@ db.mapper(User, users, properties={
                                     collection_class=set,
                                     cascade='all, delete'),
     'imaccounts':       db.relation(IMAccount, lazy=True,
-                                    cascade='all, delete')
+                                    cascade='all, delete',
+                                    backref=db.backref('user', uselist=False, lazy=False))
 })
 db.mapper(Group, groups, properties={
     'id':               groups.c.group_id,

@@ -298,8 +298,9 @@ notification_subscriptions = db.Table('notification_subscriptions', metadata,
 imaccounts = db.Table('imaccounts', metadata,
     db.Column('account_id', db.Integer, primary_key=True),
     db.Column('user_id', db.ForeignKey('users.user_id')),
-    db.Column('service', db.String(32)),
-    db.Column('account', db.String(64))
+    db.Column('service', db.Integer),
+    db.Column('account', db.String(64)),
+    db.UniqueConstraint('user_id', 'service', 'account')
 )
 
 def init_database(engine):

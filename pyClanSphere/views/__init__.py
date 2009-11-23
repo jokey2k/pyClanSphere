@@ -30,6 +30,10 @@ all_views = {
     'account/profile':          account.profile,
     'account/notification_settings':
                                 account.notification_settings,
+    'account/imaccount_list':   account.imaccount_list,
+    'account/imaccount_new':    account.imaccount_edit,
+    'account/imaccount_edit':   account.imaccount_edit,
+    'account/imaccount_delete': account.imaccount_delete,
 
     # admin views
     'admin/index':              admin.index,
@@ -38,6 +42,7 @@ all_views = {
     'admin/new_user':           admin.edit_user,
     'admin/edit_user':          admin.edit_user,
     'admin/delete_user':        admin.delete_user,
+    'admin/delete_imaccount':   admin.delete_imaccount,
     'admin/manage_groups':      admin.manage_groups,
     'admin/new_group':          admin.edit_group,
     'admin/edit_group':         admin.edit_group,

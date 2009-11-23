@@ -23,7 +23,7 @@ from pyClanSphere.i18n import _, ngettext
 from pyClanSphere.application import get_request, url_for, emit_event, \
      render_response, get_application
 from pyClanSphere.database import db, secure_database_uri
-from pyClanSphere.models import User, Group
+from pyClanSphere.models import User, Group, IMAccount
 from pyClanSphere.utils import dump_json, load_json
 from pyClanSphere.utils.validators import is_valid_email, is_valid_url, check
 from pyClanSphere.utils.admin import flash, require_admin_privilege
@@ -37,7 +37,7 @@ from pyClanSphere.pluginsystem import install_package, InstallationError, \
 from pyClanSphere.forms import LoginForm, ChangePasswordForm, PluginForm, \
      LogOptionsForm, BasicOptionsForm, URLOptionsForm, EditUserForm, DeleteUserForm, \
      CacheOptionsForm, EditGroupForm, DeleteGroupForm, ThemeOptionsForm, DeleteImportForm, ExportForm, \
-     MaintenanceModeForm, RemovePluginForm, \
+     MaintenanceModeForm, RemovePluginForm, DeleteIMAccountForm, \
      make_config_form, make_notification_form
 
 #: how many posts / comments should be displayed per page?
@@ -303,6 +303,28 @@ def delete_user(request, user_id):
     return render_admin_response('admin/delete_user.html', 'users_groups.users',
                                  form=form.as_widget())
 
+@require_admin_privilege(CLAN_ADMIN)
+def delete_imaccount(request, account_id, user_id=None):
+    """Delete an Instant Messenger Account from admin panel"""
+
+    imaccount = IMAccount.query.get(account_id)
+    if imaccount is None:
+        raise NotFound()
+    form = DeleteIMAccountForm(imaccount)
+
+    if request.method == 'POST':
+        if request.form.get('cancel'):
+            return form.redirect('admin/edit_user', user_id=imaccount.user.id)
+        elif request.form.get('confirm') and form.validate(request.form):
+            account = str(imaccount.account)
+            user_id = imaccount.user.id
+            form.delete_account()
+            db.commit()
+            flash(_('IM account %s was deleted successfully') % account, 'remove')
+            return form.redirect('admin/edit_user', user_id=user_id)
+
+    return render_admin_response('admin/imaccount_delete.html', 'users_groups.users',
+                                 form=form.as_widget())
 
 @require_admin_privilege(CLAN_ADMIN)
 def manage_groups(request):

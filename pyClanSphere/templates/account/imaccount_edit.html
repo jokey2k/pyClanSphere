@@ -1,0 +1,11 @@
+{% extends "account/layout.html" %}
+{% from "admin/_form_helpers.html" import render_formbox, render_actions %}
+{% block title %}{{ _('Add IM account') if form.new else _('Edit IM account') }}{% endblock %}
+{% block contents %}
+  <h1>{{ self.title() }}</h1>
+  {% call form() %}
+  {{ render_formbox(form.service, collapsed=false) }}
+  {{ render_formbox(form.account, collapsed=false) }}
+  {{ render_actions(form) }}
+  {% endcall %}
+{% endblock %}

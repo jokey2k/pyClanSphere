@@ -8,8 +8,23 @@
                             form.email], _("Core account data"), toggleable=false) }}
     {{ render_formmultibox([form.real_name, form.display_name, form.address, form.zip,
                             form.city, form.country, form.www, form.gender_male,
-                            form.birthday, form.height], _("About the user")) }}
-    {{ render_formmultibox([form.groups, form.privileges], _("Privileges")) }}
+                            form.birthday, form.height], _("About the user"), collapsed=(not form.new)) }}
+    {{ render_formmultibox([form.groups, form.privileges], _("Privileges"), collapsed=(not form.new)) }}
+    <div class="formbox toggleable collapsed">
+      <h3>{{ _("IM Accounts") }}</h3>
+      <table>
+      {% for group in form.user.imaccounts|groupby('named_service') %}
+      {% for imaccount in group.list %}
+        <tr>
+          {% if loop.first %}<td rowspan="{{ group.list|count }}">{{ group.grouper }}</td>{% endif %}
+          <td>{{ imaccount.account }}</td><td width="100%"><a href="{{ url_for('admin/delete_imaccount', account_id=imaccount.id, user_id=form.user.id) }}">remove this</a></td>
+        </tr>
+        {% endfor %}
+      {% else %}
+        <tr><td>{{ _("No accounts") }}</td></tr>
+      {% endfor %}
+      </table>
+    </div>
     <div class="formbox toggleable collapsed">
       <h3>{{ _("Registered Game Accounts") }}</h3>
       <table>

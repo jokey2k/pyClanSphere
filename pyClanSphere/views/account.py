@@ -9,13 +9,17 @@
     :license: BSD, see LICENSE for more details.
 """
 
+from werkzeug import escape
+
 from pyClanSphere.api import *
 from pyClanSphere.forms import LoginForm, DeleteAccountForm, EditProfileForm, \
-     make_notification_form
+     make_notification_form, DeleteIMAccountForm, EditIMAccountForm
+from pyClanSphere.models import IMAccount
 from pyClanSphere.i18n import _, ngettext
 from pyClanSphere.privileges import ENTER_ADMIN_PANEL
 from pyClanSphere.utils.account import flash, require_account_privilege
 from pyClanSphere.utils.http import redirect_back, redirect_to
+from pyClanSphere.utils.pagination import AdminPagination
 
 
 def render_account_response(template_name, _active_menu_item=None, **values):
@@ -37,6 +41,7 @@ def render_account_response(template_name, _active_menu_item=None, **values):
     navigation_bar = [
         ('dashboard', url_for('account/index'), _(u'Dashboard'), []),
         ('profile', url_for('account/profile'), _(u'Profile'), []),
+        ('imaccounts', url_for('account/imaccount_list'), _('IM accounts'), []),
         ('notifications', url_for('account/notification_settings'),
          _(u'Notifications'), [])
     ]
@@ -211,3 +216,70 @@ def notification_settings(request):
             key=lambda x: x.description.lower()
         )
     )
+
+@require_account_privilege()
+def imaccount_list(request, page):
+    """List all registered imaccounts"""
+
+    data = IMAccount.query.get_list(page=page, paginator=AdminPagination)
+
+    return render_account_response('account/imaccount_list.html', 'imaccounts',
+                                   **data)
+
+@require_account_privilege()
+def imaccount_edit(request, account_id=None):
+    """Edit an existing game account or create a new one."""
+
+    imaccount = None
+    if account_id is not None:
+        imaccount = IMAccount.query.get(account_id)
+        if imaccount is None:
+            raise NotFound()
+    form = EditIMAccountForm(request.user, imaccount)
+
+    if request.method == 'POST':
+        if 'cancel' in request.form:
+            return form.redirect('account/imaccount_list')
+        elif request.form.get('delete') and imaccount:
+            return redirect_to('account/imaccount_delete', account_id=account_id)
+        elif form.validate(request.form):
+            if imaccount is None:
+                imaccount = form.make_imaccount()
+                msg = _('IM account %s was added successfully.')
+                icon = 'add'
+            else:
+                form.save_changes()
+                msg = _('IM account %s was updated successfully.')
+                icon = 'info'
+            flash(msg % (escape(imaccount.account)), icon)
+
+            db.commit()
+            if 'save_and_continue' in request.form:
+                return redirect_to('account/imaccount_edit', account_id=imaccount.id)
+            return form.redirect('account/imaccount_list')
+    return render_account_response('account/imaccount_edit.html', 'imaccounts',
+                                    form=form.as_widget())
+
+@require_account_privilege()
+def imaccount_delete(request, account_id):
+    """Delete an InGame Account from user-account panel"""
+
+    imaccount = IMAccount.query.get(account_id)
+    if imaccount is None:
+        raise NotFound()
+    if imaccount.user != request.user:
+        raise Forbidden()
+    form = DeleteIMAccountForm(imaccount)
+
+    if request.method == 'POST':
+        if request.form.get('cancel'):
+            return form.redirect('account/imaccount_list')
+        elif request.form.get('confirm') and form.validate(request.form):
+            accountname = str(imaccount.account)
+            form.delete_account()
+            db.commit()
+            flash(_('IM account %s was deleted successfully') % accountname, 'remove')
+            return redirect_to('account/imaccount_list')
+
+    return render_account_response('account/imaccount_delete.html', 'imaccounts',
+                                   form=form.as_widget())

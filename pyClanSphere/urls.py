@@ -24,7 +24,12 @@ def make_urls(app):
             Rule('/notifications', endpoint='account/notification_settings'),
             Rule('/system/about', endpoint='account/about_pyClanSphere'),
             Rule('/system/help/', endpoint='account/help'),
-            Rule('/system/help/<path:page>', endpoint='account/help')
+            Rule('/system/help/<path:page>', endpoint='account/help'),
+            Rule('/imaccounts/', endpoint='account/imaccount_list', defaults={'page': 1}),
+            Rule('/imaccounts/page/<int:page>', endpoint='account/imaccount_list'),
+            Rule('/imaccounts/new', endpoint='account/imaccount_new'),
+            Rule('/imaccounts/<int:account_id>', endpoint='account/imaccount_edit'),
+            Rule('/imaccounts/<int:account_id>/delete', endpoint='account/imaccount_delete')
         ])
     ]
     admin_urls = [
@@ -35,6 +40,7 @@ def make_urls(app):
         Rule('/users/new', endpoint='admin/new_user'),
         Rule('/users/<int:user_id>', endpoint='admin/edit_user'),
         Rule('/users/<int:user_id>/delete', endpoint='admin/delete_user'),
+        Rule('/users/<int:user_id>/imaccount_delete/<int:account_id>', endpoint='admin/delete_imaccount'),
         Rule('/groups/', endpoint='admin/manage_groups'),
         Rule('/groups/new', endpoint='admin/new_group'),
         Rule('/groups/<int:group_id>', endpoint='admin/edit_group'),

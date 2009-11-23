@@ -14,7 +14,7 @@ from pyClanSphere.i18n import _, lazy_gettext, list_languages
 from pyClanSphere.application import get_application, get_request, emit_event
 from pyClanSphere.config import DEFAULT_VARS
 from pyClanSphere.database import db, notification_subscriptions
-from pyClanSphere.models import User, Group, NotificationSubscription
+from pyClanSphere.models import User, Group, NotificationSubscription, IMAccount
 from pyClanSphere.privileges import bind_privileges
 from pyClanSphere.notifications import send_notification_template
 from pyClanSphere.utils import forms, log, dump_json
@@ -347,6 +347,73 @@ class DeleteUserForm(_UserBoundForm):
         emit_event('before-user-deleted', self.user, self.data)
         db.delete(self.user)
 
+class _IMAccountBoundForm(forms.Form):
+    """Internal baseclass for im account bound forms."""
+
+    def __init__(self, imaccount, initial=None):
+        forms.Form.__init__(self, initial)
+        self.app = get_application()
+        self.imaccount = imaccount
+
+    def as_widget(self):
+        widget = forms.Form.as_widget(self)
+        widget.imaccount = self.imaccount
+        widget.new = self.imaccount is None
+        return widget
+
+class EditIMAccountForm(_IMAccountBoundForm):
+    """Update Players' IM Accounts."""
+
+    service = forms.TextField(lazy_gettext(u'Service'),
+                              widget=forms.SelectBox)
+    username = forms.ModelField(User, 'id', lazy_gettext(u'User'),
+                            widget=forms.SelectBox)
+    account = forms.TextField(lazy_gettext(u'Account ID'), max_length=100,
+                              validators=[is_not_whitespace_only()])
+
+    def __init__(self, user=None, imaccount=None, initial=None):
+        if imaccount is not None:
+            initial = forms.fill_dict(initial,
+                service=imaccount.service,
+                account=imaccount.account,
+                username=user.id if user is not None else None
+            )
+        _IMAccountBoundForm.__init__(self, imaccount, initial)
+        self.user = user
+        self.service.choices = [(k, v) for k, v in IMAccount.known_services.iteritems()]
+        self.username.choices = [(user.id, user.display_name) for user in User.query.all()]
+
+    def make_imaccount(self):
+        """A helper function that creates new IMAccount objects."""
+        imaccount = IMAccount(self.user if self.user is not None \
+                              else User.query.get(self.data['username']),
+                              self.data['service'], self.data['account'])
+
+        self.imaccount = imaccount
+        return imaccount
+
+    def context_validate(self, data):
+        query = IMAccount.query.filter_by(service=data['service']).filter_by(account=data['account'])
+        if self.imaccount is not None:
+            query = query.filter(IMAccount.id != self.imaccount.id)
+        if query.first() is not None:
+            raise ValidationError(_('This account is already registered'))
+
+    def _set_common_attributes(self, imaccount):
+        imaccount.user = self.user if self.user else User.query.get(self.data['username'])
+        forms.set_fields(imaccount, self.data, 'service', 'account')
+
+    def save_changes(self):
+        """Apply the changes."""
+
+        self._set_common_attributes(self.imaccount)
+
+class DeleteIMAccountForm(_IMAccountBoundForm):
+    """Used to remove a member from a squad."""
+
+    def delete_account(self):
+        """Deletes the im account."""
+        db.delete(self.imaccount)
 
 class EditProfileForm(_UserBoundForm):
     """Edit or create a user's profile."""

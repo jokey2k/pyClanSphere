@@ -1,0 +1,15 @@
+{% extends "account/layout.html" %}
+{% block title %}{{ _("Remove IM account registration") }}{% endblock %}
+{% block contents %}
+  <h1>{{ self.title() }}</h1>
+  {% call form() %}
+    <p>{% trans service=form.imaccount.service, account=form.imaccount.account %}
+      Service: <b>{{ service }}</b><br>Account: <b>{{ account }}</b><br>&nbsp;<br>
+      Do you really want to remove this account?
+    {% endtrans %}</p>
+    <div class="actions">
+      <input type="submit" name="cancel" value="{{ _('No') }}">
+      <input type="submit" name="confirm" value="{{ _('Yes') }}">
+    </div>
+  {% endcall %}
+{% endblock %}
