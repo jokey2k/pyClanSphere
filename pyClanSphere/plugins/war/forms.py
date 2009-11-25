@@ -40,7 +40,7 @@ class EditWarForm(_WarBoundForm):
     clanname = forms.TextField(lazy_gettext(u'Opponent'), max_length=64,
                                 validators=[is_not_whitespace_only()],
                                 required=True)
-    date = forms.DateTimeField(lazy_gettext(u'Date'))
+    date = forms.DateTimeField(lazy_gettext(u'Date'), required=True)
     server = forms.TextField(lazy_gettext(u'Server'), max_length=64)
     mode = forms.ModelField(WarMode, 'id', lazy_gettext(u'Warmode'),
                             widget=forms.SelectBox)
