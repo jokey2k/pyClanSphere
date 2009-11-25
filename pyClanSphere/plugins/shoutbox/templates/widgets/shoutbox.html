@@ -8,6 +8,6 @@
 {% endfor %}
 </ul>
 {% if not widget.hide_note %}
-  <center><a href="{{ url_for('shoutbox/post') }}">Shout!</a></center>
+  <center><a href="{{ widget.newposturl }}">Shout!</a></center>
 {% endif %}
 {% endblock %}
