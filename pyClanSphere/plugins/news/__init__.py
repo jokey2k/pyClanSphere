@@ -54,7 +54,7 @@ def setup(app, plugin):
     # sub-urls to filter by year, month and day
     app.add_url_rule('/news/archive', endpoint='news/archive',
                      view=views.archive)
-    tmp = '/news/'
+    tmp = '/news/archive/'
     for digits, part in zip((0, 0, 0), ('year', 'month', 'day')):
         tmp += '<int(fixed_digits=%d):%s>/' % (digits, part)
         app.add_url_rule(tmp, defaults={'page': 1}, endpoint='news/archive')
