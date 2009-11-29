@@ -51,7 +51,7 @@ def index(req, page=1):
     :URL endpoint: ``news/index``
     """
 
-    data = News.query.published().published() \
+    data = News.query.published() \
                .get_list(endpoint='news/index', page=page)
 
     return render_response('news_index.html', **data)
