@@ -10,8 +10,9 @@
 """
 import math
 
-from pyClanSphere.i18n import _
+from jinja2 import Markup
 
+from pyClanSphere.i18n import _
 
 class Pagination(object):
     """Pagination helper."""
@@ -122,7 +123,7 @@ class Pagination(object):
                 result.insert(0, u'<span class="disabled prev">%s</span> ' %
                               _(u'« Previous'))
 
-        return u''.join(result)
+        return Markup(u''.join(result))
 
 
 class AdminPagination(Pagination):
