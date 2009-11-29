@@ -47,9 +47,9 @@ def setup(app, plugin):
     app.add_template_searchpath(TEMPLATE_FILES)
 
     # war related pages
-    app.add_url_rule('/wars/', endpoint='war/index', defaults={'page': 1},
+    app.add_url_rule('/wars/', endpoint='wars/index', defaults={'page': 1},
                      view=views.war_index)
-    app.add_url_rule('/wars/<int:war_id>', endpoint='war/detail',
+    app.add_url_rule('/wars/<int:war_id>', endpoint='wars/detail',
                      view=views.war_detail)
 
     # Admin views

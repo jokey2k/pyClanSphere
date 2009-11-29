@@ -8,7 +8,7 @@
     {% if loop.first %}
     (click on war to see details)<br/>
     {% endif %}
-    <a href="{{ url_for('war/detail', war_id=war.id)  }}">{{ war.clanname}}</a> ({{ war.date|datetimeformat }})<br/>
+    <a href="{{ url_for('wars/detail', war_id=war.id)  }}">{{ war.clanname}}</a> ({{ war.date|datetimeformat }})<br/>
   {%- else %}
     {% trans %}So far there are no wars.{% endtrans %}
   {%- endfor %}
