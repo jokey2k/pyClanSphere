@@ -80,6 +80,7 @@ DEFAULT_THEME_SETTINGS = {
     # posts in a specific tag but no text at all it makes no sense to
     # load the text and more just to throw away the information.
     # for more information have a look at PostQuery.lightweight
+    'sql.index.eager':              frozenset(),
     'sql.index.lazy':               frozenset(),
     'sql.index.deferred':           frozenset(),
 }

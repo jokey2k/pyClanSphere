@@ -149,11 +149,13 @@ class ConnectionDebugProxy(ConnectionProxy):
 class Query(orm.Query):
     """Default query class."""
 
-    def lightweight(self, deferred=None, lazy=None):
+    def lightweight(self, deferred=None, lazy=None, eager=None):
         """Send a lightweight query which deferes some more expensive
-        things such as comment queries or even text data.
+        things such as comment queries or even text data yet also
+         offers eagerloading externals as well.
         """
-        args = map(db.lazyload, lazy or ()) + map(db.defer, deferred or ())
+
+        args = map(db.lazyload, lazy or ()) + map(db.defer, deferred or ()) + map(db.eagerload, eager or ())
         return self.options(*args)
 
     def first(self, raise_if_missing=False):
