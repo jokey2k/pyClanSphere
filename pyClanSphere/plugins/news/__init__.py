@@ -47,8 +47,12 @@ def setup(app, plugin):
     app.add_template_searchpath(TEMPLATE_FILES)
 
     # Register news main page
-    app.add_url_rule('/news/', endpoint='news/index',
-                     view=views.index)
+    app.add_url_rule('/news/', endpoint='news/index', view=views.index)
+    app.add_url_rule('/news/page/<int:page>', endpoint='news/index')
+
+    # Register news detail page
+    app.add_url_rule('/news/<int:news_id>', endpoint='news/detail',
+                     view=views.detail)
 
     # Register news archive along with archive
     # sub-urls to filter by year, month and day

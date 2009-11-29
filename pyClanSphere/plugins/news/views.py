@@ -56,6 +56,25 @@ def index(req, page=1):
 
     return render_response('news_index.html', **data)
 
+@cache.response(vary=('user',))
+def detail(req, news_id):
+    """Render the given post.
+
+    Available template variables:
+
+        `newsitem`:
+            the item we want to display
+
+    :Template name: ``news_detail.html``
+    :URL endpoint: ``news/detail``
+    """
+
+    entry = News.query.get(news_id)
+    if not entry or (entry and not entry.is_public and not req.user.is_somebody):
+        raise NotFound()
+
+    return render_response('news_detail.html', newsitem=entry)
+
 def archive(req, year=None, month=None, day=None, page=1):
     """Render the monthly archives.
 
