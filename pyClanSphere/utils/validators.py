@@ -98,8 +98,11 @@ def is_valid_url(message=None):
     if message is None:
         message = lazy_gettext(u'You have to enter a valid URL.')
     def validator(form, value):
-        protocol = urlparse(value)[0]
+        parsed = urlparse(value)
+        protocol = parsed[0]
         if not protocol or protocol == 'javascript':
+            raise ValidationError(message)
+        if not parsed.hostname:
             raise ValidationError(message)
     return validator
 
