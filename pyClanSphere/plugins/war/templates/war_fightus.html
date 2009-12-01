@@ -30,6 +30,14 @@
   	  {{ form.notes() }}
     </div>
   </div>
+  {% if form.captcha %}
+  <div class="post nometa">
+  	<h2 class="title">{{ _("Captcha") }}</h2>
+  	<div class="smallentry">
+  	  {{ form.captcha }}
+    </div>
+  </div>
+  {% endif %}
   <p>&nbsp;</p>
   <p style="text-align: center;"><input class="button" type="submit" value="Fight!" /></p>
   {% endcall %}
