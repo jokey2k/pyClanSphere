@@ -1,16 +1,5 @@
 {% extends "admin/layout.html" %}
-{% from "admin/_form_helpers.html" import render_actions %}
-{% macro render_formmultibox(fields, boxlabel, class, toggleable=true, collapsed=true, disabled=false) %}
-  <div class="formbox{{ " " + class if class }}{{ " toggleable" if toggleable
-    }}{{ " collapsed" if collapsed and toggleable }}">
-    <h3>{{ boxlabel }}</h3>
-    <table>
-    {% for field in fields %}
-    <tr><td nowrap>{{ field.label() }}</td><td width="100%">{{ caller(disabled=disabled, class='clearMeOnFocus') if caller else field(disabled=disabled, class='clearMeOnFocus') }}{%- if field.help_text %}<br><span class="explanation">{{ field.help_text }}</span>{% endif %}</td></tr>
-    {% endfor %}
-    </table>
-  </div>
-{% endmacro %}
+{% from "admin/_form_helpers.html" import render_actions, render_formmultibox %}
 {% block title %}{{ _('New warmap') if form.new else _('Edit warmap') }}{% endblock %}
 {% block contents %}
   <h1>{{ self.title() }}</h1>
