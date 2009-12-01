@@ -28,6 +28,7 @@ except:
     import Pickle
 
 warstates = {
+    0:_('Fightus Request'),
     1:_('Incomplete'),
     2:_('Planned'),
     3:_('Running'),

@@ -51,6 +51,8 @@ def setup(app, plugin):
                      view=views.war_index)
     app.add_url_rule('/wars/<int:war_id>', endpoint='wars/detail',
                      view=views.war_detail)
+    app.add_url_rule('/wars/fightus', endpoint='wars/fightus',
+                     view=views.war_fightus)
 
     # Admin views
     app.add_url_rule('/wars/', prefix='admin', defaults={'page': 1}, endpoint='admin/war_list',

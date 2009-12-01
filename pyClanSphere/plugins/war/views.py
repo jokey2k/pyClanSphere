@@ -54,6 +54,19 @@ def war_detail(request, war_id=None):
     return render_response('war_detail.html', war=war, result=war.result,
                            warstates=warstates, memberstates=memberstates)
 
+def war_fightus(request):
+   """Allow guests to fight us."""
+
+   form = forms.FightUsForm(None)
+
+   if request.method == 'POST':
+       if form.validate(request.form):
+           war = form.make_war()
+           db.commit()
+           return render_response('war_fightus_success.html', form=form.as_widget())
+
+   return render_response('war_fightus.html', form=form.as_widget())
+
 def warmap_list(request, page):
     """List all entered warmaps"""
 

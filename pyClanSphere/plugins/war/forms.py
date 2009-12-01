@@ -35,15 +35,14 @@ class _WarBoundForm(forms.Form):
         return widget
 
 
-class EditWarForm(_WarBoundForm):
+class FightUsForm(_WarBoundForm):
 
     clanname = forms.TextField(lazy_gettext(u'Opponent'), max_length=64,
                                 validators=[is_not_whitespace_only()],
                                 required=True)
     clanhomepage = forms.TextField(lazy_gettext(u'Homepage'), max_length=128,
-                                validators=[is_valid_url()])
+                                   validators=[is_valid_url()])
     date = forms.DateTimeField(lazy_gettext(u'Date'), required=True)
-    server = forms.TextField(lazy_gettext(u'Server'), max_length=64)
     mode = forms.ModelField(WarMode, 'id', lazy_gettext(u'Warmode'),
                             widget=forms.SelectBox)
     squad = forms.ModelField(Squad, 'id', lazy_gettext(u'Squad'),
@@ -53,11 +52,57 @@ class EditWarForm(_WarBoundForm):
     contact = forms.TextField(lazy_gettext(u'Opponent contact'), max_length=250,
                               validators=[is_not_whitespace_only()],
                               required=True)
+    server = forms.TextField(lazy_gettext(u'Server'), max_length=64)
+    notes = forms.TextField(lazy_gettext(u'Notes'), max_length=65000,
+                            widget=forms.Textarea)
+
+    def __init__(self, war=None, initial=None):
+        if war is not None:
+            initial = forms.fill_dict(initial,
+                clanname = war.clanname,
+                clanhomepage = war.clanhomepage,
+                date = war.date,
+                server = war.server,
+                squad = war.squad,
+                mode = war.mode,
+                playerchangecount = war.playerchangecount,
+                contact = war.contact,
+                notes = war.notes
+            )
+        _WarBoundForm.__init__(self, war, initial)
+        self.mode.choices = [(mode.id, mode.name) for mode in WarMode.query.all()]
+        self.squad.choices = [(squad.id, '%s (%s)' % (squad.name, squad.game.name)) for squad in Squad.query.all()]
+
+    @property
+    def captcha_protected(self):
+        """We're protected if no user is logged in and config says so."""
+        return not self.request.user.is_somebody and self.app.cfg['recaptcha_enable']
+
+    def make_war(self):
+        """A helper function that creates a new user object."""
+        war = War()
+        self._set_common_attributes(war)
+        self.war = war
+        return war
+
+    def _set_common_attributes(self, war):
+        forms.set_fields(war, self.data, 'clanname', 'date', 'server',
+                         'mode', 'playerchangecount', 'contact',
+                         'notes', 'squad', 'clanhomepage')
+
+    def save_changes(self):
+        """Apply the changes."""
+        self._set_common_attributes(self.war)
+
+        # this is a fightus request, so force status=0
+        self.war.status = 0
+
+
+class EditWarForm(FightUsForm):
+
     orgamember = forms.ModelField(User, 'id', lazy_gettext(u'Orgamember'),
                                   required=True, widget=forms.SelectBox)
     status = forms.ChoiceField(lazy_gettext(u'State'), required=True)
-    notes = forms.TextField(lazy_gettext(u'Notes'), max_length=65000,
-                           widget=forms.Textarea)
     newmap = forms.ChoiceField(lazy_gettext(u'Add map'),
                               widget=forms.SelectBox)
     removemaps = forms.MultiChoiceField(lazy_gettext(u'Check to remove'),
@@ -72,23 +117,13 @@ class EditWarForm(_WarBoundForm):
     def __init__(self, war=None, initial=None):
         if war is not None:
             initial = forms.fill_dict(initial,
-                clanname = war.clanname,
-                clanhomepage = war.clanhomepage,
-                date = war.date,
-                server = war.server,
-                mode = war.mode,
-                playerchangecount = war.playerchangecount,
-                contact = war.contact,
                 orgamember = war.orgamember,
-                status = war.status,
-                notes = war.notes
+                status = war.status
             )
-        _WarBoundForm.__init__(self, war, initial)
+        FightUsForm.__init__(self, war, initial)
         self.status.choices = [(k, v) for k, v in warstates.iteritems()]
         self.orgamember.choices = [(user.id, user.display_name) for user in User.query.all()]
-        self.mode.choices = [(mode.id, mode.name) for mode in WarMode.query.all()]
         self.newmemberstatus.choices = [(k, v) for k, v in memberstates.iteritems()]
-        self.squad.choices = [(squad.id, '%s (%s)' % (squad.name, squad.game.name)) for squad in Squad.query.all()]
         if war is not None:
             self.removemembers.choices = [(member.id, '%s (%s)' % \
                                           (member.display_name, memberstates[war.memberstatus[member]]))
@@ -107,9 +142,8 @@ class EditWarForm(_WarBoundForm):
             del self.removemaps
 
     def _set_common_attributes(self, war):
-        forms.set_fields(war, self.data, 'clanname', 'date', 'server',
-                         'mode', 'playerchangecount', 'contact', 'orgamember',
-                         'status', 'notes', 'squad', 'clanhomepage')
+        FightUsForm._set_common_attributes(self, war)
+        forms.set_fields(war, self.data, 'orgamember', 'status')
         newmap_id =  self.data['newmap']
         if newmap_id != -1:
             newmap = WarMap.query.get(newmap_id)
@@ -124,6 +158,7 @@ class EditWarForm(_WarBoundForm):
     def save_changes(self):
         """Apply the changes."""
         self._set_common_attributes(self.war)
+
         if 'removemaps' in self.data:
             for mapid in self.data['removemaps']:
                 delmap = WarMap.query.get(mapid)
@@ -134,13 +169,6 @@ class EditWarForm(_WarBoundForm):
                 member = WarMember.query.get((self.war.id,memberid))
                 if member is not None:
                     db.delete(member)
-
-    def make_war(self):
-        """A helper function that creates a new user object."""
-        war = War()
-        self._set_common_attributes(war)
-        self.war = war
-        return war
 
 
 class DeleteWarForm(_WarBoundForm):

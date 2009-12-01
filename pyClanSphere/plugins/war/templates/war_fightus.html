@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block contents %}
+<h1 class="pagetitle">Fight Us</h1>
+<div class="pagecontent">
+  {% call form() %}
+  <div class="post nometa">
+  	<h2 class="title">{{ _("War coordination data") }}</h2>
+  	<div class="smallentry"> 
+  	  <table>
+  	    <tr><td>{{ _("Opponent") }}</td><td>{{ form.clanname() }}</td></tr>
+  	    <tr><td>{{ _("Opponent email") }}</td><td>{{ form.contact() }}</td></tr>
+  	    <tr><td>{{ _("Date (format 01.12.99 13:44)") }}</td><td>{{ form.date() }}</td></tr>
+  	    <tr><td>{{ _("Squad to fight") }}</td><td>{{ form.squad() }}</td></tr>
+  	    <tr><td>{{ _("Opponent Homepage") }}</td><td>{{ form.clanhomepage() }}</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="post nometa">
+  	<h2 class="title">{{ _("Rules") }}</h2>
+  	<div class="smallentry"> 
+  	  <table>
+  	    <tr><td>{{ _("Mode") }}</td><td>{{ form.mode() }}</td></tr>
+  	    <tr><td>{{ _("Playerchanges per map") }}</td><td>{{ form.playerchangecount() }}</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="post nometa">
+  	<h2 class="title">{{ _("Notes") }}</h2>
+  	<div class="smallentry"> 
+  	  {{ form.notes() }}
+    </div>
+  </div>
+  <p>&nbsp;</p>
+  <p style="text-align: center;"><input class="button" type="submit" value="Fight!" /></p>
+  {% endcall %}
+</div>
+{% endblock %}
