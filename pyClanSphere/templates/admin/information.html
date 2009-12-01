@@ -42,7 +42,7 @@
   <h2>{{ _("Hosting Environment") }}</h2>
   <dl>
     <dt>{{ _('Python Version') }}</dt>
-    <dd>{{ python_version }}</dd>
+    <dd>{{ python_version|safe }}</dd>
     <dt>{{ _('Platform') }}</dt>
     <dd>{{ platform }}</dd>
     <dt>{{ _('Persistent Environment') }}</dt>
