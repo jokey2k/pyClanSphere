@@ -11,10 +11,11 @@
     <h2>{{ _('War coordination data') }}</h2>
     <dl>
       <dt>{{ form.clanname.label.text }}</dt><dd>{{ form.war.clanname }}</dd>
+      <dt>{{ form.clanhomepage.label.text }}</dt><dd><a href="{{ form.war.clanhomepage }}">{{ form.war.clanhomepage }}</a></dd>
+      <dt>{{ form.contact.label.text }}</dt><dd>{{ form.war.contact }}</dd>
       <dt>{{ form.date.label.text }}</dt><dd>{{ form.war.date|datetimeformat }}</dd>
       <dt>{{ form.orgamember.label.text }}</dt><dd>{{ form.war.orgamember.display_name }}</dd>
       <dt>{{ form.squad.label.text }}</dt><dd>{{ form.war.squad.name }} ({{ form.war.squad.game.name }})</dd>
-      <dt>{{ form.contact.label.text }}</dt><dd>{{ form.war.contact }}</dd>
       <dt>{{ form.status.label.text }}</dt><dd>{{ warstates[form.war.status] }}</dd>
     </dl>
     <h2>{{ _('Details') }}</h2>
@@ -37,7 +38,7 @@
       When the war is over, please <a href="%(link)s">write a result</a>
     {% endtrans %}</p>
     {% endif %}
-    {{ render_formmultibox([form.clanname, form.date, form.orgamember, form.squad, form.contact, form.status],
+    {{ render_formmultibox([form.clanname, form.contact, form.clanhomepage, form.date, form.orgamember, form.squad, form.status],
                            _("War coordination data"), toggleable=false) }}
     {{ render_formmultibox([form.mode, form.server, form.playerchangecount], _("Details"), toggleable=false) }}
     {% if form.removemaps and form.war.maps %}

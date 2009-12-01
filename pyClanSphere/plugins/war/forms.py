@@ -14,7 +14,7 @@ import os
 from pyClanSphere.api import *
 from pyClanSphere.models import User
 from pyClanSphere.utils import forms
-from pyClanSphere.utils.validators import ValidationError, is_not_whitespace_only
+from pyClanSphere.utils.validators import ValidationError, is_not_whitespace_only, is_valid_url
 
 from pyClanSphere.plugins.gamesquad.models import Game, Squad
 
@@ -40,6 +40,8 @@ class EditWarForm(_WarBoundForm):
     clanname = forms.TextField(lazy_gettext(u'Opponent'), max_length=64,
                                 validators=[is_not_whitespace_only()],
                                 required=True)
+    clanhomepage = forms.TextField(lazy_gettext(u'Homepage'), max_length=128,
+                                validators=[is_valid_url()])
     date = forms.DateTimeField(lazy_gettext(u'Date'), required=True)
     server = forms.TextField(lazy_gettext(u'Server'), max_length=64)
     mode = forms.ModelField(WarMode, 'id', lazy_gettext(u'Warmode'),
@@ -71,6 +73,7 @@ class EditWarForm(_WarBoundForm):
         if war is not None:
             initial = forms.fill_dict(initial,
                 clanname = war.clanname,
+                clanhomepage = war.clanhomepage,
                 date = war.date,
                 server = war.server,
                 mode = war.mode,
@@ -106,7 +109,7 @@ class EditWarForm(_WarBoundForm):
     def _set_common_attributes(self, war):
         forms.set_fields(war, self.data, 'clanname', 'date', 'server',
                          'mode', 'playerchangecount', 'contact', 'orgamember',
-                         'status', 'notes', 'squad')
+                         'status', 'notes', 'squad', 'clanhomepage')
         newmap_id =  self.data['newmap']
         if newmap_id != -1:
             newmap = WarMap.query.get(newmap_id)

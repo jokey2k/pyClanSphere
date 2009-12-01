@@ -122,9 +122,10 @@ class War(object):
     def __init__(self, clanname=u'', date=None, server=None, mode=None,
                  members=None, maps=None, playerchangecount=0,
                  contact=None, orgamember=None, checked=False, status=1,
-                 notes=None, result=None, squad=None):
+                 notes=None, result=None, squad=None, clanhomepage=None):
         super(War, self).__init__()
         self.clanname = clanname
+        self.clanhomepage = clanhomepage
         self.date = date
         self.server = server
         self.squad = squad
