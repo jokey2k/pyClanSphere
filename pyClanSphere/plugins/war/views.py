@@ -31,7 +31,7 @@ from pyClanSphere.plugins.war.privileges import WAR_MANAGE
 def war_index(request, page):
     """List wars in frontend"""
 
-    data = War.query.get_list(page=page)
+    data = War.query.get_list('wars/index', page=page)
 
     return render_response('war_index.html', **data)
 
