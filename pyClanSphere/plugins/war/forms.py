@@ -122,20 +122,20 @@ class EditWarForm(FightUsForm):
             )
         FightUsForm.__init__(self, war, initial)
         self.status.choices = [(k, v) for k, v in warstates.iteritems()]
-        self.orgamember.choices = [(user.id, user.display_name) for user in User.query.all()]
+        self.orgamember.choices = [(user.id, user.display_name) for user in User.query.namesort().all()]
         self.newmemberstatus.choices = [(k, v) for k, v in memberstates.iteritems()]
         if war is not None:
             self.removemembers.choices = [(member.id, '%s (%s)' % \
                                           (member.display_name, memberstates[war.memberstatus[member]]))
                                           for member in war.members]
             self.newmember.choices = [(-1, u'')] + [(member.id, member.display_name)
-                                      for member in User.query.all() if member not in war.members]
+                                      for member in User.query.namesort().all() if member not in war.members]
             self.removemaps.choices = [(map.id, map.name) for map in war.maps]
             self.newmap.choices = [(-1, u'')] + [(map.id, map.name)
                                    for map in WarMap.query.all() if map not in war.maps]
         else:
             self.newmember.choices = [(-1, u'')] + [(member.id, member.display_name)
-                                   for member in User.query.all()]
+                                   for member in User.query.namesort().all()]
             self.newmap.choices = [(-1, u'')] + [(map.id, map.name)
                                    for map in WarMap.query.all()]
             del self.removemembers

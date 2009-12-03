@@ -37,6 +37,8 @@ class UserQuery(db.Query):
     def authors(self):
         return self.filter_by(is_author=True)
 
+    def namesort(self):
+        return self.order_by(db.func.lower(User.username))
 
 class User(object):
     """Represents an user.

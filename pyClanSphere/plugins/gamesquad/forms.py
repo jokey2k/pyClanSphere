@@ -229,7 +229,7 @@ class EditSquadMemberForm(_SquadMemberBoundForm):
         # Need access to squad here, as the member might be new and thus there is no
         # member.squad relation yet.
         self.clanmember.choices = [(user.id, user.display_name) for \
-                                   user in User.query.all() if user not in self.squad.members]
+                                   user in User.query.namesort().all() if user not in self.squad.members]
         if self.squadmember:
             self.clanmember.choices.insert(0,(squadmember.user.id, squadmember.user.display_name))
         self.level.choices = [(level.id, level.name) for level in Level.query.all()]

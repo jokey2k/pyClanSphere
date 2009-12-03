@@ -231,7 +231,7 @@ def _make_post_dispatcher(action):
 @require_admin_privilege(CLAN_ADMIN)
 def manage_users(request, page):
     """Show all users in a list."""
-    users = User.query.order_by(db.func.lower(User.username)).limit(PER_PAGE).offset(PER_PAGE * (page - 1)).all()
+    users = User.query.namesort().limit(PER_PAGE).offset(PER_PAGE * (page - 1)).all()
     pagination = AdminPagination('admin/manage_users', page, PER_PAGE,
                                  User.query.count())
     if not users and page != 1:
