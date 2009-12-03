@@ -14,7 +14,7 @@ import os
 from pyClanSphere.api import *
 from pyClanSphere.models import User
 from pyClanSphere.utils import forms
-from pyClanSphere.utils.validators import ValidationError, is_not_whitespace_only, is_valid_url
+from pyClanSphere.utils.validators import ValidationError, is_not_whitespace_only, is_valid_url, is_valid_email
 
 from pyClanSphere.plugins.gamesquad.models import Game, Squad
 
@@ -37,7 +37,7 @@ class _WarBoundForm(forms.Form):
 
 class FightUsForm(_WarBoundForm):
 
-    clanname = forms.TextField(lazy_gettext(u'Opponent'), max_length=64,
+    clanname = forms.TextField(lazy_gettext(u'Clan'), max_length=64,
                                 validators=[is_not_whitespace_only()],
                                 required=True)
     clanhomepage = forms.TextField(lazy_gettext(u'Homepage'), max_length=128,
@@ -47,10 +47,10 @@ class FightUsForm(_WarBoundForm):
                             widget=forms.SelectBox)
     squad = forms.ModelField(Squad, 'id', lazy_gettext(u'Squad'),
                              widget=forms.SelectBox, required=True)
-    playerchangecount = forms.IntegerField(lazy_gettext(u'Player Changes'),
+    playerchangecount = forms.IntegerField(lazy_gettext(u'Playerchanges/map'),
                       help_text=lazy_gettext(u'How many playerchanges are allowed each mapchange'))
-    contact = forms.TextField(lazy_gettext(u'Opponent contact'), max_length=250,
-                              validators=[is_not_whitespace_only()],
+    contact = forms.TextField(lazy_gettext(u'Email'), max_length=250,
+                              validators=[is_valid_email()],
                               required=True)
     server = forms.TextField(lazy_gettext(u'Server'), max_length=64)
     notes = forms.TextField(lazy_gettext(u'Notes'), max_length=65000,
