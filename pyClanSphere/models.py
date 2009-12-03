@@ -232,7 +232,15 @@ class IMAccount(object):
 
     known_services = {
         1: u'ICQ',
-        2: u'MSN'
+        2: u'MSN',
+        3: u'Xfire',
+        4: u'AIM',
+        5: u'Skype',
+        6: u'Yahoo',
+        7: u'ebuddy',
+        8: u'XMPP (Jabber)',
+        9: u'QQ',
+        10: u'Gadu-Gadu'
     }
 
     query = db.query_property(IMAccountQuery)
