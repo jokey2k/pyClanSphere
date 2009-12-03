@@ -67,7 +67,7 @@ class WarMetaQuery(db.Query):
             raise NotFound()
 
         pagination = paginator(endpoint, page, per_page,
-                                self.count(), url_args)
+                                self.count(), url_args=url_args)
 
         return {
             'datalist':         mylist,
@@ -105,7 +105,7 @@ class WarQuery(db.Query):
             raise NotFound()
 
         pagination = paginator(endpoint, page, per_page,
-                                self.count(), url_args)
+                                self.count(), url_args=url_args)
 
         return {
             'wars':             warlist,

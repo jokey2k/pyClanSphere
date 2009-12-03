@@ -49,6 +49,7 @@ def setup(app, plugin):
     # war related pages
     app.add_url_rule('/wars/', endpoint='wars/index', defaults={'page': 1},
                      view=views.war_index)
+    app.add_url_rule('/wars/page/<int:page>', endpoint='wars/index')
     app.add_url_rule('/wars/<int:war_id>', endpoint='wars/detail',
                      view=views.war_detail)
     app.add_url_rule('/wars/fightus', endpoint='wars/fightus',
@@ -57,6 +58,7 @@ def setup(app, plugin):
     # Admin views
     app.add_url_rule('/wars/', prefix='admin', defaults={'page': 1}, endpoint='admin/war_list',
                      view=views.war_list)
+    app.add_url_rule('/wars/page/<int:page>', prefix='admin', endpoint='admin/war_list')
     app.add_url_rule('/wars/new', prefix='admin', endpoint='admin/war_create',
                      view=views.war_edit)
     app.add_url_rule('/wars/<int:war_id>', prefix='admin', endpoint='admin/war_edit',
@@ -68,6 +70,7 @@ def setup(app, plugin):
 
     app.add_url_rule('/warmaps/', prefix='admin', defaults={'page': 1}, endpoint='admin/warmap_list',
                      view=views.warmap_list)
+    app.add_url_rule('/warmaps/page/<int:page>', prefix='admin', endpoint='admin/warmap_list')
     app.add_url_rule('/warmaps/new', prefix='admin', endpoint='admin/warmap_create',
                      view=views.warmap_edit)
     app.add_url_rule('/warmaps/<int:warmap_id>', prefix='admin', endpoint='admin/warmap_edit',
@@ -77,6 +80,7 @@ def setup(app, plugin):
 
     app.add_url_rule('/warmodes/', prefix='admin', defaults={'page': 1}, endpoint='admin/warmode_list',
                      view=views.warmode_list)
+    app.add_url_rule('/warmodes/page/<int:page>', prefix='admin', endpoint='admin/warmode_list')
     app.add_url_rule('/warmodes/new', prefix='admin', endpoint='admin/warmode_create',
                      view=views.warmode_edit)
     app.add_url_rule('/warmodes/<int:warmode_id>', prefix='admin', endpoint='admin/warmode_edit',

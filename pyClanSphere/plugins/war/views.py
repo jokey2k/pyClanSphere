@@ -158,7 +158,7 @@ def war_delete(request, war_id=None):
 def warmap_list(request, page):
     """List warmaps in backend"""
 
-    data = WarMap.query.get_list(per_page=PER_PAGE, page=page,
+    data = WarMap.query.get_list('admin/warmap_list', per_page=PER_PAGE, page=page,
                                  paginator=AdminPagination)
 
     return render_admin_response('admin/warmap_list.html', 'war.maps',
@@ -274,7 +274,7 @@ def warresult_edit(request, war_id=None):
 def warmode_list(request, page):
     """List warmodes in backend"""
 
-    data = WarMode.query.get_list(per_page=PER_PAGE, page=page,
+    data = WarMode.query.get_list('admin/warmode_list', per_page=PER_PAGE, page=page,
                                  paginator=AdminPagination)
 
     return render_admin_response('admin/warmode_list.html', 'war.modes',

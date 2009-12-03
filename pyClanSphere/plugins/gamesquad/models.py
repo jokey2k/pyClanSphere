@@ -119,7 +119,7 @@ class SquadMemberQuery(db.Query):
 
         # send the query
         offset = per_page * (page - 1)
-	query_filter = self.filter_by(squad_id=squad.id).order_by(SquadMember.level_id)
+        query_filter = self.filter_by(squad_id=squad.id).order_by(SquadMember.level_id)
         memberlist = query_filter \
                          .offset(offset).limit(per_page).all()
 
