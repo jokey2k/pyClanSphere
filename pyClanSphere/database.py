@@ -25,15 +25,16 @@ from copy import deepcopy
 
 import sqlalchemy
 from sqlalchemy import orm
+from sqlalchemy.engine.url import make_url, URL
+from sqlalchemy.exc import ArgumentError
+from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.interfaces import ConnectionProxy
 from sqlalchemy.orm.collections import attribute_mapped_collection
 from sqlalchemy.orm.interfaces import AttributeExtension
-from sqlalchemy.exc import ArgumentError
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.sql import func
 from sqlalchemy.util import to_list
-from sqlalchemy.engine.url import make_url, URL
 from sqlalchemy.types import MutableType
-from sqlalchemy.ext.associationproxy import association_proxy
 
 from werkzeug import url_decode
 from werkzeug.exceptions import NotFound
@@ -232,6 +233,7 @@ db.association_proxy = association_proxy
 db.attribute_loaded = attribute_loaded
 db.AttributeExtension = AttributeExtension
 db.attribute_mapped_collection = attribute_mapped_collection
+db.func = func
 
 #: called at the end of a request
 cleanup_session = session.remove
