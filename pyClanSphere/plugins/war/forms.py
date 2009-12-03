@@ -319,7 +319,8 @@ class EditWarModeForm(_WarModeBoundForm):
     modename = forms.TextField(lazy_gettext(u'Modename'), max_length=64,
                             validators=[is_not_whitespace_only()],
                             required=True)
-    game = forms.ChoiceField(lazy_gettext(u'Game'), widget=forms.SelectBox)
+    game = forms.ChoiceField(lazy_gettext(u'Game'), widget=forms.SelectBox,
+                             required=True)
     free1 = forms.TextField(lazy_gettext(u'Free field 1'), max_length=128)
     free2 = forms.TextField(lazy_gettext(u'Free field 2'), max_length=128)
     free3 = forms.TextField(lazy_gettext(u'Free field 3'), max_length=128)
@@ -334,7 +335,7 @@ class EditWarModeForm(_WarModeBoundForm):
                 free3 = warmode.free3
             )
         _WarModeBoundForm.__init__(self, warmode, initial)
-        self.game.choices = [('','')] + [(game.id, game.name) for game in Game.query.all()]
+        self.game.choices = [(game.id, game.name) for game in Game.query.all()]
 
     def _set_common_attributes(self, warmode):
         forms.set_fields(warmode, self.data, 'free1', 'free2', 'free3')
