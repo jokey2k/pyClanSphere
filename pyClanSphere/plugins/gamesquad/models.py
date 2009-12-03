@@ -12,6 +12,7 @@
 from datetime import datetime, date
 
 from pyClanSphere.api import *
+from pyClanSphere.database import users
 from pyClanSphere.models import User
 from pyClanSphere.utils.text import build_tag_uri
 from pyClanSphere.utils.pagination import Pagination
@@ -207,6 +208,7 @@ db.mapper(Squad, squads, properties={
                     ),
     'members':      db.relation(User,
                                 secondary=squadmembers, collection_class=set,
+                                order_by=db.func.lower(users.c.username),
                                 backref=db.backref('squads')
                     ),
     'squadmembers': db.relation(SquadMember)
