@@ -80,8 +80,9 @@ def setup(app, plugin):
     app.add_url_rule('/squads/<int:squad_id>/delete', prefix='admin', endpoint='admin/squad_delete',
                      view=views.delete_squad)
     # Squadmembers
-    app.add_url_rule('/squads/<int:squad_id>/listmembers', prefix='admin', endpoint='admin/squad_listmembers',
+    app.add_url_rule('/squads/<int:squad_id>/listmembers', prefix='admin', defaults={'page': 1}, endpoint='admin/squad_listmembers',
                      view=views.list_squadmembers)
+    app.add_url_rule('/squads/<int:squad_id>/listmembers/page/<int:page>', prefix='admin', endpoint='admin/squad_listmembers')
     app.add_url_rule('/squads/<int:squad_id>/editmember/<int:user_id>', prefix='admin', endpoint='admin/squad_editmember',
                      view=views.edit_squadmember)
     app.add_url_rule('/squads/<int:squad_id>/newmember', prefix='admin', endpoint='admin/squad_newmember',

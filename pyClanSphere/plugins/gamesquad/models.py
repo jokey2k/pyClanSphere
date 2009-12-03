@@ -111,7 +111,7 @@ class SquadMemberQuery(db.Query):
     """Provide better prepared queries"""
 
     def get_list(self, squad, endpoint=None, page=1, per_page=None,
-                 url_args=None, raise_if_empty=True):
+                 url_args=None, raise_if_empty=True, paginator=Pagination):
         """Return a dict with pagination and the current members."""
 
         if per_page is None:
@@ -119,16 +119,16 @@ class SquadMemberQuery(db.Query):
 
         # send the query
         offset = per_page * (page - 1)
-        memberlist = self.filter_by(squad_id=squad.id) \
-                         .order_by(SquadMember.level_id) \
+	query_filter = self.filter_by(squad_id=squad.id).order_by(SquadMember.level_id)
+        memberlist = query_filter \
                          .offset(offset).limit(per_page).all()
 
         # if raising exceptions is wanted, raise it
         if raise_if_empty and (page != 1 and not memberlist):
             raise NotFound()
 
-        pagination = Pagination(endpoint, page, per_page,
-                                self.count(), url_args)
+        pagination = paginator(endpoint, page, per_page,
+                                query_filter.count(), url_args=url_args)
 
         return {
             'squad':            squad,

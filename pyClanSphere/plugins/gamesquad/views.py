@@ -248,7 +248,7 @@ def delete_squad(request, squad_id):
 # squad member stuff
 
 @require_admin_privilege()
-def list_squadmembers(request, squad_id=None):
+def list_squadmembers(request, page=1, squad_id=None):
     """Show Squadmemberships"""
 
     if squad_id is None:
@@ -257,7 +257,7 @@ def list_squadmembers(request, squad_id=None):
     if squad is None:
         raise NotFound()
 
-    data = SquadMember.query.get_list(squad)
+    data = SquadMember.query.get_list(squad, page=page, paginator=AdminPagination)
 
     return render_admin_response('admin/squad_listmembers.html', 'gamesquad.squads',
                                  **data)
