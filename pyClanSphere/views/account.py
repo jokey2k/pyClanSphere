@@ -10,6 +10,7 @@
 """
 
 from werkzeug import escape
+from werkzeug.exceptions import NotFound, Forbidden
 
 from pyClanSphere.api import *
 from pyClanSphere.forms import LoginForm, DeleteAccountForm, EditProfileForm, \
@@ -221,7 +222,7 @@ def notification_settings(request):
 def imaccount_list(request, page):
     """List all registered imaccounts"""
 
-    data = IMAccount.query.get_list(page=page, paginator=AdminPagination)
+    data = IMAccount.query.get_list(user=request.user, page=page, paginator=AdminPagination)
 
     return render_account_response('account/imaccount_list.html', 'imaccounts',
                                    **data)
@@ -235,6 +236,8 @@ def imaccount_edit(request, account_id=None):
         imaccount = IMAccount.query.get(account_id)
         if imaccount is None:
             raise NotFound()
+        elif imaccount.user != request.user:
+            raise Forbidden()
     form = EditIMAccountForm(request.user, imaccount)
 
     if request.method == 'POST':

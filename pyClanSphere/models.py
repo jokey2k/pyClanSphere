@@ -204,7 +204,8 @@ class IMAccountQuery(db.Query):
     """Meta-Addon methods for querying IM accounts"""
 
     def get_list(self, endpoint=None, page=1, per_page=None,
-                 url_args=None, raise_if_empty=True, paginator=Pagination):
+                 url_args=None, raise_if_empty=True, paginator=Pagination,
+                 user=None):
         """Return a dict with pagination and datalist."""
 
         if per_page is None:
@@ -212,7 +213,10 @@ class IMAccountQuery(db.Query):
 
         # send the query
         offset = per_page * (page - 1)
-        mylist = self.offset(offset).limit(per_page).all()
+        if user is not None:
+            mylist = self.filter_by(user=user).offset(offset).limit(per_page).all()
+        else:
+            mylist = self.offset(offset).limit(per_page).all()
 
         # if raising exceptions is wanted, raise it
         if raise_if_empty and (page != 1 and not mylist):
