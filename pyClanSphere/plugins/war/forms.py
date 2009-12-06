@@ -121,6 +121,7 @@ class EditWarForm(FightUsForm):
                 status = war.status
             )
         FightUsForm.__init__(self, war, initial)
+        self.contact.required = False
         self.status.choices = [(k, v) for k, v in warstates.iteritems()]
         self.orgamember.choices = [(user.id, user.display_name) for user in User.query.namesort().all()]
         self.newmemberstatus.choices = [(k, v) for k, v in memberstates.iteritems()]
