@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: pyClanSphere@digital-family.de\n"
-"POT-Creation-Date: 2009-12-06 19:50+0100\n"
+"POT-Creation-Date: 2009-12-06 20:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -777,6 +777,9 @@ msgstr ""
 #: pyClanSphere/templates/admin/delete_group.html:16
 #: pyClanSphere/templates/admin/delete_user.html:10
 #: pyClanSphere/templates/admin/imaccount_delete.html:12
+#: pyClanSphere/templates/admin/information.html:49
+#: pyClanSphere/templates/admin/information.html:55
+#: pyClanSphere/templates/admin/information.html:59
 #: pyClanSphere/templates/admin/remove_plugin.html:12
 msgid "No"
 msgstr ""
@@ -801,6 +804,8 @@ msgstr ""
 #: pyClanSphere/templates/admin/delete_group.html:17
 #: pyClanSphere/templates/admin/delete_user.html:11
 #: pyClanSphere/templates/admin/imaccount_delete.html:13
+#: pyClanSphere/templates/admin/information.html:49
+#: pyClanSphere/templates/admin/information.html:59
 #: pyClanSphere/templates/admin/remove_plugin.html:13
 msgid "Yes"
 msgstr ""
@@ -2439,17 +2444,6 @@ msgstr ""
 
 #: pyClanSphere/templates/admin/information.html:48
 msgid "Persistent Environment"
-msgstr ""
-
-#: pyClanSphere/templates/admin/information.html:49
-#: pyClanSphere/templates/admin/information.html:59
-msgid "yes"
-msgstr ""
-
-#: pyClanSphere/templates/admin/information.html:49
-#: pyClanSphere/templates/admin/information.html:55
-#: pyClanSphere/templates/admin/information.html:59
-msgid "no"
 msgstr ""
 
 #: pyClanSphere/templates/admin/information.html:50

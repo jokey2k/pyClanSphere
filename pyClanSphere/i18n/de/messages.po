@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pyClanSphere 0.1\n"
 "Report-Msgid-Bugs-To: mail@markus-ullmann.de\n"
 "POT-Creation-Date: 2009-08-22 19:19+0200\n"
-"PO-Revision-Date: 2009-12-06 19:59+0100\n"
+"PO-Revision-Date: 2009-12-06 20:54+0100\n"
 "Last-Translator: Markus Ullmann <mail@markus-ullmann.de>\n"
 "Language-Team: de <pyclansphere@digital-family.de>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -837,6 +837,9 @@ msgstr ""
 #: pyClanSphere/templates/admin/delete_group.html:16
 #: pyClanSphere/templates/admin/delete_user.html:10
 #: pyClanSphere/templates/admin/imaccount_delete.html:12
+#: pyClanSphere/templates/admin/information.html:49
+#: pyClanSphere/templates/admin/information.html:55
+#: pyClanSphere/templates/admin/information.html:59
 #: pyClanSphere/templates/admin/remove_plugin.html:12
 msgid "No"
 msgstr "Nein"
@@ -861,6 +864,8 @@ msgstr "Nein"
 #: pyClanSphere/templates/admin/delete_group.html:17
 #: pyClanSphere/templates/admin/delete_user.html:11
 #: pyClanSphere/templates/admin/imaccount_delete.html:13
+#: pyClanSphere/templates/admin/information.html:49
+#: pyClanSphere/templates/admin/information.html:59
 #: pyClanSphere/templates/admin/remove_plugin.html:13
 msgid "Yes"
 msgstr "Ja"
@@ -1699,9 +1704,9 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"      Der War ist vorüber und hat ein <a href=\"%(link)s\">Ergebnis</a>, daher"
-" sind hier die Details nur anzusehen. Wenn die Daten nochmal bearbeitet werden"
-" sollen, einfach das Ergebnis löschen.\n"
+"      Der War ist vorüber und hat ein <a href=\"%(link)s\">Ergebnis</a>, "
+"daher sind hier die Details nur anzusehen. Wenn die Daten nochmal bearbeitet"
+" werden sollen, einfach das Ergebnis löschen.\n"
 
 #: pyClanSphere/plugins/war/templates/admin/war_edit.html:24
 #: pyClanSphere/plugins/war/templates/admin/war_edit.html:48
@@ -1720,7 +1725,8 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"      Wenn der War vorbei ist, bitte ein <a href=\"%(link)s\">Ergebnisbericht</a> schreiben\n"
+"      Wenn der War vorbei ist, bitte ein <a "
+"href=\"%(link)s\">Ergebnisbericht</a> schreiben\n"
 "    "
 
 #: pyClanSphere/plugins/war/templates/admin/war_list.html:2
@@ -2151,7 +2157,8 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"      Service: <b>%(game)s</b><br>Konto ID: <b>%(account)s</b><br>&nbsp;<br>\n"
+"      Service: <b>%(game)s</b><br>Konto ID: <b>%(account)s</b><br>&nbsp;<br>"
+"\n"
 "      Willst du dieses Konto wirklich entfernen?\n"
 "    "
 

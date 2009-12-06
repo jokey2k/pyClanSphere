@@ -46,17 +46,17 @@
     <dt>{{ _('Platform') }}</dt>
     <dd>{{ platform }}</dd>
     <dt>{{ _('Persistent Environment') }}</dt>
-    <dd>{{ _('yes') if hosting_env.persistent else _('no') }}</dd>
+    <dd>{{ _('Yes') if hosting_env.persistent else _('No') }}</dd>
     <dt>{{ _('Multithreaded') }}</dt>
     <dd>
     {%- if hosting_env.multithreaded -%}
       {% trans count=hosting_env.thread_count %}yes ({{ count }} active threads){% endtrans %}
     {%- else -%}
-      {{ _("no") }}
+      {{ _("No") }}
     {%- endif -%}
     </dd>
     <dt>{{ _('Multiprocess') }}</dt>
-    <dd>{{ _('yes') if hosting_env.multiprocess else _('no') }}</dd>
+    <dd>{{ _('Yes') if hosting_env.multiprocess else _('No') }}</dd>
     <dt>{{ _('WSGI Version') }}</dt>
     <dd>{{ hosting_env.wsgi_version }}</dd>
   </dl>
