@@ -1444,7 +1444,7 @@ msgstr "Notizen"
 
 #: pyClanSphere/plugins/war/forms.py:103
 msgid "Orgamember"
-msgstr "Keine Mitglieder"
+msgstr "Orgamitglied"
 
 #: pyClanSphere/plugins/war/forms.py:105 pyClanSphere/plugins/war/forms.py:261
 #: pyClanSphere/plugins/war/templates/admin/war_list.html:9
