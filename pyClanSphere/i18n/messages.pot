@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: pyClanSphere@digital-family.de\n"
-"POT-Creation-Date: 2009-12-06 20:54+0100\n"
+"POT-Creation-Date: 2009-12-06 21:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1140,12 +1140,12 @@ msgstr ""
 msgid "can delete news"
 msgstr ""
 
-#: pyClanSphere/plugins/news/views.py:151
+#: pyClanSphere/plugins/news/views.py:152
 #, python-format
 msgid "The entry %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/news/views.py:154
+#: pyClanSphere/plugins/news/views.py:155
 #, python-format
 msgid "The entry %s was updated successfully."
 msgstr ""
@@ -1457,62 +1457,62 @@ msgstr ""
 msgid "can manage war-related stuff"
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:119
+#: pyClanSphere/plugins/war/views.py:123
 #, python-format
 msgid "The war %s was added successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:123
+#: pyClanSphere/plugins/war/views.py:127
 #, python-format
 msgid "The war %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:151
+#: pyClanSphere/plugins/war/views.py:155
 #, python-format
 msgid "The war %s was deleted successfully"
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:186
+#: pyClanSphere/plugins/war/views.py:190
 #, python-format
 msgid "Warmap %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:190
+#: pyClanSphere/plugins/war/views.py:194
 #, python-format
 msgid "Warmap %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:226
+#: pyClanSphere/plugins/war/views.py:230
 #, python-format
 msgid "Warmap %s was deleted successfully"
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:251
+#: pyClanSphere/plugins/war/views.py:255
 #, python-format
 msgid "The result for %s was deleted successfully"
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:256
+#: pyClanSphere/plugins/war/views.py:260
 #, python-format
 msgid "The result for war %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:260
+#: pyClanSphere/plugins/war/views.py:264
 #, python-format
 msgid "The result for war %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:302
+#: pyClanSphere/plugins/war/views.py:306
 #, python-format
 msgid "Warmode %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:306
+#: pyClanSphere/plugins/war/views.py:310
 #, python-format
 msgid "Warmode %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:337
+#: pyClanSphere/plugins/war/views.py:341
 #, python-format
 msgid "Warmode %s was deleted successfully"
 msgstr ""
