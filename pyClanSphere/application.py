@@ -797,7 +797,7 @@ class pyClanSphere(object):
         self.initialized = True
 
         # init smileys
-        smiley_parser = smileys_lib('pyClanSphere/shared/smilies',url_for('core/shared', filename='smilies/'))
+        smiley_parser = smileys_lib(path.join(SHARED_DATA,'smilies'),url_for('core/shared', filename='smilies/'))
 
         # init bbcode
         bbcode_parser = postmarkup_create(use_pygments=False)
