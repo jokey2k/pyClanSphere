@@ -75,6 +75,7 @@ def detail(req, news_id):
 
     return render_response('news_detail.html', newsitem=entry)
 
+@cache.response(vary=('user',))
 def archive(req, year=None, month=None, day=None, page=1):
     """Render the monthly archives.
 

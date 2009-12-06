@@ -28,6 +28,7 @@ from pyClanSphere.plugins.war.models import War, WarMap, WarMode, WarResult, war
 from pyClanSphere.plugins.war.privileges import WAR_MANAGE
 
 # Frontend stuff
+@cache.response(vary=('user',))
 def war_index(request, page):
     """List wars in frontend"""
 
@@ -35,6 +36,7 @@ def war_index(request, page):
 
     return render_response('war_index.html', **data)
 
+@cache.response(vary=('user',))
 def war_detail(request, war_id=None):
     """Show details of a specific war"""
 
@@ -67,6 +69,7 @@ def war_fightus(request):
 
    return render_response('war_fightus.html', form=form.as_widget())
 
+@cache.response(vary=('user',))
 def warmap_list(request, page):
     """List all entered warmaps"""
 
@@ -74,6 +77,7 @@ def warmap_list(request, page):
 
     return render_response('war_mapindex.html', **data)
 
+@cache.response(vary=('user',))
 def warmap_details(request, warmap_id=None):
     if warmap_id is None:
         raise NotFound()
