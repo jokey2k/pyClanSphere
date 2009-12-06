@@ -38,12 +38,14 @@ from pyClanSphere import _core
 from pyClanSphere.environment import SHARED_DATA, BUILTIN_TEMPLATE_PATH, \
      BUILTIN_PLUGIN_FOLDER
 from pyClanSphere.database import db, cleanup_session
-from pyClanSphere.cache import get_cache
+from pyClanSphere.cache import get_cache, result as cached_result
 from pyClanSphere.utils import ClosingIterator, local, local_manager, dump_json, \
      htmlhelpers
 from pyClanSphere.utils.datastructures import ReadOnlyMultiMapping
 from pyClanSphere.utils.exceptions import UserException
 
+from pyClanSphere._ext.postmarkup import create as postmarkup_create
+from pyClanSphere._ext.smiley import lib as smileys_lib
 
 #: the default theme settings
 DEFAULT_THEME_SETTINGS = {
@@ -793,6 +795,33 @@ class pyClanSphere(object):
         self.__dict__.update(dict.fromkeys(self._setup_only, _error))
 
         self.initialized = True
+
+        # init smileys
+        smiley_parser = smileys_lib('pyClanSphere/shared/smilies',url_for('core/shared', filename='smilies/'))
+
+        # init bbcode
+        bbcode_parser = postmarkup_create(use_pygments=False)
+
+        @cached_result('prettified_')
+        def prettify(text):
+            """Pass text through bbcode and smiley to make it look pretty to the user
+
+            Later on this should be chosen by template and/or user
+
+            Note: we don't use cached_property as the text varies. So store it in a system
+                  cache if we have any.
+                  The key for the cache is prettified_ and a hash of the text we want to prettify
+            """
+
+            text = bbcode_parser(text)
+            text = smiley_parser.makehappy(text)
+            return Markup(text)
+
+        env.filters.update(
+            smileys=lambda x: Markup(smiley_parser.makehappy(x)),
+            bbcode=lambda x: Markup(bbcode_parser(x)),
+            prettify=prettify
+        )
 
         #! called after the application and all plugins are initialized
         emit_event('application-setup-done')

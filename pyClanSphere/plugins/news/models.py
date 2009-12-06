@@ -14,7 +14,6 @@ from pyClanSphere.api import *
 from pyClanSphere.models import User
 from pyClanSphere.utils.text import build_tag_uri
 from pyClanSphere.utils.pagination import Pagination
-from pyClanSphere._ext.postmarkup import render_bbcode
 
 from pyClanSphere.plugins.news.database import newsitems
 from pyClanSphere.plugins.news.privileges import NEWS_EDIT, NEWS_PUBLIC
@@ -178,10 +177,6 @@ class News(object):
 
         if last_update is not None:
             self.last_update = last_update
-
-    @property
-    def rendered_text(self):
-        return render_bbcode(self.text)
 
     @property
     def is_draft(self):
