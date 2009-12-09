@@ -32,7 +32,7 @@ def add_admin_links(request, navigation_bar):
                ('maps', url_for('admin/warmap_list'), _(u'Maps')),
                ('modes', url_for('admin/warmode_list'), _(u'Modes'))]
 
-    navigation_bar.insert(-3, ('war', url_for('admin/war_list'), _(u'War Management'), entries))
+    navigation_bar.insert(1, ('war', url_for('admin/war_list'), _(u'War Management'), entries))
 
 def setup(app, plugin):
 
