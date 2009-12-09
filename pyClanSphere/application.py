@@ -38,7 +38,7 @@ from pyClanSphere import _core
 from pyClanSphere.environment import SHARED_DATA, BUILTIN_TEMPLATE_PATH, \
      BUILTIN_PLUGIN_FOLDER
 from pyClanSphere.database import db, cleanup_session
-from pyClanSphere.cache import get_cache, result as cached_result
+from pyClanSphere.cache import get_cache, result as cached_result, get_jinja_cache
 from pyClanSphere.utils import ClosingIterator, local, local_manager, dump_json, \
      htmlhelpers
 from pyClanSphere.utils.datastructures import ReadOnlyMultiMapping
@@ -737,7 +737,8 @@ class pyClanSphere(object):
 
         # init the template system with the core stuff
         from pyClanSphere import models
-        env = Environment(loader=ThemeLoader(self),
+
+        env = Environment(loader=ThemeLoader(self), bytecode_cache=get_jinja_cache(self),
                           extensions=['jinja2.ext.i18n'], autoescape=True)
         env.globals.update(
             cfg=self.cfg,

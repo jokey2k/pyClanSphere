@@ -31,6 +31,22 @@ def get_cache(app):
     return systems[app.cfg['cache_system']](app)
 
 
+def get_jinja_cache(app):
+    """Return appropriate bytecode cache for jinja if possible"""
+
+    if app.cfg['cache_system'] == 'filesystem':
+        from jinja2 import FileSystemBytecodeCache
+        return FileSystemBytecodeCache(
+                os.path.join(app.instance_folder,
+                app.cfg['filesystem_cache_path']))
+    elif app.cfg['cache_system'] == 'memcached':
+        from jinja2 import MemcachedBytecodeCache
+        return MemcachedBytecodeCache(systems['memcached'](app))
+
+    # We don't support other cache systems for jinja yet
+    return None
+
+
 def get_cache_context(vary, eager_caching=False, request=None):
     """Returns a tuple in the form ``(request, status)`` where request is a
     request object and status a bool that is `True` if caching should be
