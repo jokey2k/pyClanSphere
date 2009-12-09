@@ -278,14 +278,17 @@ class WarResult(object):
     def points(self):
         return "%s:%s" % (self.our_points, self.enemy_points)
 
+    @property
+    def win(self):
+        return self.our_points > self.enemy_points
 
 class NullWarResult(WarResult):
     """Empty War Result"""
 
     points = "--:--"
+    win = False
     def __init__(self):
         self.id = -1
-
 
 class NullWar(War):
     """Fake War so display routines will work flawless if there
