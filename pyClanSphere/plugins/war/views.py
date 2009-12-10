@@ -89,15 +89,15 @@ def war_fightus(request):
     :URL endpoint: ``wars/fightus``
     """
 
-   form = forms.FightUsForm(None)
+    form = forms.FightUsForm(None)
 
-   if request.method == 'POST':
-       if form.validate(request.form):
-           war = form.make_war()
-           db.commit()
-           return render_response('war_fightus_success.html', form=form.as_widget())
+    if request.method == 'POST':
+        if form.validate(request.form):
+            war = form.make_war()
+            db.commit()
+            return render_response('war_fightus_success.html', form=form.as_widget())
 
-   return render_response('war_fightus.html', form=form.as_widget())
+    return render_response('war_fightus.html', form=form.as_widget())
 
 # Backend stuff
 
