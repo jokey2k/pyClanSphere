@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-    pyClanSphere.plugins.news.privileges
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    pyClanSphere.plugins.gamesquad.privileges
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    This module contains a list of available privileges for the gamesquad control.
+    This module contains a list of available privileges for the gamesquad plugin.
 
     :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.

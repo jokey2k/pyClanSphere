@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-    pyClanSphere.plugins.shoutbox
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    pyClanSphere.plugins.shoutbox.forms
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Plugin implementation description goes here.
+    Forms for verification of user input
 
     :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.

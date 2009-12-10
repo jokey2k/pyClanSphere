@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-    pyClanSphere.plugins.gamesquad.database
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    pyClanSphere.plugins.shoutbox.database
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Our needed tables are declared here
 

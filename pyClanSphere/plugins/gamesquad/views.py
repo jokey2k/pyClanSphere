@@ -48,8 +48,11 @@ def game_index(req):
         `games`:
             list of known games
 
-    :Template name: ``index.html``
-    :URL endpoint: ``news/index``
+        `pagination`:
+            a pagination object to render a pagination
+
+    :Template name: ``game_index.html``
+    :URL endpoint: ``game/index``
     """
 
     data = Game.query.all()
@@ -65,8 +68,8 @@ def game_detail(req, game_id=None):
         `game`:
             selected game
 
-    :Template name: ``index.html``
-    :URL endpoint: ``news/index``
+    :Template name: ``game_detail.html``
+    :URL endpoint: ``game/detail``
     """
 
     data = Game.query.get(game_id)
@@ -84,8 +87,8 @@ def squad_detail(req, squad_id=None):
         `squad`:
             selected squad object
 
-    :Template name: ``index.html``
-    :URL endpoint: ``news/index``
+    :Template name: ``squad_detail.html``
+    :URL endpoint: ``squad/detail``
     """
 
     data = Squad.query.get(squad_id)

@@ -9,7 +9,6 @@
     :mod:`~pyClanSphere.database.db` module which you can import from the
     :mod:`pyClanSphere.api` module.
 
-
     :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """

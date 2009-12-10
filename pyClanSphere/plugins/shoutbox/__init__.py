@@ -3,7 +3,7 @@
     pyClanSphere.plugins.shoutbox
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Plugin implementation description goes here.
+    Implement a simple shoutbox.
 
     :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.

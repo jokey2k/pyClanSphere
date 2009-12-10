@@ -2,7 +2,6 @@ Name: War Module
 Author: Markus Ullmann <mail@markus-ullmann.de>
 Author URL: http://www.markus-ullmann.de
 Plugin URL: http://www.markus-ullmann.de
-
 Version: 0.1
 License: BSD
-Description:
+Description: War Management

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-    pyClanSphere.plugins.war_module
-    ~~~~~~~~~~~~~~~~~~~~~~~
+    pyClanSphere.plugins.war.database
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Plugin implementation description goes here.
+    Our needed tables are declared here
 
     :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.

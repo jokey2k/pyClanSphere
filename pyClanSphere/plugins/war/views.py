@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-    pyClanSphere.plugins.gamesquad.views
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    pyClanSphere.plugins.war.views
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    This module implements all the views for the gamesquad module.
+    This module implements all the views for the war module.
 
     :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
@@ -30,7 +30,19 @@ from pyClanSphere.plugins.war.privileges import WAR_MANAGE
 # Frontend stuff
 @cache.response(vary=('user',))
 def war_index(request, page):
-    """List wars in frontend"""
+    """Render war overview.
+
+    Available template variables:
+
+        `wars`:
+            list of war objects
+
+        `pagination`:
+            a pagination object to render a pagination
+
+    :Template name: ``war_index.html``
+    :URL endpoint: ``wars/index``
+    """
 
     data = War.query.get_list('wars/index', page=page)
 
@@ -38,7 +50,16 @@ def war_index(request, page):
 
 @cache.response(vary=('user',))
 def war_detail(request, war_id=None):
-    """Show details of a specific war"""
+    """Render a war in detail.
+
+    Available template variables:
+
+        `war`:
+            war object to render
+
+    :Template name: ``war_detail.html``
+    :URL endpoint: ``wars/detail``
+    """
 
     if war_id is None:
         raise NotFound()
@@ -57,7 +78,16 @@ def war_detail(request, war_id=None):
                            warstates=warstates, memberstates=memberstates)
 
 def war_fightus(request):
-   """Allow guests to fight us."""
+    """Render form for a fightus request on front page.
+
+    Available template variables:
+
+        `form`:
+            war object to render
+
+    :Template name: ``war_fightus.html``
+    :URL endpoint: ``wars/fightus``
+    """
 
    form = forms.FightUsForm(None)
 
@@ -68,24 +98,6 @@ def war_fightus(request):
            return render_response('war_fightus_success.html', form=form.as_widget())
 
    return render_response('war_fightus.html', form=form.as_widget())
-
-@cache.response(vary=('user',))
-def warmap_list(request, page):
-    """List all entered warmaps"""
-
-    data = WarMap.query.get_list(page=page)
-
-    return render_response('war_mapindex.html', **data)
-
-@cache.response(vary=('user',))
-def warmap_details(request, warmap_id=None):
-    if warmap_id is None:
-        raise NotFound()
-    warmap = WarMap.query.get(warmap_id)
-    if warmap is None:
-        raise NotFound()
-
-    return render_response('war_mapdetail.html', warmap=warmap)
 
 # Backend stuff
 

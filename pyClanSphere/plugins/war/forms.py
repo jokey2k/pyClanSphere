@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-    pyClanSphere.plugins.gamesquad.forms
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    pyClanSphere.plugins.war.forms
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Forms we gonna need to handle creation and editing of entries
 

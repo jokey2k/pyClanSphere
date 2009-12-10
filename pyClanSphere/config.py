@@ -7,7 +7,6 @@
     less flat thing saved as ini in the instance folder.  If the configuration
     changes the application is reloaded automatically.
 
-
     :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """

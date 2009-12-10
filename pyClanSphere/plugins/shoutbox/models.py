@@ -1,6 +1,6 @@
 """
-    pyClanSphere.plugins.gamesquad.models
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    pyClanSphere.plugins.shoutbox.models
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Required baseclass and query extension to handle our entries
 

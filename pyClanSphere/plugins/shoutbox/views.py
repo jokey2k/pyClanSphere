@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-    pyClanSphere.plugins.shoutbox
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    pyClanSphere.plugins.shoutbox.views
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Plugin implementation description goes here.
+    This module implements all the views and Widgets for the shoutbox module.
 
     :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
@@ -37,6 +37,20 @@ class ShoutboxWidget(Widget):
         self.newposturl = escape(url_for('shoutbox/post', next=get_request().path))
 
 def make_shoutbox_entry(request):
+    """Render form to make a shoutbox entry.
+
+    Available template variables:
+
+        `form`:
+            form object with all required fields
+
+        `widgetoptions`:
+            redirected widgetoptions to hide post button below entries
+
+    :Template name: ``shoutbox_post.html``
+    :URL endpoint: ``shoutbox/post``
+    """
+
     form = ShoutboxEntryForm()
 
     if request.method == 'POST':
@@ -54,6 +68,17 @@ def make_shoutbox_entry(request):
                            widgetoptions=['hide_shoutbox_note'])
 
 def delete_shoutbox_entry(request, entry_id):
+    """Render form to delete a shoutbox entry.
+
+    Available template variables:
+
+        `form`:
+            form object with all required fields
+
+    :Template name: ``shoutbox_post.html``
+    :URL endpoint: ``shoutbox/post``
+    """
+
     entry = ShoutboxEntry.query.get(entry_id)
     if entry is None:
         raise NotFound()

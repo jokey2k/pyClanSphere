@@ -90,7 +90,7 @@ def archive(req, year=None, month=None, day=None, page=1):
         `year` / `month` / `day`:
             integers or None, useful to entitle the page.
 
-    :Template name: ``archive.html``
+    :Template name: ``news_archive.html``
     :URL endpoint: ``news/archive``
     """
 

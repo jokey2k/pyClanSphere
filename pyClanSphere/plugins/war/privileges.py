@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
     pyClanSphere.plugins.war.privileges
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    This module contains a list of used privileges for the news plugin.
+    This module contains a list of used privileges for the war plugin.
 
     :copyright: (c) 2009 by the Zine Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.

@@ -1,5 +1,6 @@
 # German translations for pyClanSphere.
-# Copyright (C) 2008 The Pocoo Team
+# Copyright (C) 2009 The pyClanSphere Team
+# parts (C) 2008 The Pocoo Team
 # This file is distributed under the same license as the pyClanSphere project.
 #
 msgid ""
