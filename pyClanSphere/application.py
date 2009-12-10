@@ -1196,7 +1196,11 @@ class pyClanSphere(object):
             response = e.get_response(request)
         except SQLAlchemyError, e:
             # Some database screwup?! Don't let pyClanSphere stay dispatching 500's
-            db.session.rollback()
+            # Also don't raise if the rollback causes another headache
+            try:
+                db.session.rollback()
+            except:
+                pass
             response = self.handle_internal_error(request, e,
                                                   suppress_log=False)
 
