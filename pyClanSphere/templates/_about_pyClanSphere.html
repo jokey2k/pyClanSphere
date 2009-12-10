@@ -3,7 +3,7 @@
 {%- endmacro %}
 
 {% macro render_about_pyClanSphere_body() -%}
-  <h1>{{ _("About pyClanSphere") }}</h1>
+  <h1>{{ self.title() }}</h1>
   <div class="text">
     <img src="{{ url_for('core/shared', filename='admin/img/logo.png') }}" alt="">
     <p>{% trans %}

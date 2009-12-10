@@ -1,7 +1,7 @@
 {% extends "error_layout.html" %}
 {% block title %}{{ _('pyClanSphere Internal Error') }}{% endblock %}
 {% block body %}
-  <h1>{{ _('Internal Error') }}</h1>
+  <h1>{{ self.title() }}</h1>
   <p>
     {% trans %}pyClanSphere encountered an internal error during processing:{% endtrans %}
   </p>

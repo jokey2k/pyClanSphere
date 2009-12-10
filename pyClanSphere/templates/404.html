@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block title %}{{ _("Page Not Found") }}{% endblock %}
 {% block contents %}
-  <h2>{{ _("Page Not Found") }}</h2>
+  <h2>{{ self.title() }}</h2>
   <p>{{ _("Sorry, the page you requested does not exist.") }}</p>
   <p>{% trans %}You may have followed a bad link or mis-typed a URL.
     That’s most likely what went wrong.{% endtrans %}</p>

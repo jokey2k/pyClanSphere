@@ -1,7 +1,7 @@
 {% extends "error_layout.html" %}
 {% block title %}{{ _('PyClanSphere Internal Server Error') }}{% endblock %}
 {% block body %}
-  <h1>{{ _('Internal Server Error') }}</h1>
+  <h1>{{ self.title() }}</h1>
   <p>{% trans %}
     An internal error happened in the application. The site administrator
     has been informed about the problem.
