@@ -5,10 +5,10 @@ For a working pyClanSphere instance you need to have the following libraries
 installed:
 
 - Python 2.4 or higher
-- Werkzeug 0.5.1*
-- Jinja2*
+- Werkzeug 0.5.5*
+- Jinja 2.2*
 - A database (MySQL, SQLite or PostgreSQL and others are supported, depending on SQLAlchemy here)
-- SQLAlchemy 0.5.2*
+- SQLAlchemy 0.6beta
 - simplejson* [included in Python 2.6 and higher]
 - html5lib*
 - pytz*
