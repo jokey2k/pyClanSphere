@@ -1,22 +1,18 @@
-{% macro render_entry(entry) -%}
-  <div class="entry">
-    {{ emit_event('before-entry-rendered', entry) }}
-    <h3>{{ entry.title }}</h3>
-    <p class="meta">
-      {%- trans author='<a href="%s">%s</a>'|safe %
-        (url_for(entry.author), entry.author.display_name),
-        pub_date=entry.pub_date|datetimeformat-%}
-          written by {{ author }}, on {{ pub_date }}.
-      {%- endtrans %}
-      {%- if entry.is_scheduled %}<br>[ {% trans
-        time_span=entry.pub_date|timedeltaformat
-        %}<strong>Scheduled Post:</strong> This entry will appear in {{
-          time_span }}.{% endtrans %}
-      ]{% endif -%}
-    </p>
-    <div class="text">
-      {{ entry.text }}
-    </div>
-    {{ emit_event('after-entry-rendered', entry) }}
-  </div>
-{%- endmacro %}
+{% macro render_entry(entry, showall=False, image=None) -%}
+<div class="post">
+  {{ emit_event('before-entry-rendered', entry) }}
+	<h2 class="title">{{ entry.title}}</h2>
+	<div class="entry">{% if image or entry.image %}<img src="{{ image if image else entry.image }}" alt="Newsimage" class="left" />{% endif %}
+		{{ entry.text|prettify }}
+	</div>
+
+	<p class="meta">
+	  {%- if showall %}<a href="{{ url_for('news/index') }}" class="permalink">{{ _('Show all available news') }}&hellip;</a>{% endif -%}
+	  {%- trans author='<a href="%s" class="comments">%s</a>'|safe %
+    (url_for(entry.author)|e, entry.author.display_name|e),
+    pub_date=entry.pub_date|datetimeformat-%}
+    {{ author }}
+  {%- endtrans %}<a href="{{ url_for('news/detail', news_id=entry.id) }}" class="permalink">{{ _('More') }}&hellip;</a></p>
+</div>
+  {{ emit_event('after-entry-rendered', entry) }}
+{% endmacro %}

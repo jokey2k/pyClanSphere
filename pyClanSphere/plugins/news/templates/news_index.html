@@ -9,4 +9,9 @@
     <p>{% trans %}So far there are no news entries here.{% endtrans %}</p>
   </div>
 {%- endfor %}
+{% if pagination.necessary %}
+<div class="pagination">
+{{ _('Pages') }}: {{ pagination.generate() }}
+</div>
+{% endif %}
 {% endblock %}

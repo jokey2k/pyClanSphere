@@ -1,9 +1,16 @@
 {% extends "layout.html" %}
+{% from "_form_helpers.html" import render_field %}
 {% block title %}{{ _("Make shoutbox entry") }}{% endblock %}
 {% block contents %}
-{% call form() %}
-  <center>{% if not request.user.is_somebody %}{{ form.author() }}<br>{% endif %}{{ form.text(rows=5, cols=20) }}<br>
-  {{ form.captcha or '' }}
-  <input type="submit" name="save" value="{{ _('Shout!') }}"></center>
-{% endcall %}
+<div class="post">
+  {% call form(class="form2") %}
+  <fieldset>
+    {% if not request.user.is_somebody %}{{ render_field(form.author)}}<br/>{% endif %}
+    <label for="text">{{ form.text.label() }}</label>
+    {{ form.text(rows=3, cols=40) }}<br/>
+  </fieldset>
+  <div align="center">{{ form.captcha or '' }}<br/>
+  <input type="submit" class="button" name="save" value="{{ _("Shout!") }}" /></div>
+  {% endcall %}
+</div>
 {% endblock %}

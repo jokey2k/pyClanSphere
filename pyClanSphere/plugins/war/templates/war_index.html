@@ -1,17 +1,32 @@
 {% extends "layout.html" %}
+
+{% macro render_squad(grouper, warlist) -%}
+<div class="post">
+	<h2 class="title">{% trans squad=grouper.name, game=grouper.game.name %}Squad: {{ squad }} ({{ game }}){% endtrans %}</h2>
+	<div class="entry">
+	  <ul>
+		{%- for war in warlist %}
+      <li><a href="{{ url_for('wars/detail', war_id=war.id)  }}">{{ war.clanname }}</a> ({{ war.date|datetimeformat }})</li>
+    {%- else %}
+      <li>{% trans %}So far there are no wars for this squad.{% endtrans %}</li>
+    {%- endfor %}
+    </ul>
+	</div>
+</div>
+{% endmacro %}
+
 {% block title %}{{ _("War Index") }}{% endblock %}
 {% block contents %}
-<div class="post">
-  <h1>Wars</h1>
-  <p>
-  {%- for war in wars %}
-    {% if loop.first %}
-    (click on war to see details)<br/>
-    {% endif %}
-    <a href="{{ url_for('wars/detail', war_id=war.id)  }}">{{ war.clanname}}</a> ({{ war.date|datetimeformat }})<br/>
-  {%- else %}
-    {% trans %}So far there are no wars.{% endtrans %}
-  {%- endfor %}
-  </p>
+{%- for grouper, warlist in wars|groupby('squad') %}
+  {{ render_squad(grouper, warlist) }}
+{%- else %}
+  <div class="notification">
+    <p>{% trans %}So far there are no war entries here.{% endtrans %}</p>
+  </div>
+{%- endfor %}
+{% if pagination.necessary %}
+<div class="pagination">
+{{ _('Pages') }}: {{ pagination.generate() }}
 </div>
+{% endif %}
 {% endblock %}

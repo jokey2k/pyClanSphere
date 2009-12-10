@@ -1,25 +1,27 @@
 {% extends "layout.html" %}
-{% from "_news.html" import render_entry %}
-{% block title %}{{ newsitem.title }}{% endblock %}
+{% block title %}{{ "%s: %s" % (_("News"), newsitem.title) }}{% endblock %}
 {% block contents %}
-<div class="entry">
-  {{ emit_event('before-entry-rendered', newsitem) }}
-  <h3>{{ newsitem.title }}</h3>
-  <p class="meta">
-    {%- trans author='<a href="%s">%s</a>'|safe %
-      (url_for(newsitem.author)|e, newsitem.author.display_name),
-      pub_date=newsitem.pub_date|datetimeformat-%}
-        written by {{ author }}, on {{ pub_date }}.
-    {%- endtrans %}
-    {%- if newsitem.is_scheduled %}<br>[ {% trans
-      time_span=newsitem.pub_date|timedeltaformat
-      %}<strong>Scheduled Post:</strong> This entry will appear in {{
-        time_span }}.{% endtrans %}
-    ]{% endif -%}
+<div class="post">
+  {{ emit_event('before-entry-rendered', entry) }}
+	<h2 class="title">{{ newsitem.title }}</h2>
+	<div class="entry"> <img src="{{ shared_url('shockg::images/homepage11.jpg') }}" alt="" width="136" height="91" class="left" />
+		{{ newsitem.text|prettify }}
+	</div>
+
+	<p class="meta">
+    {%- if newsitem.is_scheduled %}[ {% trans
+        time_span=newsitem.pub_date|timedeltaformat
+        %}<strong>Scheduled Post:</strong> This entry will appear in {{
+          time_span }}.{% endtrans %}
+      ]
+    {% else %}
+      {{ newsitem.pub_date|datetimeformat }}
+    {% endif -%}
+	  {%- trans author='<a href="%s" class="comments">%s</a>'|safe %
+    (url_for(newsitem.author)|e, newsitem.author.display_name|e),
+    pub_date=newsitem.pub_date|datetimeformat-%}
+    {{ author }}
+  {%- endtrans %}
   </p>
-  <div class="text">
-    {{ newsitem.text }}
-  </div>
-  {{ emit_event('after-entry-rendered', newsitem) }}
 </div>
 {% endblock %}
