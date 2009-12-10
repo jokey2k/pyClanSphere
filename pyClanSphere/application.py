@@ -25,7 +25,7 @@ from babel import Locale
 
 from jinja2 import Environment, BaseLoader, TemplateNotFound, Markup
 
-from sqlalchemy.exceptions import SQLAlchemyError
+from sqlalchemy.exceptions import SQLAlchemyError, OperationalError
 
 from werkzeug import Request as RequestBase, Response as ResponseBase, \
      SharedDataMiddleware, url_quote, routing, redirect as _redirect, \
@@ -1226,7 +1226,28 @@ class pyClanSphere(object):
         local.request = request
         local.page_metadata = []
         local.request_locals = {}
-        request.__init__(environ, self)
+        try:
+            request.__init__(environ, self)
+        except Exception, e:
+            if self.cfg['passthrough_errors']:
+                raise
+            if isinstance(e, SQLAlchemyError):
+                # Chances our db has gone away, thus just clean the session and start over
+                try:
+                    # let's try to at least issue a rollback
+                    db.session.rollback()
+                except:
+                    pass
+                log.warning(u'SQL Database was unable to assign user to request during init, retrying with fresh session. Play with pool_recycle to get rid of this')
+                # as unsaved data will be lost at this state anyway, clear 
+                db.session.remove()
+                try:
+                    request.__init__(environ, self)
+                except:
+                    # Bad luck, so present error
+                    return self.handle_server_error(local.request)(environ, start_response)
+            else:
+                return self.handle_server_error(local.request)(environ, start_response)
 
         # check if the site is in maintenance_mode and the user is
         # not an administrator. in that case just show a message that
