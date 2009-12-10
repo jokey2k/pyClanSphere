@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pyClanSphere 0.1\n"
 "Report-Msgid-Bugs-To: mail@markus-ullmann.de\n"
 "POT-Creation-Date: 2009-08-22 19:19+0200\n"
-"PO-Revision-Date: 2009-12-06 20:54+0100\n"
+"PO-Revision-Date: 2009-12-10 12:57+0100\n"
 "Last-Translator: Markus Ullmann <mail@markus-ullmann.de>\n"
 "Language-Team: de <pyclansphere@digital-family.de>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -31,7 +31,7 @@ msgstr ""
 "Das Design „%s” ist nicht länger verfügbar, es wird das Standarddesign "
 "benutzt."
 
-#: pyClanSphere/application.py:755
+#: pyClanSphere/application.py:756
 #, python-format
 msgid "Copyright %(years)s by the pyClanSphere Team"
 msgstr "Copyright %(years)s by the pyClanSphere Team"
@@ -487,6 +487,7 @@ msgid "Use default value"
 msgstr "Benutze Standardwert"
 
 #: pyClanSphere/notifications.py:134
+#: pyClanSphere/plugins/war/templates/war_detail.html:10
 #: pyClanSphere/websetup/templates/admin_account.html:16
 msgid "E-Mail"
 msgstr "E-Mail"
@@ -672,7 +673,7 @@ msgstr "Du musst einen Level auswählen, welcher die Mitglieder aufnimmt"
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_list.html:7
 #: pyClanSphere/plugins/gamesquad/templates/admin/game_list.html:7
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_list.html:8
-#: pyClanSphere/plugins/war/forms.py:322
+#: pyClanSphere/plugins/war/forms.py:323
 #: pyClanSphere/plugins/war/templates/admin/warmode_list.html:8
 msgid "Game"
 msgstr "Spiel"
@@ -1141,6 +1142,7 @@ msgstr "Squadübersicht"
 
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_list.html:7
 #: pyClanSphere/plugins/war/forms.py:48
+#: pyClanSphere/plugins/war/templates/war_detail.html:18
 #: pyClanSphere/plugins/war/templates/admin/warmap_list.html:7
 #: pyClanSphere/plugins/war/templates/admin/warresult_edit.html:12
 msgid "Squad"
@@ -1170,6 +1172,7 @@ msgid "Write"
 msgstr "Schreiben"
 
 #: pyClanSphere/plugins/news/__init__.py:33 pyClanSphere/plugins/news/forms.py:24
+#: pyClanSphere/plugins/news/templates/news_detail.html:2
 msgid "News"
 msgstr "News"
 
@@ -1184,6 +1187,7 @@ msgstr "Veröffentlichungsdatum"
 
 #: pyClanSphere/plugins/news/forms.py:27
 #: pyClanSphere/plugins/news/templates/admin/news_list.html:9
+#: pyClanSphere/plugins/war/templates/war_detail.html:21
 msgid "Status"
 msgstr "Status"
 
@@ -1221,53 +1225,63 @@ msgstr "kann News veröffentlichen und an veröffentlichten arbeiten"
 msgid "can delete news"
 msgstr "kann News löschen"
 
-#: pyClanSphere/plugins/news/views.py:151
+#: pyClanSphere/plugins/news/views.py:152
 #, python-format
 msgid "The entry %s was created successfully."
 msgstr "Der Eintrag %s wurde erfolgreich erstellt."
 
-#: pyClanSphere/plugins/news/views.py:154
+#: pyClanSphere/plugins/news/views.py:155
 #, python-format
 msgid "The entry %s was updated successfully."
 msgstr "Der Eintrag %s wurde aktualisiert."
 
-#: pyClanSphere/plugins/news/templates/_news.html:6
-#: pyClanSphere/plugins/news/templates/news_detail.html:9
-#, python-format
-msgid "written by %(author)s, on %(pub_date)s."
-msgstr "geschrieben von %(author)s am %(pub_date)s."
+#: pyClanSphere/plugins/news/templates/_news.html:10
+msgid "Show all available news"
+msgstr "Alle verfügbaren News anzeigen"
 
 #: pyClanSphere/plugins/news/templates/_news.html:11
-#: pyClanSphere/plugins/news/templates/news_detail.html:14
+#: pyClanSphere/plugins/news/templates/news_detail.html:20
+#, python-format
+msgid "%(author)s"
+msgstr "von %(author)s"
+
+#: pyClanSphere/plugins/news/templates/_news.html:15
+msgid "More"
+msgstr "Mehr"
+
+#: pyClanSphere/plugins/news/templates/news_archive.html:5
+msgid "News Archive overview"
+msgstr "Newsarchivübersicht"
+
+#: pyClanSphere/plugins/news/templates/news_archive.html:8
+#, python-format
+msgid "Archive for %(year)s"
+msgstr "Archiv für %(year)s"
+
+#: pyClanSphere/plugins/news/templates/news_archive.html:10
+#, python-format
+msgid "Archive for %(month)s"
+msgstr "Archiv für %(month)s"
+
+#: pyClanSphere/plugins/news/templates/news_archive.html:12
+#, python-format
+msgid "Archive for %(day)s"
+msgstr "Archiv für %(day)s"
+
+#: pyClanSphere/plugins/news/templates/news_archive.html:20
+msgid "Archive"
+msgstr "Archiv"
+
+#: pyClanSphere/plugins/news/templates/news_archive.html:27
+msgid "empty archive"
+msgstr "leeres Archiv"
+
+#: pyClanSphere/plugins/news/templates/news_detail.html:12
 #, python-format
 msgid "<strong>Scheduled Post:</strong> This entry will appear in %(time_span)s."
 msgstr ""
 "<strong>Geplanter Beitrag:</strong> Dieser Eintrag wird in %(time_span)s "
 "veröffentlicht."
-
-#: pyClanSphere/plugins/news/templates/news_archive.html:2
-#: pyClanSphere/plugins/news/templates/news_archive.html:6
-msgid "Archive"
-msgstr "Archiv"
-
-#: pyClanSphere/plugins/news/templates/news_archive.html:12
-msgid "empty archive"
-msgstr "leeres Archiv"
-
-#: pyClanSphere/plugins/news/templates/news_archive.html:17
-#, python-format
-msgid "Archive for %(year)s"
-msgstr "Archiv für %(year)s"
-
-#: pyClanSphere/plugins/news/templates/news_archive.html:19
-#, python-format
-msgid "Archive for %(month)s"
-msgstr "Archiv für %(month)s"
-
-#: pyClanSphere/plugins/news/templates/news_archive.html:21
-#, python-format
-msgid "Archive for %(day)s"
-msgstr "Archiv für %(day)s"
 
 #: pyClanSphere/plugins/news/templates/news_index.html:3
 msgid "News Index"
@@ -1276,6 +1290,11 @@ msgstr "Newsübersicht"
 #: pyClanSphere/plugins/news/templates/news_index.html:9
 msgid "So far there are no news entries here."
 msgstr "Momentan gibt es keine Newseinträge."
+
+#: pyClanSphere/plugins/news/templates/news_index.html:14
+#: pyClanSphere/plugins/war/templates/war_index.html:29
+msgid "Pages"
+msgstr "Seiten"
 
 #: pyClanSphere/plugins/news/templates/admin/news_edit.html:3
 #: pyClanSphere/plugins/news/templates/admin/news_list.html:31
@@ -1323,11 +1342,11 @@ msgstr ""
 "      Möchtest du wirklich die Gruppe „%(name)s“ löschen?\n"
 "   "
 
-#: pyClanSphere/plugins/shoutbox/templates/shoutbox_post.html:2
+#: pyClanSphere/plugins/shoutbox/templates/shoutbox_post.html:3
 msgid "Make shoutbox entry"
 msgstr "Shoutbox Eintrag speichern"
 
-#: pyClanSphere/plugins/shoutbox/templates/shoutbox_post.html:7
+#: pyClanSphere/plugins/shoutbox/templates/shoutbox_post.html:13
 msgid "Shout!"
 msgstr "Shout!"
 
@@ -1392,6 +1411,7 @@ msgid "Wars"
 msgstr "Wars"
 
 #: pyClanSphere/plugins/war/__init__.py:32
+#: pyClanSphere/plugins/war/templates/war_detail.html:36
 #: pyClanSphere/plugins/war/templates/admin/war_edit.html:50
 #: pyClanSphere/plugins/war/templates/admin/war_edit.html:52
 msgid "Maps"
@@ -1408,14 +1428,17 @@ msgid "War Management"
 msgstr "kann Spiele verwalten"
 
 #: pyClanSphere/plugins/war/forms.py:40
+#: pyClanSphere/plugins/war/templates/war_detail.html:8
 msgid "Clan"
 msgstr "Clan"
 
 #: pyClanSphere/plugins/war/forms.py:43
+#: pyClanSphere/plugins/war/templates/war_detail.html:9
 msgid "Homepage"
 msgstr "Homepage"
 
 #: pyClanSphere/plugins/war/forms.py:45
+#: pyClanSphere/plugins/war/templates/war_detail.html:19
 #: pyClanSphere/plugins/war/templates/admin/war_list.html:8
 #: pyClanSphere/plugins/war/templates/admin/warresult_edit.html:13
 #, fuzzy
@@ -1435,10 +1458,12 @@ msgid "How many playerchanges are allowed each mapchange"
 msgstr "Wie viele Spieler dürfen pro Runde getauscht werden"
 
 #: pyClanSphere/plugins/war/forms.py:55
+#: pyClanSphere/plugins/war/templates/war_detail.html:30
 msgid "Server"
 msgstr "Server"
 
 #: pyClanSphere/plugins/war/forms.py:56
+#: pyClanSphere/plugins/war/templates/war_detail.html:47
 msgid "Notes"
 msgstr "Notizen"
 
@@ -1446,7 +1471,7 @@ msgstr "Notizen"
 msgid "Orgamember"
 msgstr "Orgamitglied"
 
-#: pyClanSphere/plugins/war/forms.py:105 pyClanSphere/plugins/war/forms.py:261
+#: pyClanSphere/plugins/war/forms.py:105 pyClanSphere/plugins/war/forms.py:262
 #: pyClanSphere/plugins/war/templates/admin/war_list.html:9
 msgid "State"
 msgstr "Status"
@@ -1467,52 +1492,53 @@ msgstr "Mitglied hinzufügen"
 msgid "Status for newly added member"
 msgstr "Status für neu hinzugefügtes Mitglied"
 
-#: pyClanSphere/plugins/war/forms.py:204
+#: pyClanSphere/plugins/war/forms.py:205
 msgid "Internal Mapname"
 msgstr "Interner Mapname"
 
-#: pyClanSphere/plugins/war/forms.py:207
+#: pyClanSphere/plugins/war/forms.py:208
 msgid "Owning squad"
 msgstr "Gehört zu Squad"
 
-#: pyClanSphere/plugins/war/forms.py:209
+#: pyClanSphere/plugins/war/forms.py:210
 msgid "Use name from file metadata as internal mapname"
 msgstr "Benutze Mapname aus der Datei als Mapname"
 
-#: pyClanSphere/plugins/war/forms.py:210
+#: pyClanSphere/plugins/war/forms.py:211
 msgid "Read map metadata and set internal mapname to name from mapfile"
 msgstr "Lese Map Metadaten ein und setze Mapnamen auf den der Metadaten"
 
-#: pyClanSphere/plugins/war/forms.py:221
+#: pyClanSphere/plugins/war/forms.py:222
 msgid "MapName"
 msgstr "Kartenname"
 
-#: pyClanSphere/plugins/war/forms.py:257
+#: pyClanSphere/plugins/war/forms.py:258
 msgid "Our Points"
 msgstr "Unsere Punkte"
 
-#: pyClanSphere/plugins/war/forms.py:258
+#: pyClanSphere/plugins/war/forms.py:259
 msgid "Enemy Points"
 msgstr "Gegnerpunkte"
 
-#: pyClanSphere/plugins/war/forms.py:259
+#: pyClanSphere/plugins/war/forms.py:260
+#: pyClanSphere/plugins/war/templates/war_detail.html:59
 msgid "Comment"
 msgstr "Kommentar"
 
-#: pyClanSphere/plugins/war/forms.py:319
+#: pyClanSphere/plugins/war/forms.py:320
 #: pyClanSphere/plugins/war/templates/admin/warmode_list.html:7
 msgid "Modename"
 msgstr "Modusname"
 
-#: pyClanSphere/plugins/war/forms.py:324
+#: pyClanSphere/plugins/war/forms.py:325
 msgid "Free field 1"
 msgstr "Freies Feld 1"
 
-#: pyClanSphere/plugins/war/forms.py:325
+#: pyClanSphere/plugins/war/forms.py:326
 msgid "Free field 2"
 msgstr "Freies Feld 2"
 
-#: pyClanSphere/plugins/war/forms.py:326
+#: pyClanSphere/plugins/war/forms.py:327
 msgid "Free field 3"
 msgstr "Freies Feld 3"
 
@@ -1552,75 +1578,72 @@ msgstr "Vielleicht"
 msgid "can manage war-related stuff"
 msgstr "kann Warbezogenes verwalten"
 
-#: pyClanSphere/plugins/war/views.py:119
+#: pyClanSphere/plugins/war/views.py:123
 #, python-format
 msgid "The war %s was added successfully."
 msgstr "Der War %s wurde erfolgreich hinzugefügt."
 
-#: pyClanSphere/plugins/war/views.py:123
+#: pyClanSphere/plugins/war/views.py:127
 #, python-format
 msgid "The war %s was updated successfully."
 msgstr "Der War %s wurde aktualisiert."
 
-#: pyClanSphere/plugins/war/views.py:151
+#: pyClanSphere/plugins/war/views.py:155
 #, python-format
 msgid "The war %s was deleted successfully"
 msgstr "Der War %s wurde erfolgreich gelöscht."
 
-#: pyClanSphere/plugins/war/views.py:186
+#: pyClanSphere/plugins/war/views.py:190
 #, python-format
 msgid "Warmap %s was created successfully."
 msgstr "War Karte %s wurde erfolgreich erstellt."
 
-#: pyClanSphere/plugins/war/views.py:190
+#: pyClanSphere/plugins/war/views.py:194
 #, fuzzy, python-format
 msgid "Warmap %s was updated successfully."
 msgstr "War Karte %s wurde aktualisiert."
 
-#: pyClanSphere/plugins/war/views.py:226
+#: pyClanSphere/plugins/war/views.py:230
 #, python-format
 msgid "Warmap %s was deleted successfully"
 msgstr "War Karte %s wurde erfolgreich gelöscht."
 
-#: pyClanSphere/plugins/war/views.py:251
+#: pyClanSphere/plugins/war/views.py:255
 #, python-format
 msgid "The result for %s was deleted successfully"
 msgstr "Das Ergebnis für %s wurde erfolgreich gelöscht."
 
-#: pyClanSphere/plugins/war/views.py:256
+#: pyClanSphere/plugins/war/views.py:260
 #, python-format
 msgid "The result for war %s was created successfully."
 msgstr "Das Ergebnis für %s wurde erfolgreich erstellt."
 
-#: pyClanSphere/plugins/war/views.py:260
+#: pyClanSphere/plugins/war/views.py:264
 #, python-format
 msgid "The result for war %s was updated successfully."
 msgstr "Das Ergebnis für %s wurde aktualisiert."
 
-#: pyClanSphere/plugins/war/views.py:302
+#: pyClanSphere/plugins/war/views.py:306
 #, python-format
 msgid "Warmode %s was created successfully."
 msgstr "Der Warmodus %s wurde erfolgreich erstellt."
 
-#: pyClanSphere/plugins/war/views.py:306
+#: pyClanSphere/plugins/war/views.py:310
 #, python-format
 msgid "Warmode %s was updated successfully."
 msgstr "Der Warmodus %s wurde aktualisiert."
 
-#: pyClanSphere/plugins/war/views.py:337
+#: pyClanSphere/plugins/war/views.py:341
 #, python-format
 msgid "Warmode %s was deleted successfully"
 msgstr "Der Warmodus %s wurde erfolgreich gelöscht."
 
-#: pyClanSphere/plugins/war/templates/war_detail.html:12
-msgid "War contacts"
-msgstr "War Kontakte"
+#: pyClanSphere/plugins/war/templates/war_detail.html:2
+#, python-format
+msgid "%(squad)s vs %(opponent)s"
+msgstr "%(squad)s gegen %(opponent)s"
 
-#: pyClanSphere/plugins/war/templates/war_detail.html:14
-msgid "Our clan"
-msgstr "Unser Clan"
-
-#: pyClanSphere/plugins/war/templates/war_detail.html:15
+#: pyClanSphere/plugins/war/templates/war_detail.html:5
 #: pyClanSphere/plugins/war/templates/war_fightus.html:7
 #: pyClanSphere/plugins/war/templates/admin/war_edit.html:11
 #: pyClanSphere/plugins/war/templates/admin/war_edit.html:45
@@ -1629,15 +1652,47 @@ msgstr "Unser Clan"
 msgid "Opponent"
 msgstr "Gegner"
 
-#: pyClanSphere/plugins/war/templates/war_detail.html:27
-msgid "Participating members"
-msgstr "Teilnehmende Mitglieder"
-
+#: pyClanSphere/plugins/war/templates/war_detail.html:15
 #: pyClanSphere/plugins/war/templates/war_fightus.html:17
 #: pyClanSphere/plugins/war/templates/admin/war_edit.html:17
 #: pyClanSphere/plugins/war/templates/admin/war_edit.html:47
 msgid "War coordination data"
 msgstr ""
+
+#: pyClanSphere/plugins/war/templates/war_detail.html:20
+#, python-format
+msgid "Orgamember: %(link)s"
+msgstr "Orgamember: %(link)s"
+
+#: pyClanSphere/plugins/war/templates/war_detail.html:26
+#: pyClanSphere/plugins/war/templates/war_fightus.html:26
+msgid "Rules"
+msgstr "Regeln"
+
+#: pyClanSphere/plugins/war/templates/war_detail.html:29
+msgid "Mode"
+msgstr "War Modus"
+
+#: pyClanSphere/plugins/war/templates/war_detail.html:31
+msgid "Playerchanges per map"
+msgstr "Spielerwechsel pro Map"
+
+#: pyClanSphere/plugins/war/templates/war_detail.html:55
+#: pyClanSphere/plugins/war/templates/admin/war_list.html:10
+msgid "Result"
+msgstr "Ergebnis"
+
+#: pyClanSphere/plugins/war/templates/war_detail.html:55
+msgid "Win"
+msgstr "Gewonnen"
+
+#: pyClanSphere/plugins/war/templates/war_detail.html:55
+msgid "Loss"
+msgstr "Verloren"
+
+#: pyClanSphere/plugins/war/templates/war_detail.html:58
+msgid "Points"
+msgstr "Punkte"
 
 #: pyClanSphere/plugins/war/templates/war_fightus.html:20
 msgid "Date (format 01.12.99 13:44)"
@@ -1646,10 +1701,6 @@ msgstr "Datum (Format 01.12.99 13:44)"
 #: pyClanSphere/plugins/war/templates/war_fightus.html:21
 msgid "Squad to fight"
 msgstr "Antreten gegen Squad"
-
-#: pyClanSphere/plugins/war/templates/war_fightus.html:26
-msgid "Rules"
-msgstr "Regeln"
 
 #: pyClanSphere/plugins/war/templates/war_fightus.html:42
 msgid "Captcha"
@@ -1663,13 +1714,23 @@ msgstr "Fight us Anfrage gespeichert"
 msgid "Thanks for requesting a fight. You will hear back from us shortly."
 msgstr "Danke für die Fight us Anfrage. Wir melden uns in Kürze"
 
-#: pyClanSphere/plugins/war/templates/war_index.html:2
+#: pyClanSphere/plugins/war/templates/war_index.html:5
+#, python-format
+msgid "Squad: %(squad)s (%(game)s)"
+msgstr "Squad: %(squad)s (%(game)s)"
+
+#: pyClanSphere/plugins/war/templates/war_index.html:11
+msgid "So far there are no wars for this squad."
+msgstr "Bisher keine Wars eingetragen."
+
+#: pyClanSphere/plugins/war/templates/war_index.html:18
 msgid "War Index"
 msgstr "Warübersicht"
 
-#: pyClanSphere/plugins/war/templates/war_index.html:13
-msgid "So far there are no wars."
-msgstr "Bisher keine Wars eingetragen."
+#: pyClanSphere/plugins/war/templates/war_index.html:24
+#, fuzzy
+msgid "So far there are no war entries here."
+msgstr "Momentan gibt es keine Einträge."
 
 #: pyClanSphere/plugins/war/templates/admin/war_delete.html:2
 msgid "Delete War"
@@ -1733,10 +1794,6 @@ msgstr ""
 #: pyClanSphere/plugins/war/templates/admin/war_list.html:4
 msgid "Wars Overview"
 msgstr "Warübersicht"
-
-#: pyClanSphere/plugins/war/templates/admin/war_list.html:10
-msgid "Result"
-msgstr "Ergebnis"
 
 #: pyClanSphere/plugins/war/templates/admin/war_list.html:25
 msgid "No wars"
