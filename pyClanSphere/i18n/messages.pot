@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: pyClanSphere@digital-family.de\n"
-"POT-Creation-Date: 2009-12-13 23:46+0100\n"
+"POT-Creation-Date: 2009-12-14 00:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3207,7 +3207,7 @@ msgstr ""
 msgid "IM account %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/views/account.py:348 pyClanSphere/views/admin.py:323
+#: pyClanSphere/views/account.py:348 pyClanSphere/views/admin.py:326
 #, python-format
 msgid "IM account %s was deleted successfully"
 msgstr ""
@@ -3278,74 +3278,79 @@ msgstr ""
 msgid "You cannot delete yourself."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:353
+#: pyClanSphere/views/admin.py:299
+#, python-format
+msgid "User %s removed successfully."
+msgstr ""
+
+#: pyClanSphere/views/admin.py:356
 #, python-format
 msgid "Group %s created successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:357
+#: pyClanSphere/views/admin.py:360
 #, python-format
 msgid "Group %s edited successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:409
+#: pyClanSphere/views/admin.py:412
 msgid "Configuration altered successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:436
+#: pyClanSphere/views/admin.py:439
 msgid "URL configuration changed."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:457
+#: pyClanSphere/views/admin.py:460
 msgid "Theme changed successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:473
+#: pyClanSphere/views/admin.py:476
 msgid "This theme is not configurable"
 msgstr ""
 
-#: pyClanSphere/views/admin.py:485
+#: pyClanSphere/views/admin.py:488
 msgid "Plugin configuration changed"
 msgstr ""
 
-#: pyClanSphere/views/admin.py:494
+#: pyClanSphere/views/admin.py:497
 #, python-format
 msgid "Plugin “%s” added successfully. You can now enable it in the plugin list."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:521
+#: pyClanSphere/views/admin.py:524
 #, python-format
 msgid ""
 "Could not remove the plugin “%s” because an IO error occurred. Wrong "
 "permissions?"
 msgstr ""
 
-#: pyClanSphere/views/admin.py:524
+#: pyClanSphere/views/admin.py:527
 #, python-format
 msgid "The plugin “%s” was removed from the instance successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:542
+#: pyClanSphere/views/admin.py:545
 msgid "The cache was cleared successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:546
+#: pyClanSphere/views/admin.py:549
 msgid "Cache settings were changed successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:570
+#: pyClanSphere/views/admin.py:573
 msgid "Configuration updated successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:573
+#: pyClanSphere/views/admin.py:576
 msgid "Could not save the configuration because the configuration is invalid."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:590
+#: pyClanSphere/views/admin.py:593
 msgid "Maintenance mode disabled.  The site is now publicly available."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:688
+#: pyClanSphere/views/admin.py:691
 msgid "Log changes saved."
 msgstr ""
 

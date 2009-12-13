@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pyClanSphere 0.1\n"
 "Report-Msgid-Bugs-To: mail@markus-ullmann.de\n"
 "POT-Creation-Date: 2009-08-22 19:19+0200\n"
-"PO-Revision-Date: 2009-12-13 23:46+0100\n"
+"PO-Revision-Date: 2009-12-14 00:09+0100\n"
 "Last-Translator: Markus Ullmann <mail@markus-ullmann.de>\n"
 "Language-Team: de <pyclansphere@digital-family.de>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -3563,7 +3563,7 @@ msgstr "IM Konto %s wurde hinzugefügt."
 msgid "IM account %s was updated successfully."
 msgstr "IM Konto %s wurde aktualisiert."
 
-#: pyClanSphere/views/account.py:348 pyClanSphere/views/admin.py:323
+#: pyClanSphere/views/account.py:348 pyClanSphere/views/admin.py:326
 #, python-format
 msgid "IM account %s was deleted successfully"
 msgstr "IM Konto %s wurde erfolgreich gelöscht."
@@ -3636,44 +3636,49 @@ msgstr "Der Benutzer %s wurde bearbeitet."
 msgid "You cannot delete yourself."
 msgstr "Du kannst dich selbst nicht löschen."
 
-#: pyClanSphere/views/admin.py:353
+#: pyClanSphere/views/admin.py:299
+#, python-format
+msgid "User %s removed successfully."
+msgstr "Der Benutzer %s wurde gelöscht."
+
+#: pyClanSphere/views/admin.py:356
 #, python-format
 msgid "Group %s created successfully."
 msgstr "Die Gruppe %s wurde erstellt."
 
-#: pyClanSphere/views/admin.py:357
+#: pyClanSphere/views/admin.py:360
 #, python-format
 msgid "Group %s edited successfully."
 msgstr "Die Gruppe %s wurde bearbeitet."
 
-#: pyClanSphere/views/admin.py:409
+#: pyClanSphere/views/admin.py:412
 msgid "Configuration altered successfully."
 msgstr "Die Konfiguration wurde verändert."
 
-#: pyClanSphere/views/admin.py:436
+#: pyClanSphere/views/admin.py:439
 msgid "URL configuration changed."
 msgstr "Die URL-Konfiguration wurde geändert."
 
-#: pyClanSphere/views/admin.py:457
+#: pyClanSphere/views/admin.py:460
 msgid "Theme changed successfully."
 msgstr "Das Design wurde gewechselt."
 
-#: pyClanSphere/views/admin.py:473
+#: pyClanSphere/views/admin.py:476
 msgid "This theme is not configurable"
 msgstr "Dieses Design kann nicht konfiguriert werden"
 
-#: pyClanSphere/views/admin.py:485
+#: pyClanSphere/views/admin.py:488
 msgid "Plugin configuration changed"
 msgstr "Die Plugin-Konfiguration wurde geändert."
 
-#: pyClanSphere/views/admin.py:494
+#: pyClanSphere/views/admin.py:497
 #, python-format
 msgid "Plugin “%s” added successfully. You can now enable it in the plugin list."
 msgstr ""
 "Plugin „%s“ wurde erfolgreich hinzugefügt.  Du kannst das Plugin nun "
 "aktivieren."
 
-#: pyClanSphere/views/admin.py:521
+#: pyClanSphere/views/admin.py:524
 #, python-format
 msgid ""
 "Could not remove the plugin “%s” because an IO error occurred. Wrong "
@@ -3682,32 +3687,32 @@ msgstr ""
 "Konnte das Plugin „%s“ nicht entfernen, weil ein Fehler aufgetreten ist.  "
 "Falsche Zugriffsrechte?"
 
-#: pyClanSphere/views/admin.py:524
+#: pyClanSphere/views/admin.py:527
 #, python-format
 msgid "The plugin “%s” was removed from the instance successfully."
 msgstr "Das Plugin „%s“ wurde erfolgreich entfernt."
 
-#: pyClanSphere/views/admin.py:542
+#: pyClanSphere/views/admin.py:545
 msgid "The cache was cleared successfully."
 msgstr "Der Cache wurde erfolgreich geleert."
 
-#: pyClanSphere/views/admin.py:546
+#: pyClanSphere/views/admin.py:549
 msgid "Cache settings were changed successfully."
 msgstr "Cacheinstellungen wurden erfolgreich geändert."
 
-#: pyClanSphere/views/admin.py:570
+#: pyClanSphere/views/admin.py:573
 msgid "Configuration updated successfully."
 msgstr "Die Konfiguration wurde erfolgreich geändert."
 
-#: pyClanSphere/views/admin.py:573
+#: pyClanSphere/views/admin.py:576
 msgid "Could not save the configuration because the configuration is invalid."
 msgstr "Konnte die Konfiguration nicht speichern, da die Konfiguration ungültig ist."
 
-#: pyClanSphere/views/admin.py:590
+#: pyClanSphere/views/admin.py:593
 msgid "Maintenance mode disabled.  The site is now publicly available."
 msgstr "Wartungsmodus deaktiviert.  Die Site ist nun öffentlich verfügbar."
 
-#: pyClanSphere/views/admin.py:688
+#: pyClanSphere/views/admin.py:691
 msgid "Log changes saved."
 msgstr "Protokolländerungen gespeichert."
 
