@@ -390,12 +390,10 @@ msgid "This username is already in use"
 msgstr "Der Benutzername ist bereits vergeben"
 
 #: pyClanSphere/forms.py:367 pyClanSphere/templates/account/imaccount_list.html:7
-#, fuzzy
 msgid "Service"
 msgstr "Services"
 
 #: pyClanSphere/forms.py:369
-#, fuzzy
 msgid "User"
 msgstr "Benutzer"
 
@@ -983,9 +981,8 @@ msgstr "Über den Benutzer"
 
 #: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:14
 #: pyClanSphere/templates/admin/edit_user.html:14
-#, fuzzy
 msgid "IM Accounts"
-msgstr "Keine Konten"
+msgstr "IM Konten"
 
 #: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:29
 msgid "Registered Game Accounts"
@@ -1237,7 +1234,7 @@ msgid "The entry %s was updated successfully."
 msgstr "Der Eintrag %s wurde aktualisiert."
 
 #: pyClanSphere/plugins/news/views.py:185
-#, fuzzy, python-format
+#, python-format
 msgid "The entry %s was deleted successfully"
 msgstr "Der Eintrag %s wurde erfolgreich gelöscht."
 
@@ -1303,12 +1300,11 @@ msgid "Pages"
 msgstr "Seiten"
 
 #: pyClanSphere/plugins/news/templates/admin/news_delete.html:2
-#, fuzzy
 msgid "Delete News"
-msgstr "kann News löschen"
+msgstr "News löschen"
 
 #: pyClanSphere/plugins/news/templates/admin/news_delete.html:6
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "\n"
 "      Do you really want to delete the entry “%(name)s”?\n"
@@ -1339,14 +1335,12 @@ msgid "Author"
 msgstr "Autor"
 
 #: pyClanSphere/plugins/shoutbox/forms.py:39
-#, fuzzy
 msgid "Text"
-msgstr "Weiter"
+msgstr "Text"
 
 #: pyClanSphere/plugins/shoutbox/privileges.py:27
-#, fuzzy
 msgid "can manage shoutbox entries"
-msgstr "kann Squads verwalten"
+msgstr "kann Shoutboxeinträge verwalten"
 
 #: pyClanSphere/plugins/shoutbox/templates/shoutbox_delete.html:2
 #: pyClanSphere/plugins/shoutbox/templates/shoutbox_delete.html:4
@@ -1354,14 +1348,14 @@ msgid "Delete Shoutbox Entry"
 msgstr ""
 
 #: pyClanSphere/plugins/shoutbox/templates/shoutbox_delete.html:6
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "\n"
 "      Do you really want to delete the entry from “%(name)s”?\n"
 "    "
 msgstr ""
 "\n"
-"      Möchtest du wirklich die Gruppe „%(name)s“ löschen?\n"
+"      Möchtest du wirklich den Eintrag „%(name)s“ löschen?\n"
 "   "
 
 #: pyClanSphere/plugins/shoutbox/templates/shoutbox_post.html:3
@@ -1440,14 +1434,12 @@ msgid "Maps"
 msgstr "Karten"
 
 #: pyClanSphere/plugins/war/__init__.py:33
-#, fuzzy
 msgid "Modes"
-msgstr "Spiele"
+msgstr "Modi"
 
 #: pyClanSphere/plugins/war/__init__.py:35
-#, fuzzy
 msgid "War Management"
-msgstr "kann Spiele verwalten"
+msgstr "War Management"
 
 #: pyClanSphere/plugins/war/forms.py:40
 #: pyClanSphere/plugins/war/templates/war_detail.html:8
@@ -1463,9 +1455,8 @@ msgstr "Homepage"
 #: pyClanSphere/plugins/war/templates/war_detail.html:19
 #: pyClanSphere/plugins/war/templates/admin/war_list.html:8
 #: pyClanSphere/plugins/war/templates/admin/warresult_edit.html:13
-#, fuzzy
 msgid "Date"
-msgstr "Aktiv"
+msgstr "Datum"
 
 #: pyClanSphere/plugins/war/forms.py:46
 msgid "Warmode"
@@ -1621,7 +1612,7 @@ msgid "Warmap %s was created successfully."
 msgstr "War Karte %s wurde erfolgreich erstellt."
 
 #: pyClanSphere/plugins/war/views.py:206
-#, fuzzy, python-format
+#, python-format
 msgid "Warmap %s was updated successfully."
 msgstr "War Karte %s wurde aktualisiert."
 
@@ -1750,7 +1741,6 @@ msgid "War Index"
 msgstr "Warübersicht"
 
 #: pyClanSphere/plugins/war/templates/war_index.html:24
-#, fuzzy
 msgid "So far there are no war entries here."
 msgstr "Momentan gibt es keine Einträge."
 
@@ -2218,7 +2208,7 @@ msgid "Remove IM account registration"
 msgstr "IM Kontoregistrierung entfernen"
 
 #: pyClanSphere/templates/account/imaccount_delete.html:6
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "\n"
 "      Service: <b>%(service)s</b><br>Account: "
@@ -2685,7 +2675,7 @@ msgstr ""
 "documentation</tt> im „scripts“-Ordner generieren."
 
 #: pyClanSphere/templates/admin/imaccount_delete.html:6
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "\n"
 "      Service: <b>%(service)s</b><br>\n"
@@ -3271,9 +3261,8 @@ msgid "Invalid security token submitted."
 msgstr "Ungültiges Sicherheits-Token übermittelt."
 
 #: pyClanSphere/utils/forms.py:1108
-#, fuzzy
 msgid "You entered an invalid captcha."
-msgstr "Du musst ein gültiges Datum angeben."
+msgstr "Du hast das Captcha falsch eingegeben."
 
 #: pyClanSphere/utils/forms.py:1161 pyClanSphere/utils/forms.py:1557
 #, python-format
@@ -3515,12 +3504,12 @@ msgid "IM account %s was added successfully."
 msgstr "IM Konto %s wurde hinzugefügt."
 
 #: pyClanSphere/views/account.py:255
-#, fuzzy, python-format
+#, python-format
 msgid "IM account %s was updated successfully."
 msgstr "IM Konto %s wurde aktualisiert."
 
 #: pyClanSphere/views/account.py:284 pyClanSphere/views/admin.py:323
-#, fuzzy, python-format
+#, python-format
 msgid "IM account %s was deleted successfully"
 msgstr "IM Konto %s wurde erfolgreich gelöscht."
 
