@@ -292,9 +292,9 @@ def delete_user(request, user_id):
         return form.redirect('admin/manage_users')
 
     if request.method == 'POST':
-        if request.form.get('cancel'):
+        if 'cancel' in request.form:
             return form.redirect('admin/edit_user', user_id=user.id)
-        elif request.form.get('confirm') and form.validate(request.form):
+        elif 'confirm' in request.form and form.validate(request.form):
             form.add_invalid_redirect_target('admin/edit_user', user_id=user.id)
             msg = _(u'User %s removed successfully.') % escape(user.display_name)
             icon = 'remove'

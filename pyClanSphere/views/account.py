@@ -212,9 +212,9 @@ def index(request):
 def profile(request):
     form = EditProfileForm(request.user)
     if request.method == 'POST':
-        if request.form.get('cancel'):
+        if 'cancel' in request.form:
             return form.redirect('account/index')
-        elif request.form.get('delete'):
+        elif 'delete' in request.form:
             return redirect_to('account/delete')
         elif form.validate(request.form):
             form.save_changes()
@@ -229,9 +229,9 @@ def profile(request):
 def delete_account(request):
     form = DeleteAccountForm(request.user)
     if request.method == 'POST':
-        if request.form.get('cancel'):
+        if 'cancel' in request.form:
             return form.redirect('account/profile')
-        elif request.form.get('confirm') and form.validate(request.form):
+        elif 'confirm' in request.form and form.validate(request.form):
             form.add_invalid_redirect_target('account/profile')
             form.delete_user()
             request.logout()
