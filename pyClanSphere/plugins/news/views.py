@@ -138,7 +138,7 @@ def edit_news(request, news_id=None):
     form = NewsForm(newsitem)
 
     if newsitem is None:
-        assert_privilege(NEWS_CREATE)
+        assert_privilege(privileges.NEWS_CREATE)
     else:
         if not newsitem.can_edit(request.user):
             raise Forbidden()
