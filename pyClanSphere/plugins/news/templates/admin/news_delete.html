@@ -1,0 +1,14 @@
+{% extends "admin/layout.html" %}
+{% block title %}{{ _("Delete News") }}{% endblock %}
+{% block contents %}
+  <h1>{{ self.title() }}</h1>
+  {% call form() %}
+    <p>{% trans name=form.newsitem.title %}
+      Do you really want to delete the entry “{{ name }}”?
+    {% endtrans %}</p>
+    <div class="actions">
+      <input type="submit" name="cancel" value="{{ _('No') }}">
+      <input type="submit" name="confirm" value="{{ _('Yes') }}">
+    </div>
+  {% endcall %}
+{% endblock %}

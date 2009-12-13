@@ -86,3 +86,20 @@ class NewsForm(forms.Form):
         """Apply the changes."""
         self._set_common_attributes(self.news)
         self.news.touch_times(self.data['pub_date'])
+
+
+class DeleteNewsForm(forms.Form):
+    """Used to remove a newsitem."""
+
+    def __init__(self, newsitem, initial=None):
+        forms.Form.__init__(self, initial)
+        self.newsitem = newsitem
+
+    def delete_news(self):
+        """Deletes the user."""
+        db.delete(self.newsitem)
+
+    def as_widget(self):
+        widget = forms.Form.as_widget(self)
+        widget.newsitem = self.newsitem
+        return widget

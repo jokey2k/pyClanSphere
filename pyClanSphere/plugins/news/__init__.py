@@ -67,8 +67,10 @@ def setup(app, plugin):
     # Register our admin views
     app.add_url_rule('/news', prefix='admin', defaults={'page': 1}, endpoint='admin/news_list',
                      view=views.news_list)
-    app.add_url_rule('/news/edit/<int:news_id>', prefix='admin', endpoint='admin/news_edit',
+    app.add_url_rule('/news/<int:news_id>', prefix='admin', endpoint='admin/news_edit',
                      view=views.edit_news)
+    app.add_url_rule('/news/<int:news_id>/delete', prefix='admin', endpoint='admin/news_delete',
+                     view=views.delete_news)
     app.add_url_rule('/news/new', prefix='admin', endpoint='admin/news_create',
                      view=views.edit_news)
 

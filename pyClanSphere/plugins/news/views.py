@@ -23,15 +23,15 @@ from pyClanSphere.i18n import _
 from pyClanSphere.utils.pagination import AdminPagination
 from pyClanSphere.privileges import assert_privilege
 from pyClanSphere.utils import dump_json, ClosingIterator, log
-from pyClanSphere.utils.admin import flash
+from pyClanSphere.utils.admin import require_admin_privilege, flash as admin_flash
 from pyClanSphere.utils.text import build_tag_uri
 from pyClanSphere.utils.http import redirect_to, redirect
 from pyClanSphere.utils.redirects import lookup_redirect
 from pyClanSphere.views.admin import render_admin_response, PER_PAGE
 
-from pyClanSphere.plugins.news.forms import NewsForm
+from pyClanSphere.plugins.news import privileges
+from pyClanSphere.plugins.news.forms import NewsForm, DeleteNewsForm
 from pyClanSphere.plugins.news.models import News
-from pyClanSphere.plugins.news.privileges import NEWS_CREATE
 
 # Public views
 
@@ -120,7 +120,7 @@ def news_list(request, page):
     if not newsitems and page != 1:
         raise NotFound()
 
-    can_create = request.user.has_privilege(NEWS_CREATE)
+    can_create = request.user.has_privilege(privileges.NEWS_CREATE)
 
     return render_admin_response('admin/news_list.html', 'news.list',
                                  newsitems=newsitems, pagination=pagination,
@@ -146,6 +146,8 @@ def edit_news(request, news_id=None):
     if request.method == 'POST':
         if 'cancel' in request.form:
             return form.redirect('admin/news_list')
+        elif 'delete' in request.form:
+            return redirect_to('admin/news_delete', news_id=news_id)
         elif form.validate(request.form):
             if newsitem is None:
                 newsitem = form.make_news(request.user)
@@ -154,11 +156,34 @@ def edit_news(request, news_id=None):
                 form.save_changes()
                 msg = _('The entry %s was updated successfully.')
 
-            flash(msg % (escape(newsitem.title)))
+            admin_flash(msg % (escape(newsitem.title)))
 
             db.commit()
             if 'save_and_continue' in request.form:
                 return redirect_to('admin/news_edit', news_id=newsitem.id)
             return form.redirect('admin/news_list')
     return render_admin_response('admin/news_edit.html', 'news.edit',
+                                 form=form.as_widget())
+
+@require_admin_privilege(privileges.NEWS_DELETE)
+def delete_news(request, news_id=None):
+    """Remove given news entry"""
+
+    newsitem = News.query.get(news_id)
+    if newsitem is None:
+        raise NotFound()
+    form = DeleteNewsForm(newsitem)
+
+    if request.method == 'POST':
+        if 'cancel' in request.form:
+            return form.redirect('admin/news_edit', news_id=news_id)
+        elif 'confirm' in request.form and form.validate(request.form):
+            form.add_invalid_redirect_target('admin/news_edit', news_id=news_id)
+            title = str(newsitem.title)
+            form.delete_news()
+            db.commit()
+            admin_flash(_('The entry %s was deleted successfully') % title, 'remove')
+            return form.redirect('admin/news_list')
+
+    return render_admin_response('admin/news_delete.html', 'news.edit',
                                  form=form.as_widget())
