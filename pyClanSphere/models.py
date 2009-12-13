@@ -11,12 +11,14 @@
 from math import log
 from datetime import date, datetime, timedelta
 from urlparse import urljoin
+from uuid import uuid4
 
 from werkzeug.exceptions import NotFound
 
 from pyClanSphere.database import users, groups, group_users, \
      privileges, user_privileges, group_privileges, \
-     notification_subscriptions, imaccounts, db
+     notification_subscriptions, imaccounts, db, passwordrequests
+from pyClanSphere.i18n import parse_datetime
 from pyClanSphere.utils.text import gen_slug, build_tag_uri, \
      increment_string
 from pyClanSphere.utils.pagination import Pagination
@@ -268,6 +270,21 @@ class IMAccount(object):
         )
 
 
+class PasswordRequest(object):
+    """Object to handle forgotten passwords"""
+
+    def __init__(self, user, ip):
+        self.user = user
+        self.ip = ip
+        self.req_id = str(uuid4())
+        self.requesttime = parse_datetime('now')
+
+    def __repr__(self):
+        return "<%s for %s>" % (
+            self.__class__.__name__,
+            self.user
+        )
+
 # connect the tables.
 db.mapper(User, users, properties={
     'id':               users.c.user_id,
@@ -303,4 +320,7 @@ db.mapper(NotificationSubscription, notification_subscriptions, properties={
 })
 db.mapper(IMAccount, imaccounts, properties={
     'id':           imaccounts.c.account_id
+})
+db.mapper(PasswordRequest, passwordrequests, properties={
+    'user':         db.relation(User, uselist=False, lazy=True)
 })

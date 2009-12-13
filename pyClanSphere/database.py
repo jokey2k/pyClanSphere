@@ -306,6 +306,13 @@ imaccounts = db.Table('imaccounts', metadata,
     db.UniqueConstraint('user_id', 'service', 'account')
 )
 
+passwordrequests = db.Table('passwordrequests', metadata,
+    db.Column('req_id', db.String(36), primary_key=True),
+    db.Column('user_id', db.ForeignKey('users.user_id')),
+    db.Column('ip', db.String(64)),
+    db.Column('requesttime', db.DateTime)
+)
+
 def init_database(engine):
     """This is called from the websetup which explains why it takes an engine
     and not a pyClanSphere application.

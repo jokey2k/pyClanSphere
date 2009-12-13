@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pyClanSphere 0.1\n"
 "Report-Msgid-Bugs-To: mail@markus-ullmann.de\n"
 "POT-Creation-Date: 2009-08-22 19:19+0200\n"
-"PO-Revision-Date: 2009-12-13 21:09+0100\n"
+"PO-Revision-Date: 2009-12-13 23:46+0100\n"
 "Last-Translator: Markus Ullmann <mail@markus-ullmann.de>\n"
 "Language-Team: de <pyclansphere@digital-family.de>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -224,12 +224,12 @@ msgstr ""
 msgid "Could not save configuration file: %s"
 msgstr "Konnte die Konfigurationsdatei %s nicht speichern."
 
-#: pyClanSphere/forms.py:44
+#: pyClanSphere/forms.py:44 pyClanSphere/forms.py:89
 #, python-format
 msgid "User “%(value)s” does not exist."
 msgstr "Benutzer „%(value)s” existiert nicht."
 
-#: pyClanSphere/forms.py:45
+#: pyClanSphere/forms.py:45 pyClanSphere/forms.py:90
 msgid "You have to enter a username."
 msgstr "Du musst einen Benutzernamen angeben."
 
@@ -263,226 +263,232 @@ msgstr "Passwort wiederholen"
 msgid "The old password you've entered is wrong."
 msgstr "Das alte eingegebene Passwort ist falsch."
 
-#: pyClanSphere/forms.py:81 pyClanSphere/forms.py:312
+#: pyClanSphere/forms.py:81 pyClanSphere/forms.py:330
 msgid "The two passwords don't match."
 msgstr "Die zwei Passwörter stimmen nicht überein."
 
-#: pyClanSphere/forms.py:87
+#: pyClanSphere/forms.py:92
+#, python-format
+msgid "User “%s” does not exist for password request"
+msgstr "Benutzer “%s” existiert nicht für einen Passwortreset"
+
+#: pyClanSphere/forms.py:105
 msgid "Disable plugin guard"
 msgstr "Plugin-Guard deaktivieren"
 
-#: pyClanSphere/forms.py:88
+#: pyClanSphere/forms.py:106
 msgid "If the plugin guard is disabled errors on plugin setup are not caught."
 msgstr ""
 "Wenn der Plugin-Guard deaktiviert ist, werden keine Fehler während des "
 "Plugin-Starts abgefangen."
 
-#: pyClanSphere/forms.py:138 pyClanSphere/templates/admin/manage_groups.html:8
+#: pyClanSphere/forms.py:156 pyClanSphere/templates/admin/manage_groups.html:8
 msgid "Groupname"
 msgstr "Gruppenname"
 
-#: pyClanSphere/forms.py:141 pyClanSphere/forms.py:290
+#: pyClanSphere/forms.py:159 pyClanSphere/forms.py:308
 #: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:12
 #: pyClanSphere/templates/admin/edit_user.html:12
 #: pyClanSphere/templates/admin/information.html:102
 msgid "Privileges"
 msgstr "Berechtigungen"
 
-#: pyClanSphere/forms.py:158
+#: pyClanSphere/forms.py:176
 msgid "This groupname is already in use"
 msgstr "Der Gruppenname ist bereits vergeben"
 
-#: pyClanSphere/forms.py:180
+#: pyClanSphere/forms.py:198
 msgid "What should pyClanSphere do with users assigned to this group?"
 msgstr "Wie soll mit Benutzern dieser Gruppe verfahren werden?"
 
-#: pyClanSphere/forms.py:183
+#: pyClanSphere/forms.py:201
 msgid "Do nothing, just detach the membership"
 msgstr "Nichts, nur die Mitgliedschaft auflösen"
 
-#: pyClanSphere/forms.py:184
+#: pyClanSphere/forms.py:202
 msgid "Move the users to another group"
 msgstr "Die Benutzer in eine andere Gruppe verschieben"
 
-#: pyClanSphere/forms.py:186
+#: pyClanSphere/forms.py:204
 msgid "Relocate users to"
 msgstr "Verschiebe die Benutzer in die Gruppe"
 
-#: pyClanSphere/forms.py:199
+#: pyClanSphere/forms.py:217
 msgid "You have to select a group that gets the users assigned."
 msgstr "Du musst eine Gruppe auswählen, welche die Benutzer aufnimmt"
 
-#: pyClanSphere/forms.py:222 pyClanSphere/forms.py:259
+#: pyClanSphere/forms.py:240 pyClanSphere/forms.py:277
 #: pyClanSphere/templates/account/login.html:29
+#: pyClanSphere/templates/account/lost_password.html:29
 #: pyClanSphere/templates/admin/manage_users.html:8
 #: pyClanSphere/websetup/templates/admin_account.html:10
 msgid "Username"
 msgstr "Benutzername"
 
-#: pyClanSphere/forms.py:225 pyClanSphere/forms.py:260
+#: pyClanSphere/forms.py:243 pyClanSphere/forms.py:278
 #: pyClanSphere/templates/admin/manage_users.html:9
 msgid "Realname"
 msgstr "Voller Name"
 
-#: pyClanSphere/forms.py:226
+#: pyClanSphere/forms.py:244
 msgid "Display name"
 msgstr "Anzeigename"
 
-#: pyClanSphere/forms.py:227 pyClanSphere/plugins/war/forms.py:52
+#: pyClanSphere/forms.py:245 pyClanSphere/plugins/war/forms.py:52
 msgid "Email"
 msgstr "E-Mail"
 
-#: pyClanSphere/forms.py:229
+#: pyClanSphere/forms.py:247
 msgid "Website"
 msgstr "Webseite"
 
-#: pyClanSphere/forms.py:231
+#: pyClanSphere/forms.py:249
 msgid "Gender"
 msgstr "Geschlecht"
 
-#: pyClanSphere/forms.py:232
+#: pyClanSphere/forms.py:250
 msgid "Day of Birth"
 msgstr "Geburtstag"
 
-#: pyClanSphere/forms.py:233
+#: pyClanSphere/forms.py:251
 msgid "Height in full cm"
 msgstr "Größe in ganzen cm"
 
-#: pyClanSphere/forms.py:234
+#: pyClanSphere/forms.py:252
 msgid "Streetaddress"
 msgstr "Straße"
 
-#: pyClanSphere/forms.py:235
+#: pyClanSphere/forms.py:253
 msgid "Zip code"
 msgstr "PLZ"
 
-#: pyClanSphere/forms.py:236
+#: pyClanSphere/forms.py:254
 msgid "City"
 msgstr "Ort"
 
-#: pyClanSphere/forms.py:237
+#: pyClanSphere/forms.py:255
 msgid "Country"
 msgstr "Land"
 
-#: pyClanSphere/forms.py:263
+#: pyClanSphere/forms.py:281
 msgid "Male"
 msgstr "männlich"
 
-#: pyClanSphere/forms.py:264
+#: pyClanSphere/forms.py:282
 msgid "Female"
 msgstr "weiblich"
 
-#: pyClanSphere/forms.py:292 pyClanSphere/views/admin.py:74
+#: pyClanSphere/forms.py:310 pyClanSphere/views/admin.py:74
 msgid "Groups"
 msgstr "Gruppen"
 
-#: pyClanSphere/forms.py:294 pyClanSphere/templates/account/login.html:32
-#: pyClanSphere/views/account.py:47
+#: pyClanSphere/forms.py:312 pyClanSphere/templates/account/login.html:32
+#: pyClanSphere/views/account.py:48
 #: pyClanSphere/websetup/templates/admin_account.html:12
 msgid "Password"
 msgstr "Passwort"
 
-#: pyClanSphere/forms.py:296
+#: pyClanSphere/forms.py:314
 msgid "Confirm password"
 msgstr "Passwort bestätigen"
 
-#: pyClanSphere/forms.py:319
+#: pyClanSphere/forms.py:337
 msgid "This username is already in use"
 msgstr "Der Benutzername ist bereits vergeben"
 
-#: pyClanSphere/forms.py:371 pyClanSphere/templates/account/imaccount_list.html:7
+#: pyClanSphere/forms.py:389 pyClanSphere/templates/account/imaccount_list.html:7
 msgid "Service"
 msgstr "Services"
 
-#: pyClanSphere/forms.py:373
+#: pyClanSphere/forms.py:391
 msgid "User"
 msgstr "Benutzer"
 
-#: pyClanSphere/forms.py:375 pyClanSphere/plugins/gamesquad/forms.py:366
+#: pyClanSphere/forms.py:393 pyClanSphere/plugins/gamesquad/forms.py:366
 msgid "Account ID"
 msgstr "Konto ID"
 
-#: pyClanSphere/forms.py:404 pyClanSphere/plugins/gamesquad/forms.py:392
+#: pyClanSphere/forms.py:422 pyClanSphere/plugins/gamesquad/forms.py:392
 msgid "This account is already registered"
 msgstr "Der Accountname ist bereits vergeben"
 
-#: pyClanSphere/forms.py:433
+#: pyClanSphere/forms.py:451
 msgid "This email address is already in use"
 msgstr "Diese E-Mail Adresse wird bereits verwendet"
 
-#: pyClanSphere/forms.py:442
+#: pyClanSphere/forms.py:460
 msgid "Passwords do not match"
 msgstr "Die Passwörter stimmen nicht überein."
 
-#: pyClanSphere/forms.py:492
+#: pyClanSphere/forms.py:510
 msgid "Filename"
 msgstr "Dateiname"
 
-#: pyClanSphere/forms.py:493
+#: pyClanSphere/forms.py:511
 msgid "Log Level"
 msgstr "Log-Level"
 
-#: pyClanSphere/forms.py:498
+#: pyClanSphere/forms.py:516
 msgid "Clan Page title"
 msgstr "Seitentitel"
 
-#: pyClanSphere/forms.py:499
+#: pyClanSphere/forms.py:517
 msgid "Clan Page tagline"
 msgstr "Tags Zeile im Seitenkopf"
 
-#: pyClanSphere/forms.py:500
+#: pyClanSphere/forms.py:518
 msgid "Clan email"
 msgstr "Clan E-Mail"
 
-#: pyClanSphere/forms.py:501
+#: pyClanSphere/forms.py:519
 msgid "Language"
 msgstr "Sprache"
 
-#: pyClanSphere/forms.py:502
+#: pyClanSphere/forms.py:520
 msgid "Timezone"
 msgstr "Zeitzone"
 
-#: pyClanSphere/forms.py:504
+#: pyClanSphere/forms.py:522
 msgid "Cookie Name"
 msgstr "Cookie-Name"
 
-#: pyClanSphere/forms.py:517
+#: pyClanSphere/forms.py:535
 msgid "Admin URL prefix"
 msgstr "Admin URL-Präfix"
 
-#: pyClanSphere/forms.py:519
+#: pyClanSphere/forms.py:537
 msgid "Account URL prefix"
 msgstr "Konto URL-Präfix"
 
-#: pyClanSphere/forms.py:520
+#: pyClanSphere/forms.py:538
 msgid "Force HTTPS"
 msgstr "HTTPS erzwingen"
 
-#: pyClanSphere/forms.py:544
+#: pyClanSphere/forms.py:562
 msgid "Cache system"
 msgstr "Cache-System"
 
-#: pyClanSphere/forms.py:546
+#: pyClanSphere/forms.py:564
 msgid "Default cache timeout"
 msgstr "Standardmäßiger Timeout"
 
-#: pyClanSphere/forms.py:548
+#: pyClanSphere/forms.py:566
 msgid "Enable eager caching"
 msgstr "Eager caching aktivieren"
 
-#: pyClanSphere/forms.py:549
+#: pyClanSphere/forms.py:567
 msgid "Enable"
 msgstr "Aktivieren"
 
-#: pyClanSphere/forms.py:556
+#: pyClanSphere/forms.py:574
 msgid "You have to provide at least one server to use memcached."
 msgstr "Du musst mindestens einen Server angeben, wenn memcached aktiviert ist."
 
-#: pyClanSphere/forms.py:560
+#: pyClanSphere/forms.py:578
 msgid "You have to provide cache folder to use filesystem cache."
 msgstr "Du musst einen Pfad für den Dateisystem-Cache angeben."
 
-#: pyClanSphere/forms.py:581
+#: pyClanSphere/forms.py:599
 msgid "Use default value"
 msgstr "Benutze Standardwert"
 
@@ -931,6 +937,7 @@ msgstr "Löschen"
 #: pyClanSphere/plugins/war/templates/admin/war_edit.html:67
 #: pyClanSphere/templates/account/change_password.html:9
 #: pyClanSphere/templates/account/edit_profile.html:14
+#: pyClanSphere/templates/account/reset_password.html:9
 #: pyClanSphere/templates/admin/_form_helpers.html:46
 #: pyClanSphere/templates/admin/edit_group.html:18
 msgid "Cancel"
@@ -2180,6 +2187,9 @@ msgstr "pyClanSphere-Wartungsmodus aktivieren"
 #: pyClanSphere/templates/account/change_password.html:2
 #: pyClanSphere/templates/account/change_password.html:4
 #: pyClanSphere/templates/account/change_password.html:8
+#: pyClanSphere/templates/account/reset_password.html:2
+#: pyClanSphere/templates/account/reset_password.html:4
+#: pyClanSphere/templates/account/reset_password.html:8
 msgid "Change Password"
 msgstr "Passwort ändern"
 
@@ -2256,7 +2266,7 @@ msgstr "Konto hinzufügen"
 #: pyClanSphere/templates/account/index.html:2
 #: pyClanSphere/templates/account/index.html:5
 #: pyClanSphere/templates/admin/index.html:2
-#: pyClanSphere/templates/admin/index.html:5 pyClanSphere/views/account.py:44
+#: pyClanSphere/templates/admin/index.html:5 pyClanSphere/views/account.py:45
 #: pyClanSphere/views/admin.py:64
 msgid "Dashboard"
 msgstr "Dashboard"
@@ -2275,7 +2285,7 @@ msgstr "Schnellstart"
 msgid "Set new password"
 msgstr "Neues Passwort"
 
-#: pyClanSphere/templates/account/index.html:16 pyClanSphere/views/account.py:51
+#: pyClanSphere/templates/account/index.html:16 pyClanSphere/views/account.py:52
 msgid "Notifications"
 msgstr "Benachrichtigungen"
 
@@ -2312,12 +2322,36 @@ msgid "Login"
 msgstr "Anmelden"
 
 #: pyClanSphere/templates/account/login.html:11
+#: pyClanSphere/templates/account/lost_password.html:11
+#: pyClanSphere/templates/account/lost_password_sent.html:11
 msgid "&laquo; back to the startpage"
 msgstr "&laquo; zurück zur Startseite"
+
+#: pyClanSphere/templates/account/login.html:17
+msgid "forgot password?"
+msgstr "Passwort vergessen?"
 
 #: pyClanSphere/templates/account/login.html:42
 msgid "Remember me"
 msgstr "An Konto erinnern"
+
+#: pyClanSphere/templates/account/lost_password.html:5
+#: pyClanSphere/templates/account/lost_password.html:15
+msgid "Lost password"
+msgstr "Passwort vergessen"
+
+#: pyClanSphere/templates/account/lost_password.html:34
+msgid "Request password"
+msgstr "Passwort anfordern"
+
+#: pyClanSphere/templates/account/lost_password_sent.html:5
+#: pyClanSphere/templates/account/lost_password_sent.html:16
+msgid "Lost password request sent"
+msgstr "Passwortanfragemail gesendet"
+
+#: pyClanSphere/templates/account/lost_password_sent.html:15
+msgid "Lost password request"
+msgstr "Passwort vergessen"
 
 #: pyClanSphere/templates/account/notification_settings.html:2
 #: pyClanSphere/templates/account/notification_settings.html:4
@@ -3405,7 +3439,7 @@ msgstr "Gib diese zwei Wörter ein:"
 msgid "Type what you hear:"
 msgstr "Gib ein was du hörst:"
 
-#: pyClanSphere/utils/recaptcha.py:60 pyClanSphere/views/account.py:60
+#: pyClanSphere/utils/recaptcha.py:60 pyClanSphere/views/account.py:61
 #: pyClanSphere/views/admin.py:89
 msgid "Help"
 msgstr "Hilfe"
@@ -3487,45 +3521,49 @@ msgstr "Unbekannter Formatierungscode %s."
 msgid "The text must not be empty."
 msgstr "Der Text darf nicht leer sein."
 
-#: pyClanSphere/views/account.py:45 pyClanSphere/views/account.py:46
+#: pyClanSphere/views/account.py:46 pyClanSphere/views/account.py:47
 msgid "Profile"
 msgstr "Profil"
 
-#: pyClanSphere/views/account.py:49
+#: pyClanSphere/views/account.py:50
 msgid "IM accounts"
 msgstr "IM Konten"
 
-#: pyClanSphere/views/account.py:56
+#: pyClanSphere/views/account.py:57
 msgid "About"
 msgstr "Über"
 
-#: pyClanSphere/views/account.py:62 pyClanSphere/views/admin.py:101
+#: pyClanSphere/views/account.py:63 pyClanSphere/views/admin.py:101
 msgid "System"
 msgstr "System"
 
-#: pyClanSphere/views/account.py:183
+#: pyClanSphere/views/account.py:148
+msgid "Your lost password request"
+msgstr "Ihr verlorenes Passwort"
+
+#: pyClanSphere/views/account.py:222
 msgid "Your profile was updated successfully."
 msgstr "Dein Profil wurde aktualisiert."
 
-#: pyClanSphere/views/account.py:212
+#: pyClanSphere/views/account.py:251
 msgid "Notification settings changed."
 msgstr "Benachrichtigungseinstellungen wurden geändert."
 
-#: pyClanSphere/views/account.py:237
+#: pyClanSphere/views/account.py:276
 msgid "Password changed successfully."
 msgstr "Das Passwort wurde erfolgreich geändert."
 
-#: pyClanSphere/views/account.py:275
+#: pyClanSphere/views/account.py:314
 #, python-format
 msgid "IM account %s was added successfully."
 msgstr "IM Konto %s wurde hinzugefügt."
 
-#: pyClanSphere/views/account.py:279
+#: pyClanSphere/views/account.py:318
 #, python-format
 msgid "IM account %s was updated successfully."
 msgstr "IM Konto %s wurde aktualisiert."
 
-#: pyClanSphere/views/account.py:309 pyClanSphere/views/admin.py:323
+#: pyClanSphere/views/account.py:348 pyClanSphere/views/admin.py:323
 #, python-format
 msgid "IM account %s was deleted successfully"
 msgstr "IM Konto %s wurde erfolgreich gelöscht."

@@ -20,3 +20,4 @@ def index(request):
     """Just show the pyClanSphere license and some other legal stuff."""
     return render_response('index.html')
 
+

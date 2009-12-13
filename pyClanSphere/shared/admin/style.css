@@ -1278,6 +1278,10 @@ div.login-box div.notice {
     border-radius: 3px;
 }
 
+div.login-box div.error a {
+    color: #ffa800;
+}
+
 div.login-box form {
     text-align: center;
 }
@@ -1343,6 +1347,27 @@ div.login-box input[type="submit"]:hover {
 }
 
 div.login-box input[type="submit"]:focus {
+    background: #D3E4EB;
+}
+
+div.login-box input[name="request"] {
+    display: block;
+    margin: 20px auto 0 auto;
+    background-color: #ebf0f3;
+    width: 180px;
+    color: #224466;
+    border: 1px solid #ccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+div.login-box input[name="request"]:hover {
+    background-color: white;
+}
+
+div.login-box input[name="request"]:focus {
     background: #D3E4EB;
 }
 

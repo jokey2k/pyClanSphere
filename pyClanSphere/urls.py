@@ -19,6 +19,8 @@ def make_urls(app):
             Rule('/', endpoint='account/index'),
             Rule('/login', endpoint='account/login'),
             Rule('/logout', endpoint='account/logout'),
+            Rule('/lost_password', endpoint='account/lost_password'),
+            Rule('/reset_password/<string(length=36):req_id>', endpoint='account/reset_password'),
             Rule('/delete', endpoint='account/delete'),
             Rule('/profile', endpoint='account/profile'),
             Rule('/password', endpoint='account/password'),

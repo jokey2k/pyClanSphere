@@ -14,7 +14,7 @@ from pyClanSphere.i18n import _, lazy_gettext, list_languages
 from pyClanSphere.application import get_application, get_request, emit_event
 from pyClanSphere.config import DEFAULT_VARS
 from pyClanSphere.database import db, notification_subscriptions
-from pyClanSphere.models import User, Group, NotificationSubscription, IMAccount
+from pyClanSphere.models import User, Group, NotificationSubscription, IMAccount, PasswordRequest
 from pyClanSphere.privileges import bind_privileges
 from pyClanSphere.notifications import send_notification_template
 from pyClanSphere.utils import forms, log, dump_json
@@ -79,6 +79,24 @@ class ChangePasswordForm(forms.Form):
     def context_validate(self, data):
         if data['new_password'] != data['check_password']:
             raise ValidationError(_('The two passwords don\'t match.'))
+
+    def set_password(self):
+        self.user.set_password(self.data['new_password'])
+
+class PasswordRequestForm(forms.Form):
+    """The form for the login page."""
+    user = forms.ModelField(User, 'username', required=True, messages=dict(
+        not_found=lazy_gettext(u'User “%(value)s” does not exist.'),
+        required=lazy_gettext(u'You have to enter a username.')
+    ), on_not_found=lambda user:
+        log.warning(_(u'User “%s” does not exist for password request')
+                      % user, 'auth')
+    )
+
+    def create_request(self):
+        """Create a PasswordRequest for this user"""
+        request = PasswordRequest(self.data['user'],self.request.remote_addr)
+        return request
 
 
 class PluginForm(forms.Form):

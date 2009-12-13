@@ -15,12 +15,13 @@ from werkzeug.exceptions import NotFound, Forbidden
 from pyClanSphere.api import *
 from pyClanSphere.forms import LoginForm, DeleteAccountForm, EditProfileForm, \
      make_notification_form, DeleteIMAccountForm, EditIMAccountForm, \
-     ChangePasswordForm
-from pyClanSphere.models import IMAccount
+     ChangePasswordForm, PasswordRequestForm
+from pyClanSphere.models import IMAccount, PasswordRequest
 from pyClanSphere.i18n import _, ngettext
 from pyClanSphere.privileges import ENTER_ADMIN_PANEL
 from pyClanSphere.utils.account import flash, require_account_privilege
 from pyClanSphere.utils.http import redirect_back, redirect_to
+from pyClanSphere.utils.mail import send_email
 from pyClanSphere.utils.pagination import AdminPagination
 
 
@@ -133,6 +134,44 @@ def logout(request):
     return redirect_back('account/login')
 
 
+def lost_password(request):
+    """Help users with forgotten passwords."""
+    form = PasswordRequestForm()
+
+    if request.method == 'POST' and form.validate(request.form):
+        reset_request = form.create_request()
+        db.commit()
+        text = render_template('notifications/lost_password.txt',
+                               req_id=reset_request.req_id,
+                               user=reset_request.user,
+                               siteurl=get_application().cfg['site_url'].rstrip('/'))
+        send_email(_('Your lost password request'), text, reset_request.user.email)
+        return render_response('account/lost_password_sent.html')
+
+    return render_response('account/lost_password.html', form=form.as_widget())
+
+def reset_password(request, req_id=None):
+    """Help users with forgotten passwords."""
+
+    if req_id is None:
+        raise NotFound()
+    reset_request = PasswordRequest.query.get(req_id)
+    if reset_request is None:
+        raise NotFound()
+
+    form = ChangePasswordForm(reset_request.user)
+    del form.old_password
+
+    if request.method == 'POST' and form.validate(request.form):
+        form.set_password()
+        request.login(reset_request.user)
+        db.delete(reset_request)
+        db.commit()
+        return form.redirect('account/index')
+
+    return render_account_response('account/reset_password.html', form=form.as_widget())
+
+
 @require_account_privilege()
 def about_pyClanSphere(request):
     """Just show the pyClanSphere license and some other legal stuff."""
@@ -232,7 +271,7 @@ def change_password(request):
         if request.form.get('cancel'):
             return form.redirect('account/index')
         if form.validate(request.form):
-            form.user.set_password(form['new_password'])
+            form.set_password()
             db.commit()
             flash(_(u'Password changed successfully.'), 'configure')
             return form.redirect('account/index')

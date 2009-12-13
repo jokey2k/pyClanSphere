@@ -24,6 +24,8 @@ all_views = {
     'account/index':            account.index,
     'account/login':            account.login,
     'account/logout':           account.logout,
+    'account/lost_password':    account.lost_password,
+    'account/reset_password':   account.reset_password,
     'account/delete':           account.delete_account,
     'account/about_pyClanSphere':       account.about_pyClanSphere,
     'account/help':             account.help,
