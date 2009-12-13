@@ -228,10 +228,6 @@ class _UserBoundForm(forms.Form):
                             validators=[is_valid_email()])
     www = forms.TextField(lazy_gettext(u'Website'),
                           validators=[is_valid_url()])
-    password = forms.TextField(lazy_gettext(u'Password'),
-                               widget=forms.PasswordInput)
-    password_confirm = forms.TextField(lazy_gettext(u'Confirm password'),
-                                       widget=forms.PasswordInput)
     gender_male = forms.ChoiceField(lazy_gettext(u'Gender'))
     birthday = forms.DateField(lazy_gettext(u'Day of Birth'))
     height = forms.IntegerField(lazy_gettext(u'Height in full cm'))
@@ -295,6 +291,10 @@ class EditUserForm(_UserBoundForm):
                                         widget=forms.CheckboxGroup)
     groups = forms.MultiChoiceField(lazy_gettext(u'Groups'),
                                     widget=forms.CheckboxGroup)
+    password = forms.TextField(lazy_gettext(u'Password'),
+                               widget=forms.PasswordInput)
+    password_confirm = forms.TextField(lazy_gettext(u'Confirm password'),
+                                       widget=forms.PasswordInput)
 
     def __init__(self, user=None, initial=None):
         if user is not None:
@@ -306,6 +306,10 @@ class EditUserForm(_UserBoundForm):
         self.privileges.choices = self.app.list_privileges()
         self.groups.choices = [g.name for g in Group.query.all()]
         self.password.required = user is None
+
+    def context_validate(self, data):
+        if data['password'] != data['password_confirm']:
+            raise ValidationError(_('The two passwords don\'t match.'))
 
     def validate_username(self, value):
         query = User.query.filter_by(username=value)

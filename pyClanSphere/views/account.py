@@ -14,7 +14,8 @@ from werkzeug.exceptions import NotFound, Forbidden
 
 from pyClanSphere.api import *
 from pyClanSphere.forms import LoginForm, DeleteAccountForm, EditProfileForm, \
-     make_notification_form, DeleteIMAccountForm, EditIMAccountForm
+     make_notification_form, DeleteIMAccountForm, EditIMAccountForm, \
+     ChangePasswordForm
 from pyClanSphere.models import IMAccount
 from pyClanSphere.i18n import _, ngettext
 from pyClanSphere.privileges import ENTER_ADMIN_PANEL
@@ -41,7 +42,10 @@ def render_account_response(template_name, _active_menu_item=None, **values):
     # set up the core navigation bar
     navigation_bar = [
         ('dashboard', url_for('account/index'), _(u'Dashboard'), []),
-        ('profile', url_for('account/profile'), _(u'Profile'), []),
+        ('profile', url_for('account/profile'), _(u'Profile'), [
+            ('profile', url_for('account/profile'), _(u'Profile')),
+            ('password', url_for('account/password'), _(u'Password'))
+        ]),
         ('imaccounts', url_for('account/imaccount_list'), _('IM accounts'), []),
         ('notifications', url_for('account/notification_settings'),
          _(u'Notifications'), [])
@@ -178,7 +182,7 @@ def profile(request):
             db.commit()
             flash(_(u'Your profile was updated successfully.'), 'info')
             return form.redirect('account/index')
-    return render_account_response('account/edit_profile.html', 'profile',
+    return render_account_response('account/edit_profile.html', 'profile.profile',
                                    form=form.as_widget())
 
 
@@ -194,7 +198,7 @@ def delete_account(request):
             request.logout()
             db.commit()
             return render_response('account/sorry_to_see_you_go.html')
-    return render_account_response('account/delete_account.html', 'profile',
+    return render_account_response('account/delete_account.html', 'profile.profile',
                                    form=form.as_widget())
 
 
@@ -217,6 +221,26 @@ def notification_settings(request):
             key=lambda x: x.description.lower()
         )
     )
+
+
+@require_account_privilege()
+def change_password(request):
+    """Allow the current user to change his password."""
+    form = ChangePasswordForm(request.user)
+
+    if request.method == 'POST':
+        if request.form.get('cancel'):
+            return form.redirect('account/index')
+        if form.validate(request.form):
+            form.user.set_password(form['new_password'])
+            db.commit()
+            flash(_(u'Password changed successfully.'), 'configure')
+            return form.redirect('account/index')
+
+    return render_account_response('account/change_password.html','profile.password',
+        form=form.as_widget()
+    )
+
 
 @require_account_privilege()
 def imaccount_list(request, page):
@@ -262,6 +286,7 @@ def imaccount_edit(request, account_id=None):
             return form.redirect('account/imaccount_list')
     return render_account_response('account/imaccount_edit.html', 'imaccounts',
                                     form=form.as_widget())
+
 
 @require_account_privilege()
 def imaccount_delete(request, account_id):

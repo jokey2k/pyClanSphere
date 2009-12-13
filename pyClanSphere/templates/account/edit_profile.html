@@ -4,8 +4,8 @@
 {% block contents %}
   <h1>{{ self.title() }}</h1>
   {% call form() %}
-  {{ render_formmultibox([form.display_name, form.password, form.password_confirm, 
-                          form.email], _("Core account data"), toggleable=false) }}
+  {{ render_formmultibox([form.display_name, form.email],
+                         _("Core account data"), toggleable=false) }}
   {{ render_formmultibox([form.real_name, form.address, form.zip,
                           form.city, form.country, form.www, form.gender_male,
                           form.birthday, form.height], _("About me")) }}

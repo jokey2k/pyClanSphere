@@ -692,24 +692,6 @@ def log(request, page):
 
 
 @require_admin_privilege()
-def change_password(request):
-    """Allow the current user to change his password."""
-    form = ChangePasswordForm(request.user)
-
-    if request.method == 'POST':
-        if request.form.get('cancel'):
-            return form.redirect('admin/index')
-        if form.validate(request.form):
-            form.user.set_password(form['new_password'])
-            db.commit()
-            flash(_(u'Password changed successfully.'), 'configure')
-            return form.redirect('admin/index')
-
-    return render_admin_response('admin/change_password.html',
-        form=form.as_widget()
-    )
-
-@require_admin_privilege()
 def help(req, page=''):
     """Show help page."""
     from pyClanSphere.docs import load_page, get_resource

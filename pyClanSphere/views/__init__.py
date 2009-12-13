@@ -28,6 +28,7 @@ all_views = {
     'account/about_pyClanSphere':       account.about_pyClanSphere,
     'account/help':             account.help,
     'account/profile':          account.profile,
+    'account/password':         account.change_password,
     'account/notification_settings':
                                 account.notification_settings,
     'account/imaccount_list':   account.imaccount_list,

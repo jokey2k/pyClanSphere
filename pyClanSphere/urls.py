@@ -21,6 +21,7 @@ def make_urls(app):
             Rule('/logout', endpoint='account/logout'),
             Rule('/delete', endpoint='account/delete'),
             Rule('/profile', endpoint='account/profile'),
+            Rule('/password', endpoint='account/password'),
             Rule('/notifications', endpoint='account/notification_settings'),
             Rule('/system/about', endpoint='account/about_pyClanSphere'),
             Rule('/system/help/', endpoint='account/help'),
