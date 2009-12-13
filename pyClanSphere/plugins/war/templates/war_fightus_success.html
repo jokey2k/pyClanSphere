@@ -1,12 +1,10 @@
 {% extends "layout.html" %}
+{% block title %}{{ _("Fight us submitted") }}{% endblock %}
 {% block contents %}
-<h1 class="pagetitle">Fight Us</h1>
-<div class="pagecontent">
-  <div class="post">
-  	<h2 class="title">{{ _("Fight us request saved!") }}</h2>
-  	<div class="entry"> 
-  	  {% trans %}Thanks for requesting a fight. You will hear back from us shortly.{% endtrans %}
-    </div>
+<div class="post">
+	<h2 class="title">{{ _("Fight us request saved!") }}</h2>
+	<div class="entry">
+	  {% trans %}Thanks for requesting a fight. You will hear back from us shortly.{% endtrans %}
   </div>
 </div>
 {% endblock %}

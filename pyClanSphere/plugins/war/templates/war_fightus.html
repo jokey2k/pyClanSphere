@@ -1,52 +1,50 @@
 {% extends "layout.html" %}
+{% block title %}{{ _("Fight us") }}{% endblock %}
 {% block contents %}
-<h1 class="pagetitle">Fight Us</h1>
-<div class="pagecontent">
-  {% call form() %}
-  <div class="post nometa">
-  	<h2 class="title">{{ _("Opponent") }}</h2>
-  	<div class="smallentry">
-  	  <table>
-  	    <tr><td>{{ form.clanname.label.text }}</td><td>{{ form.clanname() }}</td></tr>
-  	    <tr><td>{{ form.clanhomepage.label.text }}</td><td>{{ form.clanhomepage() }}</td></tr>
-  	    <tr><td>{{ form.contact.label.text }}</td><td>{{ form.contact() }}</td></tr>
-      </table>
-    </div>
+{% call form() %}
+<div class="post nometa">
+	<h2 class="title">{{ _("Opponent") }}</h2>
+	<div class="smallentry">
+	  <table>
+	    <tr><td>{{ form.clanname.label.text }}</td><td>{{ form.clanname() }}</td></tr>
+	    <tr><td>{{ form.clanhomepage.label.text }}</td><td>{{ form.clanhomepage() }}</td></tr>
+	    <tr><td>{{ form.contact.label.text }}</td><td>{{ form.contact() }}</td></tr>
+    </table>
   </div>
-  <div class="post nometa">
-  	<h2 class="title">{{ _("War coordination data") }}</h2>
-  	<div class="smallentry"> 
-  	  <table>
-  	    <tr><td>{{ _("Date (format 01.12.99 13:44)") }}</td><td>{{ form.date() }}</td></tr>
-  	    <tr><td>{{ _("Squad to fight") }}</td><td>{{ form.squad() }}</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="post nometa">
-  	<h2 class="title">{{ _("Rules") }}</h2>
-  	<div class="smallentry"> 
-  	  <table>
-  	    <tr><td>{{ form.mode.label.text }}</td><td>{{ form.mode() }}</td></tr>
-  	    <tr><td>{{ form.playerchangecount.label.text }}</td><td>{{ form.playerchangecount() }}</td></tr>
-      </table>
-    </div>
-  </div>
-  <div class="post nometa">
-  	<h2 class="title">{{ form.notes.label.text }}</h2>
-  	<div class="smallentry"> 
-  	  {{ form.notes() }}
-    </div>
-  </div>
-  {% if form.captcha %}
-  <div class="post nometa">
-  	<h2 class="title">{{ _("Captcha") }}</h2>
-  	<div class="smallentry">
-  	  {{ form.captcha }}
-    </div>
-  </div>
-  {% endif %}
-  <p>&nbsp;</p>
-  <p style="text-align: center;"><input class="button" type="submit" value="Fight!" /></p>
-  {% endcall %}
 </div>
+<div class="post nometa">
+	<h2 class="title">{{ _("War coordination data") }}</h2>
+	<div class="smallentry">
+	  <table>
+	    <tr><td>{{ _("Date (format 01.12.99 13:44)") }}</td><td>{{ form.date() }}</td></tr>
+	    <tr><td>{{ _("Squad to fight") }}</td><td>{{ form.squad() }}</td></tr>
+    </table>
+  </div>
+</div>
+<div class="post nometa">
+	<h2 class="title">{{ _("Rules") }}</h2>
+	<div class="smallentry">
+	  <table>
+	    <tr><td>{{ form.mode.label.text }}</td><td>{{ form.mode() }}</td></tr>
+	    <tr><td>{{ form.playerchangecount.label.text }}</td><td>{{ form.playerchangecount() }}</td></tr>
+    </table>
+  </div>
+</div>
+<div class="post nometa">
+	<h2 class="title">{{ form.notes.label.text }}</h2>
+	<div class="smallentry">
+	  {{ form.notes() }}
+  </div>
+</div>
+{% if form.captcha %}
+<div class="post nometa">
+	<h2 class="title">{{ _("Captcha") }}</h2>
+	<div class="smallentry">
+	  {{ form.captcha }}
+  </div>
+</div>
+{% endif %}
+<p>&nbsp;</p>
+<p style="text-align: center;"><input class="button" type="submit" value="Fight!" /></p>
+{% endcall %}
 {% endblock %}
