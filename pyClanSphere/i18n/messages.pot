@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: pyClanSphere@digital-family.de\n"
-"POT-Creation-Date: 2009-12-10 12:57+0100\n"
+"POT-Creation-Date: 2009-12-13 18:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,34 +35,34 @@ msgstr ""
 msgid "Copyright %(years)s by the pyClanSphere Team"
 msgstr ""
 
-#: pyClanSphere/config.py:33
+#: pyClanSphere/config.py:32
 msgid ""
 "The database URI.  For more information about database settings consult the "
 "pyClanSphere help."
 msgstr ""
 
-#: pyClanSphere/config.py:36
+#: pyClanSphere/config.py:35
 msgid ""
 "If a request to an http URL comes in, pyClanSphere will redirect to the same"
 " URL on https if this is savely possible.  This requires a working SSL setup"
 " or otherwise pyClanSphere will become unresponsive."
 msgstr ""
 
-#: pyClanSphere/config.py:40
+#: pyClanSphere/config.py:39
 msgid ""
 "If enabled the database will collect the SQL statements and add them to the "
 "bottom of the page for easier debugging"
 msgstr ""
 
-#: pyClanSphere/config.py:43
+#: pyClanSphere/config.py:42
 msgid "My Clan Page"
 msgstr ""
 
-#: pyClanSphere/config.py:44
+#: pyClanSphere/config.py:43
 msgid "just another Clan page"
 msgstr ""
 
-#: pyClanSphere/config.py:45
+#: pyClanSphere/config.py:44
 msgid ""
 "The base URL of the site.  This has to be set to a full canonical URL "
 "(including http or https).  If not set the application will behave "
@@ -70,14 +70,14 @@ msgid ""
 "location."
 msgstr ""
 
-#: pyClanSphere/config.py:50
+#: pyClanSphere/config.py:49
 msgid ""
 "The email address given here is used by the notification system to send "
 "mails from.  Also plugins that send mails will use this address as sender "
 "address."
 msgstr ""
 
-#: pyClanSphere/config.py:55
+#: pyClanSphere/config.py:54
 msgid ""
 "The timezone of the site.  All times and dates in the user interface and on "
 "the website will be shown in this timezone.  It's save to change the "
@@ -85,72 +85,72 @@ msgid ""
 " stored as UTC."
 msgstr ""
 
-#: pyClanSphere/config.py:60
+#: pyClanSphere/config.py:59
 msgid "If set to true the site enables the maintainance mode."
 msgstr ""
 
-#: pyClanSphere/config.py:63
+#: pyClanSphere/config.py:62
 msgid ""
 "If there are multiple pyClanSphere installations on the same host the cookie"
 " name should be set to something different for each one."
 msgstr ""
 
-#: pyClanSphere/config.py:67
+#: pyClanSphere/config.py:66
 msgid ""
 "The secret key is used for vairous security related tasks in the system.  "
 "For example the cookie is signed with this value."
 msgstr ""
 
-#: pyClanSphere/config.py:73
+#: pyClanSphere/config.py:72
 msgid ""
 "The iid uniquely identifies the pyClanSphere instance.  Currently this value"
 " is unused, but once set you should not modify it."
 msgstr ""
 
-#: pyClanSphere/config.py:84
+#: pyClanSphere/config.py:83
 msgid ""
 "During development this is helpful to log emails into a mail.log file in "
 "your instance folder instead of delivering them to your MTA."
 msgstr ""
 
-#: pyClanSphere/config.py:88
+#: pyClanSphere/config.py:87
 msgid ""
 "If this is set to true, errors in pyClanSphere are not catched so that "
 "debuggers can catch it instead.  This is useful for plugin and core "
 "development."
 msgstr ""
 
-#: pyClanSphere/config.py:102
+#: pyClanSphere/config.py:101
 msgid "No Cache"
 msgstr ""
 
-#: pyClanSphere/config.py:103
+#: pyClanSphere/config.py:102
 msgid "Simple Cache"
 msgstr ""
 
-#: pyClanSphere/config.py:104
+#: pyClanSphere/config.py:103
 msgid "memcached"
 msgstr ""
 
-#: pyClanSphere/config.py:105
+#: pyClanSphere/config.py:104
 msgid "Filesystem"
 msgstr ""
 
-#: pyClanSphere/config.py:120
+#: pyClanSphere/config.py:119
 msgid ""
 "This timeout is used by default for all network related operations. The "
 "default should be fine for most environments but if you have a very bad "
 "network connection during development you should increase it."
 msgstr ""
 
-#: pyClanSphere/config.py:129
+#: pyClanSphere/config.py:128
 msgid ""
 "It's possible to one or more comma separated paths here that are searched "
 "for plugins.  If the is not absolute, it's considered relative to the "
 "instance folder."
 msgstr ""
 
-#: pyClanSphere/config.py:135
+#: pyClanSphere/config.py:134
 msgid ""
 "If you want to protect forms that non-logged in users or guests can fill "
 "out, enable it and get your api keys from http://recaptcha.net. Heavily "
@@ -158,11 +158,11 @@ msgid ""
 "yourself"
 msgstr ""
 
-#: pyClanSphere/config.py:139
+#: pyClanSphere/config.py:138
 msgid "Secure communication between this app and recaptcha over ssl"
 msgstr ""
 
-#: pyClanSphere/config.py:196
+#: pyClanSphere/config.py:195
 msgid ""
 "\n"
 "    <p>\n"
@@ -172,7 +172,7 @@ msgid ""
 "    "
 msgstr ""
 
-#: pyClanSphere/config.py:208
+#: pyClanSphere/config.py:207
 #, python-format
 msgid "Could not save configuration file: %s"
 msgstr ""
@@ -638,78 +638,78 @@ msgstr ""
 msgid "can add/edit/remove memberlevel groups"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:134
+#: pyClanSphere/plugins/gamesquad/views.py:137
 #, python-format
 msgid "The game %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:138
+#: pyClanSphere/plugins/gamesquad/views.py:141
 #, python-format
 msgid "The game %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:166
+#: pyClanSphere/plugins/gamesquad/views.py:169
 #, python-format
 msgid "The game %s was deleted successfully"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:210
+#: pyClanSphere/plugins/gamesquad/views.py:213
 #, python-format
 msgid "The squad %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:214
+#: pyClanSphere/plugins/gamesquad/views.py:217
 #, python-format
 msgid "The squad %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:242
+#: pyClanSphere/plugins/gamesquad/views.py:245
 #, python-format
 msgid "%s was deleted successfully"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:290
+#: pyClanSphere/plugins/gamesquad/views.py:293
 #, python-format
 msgid "The squadmember %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:294
+#: pyClanSphere/plugins/gamesquad/views.py:297
 #, python-format
 msgid "The squadmember %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:328
+#: pyClanSphere/plugins/gamesquad/views.py:331
 #, python-format
 msgid "Member %s removed from %s"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:367
+#: pyClanSphere/plugins/gamesquad/views.py:370
 #, python-format
 msgid "The level %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:371
+#: pyClanSphere/plugins/gamesquad/views.py:374
 #, python-format
 msgid "The level %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:399
+#: pyClanSphere/plugins/gamesquad/views.py:402
 #, python-format
 msgid "The level %s was deleted successfully"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:436
+#: pyClanSphere/plugins/gamesquad/views.py:439
 #, python-format
 msgid "The game account %s was registered successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:440
+#: pyClanSphere/plugins/gamesquad/views.py:443
 #, python-format
 msgid "The game account %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:469
-#: pyClanSphere/plugins/gamesquad/views.py:491
+#: pyClanSphere/plugins/gamesquad/views.py:472
+#: pyClanSphere/plugins/gamesquad/views.py:494
 #, python-format
 msgid "The game account %s was deleted successfully"
 msgstr ""
@@ -719,12 +719,10 @@ msgid "<strong>No Squads for this game</strong>"
 msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/templates/game_index.html:2
-#: pyClanSphere/plugins/gamesquad/templates/squad_index.html:2
 msgid "Game Index"
 msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/templates/game_index.html:13
-#: pyClanSphere/plugins/gamesquad/templates/squad_index.html:13
 msgid "So far there are no games."
 msgstr ""
 
@@ -764,6 +762,7 @@ msgstr ""
 #: pyClanSphere/plugins/gamesquad/templates/admin/level_delete.html:11
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_delete.html:16
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_deletemember.html:10
+#: pyClanSphere/plugins/news/templates/admin/news_delete.html:10
 #: pyClanSphere/plugins/shoutbox/templates/shoutbox_delete.html:10
 #: pyClanSphere/plugins/war/models.py:41
 #: pyClanSphere/plugins/war/templates/admin/war_delete.html:10
@@ -791,6 +790,7 @@ msgstr ""
 #: pyClanSphere/plugins/gamesquad/templates/admin/level_delete.html:12
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_delete.html:17
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_deletemember.html:11
+#: pyClanSphere/plugins/news/templates/admin/news_delete.html:11
 #: pyClanSphere/plugins/shoutbox/templates/shoutbox_delete.html:11
 #: pyClanSphere/plugins/war/models.py:43
 #: pyClanSphere/plugins/war/templates/admin/war_delete.html:11
@@ -1144,14 +1144,19 @@ msgstr ""
 msgid "can delete news"
 msgstr ""
 
-#: pyClanSphere/plugins/news/views.py:152
+#: pyClanSphere/plugins/news/views.py:154
 #, python-format
 msgid "The entry %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/news/views.py:155
+#: pyClanSphere/plugins/news/views.py:157
 #, python-format
 msgid "The entry %s was updated successfully."
+msgstr ""
+
+#: pyClanSphere/plugins/news/views.py:185
+#, python-format
+msgid "The entry %s was deleted successfully"
 msgstr ""
 
 #: pyClanSphere/plugins/news/templates/_news.html:10
@@ -1211,6 +1216,18 @@ msgstr ""
 #: pyClanSphere/plugins/news/templates/news_index.html:14
 #: pyClanSphere/plugins/war/templates/war_index.html:29
 msgid "Pages"
+msgstr ""
+
+#: pyClanSphere/plugins/news/templates/admin/news_delete.html:2
+msgid "Delete News"
+msgstr ""
+
+#: pyClanSphere/plugins/news/templates/admin/news_delete.html:6
+#, python-format
+msgid ""
+"\n"
+"      Do you really want to delete the entry “%(name)s”?\n"
+"    "
 msgstr ""
 
 #: pyClanSphere/plugins/news/templates/admin/news_edit.html:3
@@ -1483,62 +1500,62 @@ msgstr ""
 msgid "can manage war-related stuff"
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:123
+#: pyClanSphere/plugins/war/views.py:135
 #, python-format
 msgid "The war %s was added successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:127
+#: pyClanSphere/plugins/war/views.py:139
 #, python-format
 msgid "The war %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:155
+#: pyClanSphere/plugins/war/views.py:167
 #, python-format
 msgid "The war %s was deleted successfully"
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:190
+#: pyClanSphere/plugins/war/views.py:202
 #, python-format
 msgid "Warmap %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:194
+#: pyClanSphere/plugins/war/views.py:206
 #, python-format
 msgid "Warmap %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:230
+#: pyClanSphere/plugins/war/views.py:242
 #, python-format
 msgid "Warmap %s was deleted successfully"
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:255
+#: pyClanSphere/plugins/war/views.py:267
 #, python-format
 msgid "The result for %s was deleted successfully"
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:260
+#: pyClanSphere/plugins/war/views.py:272
 #, python-format
 msgid "The result for war %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:264
+#: pyClanSphere/plugins/war/views.py:276
 #, python-format
 msgid "The result for war %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:306
+#: pyClanSphere/plugins/war/views.py:318
 #, python-format
 msgid "Warmode %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:310
+#: pyClanSphere/plugins/war/views.py:322
 #, python-format
 msgid "Warmode %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:341
+#: pyClanSphere/plugins/war/views.py:353
 #, python-format
 msgid "Warmode %s was deleted successfully"
 msgstr ""
@@ -1806,7 +1823,7 @@ msgstr ""
 msgid "(Create as top level comment)"
 msgstr ""
 
-#: pyClanSphere/templates/403.html:2 pyClanSphere/templates/403.html:4
+#: pyClanSphere/templates/403.html:2
 msgid "Access Denied"
 msgstr ""
 
@@ -1817,7 +1834,7 @@ msgid ""
 "  "
 msgstr ""
 
-#: pyClanSphere/templates/404.html:2 pyClanSphere/templates/404.html:4
+#: pyClanSphere/templates/404.html:2
 msgid "Page Not Found"
 msgstr ""
 
@@ -1842,10 +1859,6 @@ msgstr ""
 msgid "PyClanSphere Internal Server Error"
 msgstr ""
 
-#: pyClanSphere/templates/500.html:4
-msgid "Internal Server Error"
-msgstr ""
-
 #: pyClanSphere/templates/500.html:5
 msgid ""
 "\n"
@@ -1855,7 +1868,6 @@ msgid ""
 msgstr ""
 
 #: pyClanSphere/templates/_about_pyClanSphere.html:2
-#: pyClanSphere/templates/_about_pyClanSphere.html:6
 msgid "About pyClanSphere"
 msgstr ""
 
@@ -1942,10 +1954,6 @@ msgstr ""
 
 #: pyClanSphere/templates/internal_error.html:2
 msgid "pyClanSphere Internal Error"
-msgstr ""
-
-#: pyClanSphere/templates/internal_error.html:4
-msgid "Internal Error"
 msgstr ""
 
 #: pyClanSphere/templates/internal_error.html:6
