@@ -291,14 +291,10 @@ class _UserBoundForm(forms.Form):
     def _set_common_attributes(self, user):
         forms.set_fields(user, self.data, 'www', 'real_name', 'birthday',
                          'display_name', 'height', 'address', 'zip', 'city',
-                         'country')
+                         'country', 'username', 'email')
 
     def save_changes(self):
         """Apply the changes."""
-        self.user.username = self.data['username']
-        if self.data['password']:
-            self.user.set_password(self.data['password'])
-        self.user.email = self.data['email']
         self._set_common_attributes(self.user)
 
 
