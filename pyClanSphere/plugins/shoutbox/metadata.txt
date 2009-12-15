@@ -1,4 +1,4 @@
-Name: shoutbox
+Name: Shoutbox
 Author: Markus Ullmann <mail@markus-ullmann.de>
 Author URL: http://www.markus-ullmann.de
 Plugin URL: http://pyclansphere.digital-family.de/

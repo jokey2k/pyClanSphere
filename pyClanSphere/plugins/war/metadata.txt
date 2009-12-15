@@ -1,4 +1,4 @@
-Name: War Module
+Name: War Manager
 Author: Markus Ullmann <mail@markus-ullmann.de>
 Author URL: http://www.markus-ullmann.de
 Plugin URL: http://www.markus-ullmann.de

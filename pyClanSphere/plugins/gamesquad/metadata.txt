@@ -1,4 +1,4 @@
-Name: GameSquad
+Name: Squad Manager
 Plugin URL: http://pyclansphere.digital-family.de/
 Author: Markus Ullmann <mail@markus-ullmann.de>
 Author URL: http://pyclansphere.digital-family.de/
