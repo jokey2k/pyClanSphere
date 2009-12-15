@@ -43,7 +43,7 @@ def setup(app, plugin):
     """Init our needed stuff"""
 
     # Setup tables
-    init_database()
+    init_database(app)
 
     # Add our privileges
     for priv in PLUGIN_PRIVILEGES.values():
