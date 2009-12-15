@@ -199,12 +199,6 @@ def session_mapper(scoped_session):
         return orm.mapper(cls, *arg, **kw)
     return mapper
 
-# configure a declarative base.  This is unused in the code but makes it easier
-# for plugins to work with the database.
-class ModelBase(object):
-    """Internal baseclass for `Model`."""
-Model = declarative_base(name='Model', cls=ModelBase, mapper=session_mapper(session))
-
 #: create a new module for all the database related functions and objects
 sys.modules['pyClanSphere.database.db'] = db = ModuleType('db')
 key = value = mod = None
@@ -219,6 +213,15 @@ for name in 'delete', 'flush', 'execute', 'begin', 'mapper', \
             'commit', 'rollback', 'refresh', 'expire', \
             'query_property':
     setattr(db, name, getattr(session, name))
+
+#: metadata for the core tables and the core table definitions
+metadata = db.MetaData()
+
+# configure a declarative base.  This is unused in the code but makes it easier
+# for plugins to work with the database.
+class ModelBase(object):
+    """Internal baseclass for `Model`."""
+Model = declarative_base(name='Model', metadata=metadata, cls=ModelBase, mapper=session_mapper(session))
 
 #: and finally hook our own implementations of various objects in
 db.Model = Model
@@ -236,9 +239,6 @@ db.func = func
 
 #: called at the end of a request
 cleanup_session = session.remove
-
-#: metadata for the core tables and the core table definitions
-metadata = db.MetaData()
 
 users = db.Table('users', metadata,
     db.Column('user_id', db.Integer, primary_key=True),
