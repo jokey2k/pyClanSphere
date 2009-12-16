@@ -168,12 +168,15 @@ class DeleteForumForm(forms.Form):
 
     def delete_forum(self):
         """Deletes a forum."""
-
+        new_forum = self['relocate_to']
         if self.data['action'] == 'relocate':
             for topic in self.forum.topics:
-                topic.forum = self['relocate_to']
+                topic.forum = new_forum
 
         emit_event('before-board-forum-deleted', self.forum, self.data)
 
         db.delete(self.forum)
         db.commit()
+
+        if self.data['action'] == 'relocate':
+            new_forum.refresh()
