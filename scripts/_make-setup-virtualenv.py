@@ -24,7 +24,9 @@ REQUIREMENTS = [
     'Jinja2>=2.1',
     'SQLAlchemy==dev',
     'pytz',
-    'Babel>=0.9.4'
+    'Babel>=0.9.4',
+    'webdepcompress',
+    'translitcodec'
 ]
 
 # for python 2.4/2.5 we want simplejson installed too.
