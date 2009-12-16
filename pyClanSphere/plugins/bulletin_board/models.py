@@ -116,7 +116,7 @@ class Forum(db.Model):
         return True
         
     def refresh(self):
-        topics = Topic.query.filter_by(Topic.forum==self).order_by(db.desc(Topic.modification_date)).all()
+        topics = Topic.query.filter(Topic.forum_id==self.id).order_by(db.desc(Topic.modification_date)).all()
         self.topiccount = len(topics)
         if self.topiccount:
             self.lasttopic = topics[0]
@@ -162,7 +162,7 @@ class Topic(db.Model):
         self.is_external = is_external
         
     def refresh(self):
-        posts = Post.query.filter_by(Post.topic==self).order_by(db.desc(Topic.modification_date)).all()
+        posts = Post.query.filter(Post.topic_id==self.id).order_by(db.asc(Post.id)).all()
         self.postcount = len(posts)
         if self.postcount:
             lastpost = posts[0]
