@@ -1,0 +1,17 @@
+{% extends "admin/layout.html" %}
+{% from "admin/_form_helpers.html" import render_delete_actions %}
+{% block title %}{{ _("Delete %s") % itemname }}{% endblock %}
+{% block contents %}
+  <h1>{{ self.title() }}</h1>
+  {% call form() %}
+    <p>{% trans %}
+      Do you really want to delete {{ itemname }} “{{ entryname }}”?
+    {% endtrans %}</p>
+    <p>{% trans %}
+      What should happen with the {{ childitemnames }} assigned to {{ itemname }}?
+    {% endtrans %}</p>
+    {{ form.action() }}
+    <p>{{ form.relocate_to.label() }}: {{ form.relocate_to() }}
+    {{ render_delete_actions() }}
+  {% endcall %}
+{% endblock %}

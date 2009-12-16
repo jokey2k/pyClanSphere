@@ -1,0 +1,10 @@
+{% extends "admin/layout.html" %}
+{% from "admin/_form_helpers.html" import render_formbox, render_actions %}
+{% block title %}{{ _('New %s' % itemname) if form.new else _('Edit %s' % itemname) }}{% endblock %}
+{% block contents %}
+  <h1>{{ self.title() }}</h1>
+  {% call form() %}
+    {{ form.as_dl() }}
+    {{ render_actions(form) }}
+  {% endcall %}
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "admin/layout.html" %}
+{% block title %}{{ _("Forums") }}{% endblock %}
+{% block contents %}
+  <h1>{{ self.title() }}</h1>
+  <table>
+    <tr>
+      <th>{{ _("Category") }}</th>
+      <th>{{ _("Order") }}</th>
+      <th>{{ _("Name") }}</th>
+    </tr>
+  {%- for catname, list in forums.iteritems() %}
+    {% for forum in list %}
+    <tr class="{{ loop.cycle('odd', 'even') }}">
+	  {%- if forum.can_edit() %}
+	    {% if loop.first %}<td valign="top" rowspan="{{ list|count }}">{{ catname }}</td>{%- endif %}
+	    <td>{{ forum.order }}</td>
+      <td width="100%"><a href="{{ url_for('admin/board/forums/edit', forum_id=forum.id) }}">{{
+          forum.name }}</a></td>
+      {%- else %}
+      <td width="100%">{{ forum.name }}</td>
+	  {%- endif %}
+    </tr>
+    {% endfor %}
+  {% else %}
+    <tr><td colspan="2">{{ _('No forums') }}</td></tr>
+  {%- endfor %}
+  </table>
+  <form action="{{ url_for('admin/board/forums/new') }}" method="get">
+    <div class="actions">
+      <input type="submit" value="{{ _('New Forum') }}">
+    </div>
+  </form>
+  {%- if pagination.necessary %}
+  <div class="pagination">
+    {{ pagination.generate() }}
+  </div>
+  {%- endif %}
+{% endblock %}
