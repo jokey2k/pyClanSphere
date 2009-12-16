@@ -51,3 +51,31 @@ def require_admin_privilege(expr=None):
     else:
         expr = ENTER_ADMIN_PANEL
     return require_privilege(expr)
+
+
+def add_admin_urls(app, path, idname, listview, editview=None, deleteview=None):
+    """Generic admin backend routing function
+
+    As it has become pretty common to use
+    /admin/foo/         and
+    /admin/foo/page/2   for listings
+    /admin/foo/1        for editing
+    /admin/foo/new      for creating with None to edit function and
+    /admin/foo/1/delete for removals
+
+    just generate the matching urls and endpoints
+
+    editview and/or deleteview may be omitted if they're not needed
+    """
+
+    app.add_url_rule('/%s/' % path, prefix='admin', defaults={'page': 1}, endpoint='admin/%s' % path,
+                     view=listview)
+    app.add_url_rule('/%s/page/<int:page>' % path, prefix='admin', endpoint='admin/%s' % path)
+    if editview:
+        app.add_url_rule('/%s/new' % path, prefix='admin', endpoint='admin/%s/new' % path,
+                         view=editview)
+        app.add_url_rule('/%s/<int:%s>' % (path, idname), prefix='admin', endpoint='admin/%s/edit' % path,
+                         view=editview)
+    if deleteview:
+        app.add_url_rule('/%s/<int:%s>/delete' % (path, idname), prefix='admin', endpoint='admin/%s/delete' % path,
+                         view=deleteview)
