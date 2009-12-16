@@ -46,3 +46,10 @@
     <input type="submit" name="cancel" value="{{ _('Cancel') }}">
   </div>
 {% endmacro %}
+
+{% macro render_delete_actions() %}
+  <div class="actions">
+    <input type="submit" name="cancel" value="{{ _('No') }}">
+    <input type="submit" name="confirm" value="{{ _('Yes') }}">
+  </div>
+{% endmacro %}
