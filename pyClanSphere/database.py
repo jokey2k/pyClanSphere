@@ -185,6 +185,7 @@ class AutoAddExt(orm.MapperExtension):
         session.add(instance)
         return orm.EXT_CONTINUE
 
+
 def session_mapper(scoped_session):
     def mapper(cls, *arg, **kw):
         if cls.__init__ is object.__init__:
@@ -234,6 +235,7 @@ db.mapper = session_mapper(session)
 db.association_proxy = association_proxy
 db.attribute_loaded = attribute_loaded
 db.AttributeExtension = AttributeExtension
+db.AutoAddExtension = AutoAddExt
 db.attribute_mapped_collection = attribute_mapped_collection
 db.func = func
 
