@@ -490,6 +490,12 @@ class Request(RequestBase):
             user = User.query.get_nobody()
         self.user = user
         self.session = session
+        self.per_page = None
+        if 'per_page' in self.values:
+            try:
+                self.per_page = int(per_page)
+            except:
+                pass
 
     @property
     def is_behind_proxy(self):
