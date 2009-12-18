@@ -36,12 +36,18 @@ class CategoryForm(forms.Form):
     def create_category(self):
         """Creates a new category"""
         
-        category = Category(self['name'], self['ordering'])
-        db.commit()
+        category = Category(self['name'])
+        self.save_changes(category)
         return category
     
     def save_changes(self, category):
         forms.set_fields(category, self.data, 'name', 'ordering')
+        if self.data['ordering'] is None:
+            category.ordering = category.forums.count()-1
+        else:
+            category.ordering = self.data['ordering']
+        if category.ordering < 0:
+            category.ordering = 0
         db.commit()
 
     def as_widget(self):
@@ -131,9 +137,11 @@ class ForumForm(forms.Form):
         forms.set_fields(forum, self.data, 'category', 'name',
                          'allow_anonymous', 'is_public')
         if self.data['ordering'] is None:
-            forum.ordering = len(self['category'].forums)-1
+            forum.ordering = self['category'].forums.count()-1
         else:
             forum.ordering = self.data['ordering']
+        if forum.ordering < 0:
+            forum.ordering = 0
         db.commit()
 
     def as_widget(self):
