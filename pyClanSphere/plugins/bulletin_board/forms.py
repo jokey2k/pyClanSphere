@@ -216,7 +216,7 @@ class PostForm(forms.Form):
     @property
     def captcha_protected(self):
         """We're protected if no user is logged in and config says so."""
-        return not self.request.user.is_somebody and self.app.cfg['recaptcha_enable']
+        return not self.request.user.is_somebody and self.request.app.cfg['recaptcha_enable']
 
     def context_validate(self, data):
         topic = self.topic
@@ -236,7 +236,7 @@ class PostForm(forms.Form):
         
         topic = self.topic
         if topic is None:
-            topic = self.create_topic(target)
+            topic = self.create_topic(self.target)
         
         post = Post(self.topic, self['text'], self.user, datetime.utcnow(), self.request.remote_addr)
         db.commit()
