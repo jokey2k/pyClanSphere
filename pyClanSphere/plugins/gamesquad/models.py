@@ -21,6 +21,35 @@ from pyClanSphere.plugins.gamesquad.database import *
 from pyClanSphere.plugins.gamesquad.privileges import *
 
 
+class GameQuery(db.Query):
+    """Provide better prepared queries"""
+
+    def get_list(self, endpoint=None, page=1, per_page=None,
+                 url_args=None, raise_if_empty=True, paginator=Pagination):
+        """Return a dict with pagination and the current members."""
+
+        if per_page is None:
+            per_page = 20
+
+        # send the query
+        offset = per_page * (page - 1)
+        query_filter = self
+        gamelist = query_filter.order_by(Game.name) \
+                               .offset(offset).limit(per_page).all()
+
+        # if raising exceptions is wanted, raise it
+        if raise_if_empty and (page != 1 and not gamelist):
+            raise NotFound()
+
+        pagination = paginator(endpoint, page, per_page,
+                                query_filter.count(), url_args=url_args)
+
+        return {
+            'games':            memberlist,
+            'pagination':       pagination
+        }
+
+
 class Game(object):
     """Basics for a Game"""
 

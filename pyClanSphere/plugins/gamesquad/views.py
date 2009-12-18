@@ -41,7 +41,7 @@ from pyClanSphere.plugins.gamesquad.privileges import *
 #
 
 @cache.response(vary=('user',))
-def game_index(req):
+def game_index(req, page):
     """Render the most recent posts.
 
     Available template variables:
@@ -56,7 +56,8 @@ def game_index(req):
     :URL endpoint: ``game/index``
     """
 
-    data = Game.query.all()
+    data = Game.query.get_list('game/index', page,
+              request.per_page)
 
     return render_response('game_index.html', games=data)
 

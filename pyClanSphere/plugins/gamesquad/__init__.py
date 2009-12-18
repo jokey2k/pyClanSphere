@@ -53,7 +53,9 @@ def setup(app, plugin):
     app.add_template_searchpath(TEMPLATE_FILES)
 
     # Register pages page
-    app.add_url_rule('/games/', endpoint='game/index',
+    app.add_url_rule('/games/', endpoint='game/index', defaults={'page': 1},
+                     view=views.game_index)
+    app.add_url_rule('/games/page/<int:page>', endpoint='game/index',
                      view=views.game_index)
     app.add_url_rule('/games/<int:game_id>', endpoint='game/detail',
                      view=views.game_detail)
