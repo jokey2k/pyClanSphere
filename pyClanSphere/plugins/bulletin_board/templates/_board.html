@@ -1,0 +1,16 @@
+{% macro render_post_form(form) %}
+<div id="newpost">
+  {% call form() %}
+  <dl>
+    {% if form.title %}
+      <dt>{{ form.title.label() }}
+      <dd>{{ form.title() }}
+    {% endif %}
+  <dt>{{ form.text.label() }}
+  <dd>{{ form.text() }}
+  </dd>
+  {{ form.captcha or '' }}
+  <input type="submit" value="{{ _("Submit") }}">
+  {% endcall %}
+</div>
+{% endmacro %}

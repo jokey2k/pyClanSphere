@@ -1,0 +1,39 @@
+{% extends "layout_content_only.html" %}
+{% from "_board.html" import render_post_form %}
+{% block title %}{{ _("Board") }}{% endblock %}
+{% block contents %}
+<div class="entry">
+  <table width="100%" style="" class="boardtable">
+  <tr>
+    <th class="categoryline" colspan="4"><a href="{{ url_for('board/index') }}">{{ _("Board") }}</a> >> {{ forum.category.name }} >> <a href="{{ url_for('board/topics', forum_id=forum.id) }}">{{ forum.name }}</th>
+  </tr>
+  <tr>
+    <th>{{ _("Topic / Author") }}</th>
+    <th>{{ _("Last Post") }}</th>
+    <th>{{ _("Posts") }}</th>
+  </tr>  
+  {% for topic in topics %}
+  <tr>
+    <td>{%- trans topic='<a href="%s">%s</a>'|safe % (url_for('board/topic_detail', topic_id=topic.id)|e,topic.name),
+                  author='<a href="#">%s</a>'|safe % (topic.author.display_name),
+                  date=topic.date|datetimeformat('long')
+                  %}{{ topic }}<br><em>by {{ author }} at {{ date }}</em>{% endtrans -%}</td>
+    <td>{%- trans date='<a href="#">%s</a>'|safe % (topic.modification_date|timedeltaformat),
+                  author='<a href="#">%s</a>'|safe % (topic.lastposter.display_name)
+                  -%}{{ date }} ago<br>by {{ author }}{% endtrans -%}</td>  
+    <td class="count">{{ topic.postcount or '0' }}</td>
+  </tr>  
+  {% else %}
+  <tr><td colspan="3"><center>{{ _("No Topics yet") }}</center></td></tr>
+  {% endfor %}
+  </table>
+  {% if pagination.necessary %}
+  <div class="pagination">
+  {{ _('Pages') }}: {{ pagination.generate() }}
+  </div>
+  {% endif %}
+  {% if form %}
+  {{ render_post_form(form) }}  
+  {% endif %}
+</div>
+{% endblock %}

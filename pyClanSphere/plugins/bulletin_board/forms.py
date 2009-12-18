@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 """
-    pyClanSphere.plugins.bulletin_board
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    pyClanSphere.plugins.bulletin_board.forms
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Models for the board.
+    Forms we use for the board.
 
     :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 
+from datetime import datetime
+
 from pyClanSphere.api import *
 from pyClanSphere.utils import forms
+from pyClanSphere.utils.validators import is_not_whitespace_only
 
 from pyClanSphere.plugins.bulletin_board.models import *
 
@@ -18,18 +21,14 @@ class CategoryForm(forms.Form):
     """Used to edit or create a category"""
 
     name = forms.TextField(lazy_gettext(u'Name'), required=True, max_length=50)
-    order = forms.IntegerField(lazy_gettext(u'Order'), required=True,
+    ordering = forms.IntegerField(lazy_gettext(u'Order'),
                 help_text=_('Sorting order, ascending'))
     
     def __init__(self, category, initial=None):
         if category is not None:
             initial = forms.fill_dict(initial,
                 name=category.name,
-                order=category.order
-            )
-        elif initial is None:
-            initial = forms.fill_dict(initial,
-                order=0
+                ordering=category.ordering
             )
         self.category = category
         forms.Form.__init__(self, initial)
@@ -37,12 +36,12 @@ class CategoryForm(forms.Form):
     def create_category(self):
         """Creates a new category"""
         
-        category = Category(self['name'], self['order'])
+        category = Category(self['name'], self['ordering'])
         db.commit()
         return category
     
     def save_changes(self, category):
-        forms.set_fields(category, self.data, 'name', 'order')
+        forms.set_fields(category, self.data, 'name', 'ordering')
         db.commit()
 
     def as_widget(self):
@@ -97,7 +96,8 @@ class ForumForm(forms.Form):
                                 required=True, widget=forms.SelectBox)
     name = forms.TextField(lazy_gettext(u'Name'), required=True,
                            max_length=50)
-    order = forms.IntegerField(lazy_gettext(u'Order'),
+    description = forms.TextField(lazy_gettext(u'Description'), max_length=255)
+    ordering = forms.IntegerField(lazy_gettext(u'Order'),
                 help_text=_('Sorting order, ascending'))
     allow_anonymous = forms.BooleanField(lazy_gettext(u'Allow anonymous posting'))
     is_public = forms.BooleanField(lazy_gettext(u'Public'))
@@ -107,7 +107,7 @@ class ForumForm(forms.Form):
             initial = forms.fill_dict(initial,
                 category=forum.category,
                 name=forum.name,
-                order=forum.order,
+                ordering=forum.ordering,
                 allow_anonymous=forum.allow_anonymous,
                 is_public=forum.is_public
             )
@@ -130,8 +130,10 @@ class ForumForm(forms.Form):
     def save_changes(self, forum):
         forms.set_fields(forum, self.data, 'category', 'name',
                          'allow_anonymous', 'is_public')
-        if self.data['order'] is None:
-            forum.order = len(self['category'].forums)-1
+        if self.data['ordering'] is None:
+            forum.ordering = len(self['category'].forums)-1
+        else:
+            forum.ordering = self.data['ordering']
         db.commit()
 
     def as_widget(self):
@@ -180,3 +182,62 @@ class DeleteForumForm(forms.Form):
 
         if self.data['action'] == 'relocate':
             new_forum.refresh()
+
+class PostForm(forms.Form):
+    """Post creation and edit"""
+
+    title = forms.TextField(lazy_gettext(u'Title'), max_length=255)
+    _maxtext = 5000
+    text = forms.TextField(lazy_gettext(u'Text'), max_length=_maxtext,
+                           widget=forms.Textarea,
+                           validators=[is_not_whitespace_only()])
+
+    def __init__(self, target, post=None, user=None, initial=None):
+        assert target is not None
+        if post is not None:
+            initial = forms.fill_dict(initial,
+                text = post.text,
+            )
+        forms.Form.__init__(self, initial)
+        self.user = user or self.request.user
+        self.target = target
+        self.topic = None
+        if isinstance(target, Topic):
+            self.topic = target
+
+    @property
+    def captcha_protected(self):
+        """We're protected if no user is logged in and config says so."""
+        return not self.request.user.is_somebody and self.app.cfg['recaptcha_enable']
+
+    def context_validate(self, data):
+        topic = self.topic
+        if topic and topic.lastpost.text == data['text']:
+            raise ValidationError(_("No Doublepost"))
+
+    def create_topic(self, forum):
+        """Create a topic for our new post"""
+        
+        assert forum is not None
+        topic = Topic(forum, self['title'], self.user)
+        db.commit()
+        return topic
+    
+    def create_post(self):
+        """Create a new post"""
+        
+        topic = self.topic
+        if topic is None:
+            topic = self.create_topic(target)
+        
+        post = Post(self.topic, self['text'], self.user, datetime.utcnow(), self.request.remote_addr)
+        db.commit()
+        
+        topic.refresh()
+        db.commit()
+        
+        return post
+
+    def save_changes(self, post):
+        forms.set_fields(post, self.data, 'text')
+        db.commit()

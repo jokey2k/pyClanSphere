@@ -9,7 +9,7 @@
     </tr>
   {%- for category in categories %}
     <tr class="{{ loop.cycle('odd', 'even') }}">
-      <td>{{ category.order }}</td>
+      <td>{{ category.ordering }}</td>
 	  {%- if category.can_edit() %}
       <td width="100%"><a href="{{ url_for('admin/board/categories/edit', category_id=category.id) }}">{{
           category.name }}</a></td>

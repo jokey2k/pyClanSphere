@@ -46,6 +46,13 @@ def setup(app, plugin):
     # Add our template path
     app.add_template_searchpath(TEMPLATE_FILES)
 
+    # Register frontend views
+    app.add_url_rule('/board/', endpoint='board/index', view=views.board_index)
+    app.add_url_rule('/board/forum/<int:forum_id>', endpoint='board/topics', defaults={'page': 1}, view=views.topic_list)
+    app.add_url_rule('/board/forum/<int:forum_id>/page/<int:page>', endpoint='board/topics')
+    app.add_url_rule('/board/topic/<int:topic_id>', endpoint='board/topic_detail', defaults={'page': 1}, view=views.topic_detail)
+    app.add_url_rule('/board/topic/<int:topic_id>/page/<int:page>', endpoint='board/topic_detail')
+
     # Register our admin views
     add_admin_urls(app, 'board/categories', 'category_id',
                    views.categories_list, views.category_edit,

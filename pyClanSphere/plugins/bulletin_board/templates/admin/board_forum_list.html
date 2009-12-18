@@ -13,7 +13,7 @@
     <tr class="{{ loop.cycle('odd', 'even') }}">
 	  {%- if forum.can_edit() %}
 	    {% if loop.first %}<td valign="top" rowspan="{{ list|count }}">{{ catname }}</td>{%- endif %}
-	    <td>{{ forum.order }}</td>
+	    <td>{{ forum.ordering }}</td>
       <td width="100%"><a href="{{ url_for('admin/board/forums/edit', forum_id=forum.id) }}">{{
           forum.name }}</a></td>
       {%- else %}
