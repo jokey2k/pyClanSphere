@@ -11,6 +11,7 @@
 from werkzeug import escape
 from werkzeug.exceptions import NotFound, Forbidden
 
+from pyClanSphere import cache
 from pyClanSphere.api import _, url_for, db, render_response
 from pyClanSphere.utils.admin import require_admin_privilege, \
      flash as admin_flash
