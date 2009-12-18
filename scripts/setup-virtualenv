@@ -964,7 +964,7 @@ from subprocess import call
 REQUIREMENTS = [
     'Werkzeug==dev',
     'Jinja2==dev',
-    'SQLAlchemy==dev',
+#    'SQLAlchemy==dev', -- bundled until somethin 0.6ish is released
     'pytz',
 #    'Babel>=0.9.5', -- temporarily until 0.9.5 or some later version is released... shipping instead
     'webdepcompress',
