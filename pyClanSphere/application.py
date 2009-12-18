@@ -493,7 +493,7 @@ class Request(RequestBase):
         self.per_page = None
         if 'per_page' in self.values:
             try:
-                self.per_page = int(per_page)
+                self.per_page = int(self.values['per_page'])
             except:
                 pass
 
