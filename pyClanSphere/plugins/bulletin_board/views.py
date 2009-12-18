@@ -27,6 +27,8 @@ from pyClanSphere.plugins.bulletin_board.privileges import BOARD_MANAGE
 #
 # Frontend views
 #
+
+@cache.response(vary=('user',))
 def board_index(request):
     """Render the board index page
 
@@ -53,6 +55,7 @@ def board_index(request):
     return render_response('board_index.html', categories=renderdict)
 
 
+@cache.response(vary=('user',))
 def topic_list(request, forum_id, page=1):
     """Render topics for a given forum
 
@@ -98,7 +101,7 @@ def topic_list(request, forum_id, page=1):
                           topics=data['topics'], pagination=data['pagination'],
                           form=form.as_widget() if form else None)
 
-
+@cache.response(vary=('user',))
 def topic_detail(request, topic_id, page=1):
     """Render posts for a given topic
 
@@ -144,6 +147,7 @@ def topic_detail(request, topic_id, page=1):
     return render_response('board_topic_detail.html', topic=topic,
                           posts=data['posts'], pagination=data['pagination'],
                           form=form.as_widget() if form else None)
+
 #
 # Admin views
 #
