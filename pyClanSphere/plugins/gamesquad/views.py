@@ -8,6 +8,7 @@
     :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
+
 from os.path import exists
 from time import asctime, gmtime, time
 from datetime import date
@@ -32,8 +33,8 @@ from pyClanSphere.views.admin import render_admin_response, PER_PAGE
 from pyClanSphere.plugins.gamesquad.forms import DeleteGameForm, EditGameForm, \
      DeleteSquadForm, EditSquadForm, EditSquadMemberForm, DeleteSquadMemberForm, \
      EditLevelForm, DeleteLevelForm, DeleteGameAccountForm, EditGameAccountForm
-from pyClanSphere.plugins.gamesquad.models import Game, Squad, SquadMember, Level, GameAccount
-from pyClanSphere.plugins.gamesquad.privileges import GAME_MANAGE, SQUAD_MANAGE, SQUAD_MANAGE_MEMBERS, LEVEL_MANAGE
+from pyClanSphere.plugins.gamesquad.models import *
+from pyClanSphere.plugins.gamesquad.privileges import *
 
 #
 # Public views

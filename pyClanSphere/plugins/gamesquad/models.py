@@ -17,8 +17,8 @@ from pyClanSphere.models import User
 from pyClanSphere.utils.text import build_tag_uri
 from pyClanSphere.utils.pagination import Pagination
 
-from pyClanSphere.plugins.gamesquad.database import games, squads, squadmembers, levels, gameaccounts
-from pyClanSphere.plugins.gamesquad.privileges import GAME_MANAGE, SQUAD_MANAGE, SQUAD_MANAGE_MEMBERS, LEVEL_MANAGE
+from pyClanSphere.plugins.gamesquad.database import *
+from pyClanSphere.plugins.gamesquad.privileges import *
 
 
 class Game(object):
@@ -228,3 +228,5 @@ db.mapper(GameAccount, gameaccounts, properties={
                                 backref=db.backref('gameaccounts')
     )
 })
+
+__all__ = ['Game', 'Squad', 'SquadMember', 'Level', 'GameAccount']

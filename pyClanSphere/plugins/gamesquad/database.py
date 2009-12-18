@@ -47,3 +47,5 @@ def init_database(app):
     """ This is for inserting our new table"""
     engine = app.database_engine
     metadata.create_all(engine)
+
+__all__ = ['games', 'squads', 'levels', 'squadmembers', 'gameaccounts']
