@@ -2,6 +2,11 @@
 <div id="newpost">
   {% call form() %}
   <dl>
+    {% if  not request.user.is_somebody %}
+    <dt>{{ form.yourname.label() }}
+    <dd>{{ form.yourname() }}
+      
+    {% endif %}
     {% if form.title %}
       <dt>{{ form.title.label() }}
       <dd>{{ form.title() }}

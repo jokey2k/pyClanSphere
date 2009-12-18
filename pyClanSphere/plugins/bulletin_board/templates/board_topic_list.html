@@ -15,11 +15,11 @@
   {% for topic in topics %}
   <tr>
     <td>{%- trans topic='<a href="%s">%s</a>'|safe % (url_for('board/topic_detail', topic_id=topic.id)|e,topic.name),
-                  author='<a href="#">%s</a>'|safe % (topic.author.display_name),
+                  author='<a href="#">%s</a>'|safe % (topic.author_str),
                   date=topic.date|datetimeformat('long')
                   %}{{ topic }}<br><em>by {{ author }} at {{ date }}</em>{% endtrans -%}</td>
     <td>{%- trans date='<a href="#">%s</a>'|safe % (topic.modification_date|timedeltaformat),
-                  author='<a href="#">%s</a>'|safe % (topic.lastposter.display_name)
+                  author='<a href="#">%s</a>'|safe % (topic.lastpost.author_str)
                   -%}{{ date }} ago<br>by {{ author }}{% endtrans -%}</td>  
     <td class="count">{{ topic.postcount or '0' }}</td>
   </tr>  

@@ -20,7 +20,7 @@
     <td class="count">{{ forum.postcount or '0' }}</td>
     {% if forum.lasttopic %}
     <td>{%- trans topic='<a href="%s">%s</a>'|safe % (url_for('board/topic_detail', topic_id=forum.lasttopic.id)|e, forum.modification_date|datetimeformat),
-                  author='<a href="#">%s</a>'|safe % (forum.lastposter.display_name) %}
+                  author='<a href="#">%s</a>'|safe % (forum.lastpost.author_str) %}
         {{ topic }} at {{ date }}<br>by {{ author }}
         {% endtrans -%}</td>  
     {% else %}  

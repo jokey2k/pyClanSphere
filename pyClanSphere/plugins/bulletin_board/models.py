@@ -110,11 +110,8 @@ class Forum(db.Model):
     # quick access
     topiccount = db.Column('topiccount', db.Integer)
     postcount = db.Column('postcount', db.Integer)
-    lastposter_id = db.Column('lastposter_id', db.ForeignKey('users.user_id'))
-    lastposter = db.relation(User, uselist=False)
-    lasttopic_id = db.Column('lasttopic_id', db.Integer)
     modification_date = db.Column('modification_date', db.DateTime)
-    db.ForeignKeyConstraint(['lasttopic_id'],['board_topics.topic_id'], name='boardtopics', use_alter=True)
+    
 
     def __init__(self, category, name=None, description=None, ordering=0):
         assert category is not None
@@ -143,13 +140,12 @@ class Forum(db.Model):
         if self.topiccount:
             lasttopic = topics[0]
             self.lasttopic_id = lasttopic.id
-            return
-            self.lastposter_id = lasttopic.lastposter.id
+            self.lastpost_id = lasttopic.lastpost.id
             postcount = 0
             for topic in topics:
                 postcount += len(topic.posts)
         else:
-            self.lasttopic = self.lastposter = None
+            self.lasttopic_id = self.lastpost_iid = None
             postcount = 0
         self.postcount = postcount
         self.modification_date = datetime.utcnow()
@@ -183,7 +179,39 @@ class TopicQuery(db.Query):
         }
 
 
-class Topic(db.Model):
+class AuthorBase(object):
+    """Base class that has fake-authors"""
+
+    def __init__(self):
+        # this is just a base class
+        raise NotImplemented()
+
+    def _get_author(self):
+        if self._author_id == -1:
+            return unicode(self._author_str)
+        else:
+            return User.query.get(self._author_id)
+
+    def _set_author(self, author):
+        if isinstance(author, User) and author.id != -1:
+            self._author_id = author.id
+        else:
+            self._author_id = -1
+        self.author_str = author
+
+    author = db.synonym('_author_id', descriptor=property(_get_author, _set_author))
+
+    def _get_author_str(self):
+        return unicode(self._author_str)
+
+    def _set_author_str(self, author):
+        if isinstance(author, User) and author.id != -1:
+            self._author_str = author.display_name
+        else:
+            self._author_str = unicode(author)
+
+
+class Topic(db.Model, AuthorBase):
     """Representation of a topic"""
 
     __tablename__ = 'board_topics'
@@ -194,29 +222,30 @@ class Topic(db.Model):
     forum_id = db.Column('forum_id', db.ForeignKey('board_forums.forum_id'))
     forum = db.relation('Forum', uselist=False, backref='topics')
     name = db.Column('name', db.String(255))
-    author_id = db.Column('author_id', db.ForeignKey('users.user_id'))
-    author = db.relation(User, uselist=False, primaryjoin=author_id == User.id)
     date = db.Column('date', db.DateTime)
+    _author_id = db.Column('author_id', db.ForeignKey('users.user_id'))
+    _author_str = db.Column('author_str', db.String(40))
     is_sticky = db.Column('is_sticky', db.Boolean)
     is_locked = db.Column('is_locked', db.Boolean)
     is_global = db.Column('is_global', db.Boolean)
     is_solved = db.Column('is_solved', db.Boolean)
     is_external = db.Column('is_external', db.Boolean)
+    author_str = db.synonym('_author_str', descriptor=property(AuthorBase._get_author_str, AuthorBase._set_author_str))
+    author = db.synonym('_author_id', descriptor=property(AuthorBase._get_author, AuthorBase._set_author))
 
     # quick access
-    lastposter_id = db.Column('lastposter_id', db.ForeignKey('users.user_id'))
-    lastposter = db.relation(User, uselist=False, primaryjoin=lastposter_id == User.id)
     lastpost_id = db.Column('lastpost_id', db.Integer)
     postcount = db.Column('postcount', db.Integer)
     modification_date = db.Column('modification_date', db.DateTime)
     db.ForeignKeyConstraint(['lastpost_id'],['board_posts.post_id'], name='boardposts', use_alter=True)
 
-    def __init__(self, forum, name=None, author=None, is_sticky=None,
+    def __init__(self, forum, name=None, author=None, date=None, is_sticky=None,
                  is_locked=None, is_global=None, is_solved=None, is_external=None):
         assert forum is not None
         self.forum = forum
         self.name = name
         self.author = author
+        self.date = date
         self.is_sticky = is_sticky
         self.is_solved = is_solved
         self.is_global = is_global
@@ -250,27 +279,6 @@ class Topic(db.Model):
         self.forum.refresh()
 
 
-# many to many tables for prefixes
-forums_prefix = db.Table('board_forums_prefix', db.Model.metadata,
-                         db.Column('forum_id', db.ForeignKey('board_forums.forum_id')),
-                         db.Column('prefix_id', db.ForeignKey('board_prefixes'))
-                )
-
-topics_prefix = db.Table('board_topics_prefix', db.Model.metadata,
-                         db.Column('topic_id', db.ForeignKey('board_topics.topic_id')),
-                         db.Column('prefix_id', db.ForeignKey('board_prefixes'))
-                )
-
-
-class Prefix(db.Model):
-    __tablename__ = 'board_prefixes'
-
-    id = db.Column('prefix_id', db.Integer, primary_key=True)
-    name = db.Column('name', db.String(20))
-    forums = db.relation('Forum', secondary=forums_prefix)
-    topics = db.relation('Topic', secondary=topics_prefix)
-
-
 class PostQuery(db.Query):
     """Addon methods for querying posts"""
 
@@ -299,7 +307,7 @@ class PostQuery(db.Query):
         }
 
 
-class Post(db.Model):
+class Post(db.Model, AuthorBase):
     """Representation of a post"""
 
     __tablename__ = 'board_posts'
@@ -310,10 +318,12 @@ class Post(db.Model):
     topic_id = db.Column('topic_id', db.ForeignKey('board_topics.topic_id'))
     topic = db.relation('Topic', uselist=False, backref='posts')
     text = db.Column('text', db.Text)
-    author_id = db.Column('author_id', db.ForeignKey('users.user_id'))
-    author = db.relation(User, uselist=False)
+    _author_id = db.Column('author_id', db.ForeignKey('users.user_id'))
+    _author_str = db.Column('author_str', db.String(40))
     date = db.Column('date', db.DateTime)
     ip = db.Column('ip', db.String(40))
+    author_str = db.synonym('_author_str', descriptor=property(AuthorBase._get_author_str, AuthorBase._set_author_str))
+    author = db.synonym('_author_id', descriptor=property(AuthorBase._get_author, AuthorBase._set_author))
 
     def __init__(self, topic, text=None, author=None, date=None, ip=None):
         assert topic is not None
@@ -325,13 +335,27 @@ class Post(db.Model):
 
 
 # Add in relations that have circular deps on ini
-Forum.lasttopic = db.relation(Topic, uselist=False)
 Topic.lastpost = db.relation(Post, uselist=False)
 
 
 def init_database(app):
     """ This is for inserting our new table"""
     engine = app.database_engine
+
+    # Circular dependencies
+    if engine.name == 'sqlite':
+        Forum.lasttopic_id = db.Column('lasttopic_id', db.Integer)
+        Forum.lastpost_id = db.Column('lastpost_id', db.Integer)
+        Forum.lasttopic = db.relation(Topic, uselist=False)
+        Forum.lastpost = db.relation(Post, uselist=False, primaryjoin=Forum.lasttopic_id==Post.id, foreign_keys=Post.id)
+    else:
+        Forum.lasttopic_id = db.Column('lasttopic_id', db.ForeignKey('board_topics.topic_id',
+                                       name='topic1', use_alter=True))
+        Forum.lastpost_id = db.Column('lastpost_id', db.ForeignKey('board_posts.post_id',
+                                      name='topic2', use_alter=True))
+        Forum.lasttopic = db.relation(Topic, uselist=False)
+        Forum.lastpost = db.relation(Post, uselist=False)
+
     db.Model.metadata.create_all(engine)
 
 

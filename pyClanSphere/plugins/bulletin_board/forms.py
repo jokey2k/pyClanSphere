@@ -194,6 +194,7 @@ class DeleteForumForm(forms.Form):
 class PostForm(forms.Form):
     """Post creation and edit"""
 
+    yourname = forms.TextField(lazy_gettext(u'Your Name'), max_length=40)
     title = forms.TextField(lazy_gettext(u'Title'), max_length=255)
     _maxtext = 5000
     text = forms.TextField(lazy_gettext(u'Text'), max_length=_maxtext,
@@ -223,22 +224,26 @@ class PostForm(forms.Form):
         if topic and topic.lastpost.text == data['text']:
             raise ValidationError(_("No Doublepost"))
 
-    def create_topic(self, forum):
+    def create_topic(self, forum, user):
         """Create a topic for our new post"""
         
         assert forum is not None
-        topic = Topic(forum, self['title'], self.user)
+        topic = Topic(forum, self['title'], user)
         db.commit()
         return topic
     
     def create_post(self):
         """Create a new post"""
         
+        user = self.user
+        if not self.user.is_somebody:
+            user = self['yourname']
+
         topic = self.topic
         if topic is None:
-            topic = self.create_topic(self.target)
+            topic = self.create_topic(self.target, user)
         
-        post = Post(self.topic, self['text'], self.user, datetime.utcnow(), self.request.remote_addr)
+        post = Post(topic, self['text'], user, datetime.utcnow(), self.request.remote_addr)
         db.commit()
         
         topic.refresh()
