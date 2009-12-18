@@ -8,9 +8,8 @@ installed:
 - Werkzeug 0.5.5*
 - Jinja 2.2*
 - A database (MySQL, SQLite or PostgreSQL and others are supported, depending on SQLAlchemy here)
-- SQLAlchemy 0.6beta
+- SQLAlchemy 0.6beta (bundled as not all systems have subversion to do a checkout on their own)
 - simplejson* [included in Python 2.6 and higher]
-- html5lib*
 - pytz*
 - Babel* (>= 0.9.5; using bundled svn version as of 18.12.2009)
 
@@ -19,7 +18,7 @@ easy_install / pip or might be available in Debian already.
 
 If you might use easy_install::
 
-    $ easy_install Werkzeug Jinja2 MySQL-python SQLAlchemy simplejson pytz
+    $ easy_install Werkzeug==dev Jinja2 pytz webdepcompress translitcodec
 
 
 Installation
