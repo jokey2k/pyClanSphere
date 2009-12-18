@@ -236,6 +236,8 @@ db.association_proxy = association_proxy
 db.attribute_loaded = attribute_loaded
 db.AttributeExtension = AttributeExtension
 db.AutoAddExtension = AutoAddExt
+db.EXT_CONTINUE = orm.EXT_CONTINUE
+db.EXT_STOP = orm.EXT_STOP
 db.attribute_mapped_collection = attribute_mapped_collection
 db.func = func
 
