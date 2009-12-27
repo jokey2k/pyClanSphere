@@ -337,24 +337,16 @@ class Post(db.Model, AuthorBase):
 # Add in relations that have circular deps on ini
 Topic.lastpost = db.relation(Post, uselist=False)
 
+# Circular dependencies
+Forum.lasttopic_id = db.Column('lasttopic_id', db.Integer)
+Forum.lastpost_id = db.Column('lastpost_id', db.Integer)
+Forum.lasttopic = db.relation(Topic, uselist=False)
+Forum.lastpost = db.relation(Post, uselist=False, primaryjoin=Forum.lasttopic_id==Post.id, foreign_keys=Post.id)
 
 def init_database(app):
     """ This is for inserting our new table"""
     engine = app.database_engine
 
-    # Circular dependencies
-    if engine.name == 'sqlite':
-        Forum.lasttopic_id = db.Column('lasttopic_id', db.Integer)
-        Forum.lastpost_id = db.Column('lastpost_id', db.Integer)
-        Forum.lasttopic = db.relation(Topic, uselist=False)
-        Forum.lastpost = db.relation(Post, uselist=False, primaryjoin=Forum.lasttopic_id==Post.id, foreign_keys=Post.id)
-    else:
-        Forum.lasttopic_id = db.Column('lasttopic_id', db.ForeignKey('board_topics.topic_id',
-                                       name='topic1', use_alter=True))
-        Forum.lastpost_id = db.Column('lastpost_id', db.ForeignKey('board_posts.post_id',
-                                      name='topic2', use_alter=True))
-        Forum.lasttopic = db.relation(Topic, uselist=False)
-        Forum.lastpost = db.relation(Post, uselist=False)
 
     db.Model.metadata.create_all(engine)
 
