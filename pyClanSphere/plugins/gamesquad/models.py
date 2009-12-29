@@ -45,13 +45,15 @@ class GameQuery(db.Query):
                                 query_filter.count(), url_args=url_args)
 
         return {
-            'games':            memberlist,
+            'games':            gamelist,
             'pagination':       pagination
         }
 
 
 class Game(object):
     """Basics for a Game"""
+
+    query = db.query_property(GameQuery)
 
     def __init__(self, name):
         super(Game, self).__init__()

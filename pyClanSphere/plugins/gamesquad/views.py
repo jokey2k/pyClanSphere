@@ -57,7 +57,7 @@ def game_index(req, page):
     """
 
     data = Game.query.get_list('game/index', page,
-              request.per_page)
+              req.per_page)
 
     return render_response('game_index.html', games=data)
 
