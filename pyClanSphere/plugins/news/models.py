@@ -46,7 +46,7 @@ class NewsQuery(db.Query):
         return query
 
     def get_list(self, endpoint=None, page=1, per_page=None,
-                 url_args=None, raise_if_empty=True):
+                 url_args=None, raise_if_empty=True, paginator=Pagination):
         """Return a dict with pagination, the current posts, number of pages,
         total posts and all that stuff for further processing.
         """
@@ -63,7 +63,7 @@ class NewsQuery(db.Query):
         if raise_if_empty and (page != 1 and not newslist):
             raise NotFound()
 
-        pagination = Pagination(endpoint, page, per_page,
+        pagination = paginator(endpoint, page, per_page,
                                 self.count(), url_args)
 
         return {
