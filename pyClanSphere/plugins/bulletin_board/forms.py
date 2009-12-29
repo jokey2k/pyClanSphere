@@ -135,7 +135,7 @@ class ForumForm(forms.Form):
 
     def save_changes(self, forum):
         forms.set_fields(forum, self.data, 'category', 'name',
-                         'allow_anonymous', 'is_public')
+                         'allow_anonymous', 'description', 'is_public')
         if self.data['ordering'] is None:
             forum.ordering = self['category'].forums.count()-1
         else:
