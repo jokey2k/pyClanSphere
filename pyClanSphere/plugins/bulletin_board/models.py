@@ -268,13 +268,11 @@ class Topic(db.Model, AuthorBase):
         posts = Post.query.filter(Post.topic_id==self.id).order_by(db.asc(Post.id)).all()
         self.postcount = len(posts)
         if self.postcount:
-            lastpost = posts[0]
-            self.lastpost = lastpost
-            self.lastposter = lastpost.author
+            lastpost = posts[-1]
+            self.lastpost_id = lastpost.id
             self.modification_date = lastpost.date
         else:
-            self.lastpost = None
-            self.lastposter = None
+            self.lastpost_id = None
             self.modification_date = None
         self.forum.refresh()
 
@@ -335,13 +333,13 @@ class Post(db.Model, AuthorBase):
 
 
 # Add in relations that have circular deps on ini
-Topic.lastpost = db.relation(Post, uselist=False)
+Topic.lastpost = db.relation(Post, uselist=False, primaryjoin=Topic.lastpost_id==Post.id, foreign_keys=Post.id)
 
 # Circular dependencies
 Forum.lasttopic_id = db.Column('lasttopic_id', db.Integer)
 Forum.lastpost_id = db.Column('lastpost_id', db.Integer)
 Forum.lasttopic = db.relation(Topic, uselist=False)
-Forum.lastpost = db.relation(Post, uselist=False, primaryjoin=Forum.lasttopic_id==Post.id, foreign_keys=Post.id)
+Forum.lastpost = db.relation(Post, uselist=False, primaryjoin=Forum.lastpost_id==Post.id, foreign_keys=Post.id)
 
 def init_database(app):
     """ This is for inserting our new table"""
