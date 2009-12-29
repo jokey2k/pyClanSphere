@@ -113,6 +113,7 @@ class ForumForm(forms.Form):
             initial = forms.fill_dict(initial,
                 category=forum.category,
                 name=forum.name,
+                description=forum.description,
                 ordering=forum.ordering,
                 allow_anonymous=forum.allow_anonymous,
                 is_public=forum.is_public
