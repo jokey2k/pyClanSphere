@@ -59,7 +59,7 @@ def game_index(req, page):
     data = Game.query.get_list('game/index', page,
               req.per_page)
 
-    return render_response('game_index.html', games=data)
+    return render_response('game_index.html', **data)
 
 @cache.response(vary=('user',))
 def game_detail(req, game_id=None):
