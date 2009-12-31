@@ -71,5 +71,25 @@ $(function() {
   $('#comment-message').hide();
 });
 
+$().ready(function() {
+	$('textarea.tinymce').tinymce({
+		// Location of TinyMCE script
+		script_url : '/_shared/core/js/tiny_mce/tiny_mce.js',
+
+		// General options
+		theme : "advanced",
+		plugins : "safari,inlinepopups,searchreplace,contextmenu,bbcode",
+
+		// Theme options
+		theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,fontsizeselect,|,forecolor",
+		theme_advanced_buttons2 : "search,replace,|,bullist,numlist,|,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,code",
+		theme_advanced_buttons3 : "",
+		theme_advanced_buttons4 : "",
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "left",
+		theme_advanced_resizing : true,
+	});
+});
+
 // quick alias for translations
 _ = pyClanSphere.gettext;

@@ -1097,6 +1097,7 @@ class pyClanSphere(object):
         result = [
             htmlhelpers.meta(name='generator', content='pyClanSphere'),
             htmlhelpers.script(url_for('core/shared', filename='js/jQuery.js')),
+            htmlhelpers.script(url_for('core/shared', filename='js/tiny_mce/jquery.tinymce.js')),
             htmlhelpers.script(url_for('core/shared', filename='js/pyClanSphere.js')),
             htmlhelpers.script(url_for('core/serve_translations'))
         ]
