@@ -274,7 +274,7 @@ class Topic(db.Model, AuthorBase):
         else:
             self.lastpost_id = None
             self.modification_date = None
-        self.forum.refresh()
+        #self.forum.refresh()
 
 
 class PostQuery(db.Query):

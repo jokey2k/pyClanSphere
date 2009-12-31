@@ -244,12 +244,14 @@ class PostForm(forms.Form):
         if topic is None:
             topic = self.create_topic(self.target, user)
         
+        # A bug in sqlalchemy 0.6beta makes this part run and commit show a requirement, bug opened
         post = Post(topic, self['text'], user, datetime.utcnow(), self.request.remote_addr)
         db.commit()
-        
+        db.session.expire_all()
         topic.refresh()
         db.commit()
-        
+        topic.forum.refresh()
+        db.commit()
         return post
 
     def save_changes(self, post):
