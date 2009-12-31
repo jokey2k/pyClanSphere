@@ -13,7 +13,7 @@ from datetime import datetime
 
 from pyClanSphere.api import *
 from pyClanSphere.utils import forms
-from pyClanSphere.utils.validators import is_not_whitespace_only
+from pyClanSphere.utils.validators import is_not_whitespace_only, ValidationError
 
 from pyClanSphere.plugins.bulletin_board.models import *
 
