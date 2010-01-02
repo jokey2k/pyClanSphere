@@ -53,6 +53,7 @@ def setup(app, plugin):
     app.add_url_rule('/board/topic/<int:topic_id>', endpoint='board/topic_detail', defaults={'page': 1}, view=views.topic_detail)
     app.add_url_rule('/board/topic/<int:topic_id>/page/<int:page>', endpoint='board/topic_detail')
     app.add_url_rule('/board/post/<int:post_id>', endpoint='board/post_find', view=views.topic_by_post)
+    app.add_url_rule('/board/post/<int:post_id>/edit', endpoint='board/post_edit', view=views.post_edit)
 
     # Register our admin views
     add_admin_urls(app, 'board/categories', 'category_id',

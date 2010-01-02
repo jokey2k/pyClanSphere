@@ -164,6 +164,54 @@ def topic_by_post(request, post_id):
     return redirect_to('board/topic_detail', topic_id=topic_id, page=page, _anchor="post-%i" % (postnr,))
 
 
+def post_edit(request, post_id):
+    """Render post for editing, re-uses topic detail template
+
+    Available template variables:
+
+        `topic`:
+            Topic instance we give details about
+
+        `pagination`:
+            a pagination object to render a pagination
+
+        `posts`:
+            Sorted list of posts for given topic
+
+        `form`:
+            Form for post editing
+
+    :Template name: ``board_topic_detail.html``
+    :URL endpoint: ``board/post_edit``
+    """
+
+    post = Post.query.get(post_id)
+    if post is None:
+        raise NotFound()
+    (postnr, page, topic_id) = locate_post(post)
+
+    user = request.user
+    topic = post.topic
+    if not topic.can_see(user) or not post.can_edit(user):
+       raise Forbidden()
+
+    form = PostForm(topic,post)
+    del form.title
+
+    if request.method == 'POST':
+        if form.validate(request.form):
+            form.save_changes(post)
+            return redirect_to('board/post_find', post_id=post.id)
+
+    data = Post.query.filter(Post.topic==topic)\
+               .get_list('board/topic_detail', page,
+                         request.per_page, {'topic_id': topic_id})
+
+    return render_response('board_topic_detail.html', topic=topic,
+                          posts=data['posts'], pagination=data['pagination'],
+                          form=form.as_widget() if form else None)
+
+
 def locate_post(searchpost, per_page=None):
     """Locate a post and return page and topic which it is on"""
 
