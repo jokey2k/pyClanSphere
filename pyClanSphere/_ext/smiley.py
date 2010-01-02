@@ -121,41 +121,16 @@ class lib(object):
         tag = '<img src="' + image + '" alt="' + alt + '" />'
         return tag
     
-    def get_insert(self, key):
+    def get_insert(self, key, targetfield):
         """Override this if you want to add class information etc to the insert links"""
         t = self.get_tag(self.smilies[key][0], self.smilies[key][1])
         if not key[0] == key[-1] == ':':
             key = ' %s ' % key
-        return """<a href="#" onClick="return insert('""" + key + """')">""" + t + '</a>'
+        return """<a href="javascript:void(0);" onClick="pyClanSphere.insertText('""" + targetfield + r"""','""" + key + """')">""" + t + '</a>'
 
-    def get_panel(self, textarea="textarea"):
+    def get_panel(self, targetname="text"):
         """Returns HTML to display current smiley set with clickable Javascript links to insert into form.textarea"""
-        panel = r"""<script language="JavaScript" type="text/javascript">
-<!--
-function insert(myValue) {
-myField = document.getElementById('""" + textarea + r"""');
-//IE support
-if (document.selection) {
-myField.focus();
-sel = document.selection.createRange();
-sel.text = myValue;
-}
-//MOZILLA/NETSCAPE support
-else if (myField.selectionStart || myField.selectionStart == '0') {
-var startPos = myField.selectionStart;
-var endPos = myField.selectionEnd;
-myField.value = myField.value.substring(0, startPos)
-+ myValue
-+ myField.value.substring(endPos, myField.value.length);
-} else {
-myField.value += myValue;
-}
-myField.focus();
-return false;
-} 
-document.getElementById('""" + textarea + r"""').focus();//-->
-</script>
-"""
+        panel = ""
         for s in self.smilies.keys():
-            panel = panel + self.get_insert(s) + '\n'
+            panel = panel + self.get_insert(s, targetname) + '\n'
         return panel

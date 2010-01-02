@@ -64,13 +64,35 @@ var pyClanSphere = {
       this.TRANSLATIONS[key] = catalog.messages[key];
     this.PLURAL_EXPR = new Function('n', 'return +(' + catalog.plural_expr + ')');
     this.LOCALE = catalog.locale;
-  }
+  },
+
+  // Adds text to a given textelement.
+  // Sample usage:
+  // <a href="javascript:void(0);" onclick="insertText('namedField','hello world');">Say hello world</a>
+  insertText : function(element,value){
+    var element_dom=document.getElementsByName(element)[0];
+    if(document.selection){
+      element_dom.focus();
+      sel=document.selection.createRange();
+      sel.text=value;
+      return;
+    }if(element_dom.selectionStart||element_dom.selectionStart=="0"){
+      var t_start=element_dom.selectionStart;
+      var t_end=element_dom.selectionEnd;
+      var val_start=element_dom.value.substring(0,t_start);
+      var val_end=element_dom.value.substring(t_end,element_dom.value.length);
+      element_dom.value=val_start+value+val_end;
+    }else{
+      element_dom.value+=value;
+    }
+  }  
 };
 
 $(function() {
   $('#comment-message').hide();
 });
 
+// TinyMCE lazyloader, only load and use it if there's a textarea with tinymce class
 $().ready(function() {
 	$('textarea.tinymce').tinymce({
 		// Location of TinyMCE script

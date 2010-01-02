@@ -830,6 +830,10 @@ class pyClanSphere(object):
             prettify=prettify
         )
 
+        env.globals.update(
+            smileylist = lambda x: smiley_parser.get_panel(x)
+        )
+
         #! called after the application and all plugins are initialized
         emit_event('application-setup-done')
 
