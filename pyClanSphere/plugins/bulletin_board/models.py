@@ -250,7 +250,7 @@ class Topic(db.Model, AuthorBase):
         self.forum = forum
         self.name = name
         self.author = author
-        self.date = date
+        self.date = date or datetime.utcnow()
         self.is_sticky = is_sticky
         self.is_solved = is_solved
         self.is_global = is_global
@@ -279,7 +279,6 @@ class Topic(db.Model, AuthorBase):
         else:
             self.lastpost_id = None
             self.modification_date = None
-        #self.forum.refresh()
 
 
 class PostQuery(db.Query):
