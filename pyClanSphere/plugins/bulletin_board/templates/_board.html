@@ -1,21 +1,43 @@
+{% macro addtool(starttag, endtag, icon) %}<a href="javascript:void(0);" onClick="pyClanSphere.insertText('text','{{ starttag }}','[/{{ endtag }}]')"><img src="{{ shared_url('core::editicons/'+icon) }}" width="24" height="24" alt="{{ tag }}"></a>{% endmacro %}
+
+{% macro addsimpletool(tag, icon) %}{{ addtool('[' + tag + ']',tag,icon) }}{% endmacro %}
+
 {% macro render_post_form(form) %}
 <div id="newpost">
+  <table width="100%" style="" class="boardpost">
   {% call form() %}
-  <dl>
-    {% if  not request.user.is_somebody %}
-    <dt>{{ form.yourname.label() }}
-    <dd>{{ form.yourname() }}
-      
-    {% endif %}
-    {% if form.title %}
-      <dt>{{ form.title.label() }}
-      <dd>{{ form.title() }}
-    {% endif %}
-  <dt>{{ form.text.label() }}
-  <dd>{{ form.text() }}
-  </dd>
-  {{ form.captcha or '' }}
-  <input type="submit" value="{{ _("Submit") }}">
+  <tr>
+    <th class="headline" colspan="3">{{ _("New Post") }}</th>
+  </tr>
+  {% if not request.user.is_somebody %}
+  <tr>
+    <td class="label">{{ form.yourname.label() }}</td>
+    <td colspan="2">{{ form.yourname() }}</td>
+  </tr>
+  {% endif %}
+  {% if form.title %}
+  <tr>
+    <td class="label">{{ form.title.label() }}</td>
+    <td colspan="2">{{ form.title() }}</td>
+  </tr>
+  {% endif %}
+  <tr>
+    <td class="label"></td>
+    <td colspan="2">{% for tool in ['b','u','i','s','link','size','color','center'] %}{{ addsimpletool(tool,tool+".png") }}{% endfor %}{{ addtool('[list][*]','list','list.png') }}</td>
+  <tr>
+    <td class="label"><img src="{{ shared_url('core::editicons/text.gif') }}" width="16" height="16" alt="{{ tag }}">{{ form.text.label() }}</td>
+    <td align="center">{{ form.text(cols=100) }}</td>
+    <td width="100px">{{ smileylist('text')|safe }}</td>
+  </tr>
+  {% if form.captcha %}
+  <tr>
+    <td colspan="3" align="center">{{ form.captcha }}</td>
+  </tr>
+  {% endif %}
+  <tr>
+    <td colspan="3" align="center"><input type="submit" value="{{ _("Submit") }}"></td>
+  </tr>
   {% endcall %}
+  </table>
 </div>
 {% endmacro %}
