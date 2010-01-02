@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: pyClanSphere@digital-family.de\n"
-"POT-Creation-Date: 2010-01-02 15:19+0100\n"
+"POT-Creation-Date: 2010-01-02 22:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -514,7 +514,7 @@ msgid "Categories"
 msgstr ""
 
 #: pyClanSphere/plugins/bulletin_board/__init__.py:32
-#: pyClanSphere/plugins/bulletin_board/views.py:233
+#: pyClanSphere/plugins/bulletin_board/views.py:316
 #: pyClanSphere/plugins/bulletin_board/templates/admin/board_forum_list.html:2
 msgid "Forums"
 msgstr ""
@@ -568,8 +568,8 @@ msgid "You have to select a category which the forums get assigned to."
 msgstr ""
 
 #: pyClanSphere/plugins/bulletin_board/forms.py:101
-#: pyClanSphere/plugins/bulletin_board/views.py:210
-#: pyClanSphere/plugins/bulletin_board/views.py:232
+#: pyClanSphere/plugins/bulletin_board/views.py:293
+#: pyClanSphere/plugins/bulletin_board/views.py:315
 #: pyClanSphere/plugins/bulletin_board/templates/admin/board_forum_list.html:7
 msgid "Category"
 msgstr ""
@@ -634,47 +634,51 @@ msgstr ""
 msgid "can manage forums"
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/views.py:194
+#: pyClanSphere/plugins/bulletin_board/views.py:277
 #, python-format
 msgid "Category %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/views.py:198
+#: pyClanSphere/plugins/bulletin_board/views.py:281
 #, python-format
 msgid "Category %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/views.py:224
+#: pyClanSphere/plugins/bulletin_board/views.py:307
 #, python-format
 msgid "The category %s was deleted successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/views.py:282
+#: pyClanSphere/plugins/bulletin_board/views.py:365
 #, python-format
 msgid "The forum %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/views.py:286
+#: pyClanSphere/plugins/bulletin_board/views.py:369
 #, python-format
 msgid "The forum %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/views.py:298
-#: pyClanSphere/plugins/bulletin_board/views.py:320
+#: pyClanSphere/plugins/bulletin_board/views.py:381
+#: pyClanSphere/plugins/bulletin_board/views.py:403
 msgid "Forum"
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/views.py:312
+#: pyClanSphere/plugins/bulletin_board/views.py:395
 #, python-format
 msgid "The forum %s was deleted successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/views.py:321
+#: pyClanSphere/plugins/bulletin_board/views.py:404
 #: pyClanSphere/plugins/bulletin_board/templates/board_index.html:12
 msgid "Topics"
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/templates/_board.html:18
+#: pyClanSphere/plugins/bulletin_board/templates/_board.html:10
+msgid "New Post"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_board.html:38
 #: pyClanSphere/utils/forms.py:790
 msgid "Submit"
 msgstr ""
@@ -706,11 +710,7 @@ msgstr ""
 msgid "Written: %(date)s"
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:13
-msgid "Quote"
-msgstr ""
-
-#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:20
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:25
 #: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:32
 #: pyClanSphere/plugins/news/templates/news_index.html:14
 #: pyClanSphere/plugins/war/templates/war_index.html:29
