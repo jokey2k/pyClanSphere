@@ -28,7 +28,7 @@ from werkzeug import cached_property, html, escape, MultiDict
 
 from jinja2 import Markup
 
-from pyClanSphere.application import get_request, url_for
+from pyClanSphere.application import get_request, url_for, get_application
 from pyClanSphere.database import db
 from pyClanSphere.i18n import _, ngettext, lazy_gettext, parse_datetime, \
      format_system_datetime
