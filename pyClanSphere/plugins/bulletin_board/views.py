@@ -91,8 +91,8 @@ def topic_list(request, forum_id, page=1):
 
     if request.method == 'POST':
         if form.validate(request.form):
-            form.create_post()
-            form.reset()
+            newpost = form.create_post()
+            return redirect_to('board/topic_detail', topic_id=newpost.topic.id)
 
     data = Topic.query.filter(Topic.forum==forum) \
                 .get_list('board/topics', page,
