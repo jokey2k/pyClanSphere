@@ -11,10 +11,11 @@
 
 from datetime import datetime
 
-from pyClanSphere.api import db
+from pyClanSphere.api import db, get_request
 from pyClanSphere.models import User
 from pyClanSphere.utils.pagination import Pagination
 
+from pyClanSphere.plugins.bulletin_board.privileges import *
 
 class CategoryQuery(db.Query):
     """Addon methods for querying categories"""
@@ -186,6 +187,10 @@ class AuthorBase(object):
         # this is just a base class
         raise NotImplemented()
 
+    @property
+    def author_is_somebody(self):
+        return self._author_id != -1
+
     def _get_author(self):
         if self._author_id == -1:
             return unicode(self._author_str)
@@ -331,6 +336,20 @@ class Post(db.Model, AuthorBase):
         self.ip = ip
         self.topic = topic
 
+    def can_edit(self, user=None):
+        if user is None:
+            user = get_request().user
+        if not self.author_is_somebody:
+            return user.has_privilege(BOARD_MODERATE)
+        else:
+            return self.author == user or user.has_privilege(BOARD_MODERATE)
+
+    def can_delete(self, user=None):
+        return False # Hardlock until view is in place
+        if user is None:
+            user = get_request().user
+        return user.has_privilege(BOARD_MODERATE)
+
 
 # Add in relations that have circular deps on ini
 Topic.lastpost = db.relation(Post, uselist=False, primaryjoin=Topic.lastpost_id==Post.id, foreign_keys=Post.id)
@@ -344,7 +363,6 @@ Forum.lastpost = db.relation(Post, uselist=False, primaryjoin=Forum.lastpost_id=
 def init_database(app):
     """ This is for inserting our new table"""
     engine = app.database_engine
-
 
     db.Model.metadata.create_all(engine)
 
