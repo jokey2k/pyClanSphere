@@ -6,8 +6,9 @@
   {% call form(class="form2") %}
   <fieldset>
     {% if not request.user.is_somebody %}{{ render_field(form.author)}}<br/>{% endif %}
-    <label for="text">{{ form.text.label() }}</label>
-    {{ form.text(rows=3, cols=40) }}<br/>
+    {{ form.text.label() }}{{ form.text(rows=3, cols=40) }}<br>
+    <label for="smiley">{{ _("Smileys") }}</label>
+    <div name="smiley" style="height: 64px;overflow-y:scroll;">{{ smileylist('text')|safe }}</div>
   </fieldset>
   <div align="center">{{ form.captcha or '' }}<br/>
   <input type="submit" class="button" name="save" value="{{ _("Shout!") }}" /></div>
