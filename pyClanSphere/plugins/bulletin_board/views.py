@@ -149,6 +149,41 @@ def topic_detail(request, topic_id, page=1):
                           posts=data['posts'], pagination=data['pagination'],
                           form=form.as_widget() if form else None)
 
+
+@cache.response()
+def topic_by_post(request, post_id):
+    """This function acts as a proxy to find posts by id
+
+    redirects to proper page if post is found, raise 404 otherwise
+    :URL endpoint: ``board/post_find``
+    """
+    post = Post.query.get(post_id)
+    if post is None:
+        raise NotFound()
+    postnr, page, topic_id = locate_post(post)
+    return redirect_to('board/topic_detail', topic_id=topic_id, page=page, _anchor="post-%i" % (postnr,))
+
+
+def locate_post(searchpost, per_page=None):
+    """Locate a post and return page and topic which it is on"""
+
+    assert searchpost is not None
+    topic = searchpost.topic
+    posts = Post.query.filter(Post.topic==topic).order_by(db.asc(Post.date)).all()
+    number = -1
+    for postnr, post in enumerate(posts):
+        if post.id == searchpost.id:
+            number = postnr
+            break
+    if number == -1:
+        raise get_application.InternalError('Post searching returned invalid id, check database consistency')
+
+    page = 1
+    if per_page:
+        page = ceil(postnr/perpage)
+
+    return (postnr, page, topic.id)
+
 #
 # Admin views
 #
