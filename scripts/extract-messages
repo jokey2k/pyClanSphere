@@ -26,6 +26,7 @@ KEYWORDS = {
 BUGS_ADDRESS = 'pyClanSphere@digital-family.de'
 COPYRIGHT = 'The pyClanSphere Team'
 METHODS = [
+    ('**/shared/js/tiny_mce/**', 'ignore'),
     ('**.py', 'python'),
     ('**.html', 'jinja2'),
     ('**.js', 'javascript'),
