@@ -191,15 +191,15 @@ def category_edit(request, category_id=None):
         elif form.validate(request.form):
             if category is None:
                 category = form.create_category()
-                msg = _('The category <a href="%s">%s</a> was created successfully.')
+                msg = _('Category %s was created successfully.')
                 icon = 'add'
             else:
                 form.save_changes(category)
-                msg = _('The category <a href="%s">%s</a> was updated successfully.')
+                msg = _('Category %s was updated successfully.')
                 icon = 'info'
 
-            admin_flash(msg % (url_for(cat_endpoints['edit'], category_id=category.id),
-                               escape(category.name)), icon)
+            admin_flash(msg % ('<a href="%s">%s</a>' % (url_for(cat_endpoints['edit'], category_id=category.id),
+                               escape(category.name)), icon))
 
             if 'save_and_continue' in request.form:
                 return redirect_to(cat_endpoints['edit'], category_id=category_id)
@@ -207,7 +207,7 @@ def category_edit(request, category_id=None):
                 return redirect_to(cat_endpoints['edit'])
             return form.redirect(cat_endpoints['list'])
     return render_admin_response('admin/board_base_edit.html', 'board.categories',
-                                 form=form.as_widget(), itemname=_('category'))
+                                 form=form.as_widget(), itemname=_('Category'))
 
 
 @require_admin_privilege(BOARD_MANAGE)
@@ -229,8 +229,8 @@ def category_delete(request, category_id=None):
             return redirect_to(cat_endpoints['list'])
 
     return render_admin_response('admin/board_base_delete.html', 'board.categories',
-                                 form=form.as_widget(), itemname=_('category'),
-                                 childitemnames=_('forums'), entryname=category.name)
+                                 form=form.as_widget(), itemname=_('Category'),
+                                 childitemnames=_('Forums'), entryname=category.name)
 
 # Forums
 
@@ -279,15 +279,15 @@ def forum_edit(request, forum_id=None):
         elif form.validate(request.form):
             if forum is None:
                 forum = form.create_forum()
-                msg = _('The forum <a href="%s">%s</a> was created successfully.')
+                msg = _('The forum %s was created successfully.')
                 icon = 'add'
             else:
                 form.save_changes(forum)
-                msg = _('The forum <a href="%s">%s</a> was updated successfully.')
+                msg = _('The forum %s was updated successfully.')
                 icon = 'info'
 
-            admin_flash(msg % (url_for(forum_endpoints['edit'], forum_id=forum.id),
-                               escape(forum.name)), icon)
+            admin_flash(msg % ('<a href="%s">%s</a>' % (url_for(forum_endpoints['edit'], forum_id=forum.id),
+                               escape(forum.name)), icon))
 
             if 'save_and_continue' in request.form:
                 return redirect_to(forum_endpoints['edit'], forum_id=forum_id)
@@ -295,7 +295,7 @@ def forum_edit(request, forum_id=None):
                 return redirect_to(forum_endpoints['edit'])
             return form.redirect(forum_endpoints['list'])
     return render_admin_response('admin/board_base_edit.html', 'board.forums',
-                                 form=form.as_widget(), itemname=_('forum'))
+                                 form=form.as_widget(), itemname=_('Forum'))
 
 
 @require_admin_privilege(BOARD_MANAGE)
@@ -317,5 +317,5 @@ def forum_delete(request, forum_id=None):
             return redirect_to(forum_endpoints['list'])
 
     return render_admin_response('admin/board_base_delete.html', 'board.forums',
-                                 form=form.as_widget(), itemname=_('forum'),
-                                 childitemnames=_('topics'), entryname=forum.name)
+                                 form=form.as_widget(), itemname=_('Forum'),
+                                 childitemnames=_('Topics'), entryname=forum.name)
