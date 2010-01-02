@@ -68,24 +68,52 @@ var pyClanSphere = {
 
   // Adds text to a given textelement.
   // Sample usage:
-  // <a href="javascript:void(0);" onclick="insertText('namedField','hello world');">Say hello world</a>
-  insertText : function(element,value){
-    var element_dom=document.getElementsByName(element)[0];
-    if(document.selection){
-      element_dom.focus();
-      sel=document.selection.createRange();
-      sel.text=value;
-      return;
-    }if(element_dom.selectionStart||element_dom.selectionStart=="0"){
-      var t_start=element_dom.selectionStart;
-      var t_end=element_dom.selectionEnd;
-      var val_start=element_dom.value.substring(0,t_start);
-      var val_end=element_dom.value.substring(t_end,element_dom.value.length);
-      element_dom.value=val_start+value+val_end;
-    }else{
-      element_dom.value+=value;
+  // <a href="javascript:void(0);" onclick="insertText('namedField','[link]',['/link']);">Say hello world</a>
+  insertText : function(fieldname, aTag, eTag) {
+    if (! aTag) {
+        aTag = '';
     }
-  }  
+    if (! eTag) {
+        eTag = '';
+    }
+    var input = document.getElementsByName(fieldname)[0];
+    input.focus();
+    /* IE */
+    if(typeof document.selection != 'undefined') {
+      var range = document.selection.createRange();
+      var insText = range.text;
+      range.text = aTag + insText + eTag;
+      range = document.selection.createRange();
+      if (insText.length == 0) {
+        range.move('character', -eTag.length);
+      } else {
+        range.moveStart('character', aTag.length + insText.length + eTag.length);
+      }
+      range.select();
+    }
+    /* Gecko */
+    else if(typeof input.selectionStart != 'undefined')
+    {
+      var start = input.selectionStart;
+      var end = input.selectionEnd;
+      var insText = input.value.substring(start, end);
+      input.value = input.value.substr(0, start) + aTag + insText + eTag + input.value.substr(end);
+      var pos;
+      if (insText.length == 0) {
+        pos = start + aTag.length;
+      } else {
+        pos = start + aTag.length + insText.length + eTag.length;
+      }
+      input.selectionStart = pos;
+      input.selectionEnd = pos;
+    }
+    else
+    {
+      var pos;
+      pos = input.value.length;
+      input.value = input.value + aTag + eTag;
+    }
+  }
 };
 
 $(function() {
