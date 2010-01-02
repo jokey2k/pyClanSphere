@@ -12,7 +12,7 @@
       <dd>{{ form.title() }}
     {% endif %}
   <dt>{{ form.text.label() }}
-  <dd>{{ form.text(class='tinymce') }}
+  <dd>{{ form.text() }}
   </dd>
   {{ form.captcha or '' }}
   <input type="submit" value="{{ _("Submit") }}">
