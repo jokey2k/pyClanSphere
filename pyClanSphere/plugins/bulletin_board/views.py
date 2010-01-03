@@ -278,7 +278,7 @@ def category_edit(request, category_id=None):
                 icon = 'info'
 
             admin_flash(msg % ('<a href="%s">%s</a>' % (url_for(cat_endpoints['edit'], category_id=category.id),
-                               escape(category.name)), icon))
+                               escape(category.name))), icon)
 
             if 'save_and_continue' in request.form:
                 return redirect_to(cat_endpoints['edit'], category_id=category_id)
@@ -366,7 +366,7 @@ def forum_edit(request, forum_id=None):
                 icon = 'info'
 
             admin_flash(msg % ('<a href="%s">%s</a>' % (url_for(forum_endpoints['edit'], forum_id=forum.id),
-                               escape(forum.name)), icon))
+                               escape(forum.name))), icon)
 
             if 'save_and_continue' in request.form:
                 return redirect_to(forum_endpoints['edit'], forum_id=forum_id)
