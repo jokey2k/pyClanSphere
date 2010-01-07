@@ -214,6 +214,7 @@ class PostForm(forms.Form):
         self.topic = None
         if isinstance(target, Topic):
             self.topic = target
+        self.post = post
 
     @property
     def captcha_protected(self):
@@ -222,7 +223,7 @@ class PostForm(forms.Form):
 
     def context_validate(self, data):
         topic = self.topic
-        if topic and topic.lastpost.text == data['text']:
+        if not self.post and topic and topic.lastpost.text == data['text']:
             raise ValidationError(_("No Doublepost"))
 
     def create_topic(self, forum, user):
