@@ -430,20 +430,30 @@ def format_fancydatetime(in_datetime=None, format='short', rebase=True):
     if format not in ['medium', 'short']:
         format='medium'
 
+    now = datetime.utcnow()
+    if rebase:
+        tz = get_timezone()
+        in_datetime += tz._utcoffset
+        now += tz._utcoffset
+
+    in_weekday = in_datetime.weekday()
+    weekday = now.weekday()
     prefix = ''
+    import pdb;pdb.set_trace()
     if in_delta < datetime_timedelta(minutes=2):
         return lazy_gettext(u'just now')
-    elif in_delta < datetime_timedelta(days=1):
+    elif in_delta < datetime_timedelta(1) and in_weekday == weekday:
         prefix = lazy_gettext(u'today') + ' '
-    elif in_delta < datetime_timedelta(days=2):
+    elif in_delta < datetime_timedelta(2) and (
+            in_weekday == weekday - 1 or (weekday == 0 and in_weekday == 6)):
         prefix = lazy_gettext(u'yesterday') + ' '
-    elif in_delta < datetime_timedelta(days=7):
+    elif in_delta < datetime_timedelta(7) and in_weekday != weekday:
         prefix = dates.format_date(in_datetime, "EEEE", locale=get_locale()) + ' '
 
     if prefix != '':
-        return prefix + format_time(in_datetime, format)
+        return prefix + format_time(in_datetime, format, rebase=False)
 
-    return format_datetime(in_datetime, format)
+    return format_datetime(in_datetime, format, rebase=False)
 
 def list_timezones():
     """Return a list of all timezones."""
