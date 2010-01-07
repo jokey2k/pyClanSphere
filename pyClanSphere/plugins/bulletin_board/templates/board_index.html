@@ -19,8 +19,9 @@
     <td class="count">{{ forum.topiccount or '0' }}</td>
     <td class="count">{{ forum.postcount or '0' }}</td>
     {% if forum.lasttopic_id %}
-    <td>{%- trans date='<a href="%s">%s</a>'|safe % (url_for('board/topic_detail',
-                      topic_id=forum.lasttopic_id)|e, forum.modification_date|fancydatetimeformat|capitalize),
+    <td>{%- trans date='<a href="%s"><img src="%s" width="12" height="12"> %s</a>'|safe % (url_for('board/post_find',
+                      post_id=forum.lastpost_id)|e, shared_url('core::editicons/postlink.gif'),
+                      forum.modification_date|fancydatetimeformat|capitalize),
                   author='<a href="#">%s</a>'|safe % (forum.lastpost.author_str)
                   %}{{ date }}<br>by {{ author }}{% endtrans -%}</td>
     {% else %}  
