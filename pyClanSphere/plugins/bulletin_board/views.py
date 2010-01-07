@@ -48,7 +48,6 @@ def board_index(request):
             user = request.user
             forumlist = [forum for forum in \
                          forums if forum.can_see(request.user)]
-            forumlist.sort()
             if forumlist:
                 renderdict[category] = forumlist
 
