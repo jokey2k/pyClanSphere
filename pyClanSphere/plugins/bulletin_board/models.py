@@ -10,6 +10,7 @@
 """
 
 from datetime import datetime
+from operator import attrgetter
 
 from pyClanSphere.api import db, get_request
 from pyClanSphere.models import User
@@ -74,10 +75,22 @@ class ForumQuery(db.Query):
         if per_page is None:
             per_page = 20
 
-        # send the query
+        # XXX: this should all be in a one-go in the database as it is much faster
+        #      there but works for now
+
+        # retrieve (pre-filtered) forumlist
         offset = per_page * (page - 1)
-        forumlist = self.order_by([db.asc(Forum.category_id),db.asc(Forum.ordering)]) \
-                           .offset(offset).limit(per_page).all()
+        forumlist = self.offset(offset).limit(per_page).all()
+
+        # fetch an unique list of categories from selected forums
+        categories_temp = [forum.category for forum in forumlist]
+        categories = sorted(set(categories_temp), key=attrgetter('ordering'))
+
+        # order by category ordering, then forum ordering
+        retlist = []
+        for category in categories:
+            for forum in self.filter(Forum.category_id==category.id).order_by(Forum.ordering).all():
+                retlist.append(forum)
 
         # if raising exceptions is wanted, raise it
         if raise_if_empty and (page != 1 and not forumlist):
@@ -87,7 +100,7 @@ class ForumQuery(db.Query):
                                 self.count(), url_args=url_args)
 
         return {
-            'forums':           forumlist,
+            'forums':           retlist,
             'pagination':       pagination,
         }
 
