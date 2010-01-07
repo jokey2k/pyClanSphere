@@ -15,7 +15,7 @@
   <tr>
     <td>{{ post.text|prettify }}<br>
       <div style="float:right">
-        {% if post.can_edit() %}<a href="{{ url_for('board/post_edit', post_id=post.id) }}"><img src="{{ shared_url('core::editicons/edit.gif') }}" width="16" height="16"></a>&nbsp;{% endif %}
+        {% if post.can_edit() %}<a href="{{ url_for('board/post_edit', post_id=post.id, _anchor='post-edit') }}"><img src="{{ shared_url('core::editicons/edit.gif') }}" width="16" height="16"></a>&nbsp;{% endif %}
         {% if post.can_delete() %}<a href="#"><img src="{{ shared_url('core::editicons/delete.gif') }}" width="16" height="16"></a>{% endif %}
       </div>
     </td>
