@@ -439,7 +439,6 @@ def format_fancydatetime(in_datetime=None, format='short', rebase=True):
     in_weekday = in_datetime.weekday()
     weekday = now.weekday()
     prefix = ''
-    import pdb;pdb.set_trace()
     if in_delta < datetime_timedelta(minutes=2):
         return lazy_gettext(u'just now')
     elif in_delta < datetime_timedelta(1) and in_weekday == weekday:
