@@ -9,6 +9,7 @@
     :license: BSD, see LICENSE for more details.
 """
 from copy import copy
+from operator import itemgetter
 
 from pyClanSphere.i18n import _, lazy_gettext, list_languages
 from pyClanSphere.application import get_application, get_request, emit_event
@@ -281,7 +282,7 @@ class _UserBoundForm(forms.Form):
             (1, _('Male')),
             (0, _('Female'))
         ]
-        self.country.choices = sorted(self.app.locale.territories.iteritems(), key=lambda (k,v): (v,k))
+        self.country.choices = sorted(self.app.locale.territories.iteritems(), key=itemgetter(1))
 
     def as_widget(self):
         widget = forms.Form.as_widget(self)
