@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: pyClanSphere@digital-family.de\n"
-"POT-Creation-Date: 2010-01-07 22:16+0100\n"
+"POT-Creation-Date: 2010-01-07 23:18+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -504,19 +504,19 @@ msgstr ""
 msgid "no documented plugins installed."
 msgstr ""
 
-#: pyClanSphere/i18n/__init__.py:435
+#: pyClanSphere/i18n/__init__.py:444
 msgid "just now"
 msgstr ""
 
-#: pyClanSphere/i18n/__init__.py:437
+#: pyClanSphere/i18n/__init__.py:446
 msgid "today"
 msgstr ""
 
-#: pyClanSphere/i18n/__init__.py:439
+#: pyClanSphere/i18n/__init__.py:449
 msgid "yesterday"
 msgstr ""
 
-#: pyClanSphere/i18n/__init__.py:510
+#: pyClanSphere/i18n/__init__.py:520
 msgid "now"
 msgstr ""
 
@@ -710,11 +710,9 @@ msgid "Last post"
 msgstr ""
 
 #: pyClanSphere/plugins/bulletin_board/templates/board_index.html:22
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:21
 #, python-format
-msgid ""
-"\n"
-"         %(date)s<br>by %(author)s\n"
-"        "
+msgid "%(date)s<br>by %(author)s"
 msgstr ""
 
 #: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:13
@@ -736,11 +734,6 @@ msgstr ""
 #: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:17
 #, python-format
 msgid "%(topic)s<br><em>by %(author)s at %(date)s</em>"
-msgstr ""
-
-#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:21
-#, python-format
-msgid "%(date)s ago<br>by %(author)s"
 msgstr ""
 
 #: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:27

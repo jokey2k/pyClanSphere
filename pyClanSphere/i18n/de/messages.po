@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pyClanSphere 0.1\n"
 "Report-Msgid-Bugs-To: mail@markus-ullmann.de\n"
-"POT-Creation-Date: 2010-01-07 22:16+0100\n"
+"POT-Creation-Date: 2010-01-07 23:18+0100\n"
 "PO-Revision-Date: 2009-12-14 00:09+0100\n"
 "Last-Translator: Markus Ullmann <mail@markus-ullmann.de>\n"
 "Language-Team: de <pyclansphere@digital-family.de>\n"
@@ -559,19 +559,19 @@ msgstr "kann die komplette Site administrieren"
 msgid "no documented plugins installed."
 msgstr "Keine dokumentierten Plugins installiert."
 
-#: pyClanSphere/i18n/__init__.py:435
+#: pyClanSphere/i18n/__init__.py:444
 msgid "just now"
 msgstr "gerade eben"
 
-#: pyClanSphere/i18n/__init__.py:437
+#: pyClanSphere/i18n/__init__.py:446
 msgid "today"
 msgstr "heute"
 
-#: pyClanSphere/i18n/__init__.py:439
+#: pyClanSphere/i18n/__init__.py:449
 msgid "yesterday"
 msgstr "gestern"
 
-#: pyClanSphere/i18n/__init__.py:510
+#: pyClanSphere/i18n/__init__.py:520
 msgid "now"
 msgstr "jetzt"
 
@@ -732,7 +732,7 @@ msgid "Forum"
 msgstr "Forum"
 
 #: pyClanSphere/plugins/bulletin_board/views.py:391
-#, fuzzy, python-format
+#, python-format
 msgid "The forum %s was deleted successfully."
 msgstr "Das Forum %s wurde erfolgreich gelöscht."
 
@@ -756,7 +756,6 @@ msgstr "Forumindex"
 
 #: pyClanSphere/plugins/bulletin_board/templates/board_index.html:13
 #: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:13
-#, fuzzy
 msgid "Posts"
 msgstr "Beiträge"
 
@@ -766,11 +765,9 @@ msgid "Last post"
 msgstr "Letzter Beitrag"
 
 #: pyClanSphere/plugins/bulletin_board/templates/board_index.html:22
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:21
 #, python-format
-msgid ""
-"\n"
-"         %(date)s<br>by %(author)s\n"
-"        "
+msgid "%(date)s<br>by %(author)s"
 msgstr "%(date)s<br>von %(author)s"
 
 #: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:13
@@ -792,12 +789,7 @@ msgstr "Thema / Autor"
 #: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:17
 #, python-format
 msgid "%(topic)s<br><em>by %(author)s at %(date)s</em>"
-msgstr "%(topic)s<br><em>von %(author)s um %(date)s</em>"
-
-#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:21
-#, python-format
-msgid "%(date)s ago<br>by %(author)s"
-msgstr "vor %(date)s<br>von %(author)s"
+msgstr "%(topic)s<br><em>von %(author)s am %(date)s Uhr</em>"
 
 #: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:27
 msgid "No Topics yet"
