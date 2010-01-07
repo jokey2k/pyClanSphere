@@ -10,7 +10,7 @@
   {% for post in posts %}
   <tr>
     <td rowspan="2" class="userinfo">{% if post.author_is_somebody %}<a href="#">{{ post.author_str }}</a>{% else %}{{ post.author_str }}{% endif %}</td>
-    <td><a name="post-{{ post.id }}"></a>{%- trans date=post.date|datetimeformat('long') %}Written: {{ date }}{% endtrans -%}<span style="float:right;"><a href="#"><img src="{{ shared_url('core::editicons/quote.gif') }}" width="16" height="16"></a></span></td>  
+    <td><a name="post-{{ post.id }}" href="{{ url_for('board/post_find', post_id=post.id) }}"><img src="{{ shared_url('core::editicons/postlink.gif') }}" width="12" height="12"></a>&nbsp;{%- trans date=post.date|datetimeformat('long') %}Written: {{ date }}{% endtrans -%}<span style="float:right;"><a href="#"><img src="{{ shared_url('core::editicons/quote.gif') }}" width="12" height="12"></a></span></td>  
   </tr>
   <tr>
     <td>{{ post.text|prettify }}<br>
