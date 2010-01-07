@@ -157,7 +157,7 @@ def topic_by_post(request, post_id):
     if post is None:
         raise NotFound()
     postnr, page, topic_id = locate_post(post)
-    return redirect_to('board/topic_detail', topic_id=topic_id, page=page, _anchor="post-%i" % (postnr,))
+    return redirect_to('board/topic_detail', topic_id=topic_id, page=page, _anchor="post-%i" % (post_id,))
 
 
 def post_edit(request, post_id):
