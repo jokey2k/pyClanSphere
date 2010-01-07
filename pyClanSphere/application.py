@@ -772,6 +772,7 @@ class pyClanSphere(object):
             datetimeformat=self.theme.format_datetime,
             dateformat=self.theme.format_date,
             monthformat=i18n.format_month,
+            fancydatetimeformat=i18n.format_fancydatetime,
             timedeltaformat=i18n.format_timedelta
         )
 

@@ -56,7 +56,7 @@ import os
 import cPickle as pickle
 import struct
 from gettext import NullTranslations
-from datetime import datetime
+from datetime import datetime, timedelta as datetime_timedelta
 from time import strptime
 from weakref import WeakKeyDictionary
 
@@ -420,6 +420,30 @@ def format_timedelta(datetime_or_timedelta, granularity='second'):
     return dates.format_timedelta(datetime_or_timedelta, granularity,
                                   locale=get_locale())
 
+def format_fancydatetime(in_datetime=None, format='short', rebase=True):
+    """Mostly the same as `format_time` but knows about today, yesterday, weekdays and then dates"""
+
+    if in_datetime is None:
+        in_datetime = datetime.utcnow()
+    in_delta = datetime.utcnow() - in_datetime
+
+    if format not in ['medium', 'short']:
+        format='medium'
+
+    prefix = ''
+    if in_delta < datetime_timedelta(minutes=2):
+        return lazy_gettext(u'just now')
+    elif in_delta < datetime_timedelta(days=1):
+        prefix = lazy_gettext(u'today') + ' '
+    elif in_delta < datetime_timedelta(days=2):
+        prefix = lazy_gettext(u'yesterday') + ' '
+    elif in_delta < datetime_timedelta(days=7):
+        prefix = dates.format_date(in_datetime, "EEEE", locale=get_locale()) + ' '
+
+    if prefix != '':
+        return prefix + format_time(in_datetime, format)
+
+    return format_datetime(in_datetime, format)
 
 def list_timezones():
     """Return a list of all timezones."""
