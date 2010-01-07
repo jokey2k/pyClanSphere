@@ -252,7 +252,7 @@ class _UserBoundForm(forms.Form):
     address = forms.TextField(lazy_gettext('Streetaddress'))
     zip = forms.IntegerField(lazy_gettext(u'Zip code'))
     city = forms.TextField(lazy_gettext(u'City'))
-    country = forms.TextField(lazy_gettext(u'Country'))
+    country = forms.ChoiceField(lazy_gettext(u'Country'), widget=forms.SelectBox)
 
     def __init__(self, user, initial=None):
         if user is not None:
@@ -281,6 +281,7 @@ class _UserBoundForm(forms.Form):
             (1, _('Male')),
             (0, _('Female'))
         ]
+        self.country.choices = sorted(self.app.locale.territories.iteritems(), key=lambda (k,v): (v,k))
 
     def as_widget(self):
         widget = forms.Form.as_widget(self)
