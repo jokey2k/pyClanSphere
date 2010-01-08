@@ -25,7 +25,7 @@ from copy import deepcopy
 import sqlalchemy
 from sqlalchemy import orm
 from sqlalchemy.engine.url import make_url, URL
-from sqlalchemy.exc import ArgumentError
+from sqlalchemy.exc import ArgumentError, DisconnectionError
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.interfaces import ConnectionProxy
@@ -182,7 +182,7 @@ class LookLively(object):
                 dbapi_con.ping()
         except dbapi_con.OperationalError, ex:
             if ex.args[0] in (2006, 2013, 2014, 2045, 2055):
-                raise exc.DisconnectionError()
+                raise DisconnectionError()
             else:
                 raise
 
