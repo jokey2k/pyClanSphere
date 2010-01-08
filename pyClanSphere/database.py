@@ -70,6 +70,10 @@ def create_engine(uri, relative_to=None, debug=False):
 
     Furthermore the engine is created with `convert_unicode` by default.
     """
+
+    # This is a good idea in any case
+    options = {'convert_unicode': True}
+
     # special case sqlite.  We want nicer urls for that one.
     if uri.startswith('sqlite:'):
         match = _sqlite_re.match(uri)
@@ -93,12 +97,8 @@ def create_engine(uri, relative_to=None, debug=False):
         # provided we set it to utf-8
         if info.drivername == 'mysql':
             info.query.setdefault('charset', 'utf8')
-            if 'listeners' not in options:
-                options['listeners'] = [LookLively()]
-            else:
-                options['listeners'].append(LookLively())
+            options['listeners'] = [LookLively()]
 
-    options = {'convert_unicode': True}
 
     # alternative pool sizes / recycle settings and more.  These are
     # interpreter wide and not from the config for the following reasons:
