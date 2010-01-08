@@ -6,6 +6,7 @@
     <tr>
       <th>{{ _("Opponent") }}</th>
       <th>{{ _("Date") }}</th>
+      <th>{{ _("Squad") }}</th>
       <th>{{ _("State") }}</th>
       <th>{{ _("Result") }}</th>
     </tr>
@@ -17,6 +18,7 @@
     {%- else %}
       <td>{{ war.clanname }}</td>
 	  {%- endif %}
+      <td>{{ war.squad.name }}</td>
 	    <td>{{ war.date|datetimeformat }}</td>
 	    <td>{{ warstates[war.status] }}</td>
 	    <td>{% if war.status >= 4 %}{{ _('Yes') if war.result else _('No') }}{% else %}&mdash;{% endif %}</td>
