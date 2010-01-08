@@ -7,6 +7,7 @@
       <th>{{ _("Title") }}</th>
       <th>{{ _("Author") }}</th>
       <th>{{ _("Status") }}</th>
+      <th>{{ _("Date") }}</th>
     </tr>
   {%- for news in newsitems %}
     <tr class="{{ loop.cycle('odd', 'even') }}">
@@ -22,6 +23,7 @@
       {%- else %}
       <td>{%- trans %}Published{% endtrans %}</td>
 	  {%- endif %}
+	  <td>{{ news.pub_date|datetimeformat('short') if news.pub_date else '&mdash;'|safe }}</td>
     </tr>
   {%- endfor %}
   </table>

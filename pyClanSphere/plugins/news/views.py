@@ -114,16 +114,12 @@ def archive(req, year=None, month=None, day=None, page=1):
 def news_list(request, page):
     """Show all news in a list."""
 
-    newsitems = News.query.limit(PER_PAGE).offset(PER_PAGE * (page - 1)).all()
-    pagination = AdminPagination('admin/news_list', page, PER_PAGE,
-                                 News.query.count())
-    if not newsitems and page != 1:
-        raise NotFound()
+    data = News.query.get_list('admin/news_list', page, request.per_page)
 
     can_create = request.user.has_privilege(privileges.NEWS_CREATE)
 
     return render_admin_response('admin/news_list.html', 'news.list',
-                                 newsitems=newsitems, pagination=pagination,
+                                 newsitems=data['newsitems'], pagination=data['pagination'],
                                  can_create=can_create)
 
 
