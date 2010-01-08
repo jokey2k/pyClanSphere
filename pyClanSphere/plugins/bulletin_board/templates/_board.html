@@ -6,10 +6,18 @@
 <div id="newpost">
   <a name="post-edit"></a>
   <table width="100%" style="" class="boardpost">
-  {% call form() %}
+  {# we use render rather than just calling because we want
+       our own error reporting inside the box #}
+  {% call form.render() %}
   <tr>
     <th class="headline" colspan="3">{{ _("New Post") }}</th>
   </tr>
+  {% if form.errors %}
+  <tr>
+    <td class="label">{{ _("Error") }}</td>
+    <td colspan="2">{{ form.errors.as_ul()|safe }}</td>
+  </tr>
+  {% endif %}
   {% if not request.user.is_somebody %}
   <tr>
     <td class="label">{{ form.yourname.label() }}</td>
