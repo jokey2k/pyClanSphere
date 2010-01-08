@@ -65,7 +65,8 @@ def create_engine(uri, relative_to=None, debug=False):
     """Create a new engine.  This works a bit like SQLAlchemy's
     `create_engine` with the difference that it automaticaly set's MySQL
     engines to 'utf-8', and paths for SQLite are relative to the path
-    provided as `relative_to`.
+    provided as `relative_to`. Also hooks in LookLively to catch MySQL's
+    weird way of connection termination without termination.
 
     Furthermore the engine is created with `convert_unicode` by default.
     """
@@ -92,6 +93,10 @@ def create_engine(uri, relative_to=None, debug=False):
         # provided we set it to utf-8
         if info.drivername == 'mysql':
             info.query.setdefault('charset', 'utf8')
+            if 'listeners' not in options:
+                options['listeners'] = [LookLively()]
+            else:
+                options['listeners'].append(LookLively())
 
     options = {'convert_unicode': True}
 
@@ -144,6 +149,42 @@ class ConnectionDebugProxy(ConnectionProxy):
             if request is not None:
                 request.queries.append((statement, parameters, start,
                                         _timer(), find_calling_context()))
+
+class LookLively(object):
+    """Ensures that MySQL connections checked out of the pool are alive.
+
+    Specific to the MySQLdb DB-API.  Note that this can not totally
+    guarantee live connections- the remote side can drop the connection
+    in the time between ping and the connection reaching user code.
+
+    This is a simplistic implementation.  If there's a lot of pool churn
+    (i.e. implicit connections checking in and out all the time), one
+    possible and easy optimization would be to add a timer check:
+
+    1) On check-in, record the current time (integer part) into the
+       connection record's .properties
+    2) On check-out, compare the current integer time to the (possibly
+       empty) record in .properties.  If it is still the same second as
+       when the connection was last checked in, skip the ping.  The
+       connection is probably fine.
+
+    Something much like this logic will go into the SQLAlchemy core
+    eventually.
+
+    -jek
+    """
+
+    def checkout(self, dbapi_con, con_record, con_proxy):
+        try:
+            try:
+                dbapi_con.ping(False)
+            except TypeError:
+                dbapi_con.ping()
+        except dbapi_con.OperationalError, ex:
+            if ex.args[0] in (2006, 2013, 2014, 2045, 2055):
+                raise exc.DisconnectionError()
+            else:
+                raise
 
 
 class Query(orm.Query):
