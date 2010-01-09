@@ -1104,6 +1104,8 @@ class pyClanSphere(object):
                       'link': htmlhelpers.link, 'snippet': lambda html: html}
         result = [
             htmlhelpers.meta(name='generator', content='pyClanSphere'),
+            htmlhelpers.link('EditURI', url_for('core/service_rsd'),
+                             type='application/rsd+xml', title='RSD'),
             htmlhelpers.script(url_for('core/shared', filename='js/jQuery.js')),
             htmlhelpers.script(url_for('core/shared', filename='js/tiny_mce/jquery.tinymce.js')),
             htmlhelpers.script(url_for('core/shared', filename='js/pyClanSphere.js')),

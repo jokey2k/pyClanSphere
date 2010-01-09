@@ -65,7 +65,10 @@ def make_urls(app):
         Rule('/system/help/<path:page>', endpoint='admin/help'),
     ]
     other_urls = [
-        Rule('/_translations.js', endpoint='core/serve_translations')
+        Rule('/_translations.js', endpoint='core/serve_translations'),
+        Rule('/_services/', endpoint='core/service_rsd'),
+        Rule('/_services/json/<path:identifier>', endpoint='core/json_service'),
+        Rule('/_services/xml/<path:identifier>', endpoint='core/xml_service'),
     ]
 
     return [

@@ -19,6 +19,9 @@ from pyClanSphere import i18n
 all_views = {
     'core/index':               core.index,
     'core/serve_translations':  i18n.serve_javascript,
+    'core/service_rsd':         core.service_rsd,
+    'core/json_service':        core.json_service,
+    'core/xml_service':         core.xml_service,
 
     # account views
     'account/index':            account.index,
