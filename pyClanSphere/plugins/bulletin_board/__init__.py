@@ -14,14 +14,21 @@
 from os.path import join, dirname
 
 from pyClanSphere.api import *
+from pyClanSphere.utils import htmlhelpers
 from pyClanSphere.utils.admin import add_admin_urls
 
 from pyClanSphere.plugins.bulletin_board import views
 from pyClanSphere.plugins.bulletin_board.models import *
 from pyClanSphere.plugins.bulletin_board.models import init_database
 from pyClanSphere.plugins.bulletin_board.privileges import PLUGIN_PRIVILEGES, BOARD_MANAGE
+from pyClanSphere.plugins.bulletin_board.services import do_get_post
 
+SHARED_FILES = join(dirname(__file__), 'shared')
 TEMPLATE_FILES = join(dirname(__file__), 'templates')
+
+def inject_js(metadata):
+    metadata.append(htmlhelpers.script(shared_url('bulletin_board::js/bulletin_board.js')))
+    return metadata
 
 def add_admin_links(request, navigation_bar):
     """Add our views to the admin interface"""
@@ -46,6 +53,9 @@ def setup(app, plugin):
     # Add our template path
     app.add_template_searchpath(TEMPLATE_FILES)
 
+    # Add shared data path
+    app.add_shared_exports('bulletin_board', SHARED_FILES)
+
     # Register frontend views
     app.add_url_rule('/board/', endpoint='board/index', view=views.board_index)
     app.add_url_rule('/board/forum/<int:forum_id>', endpoint='board/topics', defaults={'page': 1}, view=views.topic_list)
@@ -64,3 +74,9 @@ def setup(app, plugin):
 
     # Add admin views to navigation bar
     app.connect_event('modify-admin-navigation-bar', add_admin_links)
+
+    # Inject our js for post quoting
+    app.connect_event('before-metadata-assembled', inject_js)
+
+    # Add JSON services
+    app.add_servicepoint('bulletin_board/get_post', do_get_post)
