@@ -812,6 +812,8 @@ class pyClanSphere(object):
 
         # init bbcode
         bbcode_parser = postmarkup_create(use_pygments=False)
+        # emit bbcode_parser so one can add more tags to it via plugins
+        emit('after-bbcode-initialized', bbcode_parser)
 
         @cached_result('prettified_')
         def prettify(text):
