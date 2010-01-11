@@ -15,7 +15,7 @@ import urlparse
 import socket
 import httplib
 
-from werkzeug import Response, Headers, url_decode, cached_property
+from werkzeug import Headers, url_decode, cached_property
 from werkzeug.contrib.iterio import IterO
 
 from pyClanSphere.application import Response, get_application
