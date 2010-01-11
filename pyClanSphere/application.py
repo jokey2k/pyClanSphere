@@ -1195,7 +1195,7 @@ class pyClanSphere(object):
         for callback in iter_listeners('after-request-setup'):
             result = callback(request)
             if result is not None:
-                return result(environ, start_response)
+                return result
 
         # normal request dispatching
         try:
