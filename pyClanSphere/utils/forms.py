@@ -11,7 +11,7 @@
     handle intelligent backredirects (via :mod:`pyClanSphere.utils.http`) and supports
     basic CSRF protection.
 
-    For usage informations see :class:`Form`
+    For usage information see :class:`Form`.
 
     :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
