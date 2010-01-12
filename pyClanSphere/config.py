@@ -26,66 +26,68 @@ from pyClanSphere.application import InternalError
 
 _dev_mode = environment.MODE == 'development'
 
+l_ = lazy_gettext
+
 #: variables the pyClanSphere core uses
 DEFAULT_VARS = {
     # core system settings
-    'database_uri':             TextField(default=u'', help_text=lazy_gettext(
+    'database_uri':             TextField(default=u'', help_text=l_(
         u'The database URI.  For more information about database settings '
         u'consult the pyClanSphere help.')),
-    'force_https':              BooleanField(default=False, help_text=lazy_gettext(
+    'force_https':              BooleanField(default=False, help_text=l_(
         u'If a request to an http URL comes in, pyClanSphere will redirect to the same '
         u'URL on https if this is savely possible.  This requires a working '
         u'SSL setup or otherwise pyClanSphere will become unresponsive.')),
-    'database_debug':           BooleanField(default=False, help_text=lazy_gettext(
-        u'If enabled the database will collect the SQL statements and add them '
-        u'to the bottom of the page for easier debugging')),
-    'clan_title':               TextField(default=lazy_gettext(u'My Clan Page')),
-    'clan_tagline':             TextField(default=lazy_gettext(u'just another Clan page')),
-    'site_url':                 TextField(default=u'', help_text=lazy_gettext(
+    'database_debug':           BooleanField(default=False, help_text=l_(
+        u'If enabled, the database will collect the SQL statements and add '
+        u'them to the bottom of the page for easier debugging')),
+    'clan_title':               TextField(default=l_(u'My Clan Page')),
+    'clan_tagline':             TextField(default=l_(u'just another Clan page')),
+    'site_url':                 TextField(default=u'', help_text=l_(
         u'The base URL of the site.  This has to be set to a full canonical URL '
-        u'(including http or https).  If not set the application will behave '
+        u'(including http or https).  If not set, the application will behave '
         u'confusingly.  Remember to change this value if you move your site '
         u'to a new location.')),
-    'clan_email':               TextField(default=u'', help_text=lazy_gettext(
+    'clan_email':               TextField(default=u'', help_text=l_(
         u'The email address given here is used by the notification system to send '
-        u'mails from.  Also plugins that send mails will use this address as '
-        u'sender address.'), validators=[is_valid_email()]),
+        u'emails from.  Also plugins that send mails will use this address as '
+        u'the sender address.'), validators=[is_valid_email()]),
     'timezone':                 ChoiceField(choices=sorted(list_timezones()),
-        default=u'UTC', help_text=lazy_gettext(
+        default=u'UTC', help_text=l_(
         u'The timezone of the site.  All times and dates in the user interface '
         u'and on the website will be shown in this timezone.  It\'s save to '
-        u'change the timezone after posts were created because the information '
+        u'change the timezone after posts are created because the information '
         u'in the database is stored as UTC.')),
-    'maintenance_mode':         BooleanField(default=False, help_text=lazy_gettext(
-        u'If set to true the site enables the maintainance mode.')),
+    'maintenance_mode':         BooleanField(default=False, help_text=l_(
+        u'If set to true, the site enables the maintainance mode.')),
     'session_cookie_name':      TextField(default=u'pyClanSphere_session',
-        help_text=lazy_gettext(u'If there are multiple pyClanSphere installations on '
+        help_text=l_(u'If there are multiple pyClanSphere installations on '
         u'the same host the cookie name should be set to something different '
         u'for each one.')),
     'theme':                    TextField(default=u'default'),
-    'secret_key':               TextField(default=u'', help_text=lazy_gettext(
-        u'The secret key is used for vairous security related tasks in the '
-        u'system.  For example the cookie is signed with this value.')),
+    'secret_key':               TextField(default=u'', help_text=l_(
+        u'The secret key is used for various security related tasks in the '
+        u'system. For example, the cookie is signed with this value.')),
     'language':                 ChoiceField(choices=list_languages(False),
                                             default=u'en'),
 
-    'iid':                      TextField(default=u'', help_text=lazy_gettext(
+    'iid':                      TextField(default=u'', help_text=l_(
         u'The iid uniquely identifies the pyClanSphere instance.  Currently this '
         u'value is unused, but once set you should not modify it.')),
 
     # log and development settings
     'log_file':                 TextField(default=u'pyClanSphere.log'),
-    'log_level':                ChoiceField(choices=[(k, lazy_gettext(k)) for k, v
+    'log_level':                ChoiceField(choices=[(k, l_(k)) for k, v
                                                 in sorted(log.LEVELS.items(),
                                                           key=lambda x: x[1])],
                                             default=u'warning'),
     'log_email_only':           BooleanField(default=_dev_mode,
-        help_text=lazy_gettext(u'During development this is helpful to '
+        help_text=l_(u'During development activating this is helpful to '
         u'log emails into a mail.log file in your instance folder instead '
         u'of delivering them to your MTA.')),
     'passthrough_errors':       BooleanField(default=_dev_mode,
-        help_text=lazy_gettext(u'If this is set to true, errors in pyClanSphere '
-        u'are not catched so that debuggers can catch it instead.  This is '
+        help_text=l_(u'If this is set to true, errors in pyClanSphere '
+        u'are not caught so that debuggers can catch it instead.  This is '
         u'useful for plugin and core development.')),
 
     # url settings
@@ -98,10 +100,10 @@ DEFAULT_VARS = {
     'enable_eager_caching':     BooleanField(default=False),
     'cache_timeout':            IntegerField(default=300, min_value=10),
     'cache_system':             ChoiceField(choices=[
-        (u'null', lazy_gettext(u'No Cache')),
-        (u'simple', lazy_gettext(u'Simple Cache')),
-        (u'memcached', lazy_gettext(u'memcached')),
-        (u'filesystem', lazy_gettext(u'Filesystem'))
+        (u'null', l_(u'No Cache')),
+        (u'simple', l_(u'Simple Cache')),
+        (u'memcached', l_(u'memcached')),
+        (u'filesystem', l_(u'Filesystem'))
     ], default=u'null'),
     'memcached_servers':        CommaSeparated(TextField(
                                                     validators=[is_netaddr()]),
@@ -116,26 +118,27 @@ DEFAULT_VARS = {
     'smtp_use_tls':             BooleanField(default=False),
 
     # network settings
-    'default_network_timeout':  IntegerField(default=5, help_text=lazy_gettext(
+    'default_network_timeout':  IntegerField(default=5, help_text=l_(
         u'This timeout is used by default for all network related operations. '
         u'The default should be fine for most environments but if you have a '
-        u'very bad network connection during development you should increase it.')),
+        u'very bad network connection during development you should increase '
+        u'it.')),
 
     # plugin settings
     'plugin_guard':             BooleanField(default=not _dev_mode),
     'plugins':                  CommaSeparated(TextField(), default=list),
     'plugin_searchpath':        CommaSeparated(TextField(), default=list,
-        help_text=lazy_gettext(u'It\'s possible to one or more comma '
+        help_text=l_(u'It\'s possible to one or more comma '
         u'separated paths here that are searched for plugins.  If the '
         u'is not absolute, it\'s considered relative to the instance '
         u'folder.')),
 
     # reCAPTCHA settings
-    'recaptcha_enable':         BooleanField(default=False, help_text=lazy_gettext(
+    'recaptcha_enable':         BooleanField(default=False, help_text=l_(
         u'If you want to protect forms that non-logged in users or guests can fill out,'
         u' enable it and get your api keys from http://recaptcha.net. Heavily recommended,'
         u' just not enabled per default as you need to get api keys yourself')),
-    'recaptcha_use_ssl':        BooleanField(default=True, help_text=lazy_gettext(
+    'recaptcha_use_ssl':        BooleanField(default=True, help_text=l_(
         u'Secure communication between this app and recaptcha over ssl')),
     'recaptcha_public_key':     TextField(default=u''),
     'recaptcha_private_key':    TextField(default=u'')
@@ -192,7 +195,7 @@ class ConfigurationTransactionError(InternalError):
     write the changes to the config file.
     """
 
-    help_text = lazy_gettext(u'''
+    help_text = l_(u'''
     <p>
       This error can happen if the configuration file is not writeable.
       Make sure the folder of the configuration file is writeable and
