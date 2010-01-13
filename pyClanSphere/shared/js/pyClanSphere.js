@@ -34,7 +34,7 @@ var pyClanSphere = {
           .click(function() {
             pyClanSphere.replyToNothing();
             return false;
-          }))
+          }));
       document.location = '#leave-reply';
       $('#comment-message').fadeIn();
     });
