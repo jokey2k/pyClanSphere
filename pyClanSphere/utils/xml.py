@@ -97,7 +97,7 @@ def generate_rsd(app):
 
     attributes = [('engineName', 'pyClanSphere'),
                   ('engineLink', 'http://pyclansphere.digital-family.de/'),
-                  ('homePageLink', url_for('cms/index', _external=True))]
+                  ('homePageLink', url_for('core/index', _external=True))]
 
     for attr, value in attributes:
         service.appendChild(document.createElement(attr)) \
