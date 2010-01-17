@@ -8,9 +8,7 @@
     :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
-from math import log
-from datetime import date, datetime, timedelta
-from urlparse import urljoin
+from datetime import date
 from uuid import uuid4
 
 from werkzeug.exceptions import NotFound
@@ -19,16 +17,10 @@ from pyClanSphere.database import users, groups, group_users, \
      privileges, user_privileges, group_privileges, \
      notification_subscriptions, imaccounts, db, passwordrequests
 from pyClanSphere.i18n import parse_datetime
-from pyClanSphere.utils.text import gen_slug, build_tag_uri, \
-     increment_string
 from pyClanSphere.utils.pagination import Pagination
 from pyClanSphere.utils.crypto import gen_pwhash, check_pwhash
-from pyClanSphere.utils.http import make_external_url
-from pyClanSphere.privileges import Privilege, _Privilege, privilege_attribute, \
+from pyClanSphere.privileges import _Privilege, privilege_attribute, \
      add_admin_privilege, ENTER_ADMIN_PANEL, CLAN_ADMIN, ENTER_ACCOUNT_PANEL
-from pyClanSphere.application import get_application, get_request, url_for
-
-from pyClanSphere.i18n import to_clan_timezone
 
 class UserQuery(db.Query):
     """Add some extra query methods to the user object."""

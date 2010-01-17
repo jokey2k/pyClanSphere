@@ -81,17 +81,14 @@
 import __builtin__
 import re
 import sys
-import imp
 import inspect
 from os import path, listdir, walk, makedirs
 from types import ModuleType
 from shutil import rmtree
 from time import localtime, time
-from cStringIO import StringIO
-from base64 import b64encode
 
 from urllib import quote
-from werkzeug import cached_property, escape, find_modules, import_string
+from werkzeug import cached_property, escape
 
 from pyClanSphere.application import get_application
 from pyClanSphere.utils import log

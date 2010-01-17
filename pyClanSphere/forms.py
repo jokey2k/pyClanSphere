@@ -12,17 +12,14 @@ from copy import copy
 from operator import itemgetter
 
 from pyClanSphere.i18n import _, lazy_gettext, list_languages
-from pyClanSphere.application import get_application, get_request, emit_event
+from pyClanSphere.application import get_application, emit_event
 from pyClanSphere.config import DEFAULT_VARS
-from pyClanSphere.database import db, notification_subscriptions
+from pyClanSphere.database import db
 from pyClanSphere.models import User, Group, NotificationSubscription, IMAccount, PasswordRequest
 from pyClanSphere.privileges import bind_privileges
-from pyClanSphere.notifications import send_notification_template
-from pyClanSphere.utils import forms, log, dump_json
-from pyClanSphere.utils.http import redirect_to
+from pyClanSphere.utils import forms, log
 from pyClanSphere.utils.validators import ValidationError, is_valid_email, \
-     is_valid_url, is_valid_slug, is_netaddr, is_not_whitespace_only
-from pyClanSphere.utils.redirects import register_redirect
+     is_valid_url, is_not_whitespace_only
 
 
 def config_field(cfgvar, label=None, **kwargs):

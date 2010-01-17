@@ -19,11 +19,11 @@ from urlparse import urlsplit
 
 from werkzeug import url_unquote
 
-from pyClanSphere.models import NotificationSubscription, User
+from pyClanSphere.models import NotificationSubscription
 from pyClanSphere.application import get_application, get_request, render_template
 from pyClanSphere.privileges import CLAN_ADMIN, ENTER_ACCOUNT_PANEL
 from pyClanSphere.utils.mail import send_email
-from pyClanSphere.i18n import lazy_gettext, _
+from pyClanSphere.i18n import lazy_gettext
 
 
 __all__ = ['DEFAULT_NOTIFICATION_TYPES', 'NotificationType']

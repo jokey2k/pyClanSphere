@@ -20,7 +20,7 @@ from pyClanSphere.utils import log
 from pyClanSphere.utils.forms import TextField, IntegerField, BooleanField, \
     ChoiceField, CommaSeparated
 from pyClanSphere.utils.validators import ValidationError, is_valid_url_prefix, \
-    is_valid_url_format, is_netaddr, is_valid_email
+    is_netaddr, is_valid_email
 from pyClanSphere.application import InternalError
 
 

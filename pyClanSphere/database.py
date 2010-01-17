@@ -16,11 +16,8 @@ import re
 import os
 import sys
 import time
-import urlparse
 from os import path
-from datetime import datetime, timedelta
 from types import ModuleType
-from copy import deepcopy
 
 import sqlalchemy
 from sqlalchemy import orm
@@ -32,8 +29,6 @@ from sqlalchemy.interfaces import ConnectionProxy
 from sqlalchemy.orm.collections import attribute_mapped_collection
 from sqlalchemy.orm.interfaces import AttributeExtension
 from sqlalchemy.sql import func
-from sqlalchemy.util import to_list
-from sqlalchemy.types import MutableType
 
 from werkzeug import url_decode
 from werkzeug.exceptions import NotFound
