@@ -12,9 +12,7 @@
 import sys
 from os import path, remove, makedirs, walk, environ
 from time import time
-from itertools import izip
-from datetime import datetime, timedelta
-from urlparse import urlparse, urljoin
+from urlparse import urlparse
 from collections import deque
 from inspect import getdoc
 from traceback import format_exception
@@ -25,7 +23,7 @@ from babel import Locale
 
 from jinja2 import Environment, BaseLoader, TemplateNotFound, Markup
 
-from sqlalchemy.exceptions import SQLAlchemyError, OperationalError
+from sqlalchemy.exceptions import SQLAlchemyError
 
 from werkzeug import Request as RequestBase, Response as ResponseBase, \
      SharedDataMiddleware, url_quote, routing, redirect as _redirect, \
