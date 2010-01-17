@@ -26,7 +26,11 @@ class GBXReadException(Exception):
 class GBXWrongFileTypeException(Exception):
     pass
 
-class   GBXChallengeReader:
+# our fast init confuses pylint, so
+# pylint: disable-msg=W0201, R0902
+class GBXChallengeReader:
+    """Class to read and hold attributes of a Trackmania Challenge Gbx"""
+
     def __init__(self, filename):
         self.filename = filename
 
@@ -50,21 +54,21 @@ class   GBXChallengeReader:
         import re
         regex_format = re.compile(r'\$[g|n|o|w|s|i|l|z|G|N|O|W|S|I|L|Z]')
         regex_colors = re.compile(r'\$.{3}')
-        name = regex_format.sub(u'',self.name);
-        name = regex_colors.sub(u'',name);
+        name = regex_format.sub(u'', self.name)
+        name = regex_colors.sub(u'', name)
         self.name = name
 
     def ReadGBXString(self):
         f = self.filehandle
         (datalen,) = struct.unpack('<l', f.read(4))
         if datalen <= 0 or datalen >= 0x10000:
-            raise GBXReadError('OutOfLengthScope');
-        data = f.read(datalen);
-        return data;
+            raise GBXReadException('OutOfLengthScope')
+        data = f.read(datalen)
+        return data
 
     def getData(self):
         # open file
-        self.filehandle = open(self.filename, mode='rb');
+        self.filehandle = open(self.filename, mode='rb')
         f = self.filehandle
 
         # Start from 0 and seek for GBX intro header
@@ -74,7 +78,7 @@ class   GBXChallengeReader:
             raise GBXWrongFileTypeException('GBX Header missing')
 
         # Read GBX Type
-        f.seek(4, os.SEEK_CUR);  # "BUCR" | "BUCE"
+        f.seek(4, os.SEEK_CUR)  # "BUCR" | "BUCE"
         (data,) = struct.unpack('>L', f.read(4))
         self.tracktype = '%08X' % data
 
@@ -82,7 +86,7 @@ class   GBXChallengeReader:
             raise GBXWrongFileTypeException('Not a GBX Track')
 
         # GBX Version: 2/3 = TM/TMPowerUp, 4 = TMO(LevelUp)/TMS/TMN, 5 = TMU/TMF
-        f.seek(4, os.SEEK_CUR); # Data Block Offset
+        f.seek(4, os.SEEK_CUR) # Data Block Offset
         (self.version,) = struct.unpack('<L', f.read(4))
 
         if self.version < 2 or self.version > 5:
@@ -91,12 +95,12 @@ class   GBXChallengeReader:
         # get Index (marker/lengths) table
         marks = {}
         lengths = {}
-        for i in range(1,self.version+1):
+        for i in range(1, self.version+1):
             (marks[i],) = struct.unpack('>L', f.read(4))
             (lengths[i],) = struct.unpack('<L', f.read(4))
         if self.version == 5:  # clear high-bits
-            lengths[4] &= 0x7FFFFFFF;
-            lengths[5] &= 0x7FFFFFFF;
+            lengths[4] &= 0x7FFFFFFF
+            lengths[5] &= 0x7FFFFFFF
 
         # start of Times/info block:
         # 0x25 (TM v2), 0x2D (TMPowerUp v3), 0x35 (TMO/TMS/TMN v4), 0x3D (TMU/TMF v5)
@@ -108,7 +112,7 @@ class   GBXChallengeReader:
         # TMF tracks (exever>="2.11.5") use 11; with unknown3
         entrycount = ord(f.read(1))
 
-        f.seek(4, os.SEEK_CUR);  # Unknown1: 00 00 00 00
+        f.seek(4, os.SEEK_CUR)  # Unknown1: 00 00 00 00
         (self.bronzetime,) = struct.unpack('<L', f.read(4))
         (self.silvertime,) = struct.unpack('<L', f.read(4))
         (self.goldtime,) = struct.unpack('<L', f.read(4))
@@ -136,7 +140,7 @@ class   GBXChallengeReader:
 
         # start of Strings block in version 2 (0x3A, TM)
         # start of Version? block in versions >= 3
-        f.seek(4, os.SEEK_CUR);
+        f.seek(4, os.SEEK_CUR)
 
         # 00 03 00 00 (TM v2)
         # 01 03 00 00 (TMPowerUp v3; TMO v4, exever="0.1.3.3-5"; TMS v4, exever="0.1.4.0")
@@ -153,22 +157,22 @@ class   GBXChallengeReader:
         # 0x6A (TMU/TMF v5, exever<="2.11.4")
         # 0x6E (TMF v5, exever>="2.11.5")
 
-        f.seek(5, os.SEEK_CUR);  # 00 and 00 00 00 80
-        self.uid = self.ReadGBXString();
-        f.seek(4, os.SEEK_CUR);  # 00 00 00 40
-        self.envir = self.ReadGBXString();
-        f.seek(4, os.SEEK_CUR);  # 00 00 00 [04|80]
-        self.author = self.ReadGBXString();
-        self.name = self.ReadGBXString();
-        f.seek(1, os.SEEK_CUR);  # almost always 08
+        f.seek(5, os.SEEK_CUR)  # 00 and 00 00 00 80
+        self.uid = self.ReadGBXString()
+        f.seek(4, os.SEEK_CUR)  # 00 00 00 40
+        self.envir = self.ReadGBXString()
+        f.seek(4, os.SEEK_CUR)  # 00 00 00 [04|80]
+        self.author = self.ReadGBXString()
+        self.name = self.ReadGBXString()
+        f.seek(1, os.SEEK_CUR)  # almost always 08
 
         if self.version >= 3:
-            f.seek(4, os.SEEK_CUR);  # varies... a lot
+            f.seek(4, os.SEEK_CUR)  # varies... a lot
             # password is optional, ReadGBXString might yell at us
             try:
                 self.password = self.ReadGBXString()
-            except:
-                  self.password = ""
+            except GBXReadException:
+                self.password = ""
 
         if self.version >= 4 and entrycount >= 8:  # exever>="0.1.4.1"
             f.seek(4, os.SEEK_CUR)  # 00 00 00 40
@@ -195,25 +199,25 @@ class   GBXChallengeReader:
 
         # get optional Thumbnail/Comments block
         if self.version >= 5:
-            f.seek(4, os.SEEK_CUR);  # 01 00 00 00
+            f.seek(4, os.SEEK_CUR)  # 01 00 00 00
             (data,) = struct.unpack('<L', f.read(4))
-            f.seek(15, os.SEEK_CUR);  # '<Thumbnail.jpg>'
+            f.seek(15, os.SEEK_CUR)  # '<Thumbnail.jpg>'
 
             # check for thumbnail
             if data > 0 and data < 0x10000:
                 # extract and return thumbnail image
-                data = f.read(data);
+                data = f.read(data)
 
 
             f.seek(0x10, os.SEEK_CUR)  # '</Thumbnail.jpg>'
             f.seek(10, os.SEEK_CUR)  # '<Comments>'
             try:
                 self.comment = self.ReadGBXString()
-            except:
+            except GBXReadException:
                 self.comment = ""
-            f.seek(11, os.SEEK_CUR);  # '</Comments>'
+            f.seek(11, os.SEEK_CUR)  # '</Comments>'
 
-        f.close();
+        f.close()
         # to make this pickle-able, deref file object (safe as closed before)
         self.filehandle = None
 
@@ -222,7 +226,7 @@ class   GBXChallengeReader:
             data = self.password
             self.password = ""
             for i in range(3, len(data)):  # skip 3 bogus chars
-                self.password += '%02X' % ord(data[i]);
+                self.password += '%02X' % ord(data[i])
 
         if self.rawxml:
             self.parsedxml = parseString(self.rawxml)
@@ -247,6 +251,6 @@ class   GBXChallengeReader:
             for dep in deps.getElementsByTagName('dep'):
                 filename = dep.getAttribute('file')
                 if filename.find('\\Mod\\') > 0:
-                    self.modfile = filename.split('\\Mod\\',1)[1]
+                    self.modfile = filename.split('\\Mod\\', 1)[1]
                 elif filename.find('ChallengeMusics\\') > 0:
-                    self.songfile = filename.split('ChallengeMusics\\',1)[1]
+                    self.songfile = filename.split('ChallengeMusics\\', 1)[1]
