@@ -5,7 +5,7 @@
   <table width="100%" style="" class="boardtable">
   {% for category, forums in categories.iteritems() %}
   <tr>
-    <th class="categoryline" colspan="4">{{ category.name }}</th>
+    <th class="categoryline" colspan="4"><a name="cat-{{ category.id }}"></a>{{ category.name }}</th>
   </tr>
   <tr>
     <th>{{ _("Name") }}</th>

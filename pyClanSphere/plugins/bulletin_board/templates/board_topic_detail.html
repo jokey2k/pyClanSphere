@@ -5,7 +5,7 @@
 <div class="entry">
   <table width="100%" style="" class="boardtable">
   <tr>
-    <th class="categoryline" colspan="4"><a href="{{ url_for('board/index') }}">{{ _("Board") }}</a> >> {{ topic.forum.category.name }} >> <a href="{{ url_for('board/topics', forum_id=topic.forum.id) }}">{{ topic.forum.name }}</a> >> <a href="{{ url_for('board/topic_detail', topic_id=topic.id) }}">{{ topic.name }}</th>
+    <th class="categoryline" colspan="4"><a href="{{ url_for('board/index') }}">{{ _("Board") }}</a> >> <a href="{{ url_for('board/index', _anchor='cat-%i' % forum.category.id ) }}">{{ forum.category.name }}</a> >> <a href="{{ url_for('board/topics', forum_id=topic.forum.id) }}">{{ topic.forum.name }}</a> >> <a href="{{ url_for('board/topic_detail', topic_id=topic.id) }}">{{ topic.name }}</th>
   </tr>
   {% for post in posts %}
   <tr>
