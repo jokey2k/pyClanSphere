@@ -258,3 +258,30 @@ class PostForm(forms.Form):
     def save_changes(self, post):
         forms.set_fields(post, self.data, 'text')
         db.commit()
+
+
+class DeletePostForm(forms.Form):
+    """Deletes a single post"""
+
+    def __init__(self, post, initial=None):
+        self.post=post
+        forms.Form.__init__(self, initial)
+
+    def delete_post(self):
+        """actually delete the post"""
+        topic=self.post.topic
+        db.delete(self.post)
+        db.commit()
+        db.session.expire_all()
+        if Post.query.filter(Post.topic==topic).count() > 0:
+            topic.refresh()
+            db.commit()
+            topic.forum.refresh()
+            db.commit()
+        else:
+            forum = topic.forum
+            db.delete(topic)
+            db.commit()
+            forum.refresh()
+            db.commit()
+            raise TopicEmptyException

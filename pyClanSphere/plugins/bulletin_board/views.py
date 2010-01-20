@@ -21,7 +21,8 @@ from pyClanSphere.utils.support import OrderedDict
 from pyClanSphere.views.admin import render_admin_response, PER_PAGE
 
 from pyClanSphere.plugins.bulletin_board.forms import CategoryForm, \
-     DeleteCategoryForm, ForumForm, DeleteForumForm, PostForm
+     DeleteCategoryForm, ForumForm, DeleteForumForm, PostForm, \
+     DeletePostForm
 from pyClanSphere.plugins.bulletin_board.models import *
 from pyClanSphere.plugins.bulletin_board.privileges import BOARD_MANAGE
 
@@ -227,6 +228,34 @@ def locate_post(searchpost, per_page=None):
 
     return (postnr, page, topic.id)
 
+
+def post_delete(request, post_id):
+    """Delete a post"""
+
+    post = Post.query.get(post_id)
+    if post is None:
+        raise NotFound()
+    (postnr, page, topic_id) = locate_post(post)
+
+    user = request.user
+    topic = post.topic
+    if not post.can_delete(user):
+       raise Forbidden()
+
+    form = DeletePostForm(post)
+
+    if request.method == 'POST':
+        if form.validate(request.form):
+            if 'confirm' in request.form:
+                forum = topic.forum
+            try:
+                form.delete_post()
+                return redirect_to('board/topic_detail', topic_id=topic.id)
+            except TopicEmptyException:
+                return redirect_to('board/board/topics', forum_id=forum.id)
+                
+    return render_response('board_delete_post.html', topic=topic,
+                          post=post, form=form.as_widget())
 #
 # Admin views
 #

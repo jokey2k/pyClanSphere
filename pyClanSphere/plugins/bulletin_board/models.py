@@ -18,6 +18,11 @@ from pyClanSphere.utils.pagination import Pagination
 
 from pyClanSphere.plugins.bulletin_board.privileges import *
 
+
+class TopicEmptyException(Exception):
+    """Class used to tell that the given topic has no posts"""
+    pass
+
 class CategoryQuery(db.Query):
     """Addon methods for querying categories"""
 
@@ -357,10 +362,9 @@ class Post(db.Model, AuthorBase):
             return self.author == user or user.has_privilege(BOARD_MODERATE)
 
     def can_delete(self, user=None):
-        return False # Hardlock until view is in place
         if user is None:
             user = get_request().user
-        return user.has_privilege(BOARD_MODERATE)
+        return self.topic.can_see(user) and user.has_privilege(BOARD_MODERATE)
 
 
 # Add in relations that have circular deps on ini
