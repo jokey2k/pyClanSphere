@@ -19,7 +19,7 @@ from pyClanSphere.utils.admin import add_admin_urls
 
 from pyClanSphere.plugins.bulletin_board import views
 from pyClanSphere.plugins.bulletin_board.models import *
-from pyClanSphere.plugins.bulletin_board.models import init_database
+from pyClanSphere.plugins.bulletin_board.database import init_database
 from pyClanSphere.plugins.bulletin_board.privileges import PLUGIN_PRIVILEGES, BOARD_MANAGE
 from pyClanSphere.plugins.bulletin_board.services import do_get_post
 
