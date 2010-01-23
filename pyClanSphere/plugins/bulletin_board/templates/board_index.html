@@ -1,5 +1,5 @@
 {% extends "layout_content_only.html" %}
-{% from "_board.html" import author_link, topic_name_link, lastpost_link %}
+{% from "_board.html" import author_link, topic_name_link, lastpost %}
 {% block title %}{{ _("Board index") }}{% endblock %}
 {% block contents %}
 <div class="entry">
@@ -19,9 +19,8 @@
     <td><a href="{{ url_for('board/topics', forum_id=forum.id) }}">{{ forum.name }}</a><br>{{ forum.description or '&nbsp;'|safe }}</td>
     <td class="count">{{ forum.topiccount or '0' }}</td>
     <td class="count">{{ forum.postcount or '0' }}</td>
-    {% if forum.lasttopic_id %}
-    <td>{%- trans date=lastpost_link(forum.lastpost)|safe, author=author_link(forum.lastpost.author)|safe
-                  %}{{ date }}<br>by {{ author }}{% endtrans -%}</td>
+    {% if forum.lastpost %}
+    <td>{{ lastpost(forum.lastpost, textfield='longdate') }}</td>
     {% else %}  
     <td>&mdash;</td>
     {% endif %}  

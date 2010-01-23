@@ -1,5 +1,5 @@
 {% extends "layout_content_only.html" %}
-{% from "_board.html" import render_post_form, author_link, topic_name_link, lastpost_link %}
+{% from "_board.html" import render_post_form, author_link, topic_name_link, lastpost %}
 {% block title %}{{ _("Board") }}{% endblock %}
 {% block contents %}
 <div class="entry">
@@ -15,10 +15,10 @@
   {% for topic in topics %}
   <tr>
     <td>{%- trans topic=topic_name_link(topic)|safe, author=author_link(topic.author)|safe,
-                  date=topic.date|datetimeformat('short')
+                  date=topic.date|datetimeformat('long')
                   %}{{ topic }}<br><em>by {{ author }} at {{ date }}</em>{% endtrans -%}</td>
-                  <td>{%- trans date=lastpost_link(topic.lastpost)|safe, author=author_link(topic.lastpost.author)|safe %}{{ date }}<br>by {{ author }}{% endtrans -%}</td>
-    <td class="count">{{ topic.postcount or '0' }}</td>
+                  <td>{{ lastpost(topic.lastpost) }}</td>
+    <td class="count">{{ topic.postcount }}</td>
   </tr>  
   {% else %}
   <tr><td colspan="3"><center>{{ _("No Topics yet") }}</center></td></tr>

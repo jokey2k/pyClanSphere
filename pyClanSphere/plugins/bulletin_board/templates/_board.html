@@ -14,9 +14,22 @@
 <a href="{{ url_for('board/topic_detail', topic_id=topic.id) }}">{{ topic.name }}</a>
 {% endmacro %}
 
-{% macro lastpost_link(post) %}
-<a href="{{ url_for('board/post_find', post_id=post.id) }}"><img src="{{ shared_url('core::editicons/postlink.gif') }}" width="12" height="12">{{ post.date|fancydatetimeformat|capitalize }}</a>
+{%- macro lastpost_link(post, textfield='fancydate') %}
+<a href="{{ url_for('board/post_find', post_id=post.id) }}"><img src="{{ shared_url('core::editicons/postlink.gif') }}" width="12" height="12">
+  {% if textfield == 'fancydate' %}
+    {{ post.date|fancydatetimeformat|capitalize }}
+  {% elif textfield == 'longdate' %}
+    {{ post.date|datetimeformat('long') }}
+  {% elif textfield == 'topic' %}
+    {{ post.topic.name }}
+  {% endif %}
+</a>
+{% endmacro -%}
+
+{% macro lastpost(post, textfield='fancydate') %}
+{%- trans date=lastpost_link(post, textfield)|safe, author=author_link(post.author)|safe %}{{ date }}<br>by {{ author }}{% endtrans -%}
 {% endmacro %}
+
 
 {% macro render_post_form(form) %}
 <div id="newpost">
