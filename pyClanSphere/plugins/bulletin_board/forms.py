@@ -43,7 +43,7 @@ class CategoryForm(forms.Form):
     def save_changes(self, category):
         forms.set_fields(category, self.data, 'name', 'ordering')
         if self.data['ordering'] is None:
-            category.ordering = category.forums.count()-1
+            category.ordering = Category.query.count()-1
         else:
             category.ordering = self.data['ordering']
         if category.ordering < 0:
