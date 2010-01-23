@@ -1,5 +1,5 @@
 {% extends "layout_content_only.html" %}
-{% from "_board.html" import render_post_form %}
+{% from "_board.html" import render_post_form, author_link, topic_name_link, lastpost_link %}
 {% block title %}{{ _("Board") }}{% endblock %}
 {% block contents %}
 <div class="entry">
@@ -14,13 +14,10 @@
   </tr>  
   {% for topic in topics %}
   <tr>
-    <td>{%- trans topic='<a href="%s">%s</a>'|safe % (url_for('board/topic_detail', topic_id=topic.id)|e,topic.name),
-                  author='<a href="#">%s</a>'|safe % (topic.author_str),
+    <td>{%- trans topic=topic_name_link(topic)|safe, author=author_link(topic.author)|safe,
                   date=topic.date|datetimeformat('short')
                   %}{{ topic }}<br><em>by {{ author }} at {{ date }}</em>{% endtrans -%}</td>
-                  <td>{%- trans date='<a href="%s">%s</a>'|safe % (url_for('board/topic_detail', topic_id=topic.id)|e, topic.modification_date|fancydatetimeformat|capitalize),
-                                author='<a href="#">%s</a>'|safe % (topic.lastpost.author_str)
-                                %}{{ date }}<br>by {{ author }}{% endtrans -%}</td>
+                  <td>{%- trans date=lastpost_link(topic.lastpost)|safe, author=author_link(topic.lastpost.author)|safe %}{{ date }}<br>by {{ author }}{% endtrans -%}</td>
     <td class="count">{{ topic.postcount or '0' }}</td>
   </tr>  
   {% else %}

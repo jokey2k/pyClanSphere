@@ -1,5 +1,5 @@
 {% extends "layout_content_only.html" %}
-{% from "_board.html" import render_post_form %}
+{% from "_board.html" import render_post_form, author_link %}
 {% block title %}{{ _("Board") }} / {{ topic.name }}{% endblock %}
 {% block contents %}
 <div class="entry">
@@ -9,7 +9,7 @@
   </tr>
   {% for post in posts %}
   <tr>
-    <td rowspan="2" class="userinfo">{% if post.author_is_somebody %}<a href="#">{{ post.author_str }}</a>{% else %}{{ post.author_str }}{% endif %}</td>
+    <td rowspan="2" class="userinfo">{{ author_link(post.author) }}</td>
     <td><a name="post-{{ post.id }}" href="{{ url_for('board/post_find', post_id=post.id) }}">
         <img src="{{ shared_url('core::editicons/postlink.gif') }}" width="12" height="12"></a>&nbsp;
         {%- trans date=post.date|datetimeformat('long') %}Written: {{ date }}{% endtrans -%}

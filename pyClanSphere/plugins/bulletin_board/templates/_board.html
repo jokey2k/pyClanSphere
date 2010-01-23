@@ -2,6 +2,22 @@
 
 {% macro addsimpletool(tag, icon) %}{{ addtool('[' + tag + ']',tag,icon) }}{% endmacro %}
 
+{% macro author_link(author) %}
+{% if author.is_somebody %}
+<a href="#">{{ author.display_name }}</a>
+{% else %}
+{{ author.display_name }}
+{% endif %}
+{% endmacro %}
+
+{% macro topic_name_link(topic) %}
+<a href="{{ url_for('board/topic_detail', topic_id=topic.id) }}">{{ topic.name }}</a>
+{% endmacro %}
+
+{% macro lastpost_link(post) %}
+<a href="{{ url_for('board/post_find', post_id=post.id) }}"><img src="{{ shared_url('core::editicons/postlink.gif') }}" width="12" height="12">{{ post.date|fancydatetimeformat|capitalize }}</a>
+{% endmacro %}
+
 {% macro render_post_form(form) %}
 <div id="newpost">
   <a name="post-edit"></a>
