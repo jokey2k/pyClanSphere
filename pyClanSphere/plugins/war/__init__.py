@@ -37,7 +37,7 @@ def add_admin_links(request, navigation_bar):
 def setup(app, plugin):
 
     # Setup tables
-    init_database()
+    init_database(app)
 
     # Add our privileges
     for priv in PLUGIN_PRIVILEGES.values():

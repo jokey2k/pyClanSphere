@@ -78,8 +78,7 @@ warresults = Table('warresults', metadata,
     Column('comment', Text)
 )
 
-def init_database():
+def init_database(app):
     """ This is for inserting our new table"""
-    from pyClanSphere.application import get_application
-    engine = get_application().database_engine
+    engine = app.database_engine
     metadata.create_all(engine)
