@@ -251,8 +251,8 @@ def post_delete(request, post_id):
             try:
                 form.delete_post()
                 return redirect_to('board/topic_detail', topic_id=topic.id)
-            except TopicEmptyException:
-                return redirect_to('board/board/topics', forum_id=forum.id)
+            except TopicEmpty:
+                return redirect_to('board/topics', forum_id=forum.id)
                 
     return render_response('board_delete_post.html', topic=topic,
                           post=post, form=form.as_widget())

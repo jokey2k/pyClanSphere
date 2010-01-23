@@ -20,7 +20,7 @@ from pyClanSphere.plugins.bulletin_board.privileges import *
 from pyClanSphere.plugins.bulletin_board.database import *
 
 
-class TopicEmptyException(Exception):
+class TopicEmpty(Exception):
     """Class used to tell that the given topic has no posts"""
     pass
 
@@ -324,4 +324,4 @@ db.mapper(Post, board_posts, properties={
                                 primaryjoin=board_posts.c.topic_id==board_topics.c.topic_id)
 })
 
-__all__ = ['Category', 'Forum', 'Topic', 'Post']
+__all__ = ['Category', 'Forum', 'Topic', 'Post', 'TopicEmpty']

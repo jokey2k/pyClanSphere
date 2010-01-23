@@ -284,4 +284,4 @@ class DeletePostForm(forms.Form):
             db.commit()
             forum.refresh()
             db.commit()
-            raise TopicEmptyException
+            raise TopicEmpty
