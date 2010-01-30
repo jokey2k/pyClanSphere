@@ -27,7 +27,11 @@
 {% endmacro -%}
 
 {% macro lastpost(post, textfield='fancydate') %}
+{% if textfield == 'fancydate' or textfield == 'longdate' %}
 {%- trans date=lastpost_link(post, textfield)|safe, author=author_link(post.author)|safe %}{{ date }}<br>by {{ author }}{% endtrans -%}
+{% else %}
+{%- trans topic=lastpost_link(post, textfield)|safe, date=post.date|fancydatetimeformat|capitalize, author=author_link(post.author)|safe %}{{ topic }}<br>{{ date }} by {{ author }}{% endtrans -%}
+{% endif %}
 {% endmacro %}
 
 

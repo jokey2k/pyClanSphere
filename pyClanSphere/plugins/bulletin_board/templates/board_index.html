@@ -20,7 +20,7 @@
     <td class="count">{{ forum.topiccount or '0' }}</td>
     <td class="count">{{ forum.postcount or '0' }}</td>
     {% if forum.lastpost %}
-    <td>{{ lastpost(forum.lastpost, textfield='longdate') }}</td>
+    <td>{{ lastpost(forum.lastpost, textfield='topic') }}</td>
     {% else %}  
     <td>&mdash;</td>
     {% endif %}  
