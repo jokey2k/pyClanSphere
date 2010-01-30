@@ -8,7 +8,7 @@
     :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
-from datetime import date
+from datetime import date, datetime
 from uuid import uuid4
 
 from werkzeug.exceptions import NotFound
