@@ -224,7 +224,7 @@ class DeleteGroupForm(_GroupBoundForm):
                     user.groups.append(new_group)
         db.commit()
 
-        #! plugins can use this to react to user deletes.  They can't stop
+        #! plugins can use this to react to group deletes.  They can't stop
         #! the deleting of the group but they can delete information in
         #! their own tables so that the database is consistent afterwards.
         #! Additional to the group object the form data is submitted.
@@ -233,6 +233,21 @@ class DeleteGroupForm(_GroupBoundForm):
 
 
 class _UserBoundForm(forms.Form):
+    """Internal baseclass for user bound forms."""
+
+    def __init__(self, user=None, initial=None):
+        forms.Form.__init__(self, initial)
+        self.app = self.request.app
+        self.user = user
+
+    def as_widget(self):
+        widget = forms.Form.as_widget(self)
+        widget.user = self.user
+        widget.new = self.user is None
+        return widget
+
+
+class _UserProfileForm(_UserBoundForm):
     """Internal baseclass for user bound forms."""
 
     username = forms.TextField(lazy_gettext(u'Username'), max_length=30,
@@ -268,8 +283,7 @@ class _UserBoundForm(forms.Form):
                 email=user.email,
                 www=user.www
             )
-        forms.Form.__init__(self, initial)
-        self.app = get_application()
+        _UserBoundForm.__init__(self, user, initial)
         self.user = user
         self.display_name.choices = [
             (u'$username', user and user.username or _('Username')),
@@ -279,13 +293,7 @@ class _UserBoundForm(forms.Form):
             (1, _('Male')),
             (0, _('Female'))
         ]
-        self.country.choices = sorted(self.app.locale.territories.iteritems(), key=itemgetter(1))
-
-    def as_widget(self):
-        widget = forms.Form.as_widget(self)
-        widget.user = self.user
-        widget.new = self.user is None
-        return widget
+        self.country.choices = sorted(get_application().locale.territories.iteritems(), key=itemgetter(1))
 
     def _set_common_attributes(self, user):
         forms.set_fields(user, self.data, 'www', 'real_name', 'birthday',
@@ -296,9 +304,8 @@ class _UserBoundForm(forms.Form):
         """Apply the changes."""
         self._set_common_attributes(self.user)
 
-
-class EditUserForm(_UserBoundForm):
-    """Edit or create a user."""
+class EditUserForm(_UserProfileForm):
+    """Edit or create a user in admin backend."""
 
     privileges = forms.MultiChoiceField(lazy_gettext(u'Privileges'),
                                         widget=forms.CheckboxGroup)
@@ -315,7 +322,7 @@ class EditUserForm(_UserBoundForm):
                 privileges=[x.name for x in user.own_privileges],
                 groups=[g.name for g in user.groups]
             )
-        _UserBoundForm.__init__(self, user, initial)
+        _UserProfileForm.__init__(self, user, initial)
         self.privileges.choices = self.app.list_privileges()
         self.groups.choices = [g.name for g in Group.query.all()]
         self.password.required = user is None
@@ -352,6 +359,31 @@ class EditUserForm(_UserBoundForm):
         self.user = user
         return user
 
+
+class EditProfileForm(_UserProfileForm):
+    """Edit a user's profile."""
+
+    def __init__(self, user, initial=None):
+        assert user is not None
+        _UserProfileForm.__init__(self, user, initial)
+
+    def validate_email(self, value):
+        query = User.query.filter_by(email=value)
+        if self.user:
+            query = query.filter(User.id != self.user.id)
+        if query.first():
+            raise ValidationError(_('This email address is already in use'))
+
+    def validate_password(self, value):
+        if 'password_confirm' in self.data:
+            password_confirm = self.data['password_confirm']
+        else:
+            password_confirm = self.request.values.get('password_confirm', '')
+        if ((not value == password_confirm) or (value and not password_confirm)
+            or (password_confirm and not value)):
+            raise ValidationError(_('Passwords do not match'))
+
+
 class DeleteUserForm(_UserBoundForm):
     """Used to delete a user from the admin panel."""
 
@@ -363,96 +395,6 @@ class DeleteUserForm(_UserBoundForm):
         #! Additional to the user object the form data is submitted.
         emit_event('before-user-deleted', self.user, self.data)
         db.delete(self.user)
-
-class _IMAccountBoundForm(forms.Form):
-    """Internal baseclass for im account bound forms."""
-
-    def __init__(self, imaccount, initial=None):
-        forms.Form.__init__(self, initial)
-        self.app = get_application()
-        self.imaccount = imaccount
-
-    def as_widget(self):
-        widget = forms.Form.as_widget(self)
-        widget.imaccount = self.imaccount
-        widget.new = self.imaccount is None
-        return widget
-
-class EditIMAccountForm(_IMAccountBoundForm):
-    """Update Players' IM Accounts."""
-
-    service = forms.TextField(lazy_gettext(u'Service'),
-                              widget=forms.SelectBox)
-    username = forms.ModelField(User, 'id', lazy_gettext(u'User'),
-                            widget=forms.SelectBox)
-    account = forms.TextField(lazy_gettext(u'Account ID'), max_length=100,
-                              validators=[is_not_whitespace_only()])
-
-    def __init__(self, user=None, imaccount=None, initial=None):
-        if imaccount is not None:
-            initial = forms.fill_dict(initial,
-                service=imaccount.service,
-                account=imaccount.account,
-                username=user.id if user is not None else None
-            )
-        _IMAccountBoundForm.__init__(self, imaccount, initial)
-        self.user = user
-        self.service.choices = [(k, v) for k, v in IMAccount.known_services.iteritems()]
-        self.username.choices = [(user.id, user.display_name) for user in User.query.all()]
-
-    def make_imaccount(self):
-        """A helper function that creates new IMAccount objects."""
-        imaccount = IMAccount(self.user if self.user is not None \
-                              else User.query.get(self.data['username']),
-                              self.data['service'], self.data['account'])
-
-        self.imaccount = imaccount
-        return imaccount
-
-    def context_validate(self, data):
-        query = IMAccount.query.filter_by(service=data['service']).filter_by(account=data['account'])
-        if self.imaccount is not None:
-            query = query.filter(IMAccount.id != self.imaccount.id)
-        if query.first() is not None:
-            raise ValidationError(_('This account is already registered'))
-
-    def _set_common_attributes(self, imaccount):
-        imaccount.user = self.user if self.user else User.query.get(self.data['username'])
-        forms.set_fields(imaccount, self.data, 'service', 'account')
-
-    def save_changes(self):
-        """Apply the changes."""
-
-        self._set_common_attributes(self.imaccount)
-
-class DeleteIMAccountForm(_IMAccountBoundForm):
-    """Used to remove a member from a squad."""
-
-    def delete_account(self):
-        """Deletes the im account."""
-        db.delete(self.imaccount)
-
-class EditProfileForm(_UserBoundForm):
-    """Edit or create a user's profile."""
-
-    def __init__(self, user=None, initial=None):
-        _UserBoundForm.__init__(self, user, initial)
-
-    def validate_email(self, value):
-        query = User.query.filter_by(email=value)
-        if self.user is not None:
-            query = query.filter(User.id != self.user.id)
-        if query.first() is not None:
-            raise ValidationError(_('This email address is already in use'))
-
-    def validate_password(self, value):
-        if 'password_confirm' in self.data:
-            password_confirm = self.data['password_confirm']
-        else:
-            password_confirm = self.request.values.get('password_confirm', '')
-        if ((not value == password_confirm) or (value and not password_confirm)
-            or (password_confirm and not value)):
-            raise ValidationError(_('Passwords do not match'))
 
 
 class DeleteAccountForm(_UserBoundForm):
@@ -476,6 +418,77 @@ class DeleteAccountForm(_UserBoundForm):
         #! Additional to the user object the form data is submitted.
         emit_event('before-user-deleted', self.user, self.data)
         db.delete(self.user)
+
+
+class _IMAccountBoundForm(forms.Form):
+    """Internal baseclass for im account bound forms."""
+
+    def __init__(self, imaccount, initial=None):
+        forms.Form.__init__(self, initial)
+        self.app = get_application()
+        self.imaccount = imaccount
+
+    def as_widget(self):
+        widget = forms.Form.as_widget(self)
+        widget.imaccount = self.imaccount
+        widget.new = self.imaccount is None
+        return widget
+
+
+class EditIMAccountForm(_IMAccountBoundForm):
+    """Update Players' IM Accounts."""
+
+    service = forms.TextField(lazy_gettext(u'Service'),
+                              widget=forms.SelectBox)
+    username = forms.ModelField(User, 'id', lazy_gettext(u'User'),
+                            widget=forms.SelectBox)
+    account = forms.TextField(lazy_gettext(u'Account ID'), max_length=100,
+                              validators=[is_not_whitespace_only()])
+
+    def __init__(self, user=None, imaccount=None, initial=None):
+        if imaccount:
+            initial = forms.fill_dict(initial,
+                service=imaccount.service,
+                account=imaccount.account,
+                username=user.id or None
+            )
+        _IMAccountBoundForm.__init__(self, imaccount, initial)
+        self.user = user
+        self.service.choices = [(k, v) for k, v in IMAccount.known_services.iteritems()]
+        self.username.choices = [(user.id, user.display_name) for user in User.query.all()]
+
+    def make_imaccount(self):
+        """A helper function that creates new IMAccount objects."""
+        imaccount = IMAccount(self.user if self.user is not None \
+                              else User.query.get(self.data['username']),
+                              self.data['service'], self.data['account'])
+
+        self.imaccount = imaccount
+        return imaccount
+
+    def context_validate(self, data):
+        query = IMAccount.query.filter_by(service=data['service']).filter_by(account=data['account'])
+        if self.imaccount:
+            query = query.filter(IMAccount.id != self.imaccount.id)
+        if query.first():
+            raise ValidationError(_('This account is already registered'))
+
+    def _set_common_attributes(self, imaccount):
+        imaccount.user = self.user if self.user else User.query.get(self.data['username'])
+        forms.set_fields(imaccount, self.data, 'service', 'account')
+
+    def save_changes(self):
+        """Apply the changes."""
+
+        self._set_common_attributes(self.imaccount)
+
+
+class DeleteIMAccountForm(_IMAccountBoundForm):
+    """Used to remove a member from a squad."""
+
+    def delete_account(self):
+        """Deletes the im account."""
+        db.delete(self.imaccount)
 
 
 class _ConfigForm(forms.Form):
