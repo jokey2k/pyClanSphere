@@ -27,6 +27,8 @@ SHARED_FILES = join(dirname(__file__), 'shared')
 TEMPLATE_FILES = join(dirname(__file__), 'templates')
 
 def inject_js(metadata):
+    """We add some jquery routines, so load them in the header"""
+
     metadata.append(htmlhelpers.script(shared_url('bulletin_board::js/bulletin_board.js')))
     return metadata
 
