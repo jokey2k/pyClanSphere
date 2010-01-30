@@ -53,10 +53,10 @@
        shuttingDown = true;
        messages.each(function() {
          if (!$(this).is('.message-error')) {
-           $(this).animate({height: 'hide', opacity: 'hide'}, 'slow');
+           $(this).animate({opacity: 'hide'}, 'slow');
          }
        });
-     }, 8000);
+     }, 5000);
    })();
 
    // support for toggleable sections
