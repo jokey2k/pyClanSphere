@@ -96,8 +96,11 @@ def result(cache_key, vary=(), eager_caching=False, timeout=None,
             if want_cache:
                 key = cache_key
                 if admix_arguments:
-                    key += ':%d' % hash((args[skip_posargs:],
-                                        frozenset(kwargs.iteritems())))
+                    md5calc = md5()
+                    for arglist in args[skip_posargs:], frozenset(kwargs.iteritems()):
+                        for arg in arglist:
+                            md5calc.update(arg.encode("utf-8"))
+                    key += '__%s' % md5calc.hexdigest()
                 result = request.app.cache.get(key)
                 if result is not None:
                     return result
@@ -116,13 +119,15 @@ def result(cache_key, vary=(), eager_caching=False, timeout=None,
     return decorator
 
 
-def response(vary=(), timeout=None, cache_key=None):
+def response(vary=(), timeout=None, cache_key=None, admix_arguments=True):
     """Cache a complete view function for a number of seconds.  This is a
     little bit different from `result` because it freezes the response
     properly and sets etags.  The current request path is added to the cache
     key to keep them cached properly.  If the response is not 200 no caching
     is performed.
 
+    if `admix_arguments` is set to `True` the arguments passed to the function
+    will be hashed and added to the cache key.
     This method doesn't do anything if eager caching is disabled (by default).
     """
     from pyClanSphere.application import Response
@@ -130,12 +135,24 @@ def response(vary=(), timeout=None, cache_key=None):
         vary = set(vary)
         vary.add('method')
     def decorator(f):
-        key = cache_key or 'view_func/%s.%s' % (f.__module__, f.__name__)
         def oncall(request, *args, **kwargs):
             use_cache = get_cache_context(vary, True, request)[1]
             response = None
             if use_cache:
-                cache_key = key + request.path.encode('utf-8')
+                cache_key = request.path.encode('utf-8')
+                md5calc = md5()
+                # add function arguments and keywords
+                for arg in args:
+                    print arg
+                    md5calc.update(arg.encode("utf-8"))
+                for k,v in kwargs.iteritems():
+                    md5calc.update(k+str(v))
+                # Most themes have some kind of login box, so
+                # store a per-user cache if logged in users
+                # aren't taken out of caching already
+                if 'user' not in vary and request.user.is_somebody:
+                    md5calc.update(request.user.display_name.encode('utf-8'))
+                cache_key += '__%s' % md5calc.hexdigest()
                 response = request.app.cache.get(cache_key)
 
             if response is None:
@@ -147,7 +164,7 @@ def response(vary=(), timeout=None, cache_key=None):
 
             if use_cache and response.status_code == 200:
                 response.freeze()
-                request.app.cache.set(key, response, timeout)
+                request.app.cache.set(cache_key, response, timeout)
                 response.make_conditional(request)
             return response
         oncall.__name__ = f.__name__
