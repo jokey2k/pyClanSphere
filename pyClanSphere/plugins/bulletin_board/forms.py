@@ -196,11 +196,11 @@ class PostForm(forms.Form):
     """Post creation and edit"""
 
     yourname = forms.TextField(lazy_gettext(u'Your Name'), max_length=40)
-    title = forms.TextField(lazy_gettext(u'Title'), max_length=255)
+    title = forms.TextField(lazy_gettext(u'Title'), max_length=255, required=True)
     _maxtext = 5000
     text = forms.TextField(lazy_gettext(u'Text'), max_length=_maxtext,
                            widget=forms.Textarea,
-                           validators=[is_not_whitespace_only()])
+                           validators=[is_not_whitespace_only()], required=True)
 
     def __init__(self, target, post=None, user=None, initial=None):
         assert target is not None
