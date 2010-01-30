@@ -136,13 +136,13 @@ class Forum(object):
         self.topiccount = topicfilter.count()
         if self.topiccount:
             lasttopic = topics[0]
-            self.lasttopic_id = lasttopic.id
-            self.lastpost_id = lasttopic.lastpost.id
+            self.lasttopic = lasttopic
+            self.lastpost = lasttopic.lastpost
             postcount = 0
             for topic in topics:
                 postcount += len(topic.posts)
         else:
-            self.lasttopic_id = self.lastpost_iid = None
+            self.lasttopic = self.lastpost = None
             postcount = 0
         self.postcount = postcount
         self.modification_date = datetime.utcnow()
@@ -233,14 +233,14 @@ class Topic(AuthorBase):
     def refresh(self):
         """Refresh our lasttopic/lastpost data and do so for our parent forum"""
 
-        posts = Post.query.filter(Post.topic_id==self.id).order_by(db.asc(Post.id)).all()
-        self.postcount = len(posts)
+        postquery = Post.query.filter(Post.topic_id==self.id)
+        self.postcount = postquery.count()
         if self.postcount:
-            lastpost = posts[-1]
-            self.lastpost_id = lastpost.id
+            lastpost = postquery.order_by(db.desc(Post.id)).first()
+            self.lastpost = lastpost
             self.modification_date = lastpost.date
         else:
-            self.lastpost_id = None
+            self.lastpost = None
             self.modification_date = None
 
 
