@@ -18,6 +18,7 @@ from inspect import getdoc
 from traceback import format_exception
 from pprint import pprint
 from StringIO import StringIO
+from datetime import datetime, timedelta
 
 from babel import Locale
 
@@ -487,6 +488,13 @@ class Request(RequestBase):
             user = User.query.options(db.eagerload('groups'),
                                       db.eagerload('groups', '_privileges')) \
                              .get(user_id)
+            now = datetime.utcnow()
+            # mark user online, though only once a minute to not mess with
+            # the database too much
+            if not user.last_visited or \
+                   ((now - user.last_visited) > timedelta(minutes=1)):
+               user.last_visited = now
+               db.commit()
         if user is None:
             user = User.query.get_nobody()
         self.user = user
