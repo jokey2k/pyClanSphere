@@ -66,6 +66,7 @@ class User(object):
         self.city = city
         self.country = country
         self.www = www
+        self.creation_date = datetime.utcnow()
 
     @property
     def is_manager(self):

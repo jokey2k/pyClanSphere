@@ -294,7 +294,9 @@ users = db.Table('users', metadata,
     db.Column('country', db.String(200)),
     db.Column('pw_hash', db.String(70)),
     db.Column('email', db.String(250)),
-    db.Column('www', db.String(200))
+    db.Column('www', db.String(200)),
+    db.Column('creation_date', db.DateTime),
+    db.Column('last_visited', db.DateTime)
 )
 
 groups = db.Table('groups', metadata,
