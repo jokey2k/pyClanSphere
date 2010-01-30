@@ -8,12 +8,14 @@
   <tr>
     <th class="categoryline" colspan="4"><a name="cat-{{ category.id }}"></a>{{ category.name }}</th>
   </tr>
+  {% if loop.first %}
   <tr>
     <th>{{ _("Name") }}</th>
     <th>{{ _("Topics") }}</th>
     <th>{{ _("Posts") }}</th>
     <th>{{ _("Last post") }}</th>
   </tr>  
+  {% endif %}
   {% for forum in forums %}
   <tr>
     <td><a href="{{ url_for('board/topics', forum_id=forum.id) }}">{{ forum.name }}</a><br>{{ forum.description or '&nbsp;'|safe }}</td>
