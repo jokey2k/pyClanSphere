@@ -136,13 +136,14 @@ class Forum(object):
         self.topiccount = topicfilter.count()
         if self.topiccount:
             lasttopic = topics[0]
-            self.lasttopic = lasttopic
-            self.lastpost = lasttopic.lastpost
+            self.lasttopic_id = lasttopic.id
+            self.lastpost_id = lasttopic.lastpost.id
             postcount = 0
             for topic in topics:
-                postcount += len(topic.posts)
+                postcount += topic.postcount
         else:
-            self.lasttopic = self.lastpost = None
+            self.lasttopic_id = None
+            self.lastpost_id = None
             postcount = 0
         self.postcount = postcount
         self.modification_date = datetime.utcnow()
@@ -237,10 +238,10 @@ class Topic(AuthorBase):
         self.postcount = postquery.count()
         if self.postcount:
             lastpost = postquery.order_by(db.desc(Post.id)).first()
-            self.lastpost = lastpost
+            self.lastpost_id = lastpost.id
             self.modification_date = lastpost.date
         else:
-            self.lastpost = None
+            self.lastpost_id = None
             self.modification_date = None
 
 
