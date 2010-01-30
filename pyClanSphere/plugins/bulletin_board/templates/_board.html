@@ -61,7 +61,7 @@
   {% endif %}
   <tr>
     <td class="label"></td>
-    <td colspan="2">{% for tool in ['b','u','i','s','link','size','color','center'] %}{{ addsimpletool(tool,tool+".png") }}{% endfor %}{{ addtool('[list][*]','list','list.png') }}</td>
+    <td colspan="2">{% for tool in ['b','u','i','s','link','center'] %}{{ addsimpletool(tool,tool+".png") }}{% endfor %}{{ addtool('[list][*]','list','list.png') }}</td>
   <tr>
     <td class="label"><img src="{{ shared_url('core::editicons/text.gif') }}" width="16" height="16" alt="{{ tag }}">{{ form.text.label() }}</td>
     <td align="center">{{ form.text(cols=100) }}</td>
