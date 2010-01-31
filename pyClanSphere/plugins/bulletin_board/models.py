@@ -232,17 +232,14 @@ class Topic(AuthorBase):
         return self.is_global or user.is_somebody or self.forum.is_public
 
     def refresh(self):
-        """Refresh our lasttopic/lastpost data and do so for our parent forum"""
+        """Refresh our lasttopic/lastpost data"""
 
         postquery = Post.query.filter(Post.topic_id==self.id)
         self.postcount = postquery.count()
-        if self.postcount:
-            lastpost = postquery.order_by(db.desc(Post.id)).first()
-            self.lastpost_id = lastpost.id
-            self.modification_date = lastpost.date
-        else:
-            self.lastpost_id = None
-            self.modification_date = None
+
+        lastpost = postquery.order_by(db.desc(Post.id)).first()
+        self.lastpost_id = lastpost.id
+        self.modification_date = lastpost.date
 
 
 class PostQuery(db.Query):
