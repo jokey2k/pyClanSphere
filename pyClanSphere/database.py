@@ -18,6 +18,7 @@ import sys
 import time
 from os import path
 from types import ModuleType
+from datetime import datetime
 
 import sqlalchemy
 from sqlalchemy import orm
@@ -295,7 +296,8 @@ users = db.Table('users', metadata,
     db.Column('pw_hash', db.String(70)),
     db.Column('email', db.String(250)),
     db.Column('www', db.String(200)),
-    db.Column('creation_date', db.DateTime),
+    db.Column('creation_date', db.DateTime, nullable=False,
+              default=datetime.utcnow()),
     db.Column('last_visited', db.DateTime)
 )
 
