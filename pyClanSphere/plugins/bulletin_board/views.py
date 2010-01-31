@@ -13,6 +13,7 @@ from werkzeug.exceptions import NotFound, Forbidden
 
 from pyClanSphere import cache
 from pyClanSphere.api import _, url_for, db, render_response
+from pyClanSphere.models import AnonymousUser
 from pyClanSphere.utils.admin import require_admin_privilege, \
      flash as admin_flash
 from pyClanSphere.utils.http import redirect_to
@@ -25,6 +26,39 @@ from pyClanSphere.plugins.bulletin_board.forms import CategoryForm, \
      DeletePostForm
 from pyClanSphere.plugins.bulletin_board.models import *
 from pyClanSphere.plugins.bulletin_board.privileges import BOARD_MANAGE
+
+#
+# Helper functions
+#
+def check_unread(user, topic, date=None):
+    """Marks posts of given topic as read up until date if given"""
+
+    if user is None:
+        user = get_request().user
+    if isinstance(user, AnonymousUser):
+        return
+
+    global_lastread = GlobalLastRead.query.get(user.id)
+    if not global_lastread:
+        GlobalLastRead(user)
+        db.commit()
+        return
+
+    if global_lastread.date > topic.modification_date:
+        return
+
+    local_lastread = LocalLastRead.query.get((user.id,topic.id))
+    if not local_lastread:
+        LocalLastRead(user,topic,date)
+        db.commit()
+        return
+    if local_lastread.date >= topic.modification_date:
+        return
+
+    local_lastread.date = date
+    db.commit()
+    return
+
 
 #
 # Frontend views
@@ -97,10 +131,10 @@ def topic_list(request, forum_id, page=1):
     data = Topic.query.filter(Topic.forum==forum) \
                 .get_list('board/topics', page,
                           request.per_page, {'forum_id': forum_id})
+    data['forum'] = forum
+    data['form'] = form.as_widget() if form else None
 
-    return render_response('board_topic_list.html', forum=forum,
-                          topics=data['topics'], pagination=data['pagination'],
-                          form=form.as_widget() if form else None)
+    return render_response('board_topic_list.html', **data)
 
 
 @cache.response(vary=('user',))
@@ -145,6 +179,9 @@ def topic_detail(request, topic_id, page=1):
     data = Post.query.filter(Post.topic==topic)\
                .get_list('board/topic_detail', page,
                          request.per_page, {'topic_id': topic_id})
+
+    # Mark read up to last shown post date
+    check_unread(request.user, topic, data['posts'][-1].date)
 
     return render_response('board_topic_detail.html', topic=topic,
                           posts=data['posts'], pagination=data['pagination'],

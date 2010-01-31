@@ -130,6 +130,25 @@ class Forum(object):
             user = get_request().user
         return self.allow_anonymous or user.is_somebody
 
+    def is_unread(self, user=None):
+        if user is None:
+            user = get_request().user
+        if isinstance(user, AnonymousUser):
+            return False
+
+        global_lastread = GlobalLastRead.query.get(user.id)
+        if not global_lastread:
+            return False
+        if global_lastread.date > self.modification_date:
+            return False
+
+        topics=Topic.query \
+               .filter(Topic.modification_date > global_lastread.date).all()
+        for topic in topics:
+            if topic.is_unread(user):
+                return True
+        return False
+
     def refresh(self):
         topicfilter = Topic.query.filter(Topic.forum_id==self.id)
         topics = topicfilter.order_by(db.desc(Topic.modification_date)).all()
@@ -231,6 +250,26 @@ class Topic(AuthorBase):
             user = request.user
         return self.is_global or user.is_somebody or self.forum.is_public
 
+    def is_unread(self, user=None):
+        if user is None:
+            user = get_request().user
+        if isinstance(user, AnonymousUser):
+            return False
+
+        global_lastread = GlobalLastRead.query.get(user.id)
+        if not global_lastread:
+            return False
+        if global_lastread.date > self.modification_date:
+            return False
+
+        local_lastread = LocalLastRead.query.get((user.id,self.id))
+        if not local_lastread:
+            return True
+        if local_lastread.date >= self.modification_date:
+            return False
+
+        return True
+
     def refresh(self):
         """Refresh our lasttopic/lastpost data"""
 
@@ -297,6 +336,27 @@ class Post(AuthorBase):
         return self.topic.can_see(user) and user.has_privilege(BOARD_MODERATE)
 
 
+class GlobalLastRead(object):
+    """Global Lastread entry"""
+
+    def __init__(self, user, date=None):
+        assert user is not None
+        self.user = user
+        if date:
+            self.date = date
+
+
+class LocalLastRead(object):
+    """Per-Topic Lastread entry"""
+
+    def __init__(self, user, topic, date=None):
+        assert user is not None
+        assert topic is not None
+        self.user = user
+        self.topic = topic
+        if date:
+            self.date = date
+
 # Map Classes to tables
 db.mapper(Category, board_categories, properties={
     'id':           board_categories.c.category_id
@@ -321,5 +381,12 @@ db.mapper(Post, board_posts, properties={
     'topic':        db.relation(Topic, uselist=False, backref=db.backref('posts'),
                                 primaryjoin=board_posts.c.topic_id==board_topics.c.topic_id)
 })
+db.mapper(GlobalLastRead, board_global_lastread, properties={
+    'user':         db.relation(User, uselist=False),
+})
+db.mapper(LocalLastRead, board_local_lastread, properties={
+    'user':         db.relation(User, uselist=False),
+    'topic':        db.relation(Topic, uselist=False)
+})
 
-__all__ = ['Category', 'Forum', 'Topic', 'Post', 'TopicEmpty']
+__all__ = ['Category', 'Forum', 'Topic', 'Post', 'TopicEmpty', 'GlobalLastRead', 'LocalLastRead']

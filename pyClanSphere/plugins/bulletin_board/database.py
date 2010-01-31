@@ -65,9 +65,21 @@ board_posts = Table('board_posts', metadata,
     Column('ip', String(40)),
 )
 
+board_global_lastread = Table('board_global_lastread', metadata,
+    Column('user_id', ForeignKey('users.user_id'), primary_key=True),
+    Column('date', DateTime, default=datetime.utcnow())
+)
+
+board_local_lastread = Table('board_local_lastread', metadata,
+    Column('user_id', ForeignKey('users.user_id'), primary_key=True),
+    Column('topic_id', ForeignKey('board_topics.topic_id'), primary_key=True),
+    Column('date', DateTime, default=datetime.utcnow())
+)
+
 def init_database(app):
     """ This is for inserting our new table"""
     engine = app.database_engine
     metadata.create_all(engine)
 
-__all__ = ['board_categories', 'board_forums', 'board_topics', 'board_posts']
+__all__ = ['board_categories', 'board_forums', 'board_topics', 'board_posts',
+           'board_local_lastread', 'board_global_lastread']

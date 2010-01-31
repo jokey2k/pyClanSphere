@@ -10,12 +10,12 @@
 {% endif %}
 {% endmacro %}
 
-{% macro topic_name_link(topic) %}
-<a href="{{ url_for('board/topic_detail', topic_id=topic.id) }}">{{ topic.name }}</a>
+{% macro topic_name_link(topic, text=None) %}
+<a href="{{ url_for('board/topic_detail', topic_id=topic.id) }}">{{ text if text else topic.name }}</a>
 {% endmacro %}
 
 {%- macro lastpost_link(post, textfield='fancydate') %}
-<a href="{{ url_for('board/post_find', post_id=post.id) }}"><img src="{{ shared_url('core::editicons/postlink.gif') }}" width="12" height="12">
+<a href="{{ url_for('board/post_find', post_id=post.id) }}"><img src="{{ shared_url('core::editicons/postlink.gif') }}" width="12" height="12" alt="Link to Post">
   {% if textfield == 'fancydate' %}
     {{ post.date|fancydatetimeformat|capitalize }}
   {% elif textfield == 'longdate' %}
@@ -34,6 +34,19 @@
 {% endif %}
 {% endmacro %}
 
+{% macro statusicon_topic(topic) %}
+{% if topic.is_locked %}
+  {% set imagename = "_closed" %}
+{% elif topic.is_unread() %}
+  {% set imagename = "_unread" %}
+{% else %}
+  {% set imagename = "" %}
+{% endif %}
+{% if topic.is_sticky %}
+  {% set imagename = imagename + "_important" %}
+{% endif %}
+<img src="{{ shared_url('bulletin_board::images/post') }}{{ imagename }}.png" width="32" height="32" alt="Statusicon">
+{% endmacro %}
 
 {% macro render_post_form(form) %}
 <div id="newpost">

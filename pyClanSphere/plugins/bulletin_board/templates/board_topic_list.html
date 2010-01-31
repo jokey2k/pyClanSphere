@@ -1,5 +1,5 @@
 {% extends "layout_content_only.html" %}
-{% from "_board.html" import render_post_form, author_link, topic_name_link, lastpost %}
+{% from "_board.html" import render_post_form, author_link, topic_name_link, lastpost, statusicon_topic %}
 {% block title %}{{ _("Board") }}{% endblock %}
 {% block contents %}
 <div class="entry">
@@ -8,12 +8,13 @@
     <th class="categoryline" colspan="4"><a href="{{ url_for('board/index') }}">{{ _("Board") }}</a> >> <a href="{{ url_for('board/index', _anchor='cat-%i' % forum.category.id ) }}">{{ forum.category.name }}</a> >> <a href="{{ url_for('board/topics', forum_id=forum.id) }}">{{ forum.name }}</th>
   </tr>
   <tr>
-    <th>{{ _("Topic / Author") }}</th>
+    <th colspan="2">{{ _("Topic / Author") }}</th>
     <th>{{ _("Last post") }}</th>
     <th>{{ _("Posts") }}</th>
   </tr>  
   {% for topic in topics %}
   <tr>
+    <td class="statusicon">{{ statusicon_topic(topic) }}</td>
     <td>{%- trans topic=topic_name_link(topic)|safe, author=author_link(topic.author)|safe,
                   date=topic.date|datetimeformat('long')
                   %}{{ topic }}<br><em>by {{ author }} at {{ date }}</em>{% endtrans -%}</td>
@@ -21,7 +22,7 @@
     <td class="count">{{ topic.postcount }}</td>
   </tr>  
   {% else %}
-  <tr><td colspan="3"><center>{{ _("No Topics yet") }}</center></td></tr>
+  <tr><td colspan="4"><center>{{ _("No Topics yet") }}</center></td></tr>
   {% endfor %}
   </table>
   {% if pagination.necessary %}
