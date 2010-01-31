@@ -8,6 +8,7 @@
     :copyright: (c) 2009-2010 by the pyClanSphere Team, see AUTHORS for details
     :license: BSD, see LICENSE for more details.
 """
+from datetime import datetime
 
 from pyClanSphere.database import db, metadata
 
@@ -41,7 +42,7 @@ board_topics = Table('board_topics', metadata,
     Column('topic_id', Integer, primary_key=True),
     Column('forum_id', ForeignKey('board_forums.forum_id')),
     Column('name', String(255)),
-    Column('date', DateTime),
+    Column('date', DateTime, default=datetime.utcnow()),
     Column('author_id', ForeignKey('users.user_id')),
     Column('author_str', String(40)),
     Column('is_sticky', Boolean),
@@ -60,7 +61,7 @@ board_posts = Table('board_posts', metadata,
     Column('text', Text),
     Column('author_id', ForeignKey('users.user_id')),
     Column('author_str', String(40)),
-    Column('date', DateTime),
+    Column('date', DateTime, default=datetime.utcnow()),
     Column('ip', String(40)),
 )
 
