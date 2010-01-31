@@ -21,7 +21,7 @@ from types import ModuleType
 from datetime import datetime
 
 import sqlalchemy
-from sqlalchemy import orm
+from sqlalchemy import orm, sql
 from sqlalchemy.engine.url import make_url, URL
 from sqlalchemy.exc import ArgumentError, DisconnectionError
 from sqlalchemy.ext.associationproxy import association_proxy
@@ -29,7 +29,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.interfaces import ConnectionProxy
 from sqlalchemy.orm.collections import attribute_mapped_collection
 from sqlalchemy.orm.interfaces import AttributeExtension
-from sqlalchemy.sql import func
 
 from werkzeug import url_decode
 from werkzeug.exceptions import NotFound
@@ -252,6 +251,10 @@ for name in 'delete', 'flush', 'execute', 'begin', 'mapper', \
             'query_property':
     setattr(db, name, getattr(session, name))
 
+#: forward some operators too
+for name in 'func', 'and_', 'or_', 'not_':
+    setattr(db, name, getattr(sql, name))
+
 #: metadata for the core tables and the core table definitions
 metadata = db.MetaData()
 
@@ -276,7 +279,6 @@ db.AutoAddExtension = AutoAddExt
 db.EXT_CONTINUE = orm.EXT_CONTINUE
 db.EXT_STOP = orm.EXT_STOP
 db.attribute_mapped_collection = attribute_mapped_collection
-db.func = func
 
 #: called at the end of a request
 cleanup_session = session.remove
