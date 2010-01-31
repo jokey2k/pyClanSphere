@@ -11,7 +11,25 @@
     <th colspan="2">{{ _("Topic / Author") }}</th>
     <th>{{ _("Last post") }}</th>
     <th>{{ _("Posts") }}</th>
+  </tr>
+  {% if stickies %}
+  <tr>
+    <th class="categoryline" colspan="4">{{ _("Sticky threads") }}</th>
+  </tr>
+  {% for topic in stickies %}
+  <tr>
+    <td class="statusicon">{{ statusicon_topic(topic) }}</td>
+    <td>{%- trans topic=topic_name_link(topic)|safe, author=author_link(topic.author)|safe,
+                  date=topic.date|datetimeformat('long')
+                  %}{{ topic }}<br><em>by {{ author }} at {{ date }}</em>{% endtrans -%}</td>
+                  <td>{{ lastpost(topic.lastpost) }}</td>
+    <td class="count">{{ topic.postcount }}</td>
   </tr>  
+  {% endfor %}
+  <tr>
+    <th class="categoryline" colspan="4">{{ _("Posts") }}</th>
+  </tr>
+  {% endif %}
   {% for topic in topics %}
   <tr>
     <td class="statusicon">{{ statusicon_topic(topic) }}</td>

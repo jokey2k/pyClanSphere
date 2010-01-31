@@ -180,7 +180,10 @@ class TopicQuery(db.Query):
 
         # send the query
         offset = per_page * (page - 1)
-        topiclist = self.order_by(db.desc(Topic.modification_date)) \
+        stickylist = self.filter(Topic.is_sticky==True) \
+                        .order_by(db.desc(Topic.modification_date)).all()
+        topiclist = self.filter(db.or_(Topic.is_sticky==False,Topic.is_sticky==None)) \
+                        .order_by(db.desc(Topic.modification_date)) \
                         .offset(offset).limit(per_page).all()
 
         # if raising exceptions is wanted, raise i
@@ -191,6 +194,7 @@ class TopicQuery(db.Query):
                                 self.count(), url_args=url_args)
 
         return {
+            'stickies':         stickylist,
             'topics':           topiclist,
             'pagination':       pagination,
         }

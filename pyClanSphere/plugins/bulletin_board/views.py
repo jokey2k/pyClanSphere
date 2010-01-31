@@ -102,8 +102,11 @@ def topic_list(request, forum_id, page=1):
         `pagination`:
             a pagination object to render a pagination
 
+        `stickies`:
+            Sorted list of sticky topics for given `forum_id`
+
         `topics`:
-            Sorted list of topics for given `forum_id`
+            Sorted list of non-sticky topics for given `forum_id`
 
         `form`:
             Form for topic creation or None if user is not allowed
