@@ -143,7 +143,8 @@ class Forum(object):
             return False
 
         topics=Topic.query \
-               .filter(Topic.modification_date > global_lastread.date).all()
+               .filter(Topic.modification_date > global_lastread.date) \
+               .filter(Topic.forum_id == self.id).all()
         for topic in topics:
             if topic.is_unread(user):
                 return True
