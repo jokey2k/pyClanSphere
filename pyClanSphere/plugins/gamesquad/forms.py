@@ -186,7 +186,7 @@ class DeleteSquadForm(_SquadBoundForm):
             for squadmember in self.squad.squadmembers:
                 if squadmember not in new_squad.squadmembers:
                     squadmember.squad_id = new_squad.squad_id
-        db.commit()
+            db.commit()
 
         emit_event('before-squad-deleted', self.squad, self.data)
         db.delete(self.squad)
