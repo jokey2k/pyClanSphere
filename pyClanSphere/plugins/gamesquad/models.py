@@ -242,7 +242,7 @@ db.mapper(Squad, squads, properties={
                                 order_by=db.func.lower(users.c.username),
                                 backref=db.backref('squads')
                     ),
-    'squadmembers': db.relation(SquadMember)
+    'squadmembers': db.relation(SquadMember, cascade='all,delete-orphan')
 })
 db.mapper(SquadMember, squadmembers, properties={
     'user':         db.relation(User, uselist=False, lazy=False),
