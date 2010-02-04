@@ -24,7 +24,7 @@
 	    <td>{% if war.status >= 4 %}{{ _('Yes') if war.result else _('No') }}{% else %}&mdash;{% endif %}</td>
 	  </tr>
   {% else %}
-    <tr><td colspan="4">{{ _("No wars") }}</td></tr>
+    <tr><td colspan="5">{{ _("No wars") }}</td></tr>
   {%- endfor %}
   </table>
   <form action="{{ url_for('admin/war_create')}}" method="get">
