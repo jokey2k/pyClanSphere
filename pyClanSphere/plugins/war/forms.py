@@ -38,8 +38,8 @@ class _WarBoundForm(forms.Form):
 class FightUsForm(_WarBoundForm):
 
     clanname = forms.TextField(lazy_gettext(u'Clan'), max_length=64,
-                                validators=[is_not_whitespace_only()],
-                                required=True)
+                               validators=[is_not_whitespace_only()],
+                               required=True)
     clantag = forms.TextField(lazy_gettext('Clantag'), max_length=16,
                               validators=[is_not_whitespace_only()],)
     clanhomepage = forms.TextField(lazy_gettext(u'Homepage'), max_length=128,
