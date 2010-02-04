@@ -6,7 +6,7 @@
 	<div class="entry">
 	  <ul>
 		{%- for war in warlist %}
-      <li><a href="{{ url_for('wars/detail', war_id=war.id)  }}">{{ war.clanname }}</a> ({{ war.date|datetimeformat }})</li>
+      <li><a href="{{ url_for('wars/detail', war_id=war.id)  }}">{{ war.clantag if war.clantag else war.clanname }}</a> ({{ war.date|datetimeformat }})</li>
     {%- else %}
       <li>{% trans %}So far there are no wars for this squad.{% endtrans %}</li>
     {%- endfor %}

@@ -40,6 +40,8 @@ class FightUsForm(_WarBoundForm):
     clanname = forms.TextField(lazy_gettext(u'Clan'), max_length=64,
                                 validators=[is_not_whitespace_only()],
                                 required=True)
+    clantag = forms.TextField(lazy_gettext('Clantag'), max_length=16,
+                              validators=[is_not_whitespace_only()],)
     clanhomepage = forms.TextField(lazy_gettext(u'Homepage'), max_length=128,
                                    validators=[is_valid_url()])
     date = forms.DateTimeField(lazy_gettext(u'Date'), required=True)
@@ -60,6 +62,7 @@ class FightUsForm(_WarBoundForm):
         if war is not None:
             initial = forms.fill_dict(initial,
                 clanname = war.clanname,
+                clantag = war.clantag,
                 clanhomepage = war.clanhomepage,
                 date = war.date,
                 server = war.server,
@@ -90,7 +93,7 @@ class FightUsForm(_WarBoundForm):
     def _set_common_attributes(self, war):
         forms.set_fields(war, self.data, 'clanname', 'date', 'server',
                          'mode', 'playerchangecount', 'contact',
-                         'notes', 'squad', 'clanhomepage')
+                         'notes', 'squad', 'clanhomepage', 'clantag')
 
     def save_changes(self):
         """Apply the changes."""

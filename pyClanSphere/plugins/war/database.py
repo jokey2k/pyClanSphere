@@ -21,6 +21,7 @@ for var in ['Table', 'Column', 'String', 'Integer', 'Boolean', 'DateTime', 'Fore
 wars = Table('wars', metadata,
     Column('war_id', Integer, primary_key=True),
     Column('clanname', String(64)),
+    Column('clantag', String(16)),
     Column('clanhomepage', String(128)),
     Column('date', DateTime),
     Column('server', String(64)),

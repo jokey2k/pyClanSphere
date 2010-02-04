@@ -11,6 +11,7 @@
     <h2>{{ _('Opponent') }}</h2>
     <dl>
       <dt>{{ form.clanname.label.text }}</dt><dd>{{ form.war.clanname }}</dd>
+      <dt>{{ form.clantag.label.text }}</dt><dd>{{ form.war.clantag }}</dd>
       <dt>{{ form.clanhomepage.label.text }}</dt><dd><a href="{{ form.war.clanhomepage }}">{{ form.war.clanhomepage }}</a></dd>
       <dt>{{ form.contact.label.text }}</dt><dd>{{ form.war.contact }}</dd>
     </dl>
@@ -41,7 +42,7 @@
       When the war is over, please <a href="%(link)s">write a result</a>
     {% endtrans %}</p>
     {% endif %}
-    {{ render_formmultibox([form.clanname, form.clanhomepage, form.contact],
+    {{ render_formmultibox([form.clanname, form.clantag, form.clanhomepage, form.contact],
                            _("Opponent"), toggleable=false) }}
     {{ render_formmultibox([form.squad, form.date, form.orgamember, form.status],
                            _("War coordination data"), toggleable=false) }}
