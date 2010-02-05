@@ -1,13 +1,13 @@
 <title>{% trans %}pyClanSphere Server Error{% endtrans %}</title>
-<summary>{% trans summary=summary %}pyClanSphere has suffered an internal error: “{{ summary }}”{% endtrans %}</summary>
+<summary>{% trans summary=summary|e %}pyClanSphere has suffered an internal error: “{{ summary }}”{% endtrans %}</summary>
 <longtext>
  {% trans %}Request Details:{% endtrans %}
 --------------------------------------------------------------------------------
- <pre>{{ request_details }}</pre>
+ <pre>{{ request_details|e }}</pre>
 --------------------------------------------------------------------------------
 
  {% trans %}Python Traceback:{% endtrans %}
 --------------------------------------------------------------------------------
- <pre>{{ longtext }}</pre>
+ <pre>{{ longtext|e }}</pre>
 --------------------------------------------------------------------------------
 </longtext>

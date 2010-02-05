@@ -1167,7 +1167,7 @@ class pyClanSphere(object):
         pprint(request.__dict__, request_buffer)
         request_buffer.seek(0)
         send_notification_template(
-            PYCLANSPHERE_ERROR, 'notifications/on_server_error.txt',
+            PYCLANSPHERE_ERROR, 'notifications/on_server_error.zeml',
             user=request.user, summary=error.message,
             request_details=request_buffer.read(),
             longtext=''.join(format_exception(*sys.exc_info()))

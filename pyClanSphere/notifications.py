@@ -2,8 +2,6 @@
 """
     pyClanSphere.notifications
     ~~~~~~~~~~~~~~~~~~~~~~~~~~
-    
-    ### FIXME: This needs cleanupwork and is broken at the moment!!!! (deZEMLification needed)
 
     This module implements an extensible notification system.  Plugins can
     provide different kinds of notification systems (like email, jabber etc.)
@@ -22,6 +20,7 @@ from werkzeug import url_unquote
 from pyClanSphere.models import NotificationSubscription
 from pyClanSphere.application import get_application, get_request, render_template
 from pyClanSphere.privileges import CLAN_ADMIN, ENTER_ACCOUNT_PANEL
+from pyClanSphere.utils.zeml import parse_zeml
 from pyClanSphere.utils.mail import send_email
 from pyClanSphere.i18n import lazy_gettext
 
@@ -35,9 +34,55 @@ def send_notification(type, message, user=Ellipsis):
     """Convenience function.  Get the application object and deliver the
     notification to it's NotificationManager.
 
-    If there is an associated page with the notification,
+    The message must be a valid ZEML formatted message.  The following
+    top-level elements are available for marking up the message:
+
+    title
+        The title of the notification.  Some systems may only transmit this
+        part of the message.
+
+    summary
+        An optional quick summary.  If the text is short enough it can be
+        omitted and the system will try to transmit the longtext in that
+        case.  The upper limit for the summary should be around 100 chars.
+
+    details
+        If given this may either contain a paragraph with textual information
+        or an ordered or unordered list of text or links.  The general markup
+        rules apply.
+
+    longtext
+        The full text of this notification.  May contain some formattings.
+
+    actions
+        If given this may contain an unordered list of action links.  These
+        links may be transmitted together with the notification.
+
+    Additionally if there is an associated page with the notification,
     somewhere should be a link element with a "selflink" class.  This can be
     embedded in the longtext or actions (but any other element too).
+
+    Example markup::
+
+        <title>New comment on "Foo bar baz"</title>
+        <summary>Mr. Miracle wrote a new comment: "This is awesome."</summary>
+        <details>
+          <ul>
+            <li><a href="http://miracle.invalid/">Mr. Miracle</a>
+            <li><a href="mailto:mr@miracle.invalid">E-Mail</a>
+          </ul>
+        </details>
+        <longtext>
+          <p>This is awesome.  Keep it up!
+          <p>Love your work
+        </longtext>
+        <actions>
+          <ul>
+            <li><a href="http://.../link" class="selflink">all comments</a>
+            <li><a href="http://.../?action=delete">delete it</a>
+            <li><a href="http://.../?action=approve">approve it</a>
+          </ul>
+        </actions>
 
     Example plaintext rendering (e-mail)::
 
@@ -88,12 +133,9 @@ class Notification(object):
     The message is a zeml construct.
     """
 
-    def __init__(self, id, message, title, details="", summary="", longtext="", user=Ellipsis):
-        self.message = message
+    def __init__(self, id, message, user=Ellipsis):
+        self.message = parse_zeml(message, 'system')
         self.id = id
-        self.details = details
-        self.summary = summary
-        self.longtext = longtext
         self.sent_date = datetime.utcnow()
         if user is Ellipsis:
             self.user = get_request().user
@@ -102,7 +144,15 @@ class Notification(object):
 
     @property
     def self_link(self):
-        return
+        link = self.message.query('a[class~=selflink]').first
+        if link is not None:
+            return link.attributes.get('href')
+
+    title = property(lambda x: x.message.query('/title').first)
+    details = property(lambda x: x.message.query('/details').first)
+    actions = property(lambda x: x.message.query('/actions').first)
+    summary = property(lambda x: x.message.query('/summary').first)
+    longtext = property(lambda x: x.message.query('/longtext').first)
 
 
 class NotificationSystem(object):
