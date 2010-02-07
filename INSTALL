@@ -11,14 +11,10 @@ installed:
 - SQLAlchemy* 0.6beta1*
 - simplejson* [included in Python 2.6 and higher]
 - pytz*
-- Babel* (>= 0.9.5; using bundled svn version as of 18.12.2009)
+- Babel (>= 0.9.5; shipping svn version as of 18.12.2009)
 
 Libraries marked with * are installable from the cheeseshop via
 easy_install / pip or might be available in Debian already.
-
-If you might use easy_install::
-
-    $ easy_install Werkzeug==dev Jinja2 pytz webdepcompress translitcodec
 
 
 Installation
