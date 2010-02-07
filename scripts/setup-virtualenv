@@ -963,10 +963,11 @@ from subprocess import call
 
 REQUIREMENTS = [
     'Werkzeug==dev',
-    'Jinja2==dev',
-#    'SQLAlchemy==dev', -- bundled until somethin 0.6ish is released
+    'Jinja2>=2.2.1',
+    'SQLAlchemy>=0.6beta1',
     'pytz',
 #    'Babel>=0.9.5', -- temporarily until 0.9.5 or some later version is released... shipping instead
+    'http://svn.edgewall.org/repos/babel/trunk/',
     'webdepcompress',
     'translitcodec'
 ]
