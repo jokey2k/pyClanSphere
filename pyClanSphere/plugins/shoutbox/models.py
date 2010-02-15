@@ -99,7 +99,7 @@ class ShoutboxEntry(object):
         current time is assumed.
         """
 
-        if date is None:
+        if not date:
             self.postdate = datetime.utcnow()
         else:
             self.postdate = date
@@ -107,6 +107,5 @@ class ShoutboxEntry(object):
 
 db.mapper(ShoutboxEntry, shoutboxentries, properties={
     'id':           shoutboxentries.c.entry_id,
-    'user':         db.relation(User, uselist=False, lazy=True,
-                                backref=db.backref('shoutboxentries'))
+    'user':         db.relation(User, uselist=False)
 })
