@@ -262,7 +262,7 @@ class _UserProfileForm(_UserBoundForm):
     gender_male = forms.ChoiceField(lazy_gettext(u'Gender'))
     birthday = forms.DateField(lazy_gettext(u'Day of Birth'))
     height = forms.IntegerField(lazy_gettext(u'Height in full cm'))
-    address = forms.TextField(lazy_gettext('Streetaddress'))
+    address = forms.TextField(lazy_gettext(u'Streetaddress'))
     zip = forms.IntegerField(lazy_gettext(u'Zip code'))
     city = forms.TextField(lazy_gettext(u'City'))
     country = forms.ChoiceField(lazy_gettext(u'Country'), widget=forms.SelectBox)
