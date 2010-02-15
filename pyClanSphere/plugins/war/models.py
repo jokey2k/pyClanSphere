@@ -296,6 +296,7 @@ class NullWar(War):
     """
     id = -1
     clanname = "--"
+    clantag = ""
     server = "--"
     date = None
     result = NullWarResult()
