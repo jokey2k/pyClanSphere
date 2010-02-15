@@ -15,6 +15,7 @@ from pyClanSphere import cache
 from pyClanSphere.api import *
 from pyClanSphere.i18n import _, ngettext
 from pyClanSphere.application import Response
+from pyClanSphere.models import User
 from pyClanSphere.utils import dump_json
 from pyClanSphere.utils.xml import generate_rsd, dump_xml, AtomFeed
 
@@ -22,6 +23,15 @@ from pyClanSphere.utils.xml import generate_rsd, dump_xml, AtomFeed
 def index(request):
     """Just show the pyClanSphere license and some other legal stuff."""
     return render_response('index.html')
+
+
+#@cache.response()
+def profile(request, user_id):
+    """Render profile page for given user"""
+    user = User.query.get(user_id)
+    if not user:
+        raise NotFound()
+    return render_response('profile.html', user=user)
 
 
 def json_service(req, identifier):
