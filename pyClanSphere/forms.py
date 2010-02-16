@@ -339,7 +339,7 @@ class EditUserForm(_UserProfileForm):
             raise ValidationError(_('This username is already in use'))
 
     def _set_common_attributes(self, user):
-        _UserBoundForm._set_common_attributes(self, user)
+        _UserProfileForm._set_common_attributes(self, user)
         bind_privileges(user.own_privileges, self.data['privileges'], user)
         bound_groups = set(g.name for g in user.groups)
         choosen_groups = set(self.data['groups'])
