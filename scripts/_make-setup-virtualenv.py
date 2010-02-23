@@ -20,8 +20,8 @@ from subprocess import call
 
 # requirements without lxml, because lxml is special for OS X
 REQUIREMENTS = [
-    'Werkzeug==dev',
-    'Jinja2>=2.2.1',
+    'Werkzeug>=0.6',
+    'Jinja2>=2.3',
     'SQLAlchemy>=0.6beta1',
     'pytz',
 #    'Babel>=0.9.5', -- temporarily until 0.9.5 or some later version is released... shipping instead
