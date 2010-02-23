@@ -174,7 +174,7 @@ class SquadMember(object):
 
     query = db.query_property(SquadMemberQuery)
 
-    def __init__(self, user, squad, level, othertasks=None):
+    def __init__(self, user, squad=None, level=None, othertasks=None):
         super(SquadMember, self).__init__()
         self.user = user
         self.squad = squad
@@ -242,11 +242,11 @@ db.mapper(Squad, squads, properties={
                                 order_by=db.func.lower(users.c.username),
                                 backref=db.backref('squads')
                     ),
-    'squadmembers': db.relation(SquadMember, cascade='all,delete-orphan')
+    'squadmembers': db.relation(SquadMember, cascade='all,delete-orphan',
+                                backref=db.backref('squad', uselist=False))
 })
 db.mapper(SquadMember, squadmembers, properties={
     'user':         db.relation(User, uselist=False, lazy=False),
-    'squad':        db.relation(Squad, uselist=False, lazy=False),
     'level':        db.relation(Level, uselist=False, lazy=False)
 })
 db.mapper(Level, levels, properties={
