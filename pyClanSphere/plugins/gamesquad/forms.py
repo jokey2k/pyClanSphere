@@ -225,6 +225,7 @@ class EditSquadMemberForm(_SquadMemberBoundForm):
                 othertasks=squadmember.othertasks
             )
         _SquadMemberBoundForm.__init__(self, squadmember, initial)
+        assert squad is not None
         self.squad = squad
         # Need access to squad here, as the member might be new and thus there is no
         # member.squad relation yet.
@@ -237,8 +238,8 @@ class EditSquadMemberForm(_SquadMemberBoundForm):
     def make_squadmember(self):
         """A helper function that creates new SquadMember objects."""
 
-        squadmember = SquadMember(self.data['clanmember'], self.squad,
-                                  self.data['level'], self.data['othertasks'])
+        squadmember = SquadMember(self.data['clanmember'])
+        self._set_common_attributes(squadmember)
         self.new_squadmember = squadmember
         return squadmember
 
