@@ -300,7 +300,6 @@ def edit_squadmember(request, squad_id=None, user_id=None):
                 icon = 'info'
 
             admin_flash(msg % (escape(squadmember.user.display_name)),icon)
-
             db.commit()
             if 'save_and_continue' in request.form:
                 return redirect_to('admin/squad_editmember', squad_id=squad_id,

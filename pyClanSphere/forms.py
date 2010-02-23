@@ -131,8 +131,6 @@ class RemovePluginForm(forms.Form):
         self.plugin = plugin
 
 
-
-
 class _GroupBoundForm(forms.Form):
     """Internal baseclass for group bound forms."""
 
