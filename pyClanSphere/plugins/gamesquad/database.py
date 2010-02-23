@@ -25,7 +25,8 @@ squads = db.Table('squads', metadata,
 
 levels = db.Table('levels', metadata,
     db.Column('level_id', db.Integer, primary_key=True),
-    db.Column('name', db.String(32))
+    db.Column('name', db.String(32)),
+    db.Column('ordering', db.Integer)
 )
 
 squadmembers = db.Table('squadmembers', metadata,

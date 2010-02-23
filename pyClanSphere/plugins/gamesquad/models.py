@@ -151,7 +151,7 @@ class SquadMemberQuery(db.Query):
 
         # send the query
         offset = per_page * (page - 1)
-        query_filter = self.filter_by(squad_id=squad.id).order_by(SquadMember.level_id)
+        query_filter = self.filter_by(squad_id=squad.id).order_by('levels_1_ordering')
         memberlist = query_filter \
                          .offset(offset).limit(per_page).all()
 
@@ -191,9 +191,12 @@ class SquadMember(object):
 class Level(object):
     """Name Alias for Levels"""
 
-    def __init__(self, name):
+    query = db.query_property(LevelQuery)
+
+    def __init__(self, name, ordering=None):
         super(Level, self).__init__()
         self.name = name
+        self.ordering = ordering
 
     def can_edit(self, user=None):
         """Checks if the given user (or current user) can edit this level."""
@@ -243,6 +246,7 @@ db.mapper(Squad, squads, properties={
                                 backref=db.backref('squads')
                     ),
     'squadmembers': db.relation(SquadMember, cascade='all,delete-orphan',
+                                lazy='dynamic', order_by='levels_1_ordering',
                                 backref=db.backref('squad', uselist=False))
 })
 db.mapper(SquadMember, squadmembers, properties={

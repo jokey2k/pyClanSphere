@@ -284,11 +284,14 @@ class EditLevelForm(_LevelBoundForm):
     levelname = forms.TextField(lazy_gettext(u'Levelname'), max_length=32,
                                 validators=[is_not_whitespace_only()],
                                 required=True)
+    ordering = forms.IntegerField(lazy_gettext(u'Order'),
+                help_text=_('Sorting order, ascending'))
 
     def __init__(self, level=None, initial=None):
         if level is not None:
             initial = forms.fill_dict(initial,
-                levelname=level.name
+                levelname=level.name,
+                ordering=level.ordering
             )
         _LevelBoundForm.__init__(self, level, initial)
 
@@ -299,8 +302,16 @@ class EditLevelForm(_LevelBoundForm):
         if query.first() is not None:
             raise ValidationError(_('This levelname is already in use'))
 
+    def validate_ordering(self, level):
+        if level < 0:
+            raise ValidationError(_('Ordering with positive integers or zero only'))
+
     def _set_common_attributes(self, level):
-        forms.set_fields(level, self.data)
+        forms.set_fields(level, self.data, 'ordering')
+        if self.data['ordering'] is None:
+            level.ordering = Level.query.count()-1
+        else:
+            level.ordering = self.data['ordering']
 
     def make_level(self):
         """A helper function that creates a new level object."""

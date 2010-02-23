@@ -4,10 +4,12 @@
   <h1>{{ _("Levels Overview") }}</h1>
   <table>
     <tr>
+      <th>{{ _("Ordering") }}</th>
       <th>{{ _("Level") }}</th>
     </tr>
   {%- for level in levels %}
     <tr class="{{ loop.cycle('odd', 'even') }}">
+    <td>{{ level.ordering }}</td>
 	  {%- if level.can_edit() %}
       <td><a href="{{ url_for('admin/level_edit', level_id=level.id) }}">{{
           level.name}}</a></td>

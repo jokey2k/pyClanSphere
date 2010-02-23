@@ -2,11 +2,9 @@
 {% from "admin/_form_helpers.html" import render_formbox %}
 {% block title %}{{ _('New Level') if form.new else _('Edit Level') }}{% endblock %}
 {% block contents %}
+  <h1>{{ self.title() }}</h1>
   {% call form() %}
-  <div class="formbox">
-    <h3>{{ form.levelname.label() }}</h3>
-    {{ form.levelname() }}
-  </div>
+  {{ form.as_dl() }}
     <div class="actions">
       <input type="submit" name="save" value="{{ _('Save') }}">
       <input type="submit" name="save_and_continue" value="{{ _('Save and continue editing') }}">
