@@ -341,13 +341,10 @@ def delete_squadmember(request, squad_id=None, user_id=None):
 def level_list(request, page):
     """Show all games in a list."""
 
-    levels = Level.query.limit(PER_PAGE).offset(PER_PAGE * (page - 1)).all()
-    pagination = AdminPagination('admin/level_list', page, PER_PAGE,
-                                 Level.query.count())
-    if not levels and page != 1:
-        raise NotFound()
+    data = Level.query.get_list('admin/level_list', page,
+                                paginator=AdminPagination)
     return render_admin_response('admin/level_list.html', 'gamesquad.levels',
-                                 levels=levels, pagination=pagination)
+                                 **data)
 
 @require_admin_privilege(LEVEL_MANAGE)
 def edit_level(request, level_id=None):

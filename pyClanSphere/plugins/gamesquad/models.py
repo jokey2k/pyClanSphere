@@ -188,6 +188,36 @@ class SquadMember(object):
             self.squad.name
         )
 
+
+class LevelQuery(db.Query):
+    """Provide better prepared queries"""
+
+    def get_list(self, endpoint=None, page=1, per_page=None,
+                 url_args=None, raise_if_empty=True, paginator=Pagination):
+        """Return a dict with pagination and the current members."""
+
+        if per_page is None:
+            per_page = 20
+
+        # send the query
+        offset = per_page * (page - 1)
+        query_filter = self
+        levellist = query_filter.order_by(Level.ordering) \
+                                .offset(offset).limit(per_page).all()
+
+        # if raising exceptions is wanted, raise it
+        if raise_if_empty and (page != 1 and not levellist):
+            raise NotFound()
+
+        pagination = paginator(endpoint, page, per_page,
+                                query_filter.count(), url_args=url_args)
+
+        return {
+            'levels':           levellist,
+            'pagination':       pagination
+        }
+
+
 class Level(object):
     """Name Alias for Levels"""
 

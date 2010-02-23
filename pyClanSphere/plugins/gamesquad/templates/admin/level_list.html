@@ -11,10 +11,10 @@
     <tr class="{{ loop.cycle('odd', 'even') }}">
     <td>{{ level.ordering }}</td>
 	  {%- if level.can_edit() %}
-      <td><a href="{{ url_for('admin/level_edit', level_id=level.id) }}">{{
+      <td width="100%"><a href="{{ url_for('admin/level_edit', level_id=level.id) }}">{{
           level.name}}</a></td>
       {%- else %}
-      <td>{{ level.name }}</td>
+      <td width="100%">{{ level.name }}</td>
 	  {%- endif %}
 	</tr>
   {%- endfor %}
