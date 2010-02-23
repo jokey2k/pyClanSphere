@@ -233,7 +233,7 @@ class EditSquadMemberForm(_SquadMemberBoundForm):
                                    user in User.query.namesort().all() if user not in self.squad.members]
         if self.squadmember:
             self.clanmember.choices.insert(0,(squadmember.user.id, squadmember.user.display_name))
-        self.level.choices = [(level.id, level.name) for level in Level.query.all()]
+        self.level.choices = [(level.id, level.name) for level in Level.query.order_by(Level.ordering).all()]
 
     def make_squadmember(self):
         """A helper function that creates new SquadMember objects."""
