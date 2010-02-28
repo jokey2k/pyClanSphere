@@ -7,6 +7,11 @@
   <tr>
     <th class="categoryline" colspan="4"><a href="{{ url_for('board/index') }}">{{ _("Board") }}</a> >> <a href="{{ url_for('board/index', _anchor='cat-%i' % topic.forum.category.id ) }}">{{ topic.forum.category.name }}</a> >> <a href="{{ url_for('board/topics', forum_id=topic.forum.id) }}">{{ topic.forum.name }}</a> >> <a href="{{ url_for('board/topic_detail', topic_id=topic.id) }}">{{ topic.name }}</th>
   </tr>
+  {% if pagination.necessary %}
+  <tr>
+    <td colspan="2" style="text-align: right;">{{ _('Pages') }}: {{ pagination.generate() }}</td>
+  </tr>
+  {% endif %}
   {% for post in posts %}
   <tr>
     <td rowspan="2" class="userinfo">{{ author_link(post.author) }}</td>
@@ -28,9 +33,11 @@
     </td>
   <tr>  
   {% endfor %}
+  {% if pagination.necessary %}
   <tr>
     <td colspan="2" style="text-align: right;">{{ _('Pages') }}: {{ pagination.generate() }}</td>
   </tr>
+  {% endif %}
   </table>
   {% if form %}
   {{ render_post_form(form) }}  
