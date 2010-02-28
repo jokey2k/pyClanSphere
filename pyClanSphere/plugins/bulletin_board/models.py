@@ -93,7 +93,7 @@ class ForumQuery(db.Query):
                 retlist.append(forum)
 
         # if raising exceptions is wanted, raise it
-        if raise_if_empty and (page != 1 and not forumlist):
+        if raise_if_empty and (page != 1 and not retlist):
             raise NotFound()
 
         pagination = paginator(endpoint, page, per_page,
