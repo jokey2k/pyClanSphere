@@ -105,7 +105,7 @@ def war_fightus(request):
 def war_list(request, page):
     """List wars in backend"""
 
-    data = War.query.get_list(per_page=PER_PAGE, page=page,
+    data = War.query.get_list('admin/war_list', per_page=PER_PAGE, page=page,
                               paginator=AdminPagination)
 
     return render_admin_response('admin/war_list.html', 'war.wars',
