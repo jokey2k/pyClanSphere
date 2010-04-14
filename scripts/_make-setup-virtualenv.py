@@ -39,7 +39,7 @@ if sys.platform == 'darwin':
     print '=' * 60
     print 'It appears that you are using OS X.  If an installation error'
     print 'occurs on installing lxml, please make sure you have port'
-    print 'installed.
+    print 'installed.'
     print '=' * 60
 
     # no idea if that actually helps, but let's hope it does :D
