@@ -21,7 +21,7 @@ from subprocess import call
 REQUIREMENTS = [
     'Werkzeug>=0.6',
     'Jinja2>=2.4',
-    'SQLAlchemy>=0.6beta3',
+    'SQLAlchemy>=0.6.0',
     'pytz',
     'Babel>=0.9.5',
     'webdepcompress',
