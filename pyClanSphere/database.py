@@ -3,13 +3,12 @@
     pyClanSphere.database
     ~~~~~~~~~~~~~~~~~~~~~
 
-    This module is a rather complex layer on top of SQLAlchemy 0.4.
-    Basically you will never use the `pyClanSphere.database` module except you
-    are a core developer, but always the high level
-    :mod:`~pyClanSphere.database.db` module which you can import from the
-    :mod:`pyClanSphere.api` module.
+    Our layer on top of SQLAlchemy.
+    Simply use the high level :mod:`~pyClanSphere.database.db` module which
+    you can import from the :mod:`pyClanSphere.api` module.
 
-    :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
+    :copyright: (c) 2009 - 2010 by the pyClanSphere Team,
+                see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 import re
@@ -120,13 +119,6 @@ def secure_database_uri(uri):
     if obj.password:
         obj.password = '***'
     return unicode(obj).replace(u':%2A%2A%2A@', u':***@', 1)
-
-
-def attribute_loaded(model, attribute):
-    """Returns true if the attribute of the model was already loaded."""
-    # XXX: this works but it relys on a specific implementation in
-    # SQLAlchemy.  Figure out if SA provides a way to query that information.
-    return attribute in model.__dict__
 
 
 class ConnectionDebugProxy(ConnectionProxy):
@@ -273,7 +265,6 @@ db.create_engine = create_engine
 db.session = session
 db.mapper = session_mapper(session)
 db.association_proxy = association_proxy
-db.attribute_loaded = attribute_loaded
 db.AttributeExtension = AttributeExtension
 db.AutoAddExtension = AutoAddExt
 db.attribute_mapped_collection = attribute_mapped_collection
