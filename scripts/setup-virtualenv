@@ -1153,7 +1153,10 @@ def install(home_dir, *args, **kw):
     if static_deps:
         env = dict(os.environ.items())
         env['STATIC_DEPS'] = 'true'
-    call([os.path.join(home_dir, 'bin', 'easy_install')] + list(args), env=env)
+    bindir = 'bin'
+    if sys.platform == 'win32':
+        bindir = 'Scripts'
+    call([os.path.join(home_dir, bindir, 'easy_install')] + list(args), env=env)
 
 def after_install(options, home_dir):
     site_packages = os.path.normpath(os.path.join(home_dir, 'lib', 'python%d.%d'

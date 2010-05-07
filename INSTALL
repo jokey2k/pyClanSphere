@@ -79,3 +79,28 @@ To get access to a python console with the pyClanSphere instance context do this
 Note that if your instance folder is not named "instance" or is not stored
 in this directory or if you are not below the instance folder you have to
 provide the path to it as argument to the scripts using the "-I" parameter.
+
+
+
+Getting started on Win
+----------------------
+
+For a quickstart with the development server do this::
+
+ 1) Install Python 2.x from http://www.python.org/
+ 2) Recommended: Add python to your environment path
+ 3) Get a zip
+    or
+    git clone git://github.com/jokey2k/pyClanSphere.git
+ 4) Start->Run "cmd"
+ 5) cd \path\to\pyClanSphere
+ 6) python scripts\setup-virtualenv env
+ 7) env\Scripts\activate.bat
+ 8) mkdir instance
+ 9) python scripts\server -I instance
+
+ Now a development server should be up and running and you can
+ open http://localhost:4000/ to get started with the websetup
+
+ To restart it after a system reboot, open up "cmd" again
+ and do steps 4), 5), 7) and 9) again
