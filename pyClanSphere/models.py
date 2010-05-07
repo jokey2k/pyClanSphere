@@ -13,7 +13,7 @@ from uuid import uuid4
 
 from werkzeug.exceptions import NotFound
 
-from pyClanSphere.database import users, groups, group_users, \
+from pyClanSphere.schema import users, groups, group_users, \
      privileges, user_privileges, group_privileges, \
      notification_subscriptions, imaccounts, db, passwordrequests
 from pyClanSphere.i18n import parse_datetime

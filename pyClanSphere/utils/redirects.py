@@ -11,7 +11,8 @@
 from urlparse import urlparse
 
 from pyClanSphere.application import get_application
-from pyClanSphere.database import redirects, db
+from pyClanSphere.database import db
+from pyClanSphere.schema import redirects
 from pyClanSphere.utils.http import make_external_url
 
 

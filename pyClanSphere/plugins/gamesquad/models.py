@@ -12,7 +12,7 @@
 from datetime import datetime, date
 
 from pyClanSphere.api import *
-from pyClanSphere.database import users
+from pyClanSphere.schema import users
 from pyClanSphere.models import User
 from pyClanSphere.utils.text import build_tag_uri
 from pyClanSphere.utils.pagination import Pagination
