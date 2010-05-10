@@ -216,7 +216,7 @@ for mod in sqlalchemy, orm:
 del key, mod, value
 
 #: forward some session methods to the module as well
-for name in 'delete', 'flush', 'execute', 'begin', 'mapper', \
+for name in 'delete', 'flush', 'execute', 'begin', \
             'commit', 'rollback', 'refresh', 'expire', \
             'query_property':
     setattr(db, name, getattr(session, name))
@@ -239,6 +239,7 @@ db.Model = Model
 db.Query = Query
 db.get_engine = get_engine
 db.create_engine = create_engine
+db.mapper = mapper
 db.session = session
 db.association_proxy = association_proxy
 db.AttributeExtension = AttributeExtension
