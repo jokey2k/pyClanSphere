@@ -111,10 +111,11 @@ def archive(req, year=None, month=None, day=None, page=1):
 
 # Admin views
 
+@require_admin_privilege()
 def news_list(request, page):
     """Show all news in a list."""
 
-    data = News.query.get_list('admin/news', page, request.per_page)
+    data = News.query.get_list('admin/news', page, request.per_page, paginator=AdminPagination)
 
     can_create = request.user.has_privilege(privileges.NEWS_CREATE)
 
@@ -122,7 +123,7 @@ def news_list(request, page):
                                  newsitems=data['newsitems'], pagination=data['pagination'],
                                  can_create=can_create)
 
-
+@require_admin_privilege()
 def edit_news(request, news_id=None):
     """Edit an existing entry or create a new one."""
 
