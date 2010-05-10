@@ -112,7 +112,6 @@ def create_engine(uri, relative_to=None, debug=False):
 
     return sqlalchemy.create_engine(info, **options)
 
-
 def secure_database_uri(uri):
     """Returns the database uri with confidental information stripped."""
     obj = make_url(uri)
@@ -137,28 +136,11 @@ class ConnectionDebugProxy(ConnectionProxy):
                 request.queries.append((statement, parameters, start,
                                         _timer(), find_calling_context()))
 
+
 class LookLively(object):
     """Ensures that MySQL connections checked out of the pool are alive.
 
-    Specific to the MySQLdb DB-API.  Note that this can not totally
-    guarantee live connections- the remote side can drop the connection
-    in the time between ping and the connection reaching user code.
-
-    This is a simplistic implementation.  If there's a lot of pool churn
-    (i.e. implicit connections checking in and out all the time), one
-    possible and easy optimization would be to add a timer check:
-
-    1) On check-in, record the current time (integer part) into the
-       connection record's .properties
-    2) On check-out, compare the current integer time to the (possibly
-       empty) record in .properties.  If it is still the same second as
-       when the connection was last checked in, skip the ping.  The
-       connection is probably fine.
-
-    Something much like this logic will go into the SQLAlchemy core
-    eventually.
-
-    -jek
+    Specific to the MySQLdb DB-API.
     """
 
     def checkout(self, dbapi_con, con_record, con_proxy):
@@ -197,14 +179,6 @@ class Query(orm.Query):
         return rv
 
 
-session = orm.scoped_session(lambda: orm.create_session(get_engine(),
-                             autoflush=True, autocommit=False),
-                             local_manager.get_ident)
-
-# Session.mapper is deprecated in SQL Alchemy 0.5.5 and above´
-# New mapper doesn't auto-add, so put together a MapperExtension
-# that allows emulating that behaviour (it's added automatically
-# unless you specify extenion=... in your mapper() call)
 class AutoAddExt(orm.MapperExtension):
     def init_instance(self, mapper, class_, oldinit, instance, args, kwargs):
         session = kwargs.pop('_sa_session', None)
@@ -214,19 +188,22 @@ class AutoAddExt(orm.MapperExtension):
         return orm.EXT_CONTINUE
 
 
-def session_mapper(scoped_session):
-    def mapper(cls, *arg, **kw):
-        if cls.__init__ is object.__init__:
-            def __init__(self, **kwargs):
-                for key, value in kwargs.items():
-                    setattr(self, key, value)
-            cls.__init__ = __init__
-        if not hasattr(cls,'query'):
-            cls.query = scoped_session.query_property()
-        if not 'extension' in kw:
-            kw['extension'] = AutoAddExt()
-        return orm.mapper(cls, *arg, **kw)
-    return mapper
+#: get a new session
+session = orm.scoped_session(lambda: orm.create_session(get_engine(),
+                             autoflush=False, autocommit=False),
+                             local_manager.get_ident)
+
+def mapper(cls, *arg, **options):
+    """A mapper that hooks in our standard extensions."""
+
+    extensions = to_list(options.pop('extension', None), [])
+    extensions.append(AutoAddExt())
+    options['extension'] = extensions
+
+    if not hasattr(cls, 'query'):
+        cls.query = session.query_property()
+
+    return orm.mapper(cls, *arg, **options)
 
 #: create a new module for all the database related functions and objects
 sys.modules['pyClanSphere.database.db'] = db = ModuleType('db')
@@ -250,28 +227,24 @@ for name in 'func', 'and_', 'or_', 'not_':
 #: metadata for the core tables and the core table definitions
 metadata = db.MetaData()
 
-# configure a declarative base.  This is unused in the code but makes it easier
-# for plugins to work with the database.
+#: configure a declarative base.  This is unused in the code but makes it easier
+#: for plugins to work with the database.
 class ModelBase(object):
     """Internal baseclass for `Model`."""
-Model = declarative_base(name='Model', metadata=metadata, cls=ModelBase, mapper=session_mapper(session))
+Model = declarative_base(name='Model', metadata=metadata, cls=ModelBase, mapper=mapper(session))
 
 #: and finally hook our own implementations of various objects in
 db.Model = Model
 db.Query = Query
-db.AutoAddExt = AutoAddExt
 db.get_engine = get_engine
 db.create_engine = create_engine
 db.session = session
-db.mapper = session_mapper(session)
 db.association_proxy = association_proxy
 db.AttributeExtension = AttributeExtension
-db.AutoAddExtension = AutoAddExt
 db.attribute_mapped_collection = attribute_mapped_collection
 
 #: called at the end of a request
 cleanup_session = session.remove
-
 
 def init_database(engine):
     """This is called from the websetup which explains why it takes an engine
