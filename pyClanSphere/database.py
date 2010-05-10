@@ -28,6 +28,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.interfaces import ConnectionProxy
 from sqlalchemy.orm.collections import attribute_mapped_collection
 from sqlalchemy.orm.interfaces import AttributeExtension
+from sqlalchemy.util import to_list
 
 from werkzeug import url_decode
 from werkzeug.exceptions import NotFound
@@ -231,7 +232,7 @@ metadata = db.MetaData()
 #: for plugins to work with the database.
 class ModelBase(object):
     """Internal baseclass for `Model`."""
-Model = declarative_base(name='Model', metadata=metadata, cls=ModelBase, mapper=mapper(session))
+Model = declarative_base(name='Model', metadata=metadata, cls=ModelBase, mapper=mapper)
 
 #: and finally hook our own implementations of various objects in
 db.Model = Model
