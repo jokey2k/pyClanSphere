@@ -85,7 +85,7 @@ def setup(app, plugin):
         app.add_url_rule(tmp + 'page/<int:page>', endpoint='news/archive')
 
     # Register our admin views
-    add_admin_urls('news', 'news_id', views.news_list, views.edit_news,
+    add_admin_urls(app, 'news', 'news_id', views.news_list, views.edit_news,
                    views.delete_news)
 
     # Add admin views to navigation bar
