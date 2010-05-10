@@ -13,6 +13,7 @@ from os.path import join, dirname, exists
 from os import makedirs
 
 from pyClanSphere.api import url_for, _, signals
+from pyClanSphere.utils.admin import add_admin_urls
 
 from pyClanSphere.plugins.war import views
 from pyClanSphere.plugins.war.database import init_database
@@ -56,37 +57,15 @@ def setup(app, plugin):
                      view=views.war_fightus)
 
     # Admin views
-    app.add_url_rule('/wars/', prefix='admin', defaults={'page': 1}, endpoint='admin/war_list',
-                     view=views.war_list)
-    app.add_url_rule('/wars/page/<int:page>', prefix='admin', endpoint='admin/war_list')
-    app.add_url_rule('/wars/new', prefix='admin', endpoint='admin/war_create',
-                     view=views.war_edit)
-    app.add_url_rule('/wars/<int:war_id>', prefix='admin', endpoint='admin/war_edit',
-                     view=views.war_edit)
-    app.add_url_rule('/wars/<int:war_id>/delete', prefix='admin', endpoint='admin/war_delete',
-                     view=views.war_delete)
+    add_admin_urls(app, 'wars', 'war_id', views.war_list,
+                   views.war_edit, views.war_delete)
     app.add_url_rule('/wars/<int:war_id>/result', prefix='admin', endpoint='admin/warresult_edit',
                      view=views.warresult_edit)
 
-    app.add_url_rule('/warmaps/', prefix='admin', defaults={'page': 1}, endpoint='admin/warmap_list',
-                     view=views.warmap_list)
-    app.add_url_rule('/warmaps/page/<int:page>', prefix='admin', endpoint='admin/warmap_list')
-    app.add_url_rule('/warmaps/new', prefix='admin', endpoint='admin/warmap_create',
-                     view=views.warmap_edit)
-    app.add_url_rule('/warmaps/<int:warmap_id>', prefix='admin', endpoint='admin/warmap_edit',
-                     view=views.warmap_edit)
-    app.add_url_rule('/warmaps/<int:warmap_id>/delete', prefix='admin', endpoint='admin/warmap_delete',
-                     view=views.warmap_delete)
-
-    app.add_url_rule('/warmodes/', prefix='admin', defaults={'page': 1}, endpoint='admin/warmode_list',
-                     view=views.warmode_list)
-    app.add_url_rule('/warmodes/page/<int:page>', prefix='admin', endpoint='admin/warmode_list')
-    app.add_url_rule('/warmodes/new', prefix='admin', endpoint='admin/warmode_create',
-                     view=views.warmode_edit)
-    app.add_url_rule('/warmodes/<int:warmode_id>', prefix='admin', endpoint='admin/warmode_edit',
-                     view=views.warmode_edit)
-    app.add_url_rule('/warmodes/<int:warmode_id>/delete', prefix='admin', endpoint='admin/warmode_delete',
-                     view=views.warmode_delete)
+    add_admin_urls(app, 'warmaps', 'warmap_id', views.warmap_list,
+                   views.warmap_edit, views.warmap_delete)
+    add_admin_urls(app, 'warmodes', 'warmode_id', views.warmode_list,
+                   views.warmode_edit, views.warmode_delete)
 
     # Add admin views to navigation bar
     signals.modify_admin_navigation_bar.connect(add_admin_links)

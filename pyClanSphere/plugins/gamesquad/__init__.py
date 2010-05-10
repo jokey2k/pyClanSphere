@@ -12,6 +12,8 @@
 from os.path import join, dirname
 
 from pyClanSphere.api import _, url_for, signals, signal
+from pyClanSphere.utils.account import add_account_urls
+from pyClanSphere.utils.admin import add_admin_urls
 
 from pyClanSphere.plugins.gamesquad.database import init_database
 from pyClanSphere.plugins.gamesquad.privileges import PLUGIN_PRIVILEGES, GAME_MANAGE, LEVEL_MANAGE
@@ -97,23 +99,17 @@ def setup(app, plugin):
 
     # Register our admin views
     # Games
-    app.add_url_rule('/games/', prefix='admin', defaults={'page': 1}, endpoint='admin/game_list',
-                     view=views.game_list)
-    app.add_url_rule('/games/new', prefix='admin', endpoint='admin/game_create',
-                     view=views.edit_game)
-    app.add_url_rule('/games/<int:game_id>', prefix='admin', endpoint='admin/game_edit',
-                     view=views.edit_game)
-    app.add_url_rule('/games/<int:game_id>/delete', prefix='admin', endpoint='admin/game_delete',
-                     view=views.delete_game)
+    add_admin_urls(app, 'games', 'game_id', views.game_list,
+                   views.edit_game, views.delete_game)
+
     # Squads
-    app.add_url_rule('/squads/', prefix='admin', defaults={'page': 1}, endpoint='admin/squad_list',
-                     view=views.squad_list)
-    app.add_url_rule('/squads/new', prefix='admin', endpoint='admin/squad_create',
-                     view=views.edit_squad)
-    app.add_url_rule('/squads/<int:squad_id>', prefix='admin', endpoint='admin/squad_edit',
-                     view=views.edit_squad)
-    app.add_url_rule('/squads/<int:squad_id>/delete', prefix='admin', endpoint='admin/squad_delete',
-                     view=views.delete_squad)
+    add_admin_urls(app, 'squads', 'squad_id', views.squad_list,
+                   views.edit_squad, views.delete_squad)
+
+    # Levels
+    add_admin_urls(app, 'levels', 'level_id', views.level_list,
+                   views.edit_level, views.delete_level)
+
     # Squadmembers
     app.add_url_rule('/squads/<int:squad_id>/listmembers', prefix='admin', defaults={'page': 1}, endpoint='admin/squad_listmembers',
                      view=views.list_squadmembers)
@@ -124,29 +120,14 @@ def setup(app, plugin):
                      view=views.edit_squadmember)
     app.add_url_rule('/squads/<int:squad_id>/deletemember/<int:user_id>', prefix='admin', endpoint='admin/squad_deletemember',
                      view=views.delete_squadmember)
-    # Levels
-    app.add_url_rule('/levels/', prefix='admin', defaults={'page': 1}, endpoint='admin/level_list',
-                     view=views.level_list)
-    app.add_url_rule('/levels/new', prefix='admin', endpoint='admin/level_create',
-                     view=views.edit_level)
-    app.add_url_rule('/levels/<int:level_id>', prefix='admin', endpoint='admin/level_edit',
-                     view=views.edit_level)
-    app.add_url_rule('/levels/<int:level_id>/delete', prefix='admin', endpoint='admin/level_delete',
-                     view=views.delete_level)
 
-    # admin views
+    # Admin views: Gameaccounts
     app.add_url_rule('/gameaccounts/<int:account_id>/delete', prefix='admin', endpoint='admin/gameaccount_delete',
                       view=views.adm_delete_gameaccount)
 
-    # Gameaccounts
-    app.add_url_rule('/gameaccounts/', prefix='account', defaults={'page': 1}, endpoint='account/gameaccount_list',
-                     view=views.gameaccount_list)
-    app.add_url_rule('/gameaccounts/new', prefix='account', endpoint='account/gameaccount_new',
-                     view=views.gameaccount_edit)
-    app.add_url_rule('/gameaccounts/<int:account_id>', prefix='account', endpoint='account/gameaccount_edit',
-                     view=views.gameaccount_edit)
-    app.add_url_rule('/gameaccounts/<int:account_id>/delete', prefix='account', endpoint='account/gameaccount_delete',
-                     view=views.acc_delete_gameaccount)
+    # Account views: Gameaccounts
+    add_account_urls(app, 'gameaccounts', 'account_id', views.gameaccount_list,
+                     views.gameaccount_edit, views.acc_delete_gameaccount)
 
     # Add admin views to navigation bar
     signals.modify_admin_navigation_bar.connect(add_admin_links)

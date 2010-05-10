@@ -17,12 +17,12 @@ from werkzeug.exceptions import NotFound, Forbidden
 
 from pyClanSphere import cache
 from pyClanSphere.database import db
-from pyClanSphere.application import url_for, render_response, emit_event, \
-     Response, get_application
+from pyClanSphere.application import url_for, render_response, \
+     get_application
 from pyClanSphere.i18n import _
 from pyClanSphere.utils.pagination import AdminPagination
 from pyClanSphere.privileges import assert_privilege
-from pyClanSphere.utils import dump_json, ClosingIterator, log
+from pyClanSphere.utils import log
 from pyClanSphere.utils.admin import require_admin_privilege, flash as admin_flash
 from pyClanSphere.utils.text import build_tag_uri
 from pyClanSphere.utils.http import redirect_to, redirect
