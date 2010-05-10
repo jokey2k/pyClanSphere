@@ -10,7 +10,7 @@
   {%- for game in games %}
     <tr class="{{ loop.cycle('odd', 'even') }}">
 	  {%- if game.can_edit() %}
-      <td><a href="{{ url_for('admin/game_edit', game_id=game.id) }}">{{
+      <td><a href="{{ url_for('admin/games/edit', game_id=game.id) }}">{{
           game.name }}</a></td>
       {%- else %}
       <td>{{ game.name }}</td>
@@ -24,7 +24,7 @@
     </td></tr>
   {%- endfor %}
   </table>
-  <form action="{{ url_for('admin/game_create') }}" method="get">
+  <form action="{{ url_for('admin/games/new') }}" method="get">
     <div class="actions">
       <input type="submit" value="{{ _('New Game') }}">
     </div>

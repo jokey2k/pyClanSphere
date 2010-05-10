@@ -29,11 +29,11 @@ def add_admin_links(sender, **kwds):
     if not priv_check(WAR_MANAGE):
         return
 
-    entries = [('wars', url_for('admin/war_list'), _(u'Wars')),
-               ('maps', url_for('admin/warmap_list'), _(u'Maps')),
-               ('modes', url_for('admin/warmode_list'), _(u'Modes'))]
+    entries = [('wars', url_for('admin/wars'), _(u'Wars')),
+               ('maps', url_for('admin/warmaps'), _(u'Maps')),
+               ('modes', url_for('admin/warmodes'), _(u'Modes'))]
 
-    kwds['navbar'].insert(1, ('war', url_for('admin/war_list'), _(u'War Management'), entries))
+    kwds['navbar'].insert(1, ('war', url_for('admin/wars'), _(u'War Management'), entries))
 
 def setup(app, plugin):
 

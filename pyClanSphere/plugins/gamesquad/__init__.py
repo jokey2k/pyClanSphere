@@ -59,20 +59,20 @@ def add_admin_links(sender, **kwds):
 
     priv_check = kwds['request'].user.has_privilege
 
-    entries = [('squads', url_for('admin/squad_list'), _(u'Squads'))]
+    entries = [('squads', url_for('admin/squads'), _(u'Squads'))]
 
     if priv_check(GAME_MANAGE):
-        entries.insert(0,('games', url_for('admin/game_list'), _(u'Games')))
+        entries.insert(0,('games', url_for('admin/games'), _(u'Games')))
 
     if priv_check(LEVEL_MANAGE):
-        entries.append(('levels', url_for('admin/level_list'), _(u'Levels')))
+        entries.append(('levels', url_for('admin/levels'), _(u'Levels')))
 
-    kwds['navbar'].insert(1, ('gamesquad', url_for('admin/squad_list'), _(u'Games and Squads'), entries))
+    kwds['navbar'].insert(1, ('gamesquad', url_for('admin/squads'), _(u'Games and Squads'), entries))
 
 def add_account_links(sender, **kwds):
     """Add our views to the account interface"""
 
-    kwds['navbar'].insert(2, ('gameaccounts', url_for('account/gameaccount_list'), _(u'Gameaccounts'),[]))
+    kwds['navbar'].insert(2, ('gameaccounts', url_for('account/gameaccounts'), _(u'Gameaccounts'),[]))
 
 def setup(app, plugin):
     """Init our needed stuff"""

@@ -13,7 +13,7 @@
   {%- for war in wars %}
     <tr class="{{ loop.cycle('odd', 'even') }}">
 	  {%- if war.can_edit() %}
-      <td><a href="{{ url_for('admin/war_edit', war_id=war.id) }}">{{
+      <td><a href="{{ url_for('admin/wars/edit', war_id=war.id) }}">{{
           war.clanname }}</a></td>
     {%- else %}
       <td>{{ war.clanname }}</td>
@@ -27,7 +27,7 @@
     <tr><td colspan="5">{{ _("No wars") }}</td></tr>
   {%- endfor %}
   </table>
-  <form action="{{ url_for('admin/war_create')}}" method="get">
+  <form action="{{ url_for('admin/wars/new')}}" method="get">
     <div class="actions">
       <input type="submit" value="{{ _('New War') }}">
     </div>

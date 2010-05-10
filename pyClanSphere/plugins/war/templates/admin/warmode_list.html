@@ -11,7 +11,7 @@
       {% for warmode in group.list %}
       <tr class="{{ loop.cycle('odd', 'even') }}">
     	  {%- if warmode.can_edit() %}
-          <td><a href="{{ url_for('admin/warmode_edit', warmode_id=warmode.id) }}">{{
+          <td><a href="{{ url_for('admin/warmodes/edit', warmode_id=warmode.id) }}">{{
               warmode.name }}</a></td>
           {%- else %}
           <td>{{ warmode.name }}</td>
@@ -23,7 +23,7 @@
       <tr><td colspan="2">{{ _("No modes") }}</td></tr>
     {% endfor %}
   </table>
-  <form action="{{ url_for('admin/warmode_create')}}" method="get">
+  <form action="{{ url_for('admin/warmodes/new') }}" method="get">
     <div class="actions">
       <input type="submit" value="{{ _('New warmode') }}">
     </div>

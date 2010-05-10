@@ -10,7 +10,7 @@
     </tr>
   {%- for member in squadmembers %}
     <tr class="{{ loop.cycle('odd', 'even') }}">
-      <td><a href="{{ url_for('admin/squad_editmember', squad_id=squad.id, user_id=member.user.id) }}">{{
+      <td><a href="{{ url_for('admin/squadmembers/edit', squad_id=squad.id, user_id=member.user.id) }}">{{
           member.user.display_name }}</a></td>
 	    <td>{{ member.level.name }}</td>
 	    <td>{{ member.othertasks }}</td>
@@ -21,7 +21,7 @@
 	  </tr>
   {%- endfor %}
   </table>
-  <form action="{{ url_for('admin/squad_newmember', squad_id=squad.id) }}" method="get">
+  <form action="{{ url_for('admin/squadmembers/new', squad_id=squad.id) }}" method="get">
     <div class="actions">
       <input type="submit" value="{{ _('New Member') }}">
     </div>

@@ -11,7 +11,7 @@
     <tr class="{{ loop.cycle('odd', 'even') }}">
     <td>{{ level.ordering }}</td>
 	  {%- if level.can_edit() %}
-      <td width="100%"><a href="{{ url_for('admin/level_edit', level_id=level.id) }}">{{
+      <td width="100%"><a href="{{ url_for('admin/levels/edit', level_id=level.id) }}">{{
           level.name}}</a></td>
       {%- else %}
       <td width="100%">{{ level.name }}</td>
@@ -19,7 +19,7 @@
 	</tr>
   {%- endfor %}
   </table>
-  <form action="{{ url_for('admin/level_create') }}" method="get">
+  <form action="{{ url_for('admin/levels/new') }}" method="get">
     <div class="actions">
       <input type="submit" value="{{ _('New Level') }}">
     </div>

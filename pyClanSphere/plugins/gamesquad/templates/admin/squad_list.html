@@ -11,7 +11,7 @@
   {%- for squad in squads %}
     <tr class="{{ loop.cycle('odd', 'even') }}">
 	  {%- if squad.can_edit() %}
-      <td><a href="{{ url_for('admin/squad_edit', squad_id=squad.id) }}">{{
+      <td><a href="{{ url_for('admin/squads/edit', squad_id=squad.id) }}">{{
           squad.name }}</a></td>
       {%- else %}
       <td>{{ squad.name }}</td>
@@ -34,7 +34,7 @@
   {%- endfor %}
   </table>
   {% if create_option %}
-  <form action="{{ url_for('admin/squad_create') }}" method="get">
+  <form action="{{ url_for('admin/squads/new') }}" method="get">
     <div class="actions">
       <input type="submit" value="{{ _('New Squad') }}">
     </div>
