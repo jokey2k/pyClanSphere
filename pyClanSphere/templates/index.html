@@ -1,6 +1,24 @@
 {% extends "layout.html" %}
-{% block title %}{{ _("Index") }}{% endblock %}
+{% block title %}{{ _('Home') }}{% endblock %}
 {% block contents %}
-  <h1>{% trans %}Welcome{% endtrans %}</h1>
-  <p>{% trans %}So far there are no entries here.{% endtrans %}</p>
+  {% set hascontent = False %}
+  {%- if newsitems %}
+    {% set hascontent = True %}
+    {% from "_news.html" import render_entry %}
+    {%- for item in newsitems %}
+      {{ render_entry(item, showall=loop.last) }}
+    {%- else %}
+    <div class="notification">
+      <p>{% trans %}So far there are no news entries here.{% endtrans %}</p>
+    </div>
+    {%- endfor %}
+  {% endif -%}
+  {%- for sender, value in signals.frontpage_content_rendered.send() %}
+    {% set hascontent = True %}
+    {{ value }}
+  {% endfor -%}
+
+  {%- if not hascontent %}
+    <p>{% trans %}Nothing here to see yet, please enable some plugins or give them something to be proud of.{% endtrans %}</p>
+  {% endif -%}
 {% endblock %}

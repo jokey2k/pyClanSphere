@@ -31,6 +31,14 @@ Sent after a news entry was rendered
 :keyword entry: the news entry which was just rendered
 """)
 
+def add_frontpage_contents(sender, **kwds):
+    """Add newsitems to frontpage"""
+
+    context = kwds['context']
+    if 'newsitems' not in context:
+        context['newsitems'] = News.query.latest().limit(5).all()
+    return context
+
 def add_admin_links(sender, **kwds):
     """Add our views to the admin interface"""
 
@@ -90,3 +98,5 @@ def setup(app, plugin):
     # Add admin views to navigation bar
     signals.modify_admin_navigation_bar.connect(add_admin_links)
 
+    # Add newsitems to frontpage
+    signals.frontpage_context_collect.connect(add_frontpage_contents)

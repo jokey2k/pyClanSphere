@@ -77,6 +77,18 @@ admin context etc.
 :keyword request: current processed request
 :keyword values: values passed as keyword to the render function
 """)
+signal('frontpage_context_collect', """\
+Allow plugins to add their objects to frontpage context. Always
+return the context again or it will be empty afterwards.
+
+:keyword context: the current frontpage context
+:rtype: (modified) context
+""")
+signal('frontpage_content_rendered', """\
+Allow plugins to append stuff to the frontpage
+
+:rtype: Markup to be added to the frontpage
+""")
 
 #: User logging in/out
 signal('user_logged_in', """\

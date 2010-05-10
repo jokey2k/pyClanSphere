@@ -22,7 +22,10 @@ from pyClanSphere.utils.xml import generate_rsd, dump_xml, AtomFeed
 @cache.response()
 def index(request):
     """Just show the pyClanSphere license and some other legal stuff."""
-    return render_response('index.html')
+    context = {}
+    for callback in signals.frontpage_context_collect.receivers_for(signals.ANY):
+        context = callback(signals.ANY, context=context)
+    return render_response('index.html', **context)
 
 
 #@cache.response()
