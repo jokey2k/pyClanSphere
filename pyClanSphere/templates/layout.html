@@ -13,9 +13,9 @@
     <p class="description">{{ cfg.clan_tagline }}</p>
   </div>
   <div class="contents">
-    {{ emit_event('before-contents-rendered') }}
+    {% set result = signals.before_contents_rendered.send() %}
     {% block contents %}{% endblock %}
-    {{ emit_event('after-contents-rendered') }}
+    {% set result = signals.after_contents_rendered.send() %}
   </div>
   <div class="footer">{% trans pyClanSphere='<a href="http://pyclansphere.digital-family.de/">pyClanSphere</a>'|safe
     %}Empowered by {{ pyClanSphere }}.{% endtrans %}</div>

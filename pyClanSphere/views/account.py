@@ -63,8 +63,7 @@ def render_account_response(template_name, _active_menu_item=None, **values):
     navigation_bar.append(('system', system_items[0][1], _(u'System'),
                            system_items))
 
-    #! allow plugins to extend the navigation bar
-    emit_event('modify-account-navigation-bar', request, navigation_bar)
+    signals.modify_account_navigation_bar.send(request=request, navbar=navigation_bar)
 
     # find out which is the correct menu and submenu bar
     active_menu = active_submenu = None
@@ -80,10 +79,8 @@ def render_account_response(template_name, _active_menu_item=None, **values):
     else:
         subnavigation_bar = []
 
-
-    #! used to flash messages, add links to stylesheets, modify the admin
-    #! context etc.
-    emit_event('before-account-response-rendered', request, values)
+    signals.before_account_response_rendered.send(request=request,
+                                                  values=values)
 
     # the admin variables is pushed into the context after the event was
     # sent so that plugins can flash their messages. If we would emit the

@@ -18,9 +18,10 @@ from urlparse import urlparse
 from werkzeug import escape
 from werkzeug.exceptions import NotFound, BadRequest, Forbidden
 
+from pyClanSphere import signals
 from pyClanSphere.privileges import assert_privilege, require_privilege, CLAN_ADMIN
 from pyClanSphere.i18n import _, ngettext
-from pyClanSphere.application import get_request, url_for, emit_event, \
+from pyClanSphere.application import get_request, url_for, \
      render_response, get_application
 from pyClanSphere.database import db, secure_database_uri
 from pyClanSphere.models import User, Group, IMAccount
@@ -101,8 +102,7 @@ def render_admin_response(template_name, _active_menu_item=None, **values):
     navigation_bar.append(('system', system_items[0][1], _(u'System'),
                            system_items))
 
-    #! allow plugins to extend the navigation bar
-    emit_event('modify-admin-navigation-bar', request, navigation_bar)
+    signals.modify_admin_navigation_bar.send(request=request, navbar=navigation_bar)
 
     # find out which is the correct menu and submenu bar
     active_menu = active_submenu = None
@@ -148,10 +148,7 @@ def render_admin_response(template_name, _active_menu_item=None, **values):
             # information
             request.app.cfg.touch()
 
-
-    #! used to flash messages, add links to stylesheets, modify the admin
-    #! context etc.
-    emit_event('before-admin-response-rendered', request, values)
+    signals.before_admin_response_rendered.send(request=request, values=values)
 
     # the admin variables is pushed into the context after the event was
     # sent so that plugins can flash their messages. If we would emit the

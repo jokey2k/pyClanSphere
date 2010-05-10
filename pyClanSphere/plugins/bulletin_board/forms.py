@@ -89,7 +89,7 @@ class DeleteCategoryForm(forms.Form):
             for forum in self.category.forums:
                 forum.category = self['relocate_to']
 
-        emit_event('before-board-category-deleted', self.category, self.data)
+        signals.before_board_category_deleted.send(category=category, formdata=self.data)
 
         db.delete(self.category)
         db.commit()
@@ -184,7 +184,7 @@ class DeleteForumForm(forms.Form):
             for topic in self.forum.topics:
                 topic.forum = new_forum
 
-        emit_event('before-board-forum-deleted', self.forum, self.data)
+        signals.before_board_forum_deleted.send(forum=self.forum, formdata=self.data)
 
         db.delete(self.forum)
         db.commit()

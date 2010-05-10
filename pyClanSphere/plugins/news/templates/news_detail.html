@@ -2,7 +2,7 @@
 {% block title %}{{ "%s: %s" % (_("News"), newsitem.title) }}{% endblock %}
 {% block contents %}
 <div class="post">
-  {{ emit_event('before-entry-rendered', entry) }}
+  {% set result = signals.before_news_entry_rendered.send(entry=entry) %}
 	<h2 class="title">{{ newsitem.title }}</h2>
 	<div class="entry"> <img src="{{ shared_url('shockg::images/homepage11.jpg') }}" alt="" width="136" height="91" class="left" />
 		{{ newsitem.text|prettify }}
@@ -23,5 +23,6 @@
     {{ author }}
   {%- endtrans %}
   </p>
+  {% set result = signals.after_news_entry_rendered.send(entry=entry) %}
 </div>
 {% endblock %}

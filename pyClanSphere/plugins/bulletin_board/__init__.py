@@ -26,23 +26,43 @@ from pyClanSphere.plugins.bulletin_board.services import do_get_post
 SHARED_FILES = join(dirname(__file__), 'shared')
 TEMPLATE_FILES = join(dirname(__file__), 'templates')
 
-def inject_js(metadata):
+signal('before_board_category_deleted', """\
+Plugins can use this to react to board category deletes.  They can't stop
+the deleting but they can delete information in their own tables so that
+the database is consistent afterwards.
+
+:keyword category: the category to be deleted
+:keyword formdata: data of the submitted form
+""")
+signal('before_board_forum_squad_deleted', """\
+Plugins can use this to react to board forum deletes.  They can't stop
+the deleting but they can delete information in their own tables so that
+the database is consistent afterwards.
+
+:keyword forum: the forum to be deleted
+:keyword formdata: data of the submitted form
+""")
+
+def inject_js(sender, **kwds):
     """We add some jquery routines, so load them in the header"""
 
-    metadata.append(htmlhelpers.script(shared_url('bulletin_board::js/bulletin_board.js')))
-    return metadata
+    kwds['result'].append(
+        htmlhelpers.script(shared_url('bulletin_board::js/bulletin_board.js'))
+    )
 
-def add_admin_links(request, navigation_bar):
+def add_admin_links(sender, **kwds):
     """Add our views to the admin interface"""
 
-    priv_check = request.user.has_privilege
+    priv_check = kwds['request'].user.has_privilege
+
+    if not priv_check(BOARD_MANAGE):
+        return
 
     entries = [('categories', url_for('admin/board/categories'), _(u'Categories')),
                ('forums', url_for('admin/board/forums'), _(u'Forums'))
     ]
 
-    if priv_check(BOARD_MANAGE):
-        navigation_bar.insert(1, ('board', url_for('admin/board/categories'), _(u'Board'), entries))
+    kwds['navbar'].insert(1, ('board', url_for('admin/board/categories'), _(u'Board'), entries))
 
 def setup(app, plugin):
     # Add our privileges
@@ -76,10 +96,10 @@ def setup(app, plugin):
                    views.forum_list, views.forum_edit, views.forum_delete)
 
     # Add admin views to navigation bar
-    app.connect_event('modify-admin-navigation-bar', add_admin_links)
+    signals.modify_admin_navigation_bar.connect(add_admin_links)
 
     # Inject our js for post quoting
-    app.connect_event('before-metadata-assembled', inject_js)
+    signals.before_metadata_assembled.connect(inject_js)
 
     # Add JSON services
     app.add_servicepoint('bulletin_board/get_post', do_get_post)

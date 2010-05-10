@@ -43,3 +43,31 @@ def require_account_privilege(expr=None):
     else:
         expr = ENTER_ACCOUNT_PANEL
     return require_privilege(expr)
+
+
+def add_account_urls(app, path, idname, listview, editview=None, deleteview=None):
+    """Generic admin backend routing function
+
+    As it has become pretty common to use
+    /account/foo/         and
+    /account/foo/page/2   for listings
+    /account/foo/1        for editing
+    /account/foo/new      for creating with None to edit function and
+    /account/foo/1/delete for removals
+
+    just generate the matching urls and endpoints
+
+    editview and/or deleteview may be omitted if they're not needed
+    """
+
+    app.add_url_rule('/%s/' % path, prefix='account', defaults={'page': 1}, endpoint='account/%s' % path,
+                     view=listview)
+    app.add_url_rule('/%s/page/<int:page>' % path, prefix='account', endpoint='account/%s' % path)
+    if editview:
+        app.add_url_rule('/%s/new' % path, prefix='account', endpoint='account/%s/new' % path,
+                         view=editview)
+        app.add_url_rule('/%s/<int:%s>' % (path, idname), prefix='account', endpoint='account/%s/edit' % path,
+                         view=editview)
+    if deleteview:
+        app.add_url_rule('/%s/<int:%s>/delete' % (path, idname), prefix='account', endpoint='account/%s/delete' % path,
+                         view=deleteview)

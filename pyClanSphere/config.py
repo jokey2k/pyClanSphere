@@ -14,7 +14,7 @@ import os
 from os import path
 from threading import Lock
 
-from pyClanSphere import environment
+from pyClanSphere import environment, signals
 from pyClanSphere.i18n import lazy_gettext, _, list_timezones, list_languages
 from pyClanSphere.utils import log
 from pyClanSphere.utils.forms import TextField, IntegerField, BooleanField, \
@@ -402,7 +402,6 @@ class Configuration(object):
         configuration.  This list is safe to share because dangerous keys
         are either hidden or cloaked.
         """
-        from pyClanSphere.application import emit_event
         from pyClanSphere.database import secure_database_uri
         result = []
         for key, field in self.config_vars.iteritems():
@@ -413,13 +412,8 @@ class Configuration(object):
                 elif key == 'database_uri':
                     value = repr(secure_database_uri(value))
                 else:
-                    #! this event is emitted if the application wants to
-                    #! display a configuration value in a publicly.  The
-                    #! return value of the listener is used as new value.
-                    #! A listener should return None if the return value
-                    #! is not used.
-                    for rv in emit_event('cloak-insecure-configuration-var',
-                                         key, value):
+                    for sender, rv in signals.cloak_insecure_configuration_var.send(
+                            key=key, value=value):
                         if rv is not None:
                             value = rv
                             break

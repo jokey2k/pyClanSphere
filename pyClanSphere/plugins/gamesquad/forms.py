@@ -96,7 +96,7 @@ class DeleteGameForm(_GameBoundForm):
                 new_game.squads.append(squad)
         db.commit()
 
-        emit_event('before-game-deleted', self.game, self.data)
+        signals.before_game_deleted.send(game=self.game, formdata=self.data)
         db.delete(self.game)
 
 
@@ -188,7 +188,7 @@ class DeleteSquadForm(_SquadBoundForm):
                     squadmember.squad_id = new_squad.squad_id
             db.commit()
 
-        emit_event('before-squad-deleted', self.squad, self.data)
+        signals.before_squad_deleted.send(squad=self.squad, formdata=self.data)
         db.delete(self.squad)
 
 
@@ -353,7 +353,7 @@ class DeleteLevelForm(_LevelBoundForm):
             squadmember.level = new_level
         db.commit()
 
-        emit_event('before-level-deleted', self.level, self.data)
+        signals.before_level_deleted.send(level=self.level, formdata=self.data)
         db.delete(self.level)
 
 class _GameAccountBoundForm(forms.Form):
@@ -419,4 +419,5 @@ class DeleteGameAccountForm(_GameAccountBoundForm):
 
     def delete_account(self):
         """Deletes the game account."""
+        signals.before_gameaccount_deleted.send(gameaccount=self.gameaccount)
         db.delete(self.gameaccount)

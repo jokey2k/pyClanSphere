@@ -11,7 +11,7 @@
 
 from os.path import join, dirname
 
-from pyClanSphere.api import _, url_for
+from pyClanSphere.api import _, url_for, signal, signals
 
 from pyClanSphere.plugins.news.database import init_database
 from pyClanSphere.plugins.news.models import News
@@ -20,17 +20,28 @@ from pyClanSphere.plugins.news import views
 
 TEMPLATE_FILES = join(dirname(__file__), 'templates')
 
-def add_admin_links(request, navigation_bar):
+signal('before_news_entry_rendered', """\
+Sent before a news entry is rendered
+
+:keyword entry: the news entry to be rendered
+""")
+signal('after_news_entry_rendered', """\
+Sent after a news entry was rendered
+
+:keyword entry: the news entry which was just rendered
+""")
+
+def add_admin_links(sender, **kwds):
     """Add our views to the admin interface"""
 
-    priv_check = request.user.has_privilege
+    priv_check = kwds['request'].user.has_privilege
 
     entries = [('list', url_for('admin/news_list'), _(u'Overview'))]
 
     if priv_check(NEWS_CREATE) or priv_check(NEWS_EDIT):
         entries.append(('edit', url_for('admin/news_create'), _(u'Write')))
 
-    navigation_bar.insert(1,(('news', url_for('admin/news_list'), _(u'News'), entries)))
+    kwds['navbar'].insert(1,(('news', url_for('admin/news_list'), _(u'News'), entries)))
 
 
 def setup(app, plugin):
@@ -77,5 +88,5 @@ def setup(app, plugin):
                      view=views.edit_news)
 
     # Add admin views to navigation bar
-    app.connect_event('modify-admin-navigation-bar', add_admin_links)
+    signals.modify_admin_navigation_bar.connect(add_admin_links)
 

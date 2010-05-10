@@ -33,7 +33,7 @@ from werkzeug.exceptions import HTTPException, Forbidden, \
      NotFound
 from werkzeug.contrib.securecookie import SecureCookie
 
-from pyClanSphere import _core
+from pyClanSphere import _core, signals
 from pyClanSphere.environment import SHARED_DATA, BUILTIN_TEMPLATE_PATH, \
      BUILTIN_PLUGIN_FOLDER
 from pyClanSphere.database import db, cleanup_session
@@ -135,25 +135,6 @@ def shared_url(spec):
     endpoint, filename = spec.split('::', 1)
     return url_for(endpoint + '/shared', filename=filename)
 
-def emit_event(event, *args, **kwargs):
-    """Emit a event and return a list of event results.  Each called
-    function contributes one item to the returned list.
-
-    This is equivalent to the following call to :func:`iter_listeners`::
-
-        result = []
-        for listener in iter_listeners(event):
-            result.append(listener(*args, **kwargs))
-    """
-    return [x(*args, **kwargs) for x in
-            get_application()._event_manager.iter(event)]
-
-
-def iter_listeners(event):
-    """Return an iterator for all the listeners for the event provided."""
-    return get_application()._event_manager.iter(event)
-
-
 def add_link(rel, href, type, title=None, charset=None, media=None):
     """Add a new link to the metadata of the current page being processed."""
     local.page_metadata.append(('link', {
@@ -214,9 +195,7 @@ def render_template(template_name, _stream=False, **context):
     else:
         tmpl = get_application().template_env.get_template(template_name)
 
-    #! called right before a template is rendered, the return value is
-    #! ignored but the context can be modified in place.
-    emit_event('before-render-template', template_name, _stream, context)
+    signals.before_render_template.send(template_name=template_name, stream=_stream, context=context)
 
     if _stream:
         return tmpl.stream(context)
@@ -523,8 +502,7 @@ class Request(RequestBase):
         if user is None:
             raise RuntimeError('User does not exist')
         self.user = user
-        #! called after a user was logged in successfully
-        emit_event('after-user-login', user)
+        signals.user_logged_in.send(user=user)
         self.session['uid'] = user.id
         self.session['lt'] = time()
         if permanent:
@@ -532,12 +510,12 @@ class Request(RequestBase):
 
     def logout(self):
         """Log the current user out."""
+        signals.before_user_logout.send(user=user)
         from pyClanSphere.models import User
         user = self.user
         self.user = User.query.get_nobody()
         self.session.clear()
-        #! called after a user was logged out and the session cleared.
-        emit_event('after-user-logout', user)
+        signals.after_user_logout.send(user=user)
 
 
 class Response(ResponseBase):
@@ -545,73 +523,6 @@ class Response(ResponseBase):
     and the default mimetype ``'text/html'``.
     """
     default_mimetype = 'text/html'
-
-
-class EventManager(object):
-    """Helper class that handles event listeners and event emitting.
-
-    This is *not* a public interface. Always use the `emit_event` or
-    `iter_listeners` functions to access it or the `connect_event` or
-    `disconnect_event` methods on the application.
-    """
-
-    def __init__(self, app):
-        self.app = app
-        self._listeners = {}
-        self._last_listener = 0
-
-    def connect(self, event, callback, position='after'):
-        """Connect a callback to an event."""
-        assert position in ('before', 'after'), 'invalid position'
-        listener_id = self._last_listener
-        event = intern(event)
-        if event not in self._listeners:
-            self._listeners[event] = deque([callback])
-        elif position == 'after':
-            self._listeners[event].append(callback)
-        elif position == 'before':
-            self._listeners[event].appendleft(callback)
-        self._last_listener += 1
-        return listener_id
-
-    def remove(self, listener_id):
-        """Remove a callback again."""
-        for event in self._listeners:
-            try:
-                event.remove(listener_id)
-            except ValueError:
-                pass
-
-    def iter(self, event):
-        """Return an iterator for all listeners of a given name."""
-        if event not in self._listeners:
-            return iter(())
-        return iter(self._listeners[event])
-
-    def template_emit(self, event, *args, **kwargs):
-        """Emits events for the template context."""
-        results = []
-        for f in self.iter(event):
-            rv = f(*args, **kwargs)
-            if rv is not None:
-                results.append(rv)
-        return TemplateEventResult(results)
-
-
-class TemplateEventResult(list):
-    """A list subclass for results returned by the event listener that
-    concatenates the results if converted to string, otherwise it works
-    exactly like any other list.
-    """
-
-    def __init__(self, items):
-        list.__init__(self, items)
-
-    def __unicode__(self):
-        return u''.join(map(unicode, self))
-
-    def __str__(self):
-        return unicode(self).encode('utf-8')
 
 
 class pyClanSphere(object):
@@ -644,7 +555,6 @@ class pyClanSphere(object):
         # create the event manager, this is the first thing we have to
         # do because it could happen that events are sent during setup
         self.initialized = False
-        self._event_manager = EventManager(self)
 
         # and instanciate the configuration. this won't fail,
         # even if the database is not connected.
@@ -760,8 +670,8 @@ class pyClanSphere(object):
             theme=self.theme,
             h=htmlhelpers,
             url_for=url_for,
+            signals=signals,
             shared_url=shared_url,
-            emit_event=self._event_manager.template_emit,
             request=local('request'),
             render_widgets=lambda x=[]: Markup(render_template('_widgets.html', widgetoptions=x)),
             get_page_metadata=self.get_page_metadata,
@@ -818,8 +728,8 @@ class pyClanSphere(object):
 
         # init bbcode
         bbcode_parser = postmarkup_create(use_pygments=False)
-        # emit bbcode_parser so one can add more tags to it via plugins
-        emit_event('after-bbcode-initialized', bbcode_parser)
+
+        signals.after_bbcode_initialized.send(bbcode_parser=bbcode_parser)
 
         @cached_result('prettified_')
         def prettify(text):
@@ -847,7 +757,7 @@ class pyClanSphere(object):
         )
 
         #! called after the application and all plugins are initialized
-        emit_event('application-setup-done')
+        signals.application_setup_done.send()
 
     @property
     def wants_reload(self):
@@ -1067,23 +977,6 @@ class pyClanSphere(object):
         self.privileges[privilege.name] = privilege
 
     @setuponly
-    def connect_event(self, event, callback, position='after'):
-        """Connect a callback to an event.  Per default the callback is
-        appended to the end of the handlers but handlers can ask for a higher
-        privilege by setting `position` to ``'before'``.
-
-        Example usage::
-
-            def on_before_metadata_assembled(metadata):
-                metadata.append('<!-- IM IN UR METADATA -->')
-
-            def setup(app):
-                app.connect_event('before-metadata-assembled',
-                                  on_before_metadata_assembled)
-        """
-        self._event_manager.connect(event, callback, position)
-
-    @setuponly
     def add_notification_system(self, system):
         """Add the notification system to the list of notification systems
         the NotificationManager holds.
@@ -1136,10 +1029,7 @@ class pyClanSphere(object):
         for type, attr in local.page_metadata:
             result.append(generators[type](**attr))
 
-        #! this is called before the page metadata is assembled with
-        #! the list of already collected metadata.  You can extend the
-        #! list in place to add some more html snippets to the page header.
-        emit_event('before-metadata-assembled', result)
+        signals.before_metadata_assembled.send(result=result)
         return Markup(u'\n'.join(result))
 
     def handle_not_found(self, request, exception):
@@ -1198,7 +1088,7 @@ class pyClanSphere(object):
         #! the after-request-setup event can return a response
         #! or modify the request object in place. If we have a
         #! response we just send it, no other modifications are done.
-        for callback in iter_listeners('after-request-setup'):
+        for callback in signals.after_request_setup.receivers_for(signals.ANY):
             result = callback(request)
             if result is not None:
                 return result
@@ -1309,7 +1199,7 @@ class pyClanSphere(object):
             response = Response.force_type(response, environ)
 
             #! allow plugins to change the response object
-            for callback in iter_listeners('before-response-processed'):
+            for callback in signals.before_response_processed.receivers_for(signals.ANY):
                 result = callback(response)
                 if result is not None:
                     response = result

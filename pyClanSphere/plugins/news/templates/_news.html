@@ -1,6 +1,6 @@
 {% macro render_entry(entry, showall=False, image=None) -%}
 <div class="post">
-  {{ emit_event('before-entry-rendered', entry) }}
+  {% set result = signals.before_news_entry_rendered.send(entry=entry) %}
 	<h2 class="title">{{ entry.title}}</h2>
 	<div class="entry">{% if image or entry.image %}<img src="{{ image if image else entry.image }}" alt="Newsimage" class="left" />{% endif %}
 		{{ entry.text|prettify }}
@@ -14,5 +14,5 @@
     {{ author }}
   {%- endtrans %}<a href="{{ url_for('news/detail', news_id=entry.id) }}" class="permalink">{{ _('More') }}&hellip;</a></p>
 </div>
-  {{ emit_event('after-entry-rendered', entry) }}
+  {% set result = signals.after_news_entry_rendered.send(entry=entry) %}
 {% endmacro %}

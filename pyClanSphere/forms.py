@@ -11,8 +11,9 @@
 from copy import copy
 from operator import itemgetter
 
+from pyClanSphere import signals
 from pyClanSphere.i18n import _, lazy_gettext, list_languages
-from pyClanSphere.application import get_application, emit_event
+from pyClanSphere.application import get_application
 from pyClanSphere.config import DEFAULT_VARS
 from pyClanSphere.database import db
 from pyClanSphere.models import User, Group, NotificationSubscription, IMAccount, PasswordRequest
@@ -222,11 +223,7 @@ class DeleteGroupForm(_GroupBoundForm):
                     user.groups.append(new_group)
         db.commit()
 
-        #! plugins can use this to react to group deletes.  They can't stop
-        #! the deleting of the group but they can delete information in
-        #! their own tables so that the database is consistent afterwards.
-        #! Additional to the group object the form data is submitted.
-        emit_event('before-group-deleted', self.group, self.data)
+        signals.before_group_deleted.send(group=self.group, formdata=self.data)
         db.delete(self.group)
 
 
@@ -387,11 +384,7 @@ class DeleteUserForm(_UserBoundForm):
 
     def delete_user(self):
         """Deletes the user."""
-        #! plugins can use this to react to user deletes.  They can't stop
-        #! the deleting of the user but they can delete information in
-        #! their own tables so that the database is consistent afterwards.
-        #! Additional to the user object the form data is submitted.
-        emit_event('before-user-deleted', self.user, self.data)
+        signals.before_user_deleted.send(user=self.user, formdata=self.data)
         db.delete(self.user)
 
 
@@ -410,11 +403,7 @@ class DeleteAccountForm(_UserBoundForm):
         for comment in self.user.comments.all():
             comment.unbind_user()
 
-        #! plugins can use this to react to user deletes.  They can't stop
-        #! the deleting of the user but they can delete information in
-        #! their own tables so that the database is consistent afterwards.
-        #! Additional to the user object the form data is submitted.
-        emit_event('before-user-deleted', self.user, self.data)
+        signals.before_user_deleted.send(user=self.user, formdata=self.data)
         db.delete(self.user)
 
 

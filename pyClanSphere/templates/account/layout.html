@@ -46,9 +46,9 @@
         <div class="message message-{{ message.type }}">{{ message.msg }}</div>
       {%- endfor %}
       </div>
-      {{ emit_event('before-account-contents-rendered', post) }}
+      {% set result = signals.before_account_contents_rendered.send() %}
       {% block contents %}{% endblock %}
-      {{ emit_event('after-account-contents-rendered', post) }}
+      {% set result = signals.after_account_contents_rendered.send() %}
     </div>
   </div>
   <div class="footer">

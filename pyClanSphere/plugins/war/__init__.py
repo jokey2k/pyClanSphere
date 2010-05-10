@@ -12,7 +12,7 @@
 from os.path import join, dirname, exists
 from os import makedirs
 
-from pyClanSphere.api import url_for, _
+from pyClanSphere.api import url_for, _, signals
 
 from pyClanSphere.plugins.war import views
 from pyClanSphere.plugins.war.database import init_database
@@ -20,10 +20,10 @@ from pyClanSphere.plugins.war.privileges import PLUGIN_PRIVILEGES, WAR_MANAGE
 
 TEMPLATE_FILES = join(dirname(__file__), 'templates')
 
-def add_admin_links(request, navigation_bar):
+def add_admin_links(sender, **kwds):
     """Add our views to the admin interface"""
 
-    priv_check = request.user.has_privilege
+    priv_check = kwds['request'].user.has_privilege
 
     if not priv_check(WAR_MANAGE):
         return
@@ -32,7 +32,7 @@ def add_admin_links(request, navigation_bar):
                ('maps', url_for('admin/warmap_list'), _(u'Maps')),
                ('modes', url_for('admin/warmode_list'), _(u'Modes'))]
 
-    navigation_bar.insert(1, ('war', url_for('admin/war_list'), _(u'War Management'), entries))
+    kwds['navbar'].insert(1, ('war', url_for('admin/war_list'), _(u'War Management'), entries))
 
 def setup(app, plugin):
 
@@ -89,7 +89,7 @@ def setup(app, plugin):
                      view=views.warmode_delete)
 
     # Add admin views to navigation bar
-    app.connect_event('modify-admin-navigation-bar', add_admin_links)
+    signals.modify_admin_navigation_bar.connect(add_admin_links)
 
     # create warmaps folder if not already there
     map_path = join(app.instance_folder, 'warmaps')

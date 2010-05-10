@@ -42,7 +42,7 @@ def json_service(req, identifier):
 
     #! if this event returns a handler it is called instead of the default
     #! handler.  Useful to intercept certain requests.
-    for callback in iter_listeners('before-json-service-called'):
+    for callback in signals.before_json_service_called.receivers_for(signals.ANY):
         rv = callback(identifier, handler)
         if rv is not None:
             handler = rv
@@ -52,7 +52,7 @@ def json_service(req, identifier):
     #! of the req method and the result object.  Note that events *have*
     #! to return an object, even if it's just changed in place, otherwise the
     #! return value will be `null` (None).
-    for callback in iter_listeners('after-json-service-called'):
+    for callback in signals.after_json_service_called.receivers_for(signals.ANY):
         result = callback(identifier, result)
     return Response(dump_json(result), mimetype='text/javascript')
 
@@ -65,7 +65,7 @@ def xml_service(req, identifier):
 
     #! if this event returns a handler it is called instead of the default
     #! handler.  Useful to intercept certain requests.
-    for callback in iter_listeners('before-xml-service-called'):
+    for callback in signals.before_xml_service_called.receivers_for(signals.ANY):
         rv = callback(identifier, handler)
         if rv is not None:
             handler = rv
@@ -75,10 +75,8 @@ def xml_service(req, identifier):
     #! of the req method and the result object.  Note that events *have*
     #! to return an object, even if it's just changed in place, otherwise the
     #! return value will be None.
-    for callback in iter_listeners('after-xml-service-called'):
-        rv = callback(identifier, result)
-        if rv is not None:
-            result = rv
+    for callback in signals.after_xml_service_called.receivers_for(signals.ANY):
+        result = callback(identifier, result)
     return Response(dump_xml(result), mimetype='text/xml')
 
 

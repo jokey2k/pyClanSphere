@@ -11,7 +11,7 @@
 
 from os.path import join, dirname
 
-from pyClanSphere.api import _, url_for
+from pyClanSphere.api import _, url_for, signals, signal
 
 from pyClanSphere.plugins.gamesquad.database import init_database
 from pyClanSphere.plugins.gamesquad.privileges import PLUGIN_PRIVILEGES, GAME_MANAGE, LEVEL_MANAGE
@@ -19,10 +19,43 @@ from pyClanSphere.plugins.gamesquad import views
 
 TEMPLATE_FILES = join(dirname(__file__), 'templates')
 
-def add_admin_links(request, navigation_bar):
+# Register our used signals
+signal('before_game_deleted', """\
+Plugins can use this to react to game deletes.  They can't stop
+the deleting of the game but they can delete information in
+their own tables so that the database is consistent afterwards.
+
+:keyword game: the game to be deleted
+:keyword formdata: data of the submitted form
+""")
+signal('before_squad_deleted', """\
+Plugins can use this to react to squad deletes.  They can't stop
+the deleting of the squad but they can delete information in
+their own tables so that the database is consistent afterwards.
+
+:keyword squad: the squad to be deleted
+:keyword formdata: data of the submitted form
+""")
+signal('before_level_deleted', """\
+Plugins can use this to react to level deletes.  They can't stop
+the deleting of the level but they can delete information in
+their own tables so that the database is consistent afterwards.
+
+:keyword level: the level to be deleted
+:keyword formdata: data of the submitted form
+""")
+signal('before_gameaccount_deleted', """\
+Plugins can use this to react to gameaccount deletes.  They can't stop
+the deleting of the level but they can delete information in
+their own tables or push out new server configurations.
+
+:keyword gameaccount: the gameaccount to be deleted
+""")
+
+def add_admin_links(sender, **kwds):
     """Add our views to the admin interface"""
 
-    priv_check = request.user.has_privilege
+    priv_check = kwds['request'].user.has_privilege
 
     entries = [('squads', url_for('admin/squad_list'), _(u'Squads'))]
 
@@ -32,12 +65,12 @@ def add_admin_links(request, navigation_bar):
     if priv_check(LEVEL_MANAGE):
         entries.append(('levels', url_for('admin/level_list'), _(u'Levels')))
 
-    navigation_bar.insert(1, ('gamesquad', url_for('admin/squad_list'), _(u'Games and Squads'), entries))
+    kwds['navbar'].insert(1, ('gamesquad', url_for('admin/squad_list'), _(u'Games and Squads'), entries))
 
-def add_account_links(request, navigation_bar):
+def add_account_links(sender, **kwds):
     """Add our views to the account interface"""
 
-    navigation_bar.insert(2, ('gameaccounts', url_for('account/gameaccount_list'), _(u'Gameaccounts'),[]))
+    kwds['navbar'].insert(2, ('gameaccounts', url_for('account/gameaccount_list'), _(u'Gameaccounts'),[]))
 
 def setup(app, plugin):
     """Init our needed stuff"""
@@ -116,7 +149,7 @@ def setup(app, plugin):
                      view=views.acc_delete_gameaccount)
 
     # Add admin views to navigation bar
-    app.connect_event('modify-admin-navigation-bar', add_admin_links)
+    signals.modify_admin_navigation_bar.connect(add_admin_links)
 
     # Add account views to navigation bar
-    app.connect_event('modify-account-navigation-bar', add_account_links)
+    signals.modify_account_navigation_bar.connect(add_account_links)

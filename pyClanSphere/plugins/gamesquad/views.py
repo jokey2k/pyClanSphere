@@ -18,8 +18,8 @@ from werkzeug.exceptions import NotFound, Forbidden
 
 from pyClanSphere import cache
 from pyClanSphere.database import db
-from pyClanSphere.application import url_for, render_response, emit_event, \
-     Response, get_application
+from pyClanSphere.application import url_for, render_response, \
+     get_application
 from pyClanSphere.i18n import _
 from pyClanSphere.privileges import CLAN_ADMIN
 from pyClanSphere.utils.admin import require_admin_privilege, flash as admin_flash
