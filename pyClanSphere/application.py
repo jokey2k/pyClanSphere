@@ -503,12 +503,13 @@ class Request(RequestBase):
 
     def logout(self):
         """Log the current user out."""
-        signals.before_user_logout.send(user=user)
+        current_user = self.user
+        signals.before_user_logout.send(user=current_user)
         from pyClanSphere.models import User
         user = self.user
         self.user = User.query.get_nobody()
         self.session.clear()
-        signals.after_user_logout.send(user=user)
+        signals.after_user_logout.send(user=current_user)
 
 
 class Response(ResponseBase):

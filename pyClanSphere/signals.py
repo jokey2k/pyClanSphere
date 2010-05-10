@@ -84,12 +84,12 @@ Sent after successful user login.
 
 :keyword user: the user in question
 """)
-signal('before_user_logged_out', """\
+signal('before_user_logout', """\
 Sent before logout is processed.
 
 :keyword user: the user in question
 """)
-signal('after_user_logged_out', """\
+signal('after_user_logout', """\
 Sent after user logged out.
 
 :keyword: the user in question
