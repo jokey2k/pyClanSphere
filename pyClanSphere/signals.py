@@ -25,7 +25,7 @@ def signal(name, doc=None):
 
 __all__ = ['ANY']
 
-#: Rendering
+#: Frontend Rendering
 signal('before_render_template', """\
 Sent right before a template is rendered, the return value is
 ignored but the context can be modified in place.
@@ -51,6 +51,25 @@ Sent right before the contents block is rendered.
 signal('after_contents_rendered', """\
 Sent right after the contents block is rendered.
 """)
+signal('frontpage_context_collect', """\
+Allow plugins to add their objects to frontpage context. Always
+return the context again or it will be empty afterwards.
+
+:keyword context: the current frontpage context
+:rtype: (modified) context
+""")
+signal('frontpage_content_rendered', """\
+Allow plugins to append stuff to the frontpage
+
+:rtype: Markup to be added to the frontpage
+""")
+signal('public_profile_rendered', """\
+Extend public profile display with plugins
+
+:rtype: Markup to be added to the profile page
+""")
+
+#: Backend rendering
 signal('before_account_contents_rendered', """\
 Sent right before the contents block of account view is rendered.
 """)
@@ -76,18 +95,6 @@ admin context etc.
 
 :keyword request: current processed request
 :keyword values: values passed as keyword to the render function
-""")
-signal('frontpage_context_collect', """\
-Allow plugins to add their objects to frontpage context. Always
-return the context again or it will be empty afterwards.
-
-:keyword context: the current frontpage context
-:rtype: (modified) context
-""")
-signal('frontpage_content_rendered', """\
-Allow plugins to append stuff to the frontpage
-
-:rtype: Markup to be added to the frontpage
 """)
 
 #: User logging in/out

@@ -36,6 +36,7 @@ def profile(request, user_id):
         raise NotFound()
     if not request.user.is_somebody:
         return render_response('profile_not_public.html')
+    addondata = signals.public_profile_rendered.send(user=user)
     addons = None
     return render_response('profile.html', user=user, profileaddons=addons)
 
