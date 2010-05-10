@@ -18,6 +18,7 @@ from pyClanSphere import i18n
 #: bind the views to url endpoints
 all_views = {
     'core/index':               core.index,
+    'core/profile':             core.profile,
     'core/serve_translations':  i18n.serve_javascript,
     'core/service_rsd':         core.service_rsd,
     'core/json_service':        core.json_service,

@@ -15,6 +15,7 @@ def make_urls(app):
     """Make the URLs for a new pyClanSphere application."""
     base_urls = [
         Rule('/', endpoint='core/index'),
+        Rule('/users/<int:user_id>', endpoint='core/profile'),
         Submount(app.cfg['account_url_prefix'], [
             Rule('/', endpoint='account/index'),
             Rule('/login', endpoint='account/login'),

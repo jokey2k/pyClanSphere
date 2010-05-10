@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}{{ _('Profile for user %s' % user.display_name ) }}{% endblock %}
+{% block contents %}
+<div class="post">
+  <table><tr><th colspan="2">Basics</th></tr>
+    <tr><td>Username</td><td>{{ user.username }}</td></tr>
+    <tr><td>Real name</td><td>{{ user.real_name or '' }}</td></tr>
+    <tr><td>Gender</td><td>{{ 'female' if user.gender_male else 'male' }}</td></tr>
+    <tr><td>Birthday</td><td>{{ user.birthday|dateformat or '' }}</td></tr>
+    <tr><td>Height</td><td>{{ user.height or 'unknown' }} cm</td></tr>
+    <tr><td>Adress</td><td>{{ user.adress  or '' }}<br>{{ user.zip or '' }} {{ user.city or '' }}</td></tr>
+    <tr><td>Country</td><td>{{ user.country }}</td></tr>
+    <tr><td>Homepage</td><td>{% if user.www %}<a href="{{ user.www }}" target="_blank">{{ user.www }}</a>{% else %}No homepage (yet){% endif %}</td></tr>
+  </table>
+  {{ profileaddons if profileaddons else '' }}
+</div>
+{% endblock %}

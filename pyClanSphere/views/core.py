@@ -28,13 +28,16 @@ def index(request):
     return render_response('index.html', **context)
 
 
-#@cache.response()
+@cache.response()
 def profile(request, user_id):
     """Render profile page for given user"""
     user = User.query.get(user_id)
     if not user:
         raise NotFound()
-    return render_response('profile.html', user=user)
+    if not request.user.is_somebody:
+        return render_response('profile_not_public.html')
+    addons = None
+    return render_response('profile.html', user=user, profileaddons=addons)
 
 
 def json_service(req, identifier):
