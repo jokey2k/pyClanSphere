@@ -27,6 +27,10 @@ def index(request):
         context = callback(signals.ANY, context=context)
     return render_response('index.html', **context)
 
+@cache.response()
+def imprint(request):
+    """Just show the pyClanSphere license and some other legal stuff."""
+    return render_response('imprint.html')
 
 @cache.response()
 def profile(request, user_id):
