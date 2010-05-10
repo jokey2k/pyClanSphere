@@ -23,7 +23,8 @@ class NewsForm(forms.Form):
     title = forms.TextField(lazy_gettext(u'Title'), required=True)
     text = forms.TextField(lazy_gettext(u'News'), required=True, max_length=65000,
                            widget=forms.Textarea)
-    pub_date = forms.DateTimeField(lazy_gettext(u'Date of Publication'))
+    pub_date = forms.DateTimeField(lazy_gettext(u'Date of Publication'),
+                                   help_text=lazy_gettext(u'Leave empty for auto-fill'))
     status = forms.ChoiceField(lazy_gettext(u'Status'))
 
     def __init__(self, news=None, initial=None):
