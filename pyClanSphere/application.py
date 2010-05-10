@@ -90,7 +90,6 @@ DEFAULT_THEME_SETTINGS = {
 }
 
 
-
 def get_request():
     """Return the current request.  If no request is available this function
     returns `None`.
@@ -146,7 +145,6 @@ def add_link(rel, href, type, title=None, charset=None, media=None):
         'media':    media
     }))
 
-
 def add_meta(http_equiv=None, name=None, content=None):
     """Add a new meta element to the metadata of the current page."""
     local.page_metadata.append(('meta', {
@@ -154,7 +152,6 @@ def add_meta(http_equiv=None, name=None, content=None):
         'name':         name,
         'content':      content
     }))
-
 
 def add_script(src, type='text/javascript'):
     """Load a script."""
@@ -170,7 +167,6 @@ def add_header_snippet(html):
         'html':     html
     }))
 
-
 def select_template(templates):
     """Selects the first template from a list of templates that exists."""
     env = get_application().template_env
@@ -181,7 +177,6 @@ def select_template(templates):
             except TemplateNotFound:
                 pass
     raise TemplateNotFound('<multiple-choices>')
-
 
 def render_template(template_name, _stream=False, **context):
     """Renders a template. If `_stream` is ``True`` the return value will be
@@ -201,7 +196,6 @@ def render_template(template_name, _stream=False, **context):
         return tmpl.stream(context)
     return tmpl.render(context)
 
-
 def render_response(template_name, **context):
     """Like render_template but returns a response. If `_stream` is ``True``
     the response returned uses the Jinja stream processing. This is useful
@@ -210,7 +204,6 @@ def render_response(template_name, **context):
     in those situations because it's usually slower than bunch processing.
     """
     return Response(render_template(template_name, **context))
-
 
 class Theme(object):
     """Represents a theme and is created automatically by `add_theme`."""
@@ -631,7 +624,7 @@ class pyClanSphere(object):
         from pyClanSphere.widgets import all_widgets
         self.widgets = dict((x.name, x) for x in all_widgets)
 
-        # load plugins
+        # add searchpath for plugins
         from pyClanSphere.pluginsystem import find_plugins, set_plugin_searchpath
         self.plugin_folder = path.join(instance_folder, 'plugins')
         self.plugin_searchpath = [self.plugin_folder]
