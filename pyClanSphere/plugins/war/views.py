@@ -105,7 +105,7 @@ def war_fightus(request):
 def war_list(request, page):
     """List wars in backend"""
 
-    data = War.query.get_list('admin/war_list', per_page=PER_PAGE, page=page,
+    data = War.query.get_list('admin/wars', per_page=PER_PAGE, page=page,
                               paginator=AdminPagination)
 
     return render_admin_response('admin/war_list.html', 'war.wars',
@@ -124,11 +124,11 @@ def war_edit(request, war_id=None):
 
     if request.method == 'POST':
         if 'cancel' in request.form:
-            return form.redirect('admin/war_list')
+            return form.redirect('admin/wars')
         elif 'result' in request.form:
             return form.redirect('admin/warresult_edit', war_id=war_id)
         elif request.form.get('delete') and war:
-            return redirect_to('admin/war_delete', war_id=war_id)
+            return redirect_to('admin/wars/delete', war_id=war_id)
         elif form.validate(request.form):
             if war is None:
                 war = form.make_war()
@@ -142,8 +142,8 @@ def war_edit(request, war_id=None):
 
             db.commit()
             if 'save_and_continue' in request.form:
-                return redirect_to('admin/war_edit', war_id=war.id)
-            return form.redirect('admin/war_list')
+                return redirect_to('admin/wars/edit', war_id=war.id)
+            return redirect_to('admin/wars')
 
     return render_admin_response('admin/war_edit.html', 'war.wars',
                                  form=form.as_widget(), memberstates=memberstates, warstates=warstates)
@@ -159,13 +159,13 @@ def war_delete(request, war_id=None):
 
     if request.method == 'POST':
         if request.form.get('cancel'):
-            return form.redirect('admin/war_edit', war_id=war_id)
+            return form.redirect('admin/wars/edit', war_id=war_id)
         elif request.form.get('confirm') and form.validate(request.form):
             warname = str(war.clanname)
             form.delete_war()
             db.commit()
             admin_flash(_('The war %s was deleted successfully') % warname, 'remove')
-            return form.redirect('admin/war_list')
+            return redirect_to('admin/wars')
 
     return render_admin_response('admin/war_delete.html', 'war.wars',
                                  form=form.as_widget())
@@ -174,7 +174,7 @@ def war_delete(request, war_id=None):
 def warmap_list(request, page):
     """List warmaps in backend"""
 
-    data = WarMap.query.get_list('admin/warmap_list', per_page=PER_PAGE, page=page,
+    data = WarMap.query.get_list('admin/warmaps', per_page=PER_PAGE, page=page,
                                  paginator=AdminPagination)
 
     return render_admin_response('admin/warmap_list.html', 'war.maps',
@@ -193,9 +193,9 @@ def warmap_edit(request, warmap_id=None):
 
     if request.method == 'POST':
         if 'cancel' in request.form:
-            return form.redirect('admin/warmap_list')
+            return form.redirect('admin/warmaps')
         elif request.form.get('delete') and warmap:
-            return redirect_to('admin/warmap_delete', warmap_id=warmap_id)
+            return redirect_to('admin/warmaps/delete', warmap_id=warmap_id)
         elif form.validate(request.form):
             if warmap is None:
                 warmap = form.make_warmap()
@@ -216,8 +216,8 @@ def warmap_edit(request, warmap_id=None):
             admin_flash(msg % (warmap.name), icon)
 
             if 'save_and_continue' in request.form:
-                return redirect_to('admin/warmap_edit', warmap_id=warmap.id)
-            return form.redirect('admin/warmap_list')
+                return redirect_to('admin/warmaps/edit', warmap_id=warmap.id)
+            return redirect_to('admin/warmaps')
     return render_admin_response('admin/warmap_edit.html', 'war.maps',
                                     form=form.as_widget())
 
@@ -232,15 +232,13 @@ def warmap_delete(request, warmap_id=None):
 
     if request.method == 'POST':
         if request.form.get('cancel'):
-            return form.redirect('admin/warmap_edit', warmap_id=warmap_id)
+            return form.redirect('admin/warmaps/edit', warmap_id=warmap_id)
         elif request.form.get('confirm') and form.validate(request.form):
-            form.add_invalid_redirect_target('admin/warmap_edit', warmap_id=warmap_id)
-            form.add_invalid_redirect_target('admin/warmap_delete', warmap_id=warmap_id)
             name = str(warmap.name)
             form.delete_warmap()
             db.commit()
             admin_flash(_('Warmap %s was deleted successfully') % name, 'remove')
-            return form.redirect('admin/warmap_list')
+            return redirect_to('admin/warmaps')
 
     return render_admin_response('admin/warmap_delete.html', 'war.maps',
                                  form=form.as_widget())
@@ -259,13 +257,13 @@ def warresult_edit(request, war_id=None):
 
     if request.method == 'POST':
         if request.form.get('cancel'):
-            return form.redirect('admin/war_edit', war_id=war_id)
+            return form.redirect('admin/wars/edit', war_id=war_id)
         elif request.form.get('delete'):
             if warresult is not None:
                 db.delete(warresult)
                 db.commit()
                 admin_flash(_('The result for %s was deleted successfully') % war.clanname, 'remove')
-            return form.redirect('admin/war_edit', war_id=war_id)
+            return form.redirect('admin/wars/edit', war_id=war_id)
         elif form.validate(request.form):
             if warresult is None:
                 warresult = form.make_warresult()
@@ -282,7 +280,7 @@ def warresult_edit(request, war_id=None):
 
             if 'save_and_continue' in request.form:
                 return redirect_to('admin/warresult_edit', war_id=war_id)
-            return form.redirect('admin/war_edit', war_id=war_id)
+            return redirect_to('admin/wars')
     return render_admin_response('admin/warresult_edit.html', 'war.wars',
                                     form=form.as_widget())
 
@@ -290,7 +288,7 @@ def warresult_edit(request, war_id=None):
 def warmode_list(request, page):
     """List warmodes in backend"""
 
-    data = WarMode.query.get_list('admin/warmode_list', per_page=PER_PAGE, page=page,
+    data = WarMode.query.get_list('admin/warmodes', per_page=PER_PAGE, page=page,
                                  paginator=AdminPagination)
 
     return render_admin_response('admin/warmode_list.html', 'war.modes',
@@ -309,9 +307,9 @@ def warmode_edit(request, warmode_id=None):
 
     if request.method == 'POST':
         if 'cancel' in request.form:
-            return form.redirect('admin/warmode_list')
+            return form.redirect('admin/warmodes')
         elif request.form.get('delete') and warmode:
-            return redirect_to('admin/warmode_delete', warmode_id=warmode_id)
+            return redirect_to('admin/warmodes/delete', warmode_id=warmode_id)
         elif form.validate(request.form):
             if warmode is None:
                 warmode = form.make_warmode()
@@ -327,8 +325,8 @@ def warmode_edit(request, warmode_id=None):
             db.commit()
 
             if 'save_and_continue' in request.form:
-                return redirect_to('admin/warmode_edit', warmode_id=warmode.id)
-            return form.redirect('admin/warmode_list')
+                return redirect_to('admin/warmodes/edit', warmode_id=warmode.id)
+            return redirect_to('admin/warmodes')
     return render_admin_response('admin/warmode_edit.html', 'war.modes',
                                     form=form.as_widget())
 
@@ -343,16 +341,13 @@ def warmode_delete(request, warmode_id=None):
 
     if request.method == 'POST':
         if request.form.get('cancel'):
-            return form.redirect('admin/warmode_edit', warmode_id=warmode_id)
+            return form.redirect('admin/warmodes/edit', warmode_id=warmode_id)
         elif request.form.get('confirm') and form.validate(request.form):
-            form.add_invalid_redirect_target('admin/warmode_edit', warmode_id=warmode_id)
-            form.add_invalid_redirect_target('admin/warmode_delete', warmode_id=warmode_id)
             name = str(warmode.name)
             form.delete_warmode()
             db.commit()
             admin_flash(_('Warmode %s was deleted successfully') % name, 'remove')
-            return form.redirect('admin/warmode_list')
+            return redirect_to('admin/warmodes')
 
     return render_admin_response('admin/warmode_delete.html', 'war.modes',
                                  form=form.as_widget())
-

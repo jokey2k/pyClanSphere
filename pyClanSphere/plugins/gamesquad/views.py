@@ -110,7 +110,7 @@ def game_list(request, page):
     """Show all games in a list."""
 
     games = Game.query.limit(PER_PAGE).offset(PER_PAGE * (page - 1)).all()
-    pagination = AdminPagination('admin/game_list', page, PER_PAGE,
+    pagination = AdminPagination('admin/games', page, PER_PAGE,
                                  Game.query.count())
     if not games and page != 1:
         raise NotFound()
@@ -130,9 +130,9 @@ def edit_game(request, game_id=None):
 
     if request.method == 'POST':
         if 'cancel' in request.form:
-            return form.redirect('admin/game_list')
+            return form.redirect('admin/games')
         elif request.form.get('delete') and game:
-            return redirect_to('admin/game_delete', game_id=game.id)
+            return redirect_to('admin/games/delete', game_id=game.id)
         elif form.validate(request.form):
             if game is None:
                 game = form.make_game()
@@ -147,7 +147,7 @@ def edit_game(request, game_id=None):
             db.commit()
             if 'save_and_continue' in request.form:
                 return redirect_to('admin/game_edit', game_id=game.id)
-            return form.redirect('admin/game_list')
+            return redirect_to('admin/games')
     return render_admin_response('admin/game_edit.html', 'gamesquad.games',
                                  form=form.as_widget())
 
@@ -162,14 +162,13 @@ def delete_game(request, game_id):
 
     if request.method == 'POST':
         if request.form.get('cancel'):
-            return form.redirect('admin/game_edit', game_id=game.id)
+            return form.redirect('admin/games/edit', game_id=game.id)
         elif request.form.get('confirm') and form.validate(request.form):
-            form.add_invalid_redirect_target('admin/game_edit', game_id=game.id)
             gamename = str(game.name)
             form.delete_game()
             db.commit()
             admin_flash(_('The game %s was deleted successfully') % gamename, 'remove')
-            return form.redirect('admin/game_list')
+            return redirect_to('admin/games')
 
     return render_admin_response('admin/game_delete.html', 'gamesquad.games',
                                  form=form.as_widget())
@@ -181,7 +180,7 @@ def squad_list(request, page):
     """Show all squads in a list."""
 
     squads = Squad.query.limit(PER_PAGE).offset(PER_PAGE * (page - 1)).all()
-    pagination = AdminPagination('admin/squad_list', page, PER_PAGE,
+    pagination = AdminPagination('admin/squads', page, PER_PAGE,
                                  Squad.query.count())
     if not squads and page != 1:
         raise NotFound()
@@ -206,9 +205,9 @@ def edit_squad(request, squad_id=None):
 
     if request.method == 'POST':
         if 'cancel' in request.form:
-            return form.redirect('admin/squad_list')
+            return form.redirect('admin/squads')
         elif request.form.get('delete') and squad:
-            return redirect_to('admin/squad_delete', squad_id=squad.id)
+            return redirect_to('admin/squads/delete', squad_id=squad.id)
         elif form.validate(request.form):
             if squad is None:
                 squad = form.make_squad()
@@ -222,8 +221,8 @@ def edit_squad(request, squad_id=None):
 
             db.commit()
             if 'save_and_continue' in request.form:
-                return redirect_to('admin/squad_edit', squad_id=squad.id)
-            return form.redirect('admin/squad_list')
+                return redirect_to('admin/squads/edit', squad_id=squad.id)
+            return redirect_to('admin/squads')
     return render_admin_response('admin/squad_edit.html', 'gamesquad.squads',
                                  form=form.as_widget())
 
@@ -238,14 +237,13 @@ def delete_squad(request, squad_id):
 
     if request.method == 'POST':
         if request.form.get('cancel'):
-            return form.redirect('admin/squad_edit', squad_id=squad.id)
+            return form.redirect('admin/squads/edit', squad_id=squad.id)
         elif request.form.get('confirm') and form.validate(request.form):
-            form.add_invalid_redirect_target('admin/squad_edit', squad_id=squad.id)
             squadname = str(squad.name)
             form.delete_squad()
             db.commit()
             admin_flash(_('%s was deleted successfully') % squadname, 'remove')
-            return form.redirect('admin/squad_list')
+            return redirect_to('admin/squads')
 
     return render_admin_response('admin/squad_delete.html', 'gamesquad.squads',
                                  form=form.as_widget())
@@ -262,9 +260,11 @@ def list_squadmembers(request, page=1, squad_id=None):
     if squad is None:
         raise NotFound()
 
-    data = SquadMember.query.get_list(squad, page=page, paginator=AdminPagination)
+    data = SquadMember.query.get_list(squad, 'admin/squadmembers', page=page,
+                                      paginator=AdminPagination)
 
-    return render_admin_response('admin/squad_listmembers.html', 'gamesquad.squads',
+    return render_admin_response('admin/squad_listmembers.html',
+                                 'gamesquad.squads',
                                  **data)
 
 @require_admin_privilege(SQUAD_MANAGE_MEMBERS)
@@ -286,9 +286,9 @@ def edit_squadmember(request, squad_id=None, user_id=None):
 
     if request.method == 'POST':
         if 'cancel' in request.form:
-            return form.redirect('admin/squad_listmembers', squad_id=squad_id)
+            return form.redirect('admin/squadmembers', squad_id=squad_id)
         elif request.form.get('delete') and user_id is not None:
-            return redirect_to('admin/squad_deletemember', squad_id=squad_id, user_id=user_id)
+            return redirect_to('admin/squadmembers/delete', squad_id=squad_id, user_id=user_id)
         elif form.validate(request.form):
             if squadmember is None:
                 squadmember = form.make_squadmember()
@@ -302,9 +302,9 @@ def edit_squadmember(request, squad_id=None, user_id=None):
             admin_flash(msg % (escape(squadmember.user.display_name)),icon)
             db.commit()
             if 'save_and_continue' in request.form:
-                return redirect_to('admin/squad_editmember', squad_id=squad_id,
+                return redirect_to('admin/squadmembers/edit', squad_id=squad_id,
                                    user_id=squadmember.user.id)
-            return form.redirect('admin/squad_listmembers', squad_id=squad_id)
+            return redirect_to('admin/squadmembers', squad_id=squad_id)
     return render_admin_response('admin/squad_editmember.html', 'gamesquad.squads',
                                  form=form.as_widget(), squad=squad, squadmember=squadmember)
 
@@ -322,15 +322,14 @@ def delete_squadmember(request, squad_id=None, user_id=None):
 
     if request.method == 'POST':
         if 'cancel' in request.form:
-            return form.redirect('admin/squad_editmember', squad_id=squad_id, user_id=user_id)
+            return form.redirect('admin/squadmembers/edit', squad_id=squad_id, user_id=user_id)
         elif request.form.get('confirm') and form.validate(request.form):
-            form.add_invalid_redirect_target('admin/squad_editmember', squad_id=squad_id, user_id=user_id)
             membername = str(member.user.display_name)
             squadname = str(member.squad.name)
             form.delete_member()
             db.commit()
             admin_flash(_('Member %s removed from %s') % (membername,  squadname), 'remove')
-            return form.redirect('admin/squad_listmembers', squad_id=squad_id)
+            return redirect_to('admin/squadmembers', squad_id=squad_id)
 
     return render_admin_response('admin/squad_deletemember.html', 'gamesquad.squads',
                                  form=form.as_widget())
@@ -341,7 +340,7 @@ def delete_squadmember(request, squad_id=None, user_id=None):
 def level_list(request, page):
     """Show all games in a list."""
 
-    data = Level.query.get_list('admin/level_list', page,
+    data = Level.query.get_list('admin/levels', page,
                                 paginator=AdminPagination)
     return render_admin_response('admin/level_list.html', 'gamesquad.levels',
                                  **data)
@@ -359,9 +358,9 @@ def edit_level(request, level_id=None):
 
     if request.method == 'POST':
         if 'cancel' in request.form:
-            return form.redirect('admin/level_list')
+            return form.redirect('admin/levels')
         elif request.form.get('delete') and level:
-            return redirect_to('admin/level_delete', level_id=level_id)
+            return redirect_to('admin/levels/delete', level_id=level_id)
         elif form.validate(request.form):
             if level is None:
                 level = form.make_level()
@@ -375,8 +374,8 @@ def edit_level(request, level_id=None):
 
             db.commit()
             if 'save_and_continue' in request.form:
-                return redirect_to('admin/level_edit', level_id=level.id)
-            return form.redirect('admin/level_list')
+                return redirect_to('admin/levels/edit', level_id=level.id)
+            return redirect_to('admin/levels')
     return render_admin_response('admin/level_edit.html', 'levelsquad.levels',
                                  form=form.as_widget())
 
@@ -391,14 +390,13 @@ def delete_level(request, level_id):
 
     if request.method == 'POST':
         if request.form.get('cancel'):
-            return form.redirect('admin/level_edit', level_id=level.id)
+            return form.redirect('admin/levels/edit', level_id=level.id)
         elif request.form.get('confirm') and form.validate(request.form):
-            form.add_invalid_redirect_target('admin/level_edit', level_id=level.id)
             levelname = str(level.name)
             form.delete_level()
             db.commit()
             admin_flash(_('The level %s was deleted successfully') % levelname, 'remove')
-            return form.redirect('admin/level_list')
+            return redirect_to('admin/levels')
 
     return render_admin_response('admin/level_delete.html', 'levelsquad.levels',
                                  form=form.as_widget())
@@ -407,7 +405,7 @@ def delete_level(request, level_id):
 def gameaccount_list(request, page):
     """List all registered gameaccounts"""
     gameaccounts = GameAccount.query.filter_by(user=request.user).limit(PER_PAGE).offset(PER_PAGE * (page - 1)).all()
-    pagination = AdminPagination('account/gameaccount_list', page, PER_PAGE,
+    pagination = AdminPagination('account/gameaccounts', page, PER_PAGE,
                                  GameAccount.query.filter_by(user=request.user).count())
     if not gameaccounts and page != 1:
         raise NotFound()
@@ -428,9 +426,9 @@ def gameaccount_edit(request, account_id=None):
 
     if request.method == 'POST':
         if 'cancel' in request.form:
-            return form.redirect('account/gameaccount_list')
+            return form.redirect('account/gameaccounts')
         elif request.form.get('delete') and gameaccount:
-            return redirect_to('account/gameaccount_delete', account_id=account_id)
+            return redirect_to('account/gameaccounts/delete', account_id=account_id)
         elif form.validate(request.form):
             if gameaccount is None:
                 gameaccount = form.make_gameaccount()
@@ -444,8 +442,8 @@ def gameaccount_edit(request, account_id=None):
 
             db.commit()
             if 'save_and_continue' in request.form:
-                return redirect_to('account/gameaccount_edit', account_id=gameaccount.id)
-            return form.redirect('account/gameaccount_list')
+                return redirect_to('account/gameaccounts/edit', account_id=gameaccount.id)
+            return redirect_to('account/gameaccounts')
     return render_account_response('account/gameaccount_edit.html', 'gameaccounts',
                                     form=form.as_widget())
 
@@ -462,13 +460,13 @@ def acc_delete_gameaccount(request, account_id):
 
     if request.method == 'POST':
         if request.form.get('cancel'):
-            return form.redirect('account/gameaccount_list')
+            return form.redirect('account/gameaccounts')
         elif request.form.get('confirm') and form.validate(request.form):
             accountname = str(gameaccount.account)
             form.delete_account()
             db.commit()
             account_flash(_('The game account %s was deleted successfully') % accountname, 'remove')
-            return redirect_to('account/gameaccount_list')
+            return redirect_to('account/gameaccounts')
 
     return render_account_response('account/gameaccount_delete.html', 'gameaccounts',
                                    form=form.as_widget())
@@ -490,7 +488,7 @@ def adm_delete_gameaccount(request, account_id):
             form.delete_account()
             db.commit()
             admin_flash(_('The game account %s was deleted successfully') % account, 'remove')
-            return form.redirect('admin/edit_user', user_id=gameaccount.user.id)
+            return redirect_to('admin/edit_user', user_id=gameaccount.user.id)
 
     return render_admin_response('admin/gameaccount_delete.html', 'users_groups.users',
                                  form=form.as_widget())

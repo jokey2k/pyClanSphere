@@ -114,7 +114,7 @@ def archive(req, year=None, month=None, day=None, page=1):
 def news_list(request, page):
     """Show all news in a list."""
 
-    data = News.query.get_list('admin/news_list', page, request.per_page)
+    data = News.query.get_list('admin/news', page, request.per_page)
 
     can_create = request.user.has_privilege(privileges.NEWS_CREATE)
 
@@ -141,9 +141,9 @@ def edit_news(request, news_id=None):
 
     if request.method == 'POST':
         if 'cancel' in request.form:
-            return form.redirect('admin/news_list')
+            return form.redirect('admin/news')
         elif 'delete' in request.form:
-            return redirect_to('admin/news_delete', news_id=news_id)
+            return redirect_to('admin/news/delete', news_id=news_id)
         elif form.validate(request.form):
             if newsitem is None:
                 newsitem = form.make_news(request.user)
@@ -157,7 +157,7 @@ def edit_news(request, news_id=None):
             db.commit()
             if 'save_and_continue' in request.form:
                 return redirect_to('admin/news_edit', news_id=newsitem.id)
-            return form.redirect('admin/news_list')
+            return redirect_to('admin/news')
     return render_admin_response('admin/news_edit.html', 'news.edit',
                                  form=form.as_widget())
 
@@ -172,14 +172,13 @@ def delete_news(request, news_id=None):
 
     if request.method == 'POST':
         if 'cancel' in request.form:
-            return form.redirect('admin/news_edit', news_id=news_id)
+            return form.redirect('admin/news/edit', news_id=news_id)
         elif 'confirm' in request.form and form.validate(request.form):
-            form.add_invalid_redirect_target('admin/news_edit', news_id=news_id)
             title = str(newsitem.title)
             form.delete_news()
             db.commit()
             admin_flash(_('The entry %s was deleted successfully') % title, 'remove')
-            return form.redirect('admin/news_list')
+            return redirect_to('admin/news')
 
     return render_admin_response('admin/news_delete.html', 'news.edit',
                                  form=form.as_widget())
