@@ -12,6 +12,7 @@
 from os.path import join, dirname
 
 from pyClanSphere.api import _, url_for, signal, signals
+from pyClanSphere.utils.admin import add_admin_urls
 
 from pyClanSphere.plugins.news.database import init_database
 from pyClanSphere.plugins.news.models import News
@@ -84,16 +85,8 @@ def setup(app, plugin):
         app.add_url_rule(tmp + 'page/<int:page>', endpoint='news/archive')
 
     # Register our admin views
-    app.add_url_rule('/news', prefix='admin', defaults={'page': 1}, endpoint='admin/news_list',
-                     view=views.news_list)
-    app.add_url_rule('/news/page/<int:page>', prefix='admin', endpoint='admin/news_list',
-                     view=views.news_list)
-    app.add_url_rule('/news/<int:news_id>', prefix='admin', endpoint='admin/news_edit',
-                     view=views.edit_news)
-    app.add_url_rule('/news/<int:news_id>/delete', prefix='admin', endpoint='admin/news_delete',
-                     view=views.delete_news)
-    app.add_url_rule('/news/new', prefix='admin', endpoint='admin/news_create',
-                     view=views.edit_news)
+    add_admin_urls('news', 'news_id', views.news_list, views.edit_news,
+                   views.delete_news)
 
     # Add admin views to navigation bar
     signals.modify_admin_navigation_bar.connect(add_admin_links)
