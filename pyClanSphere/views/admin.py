@@ -186,25 +186,6 @@ def index(request):
     return render_admin_response('admin/index.html', 'dashboard')
 
 
-def bookmarklet(request):
-    """Requests to this view are usually triggered by the bookmarklet
-    from the edit-post page.  Currently this is a redirect to the new-post
-    page with some small modifications but in the future this could be
-    expanded to add a wizard or something.
-    """
-    if request.args['mode'] != 'newpost':
-        raise BadRequest()
-    body = '%s\n\n<a href="%s">%s</a>' % (
-        request.args.get('text', _(u'Text here...')),
-        request.args['url'],
-        request.args.get('title', _(u'Untitled Page'))
-    )
-    return redirect_to('admin/new_entry',
-        title=request.args.get('title'),
-        body=body
-    )
-
-
 def _make_post_dispatcher(action):
     """Creates a new dispatcher for the given content type action.  This
     already checks if the user can enter the admin panel but not if the

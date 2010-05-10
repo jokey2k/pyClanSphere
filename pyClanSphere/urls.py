@@ -37,7 +37,6 @@ def make_urls(app):
     ]
     admin_urls = [
         Rule('/', endpoint='admin/index'),
-        Rule('/_bookmarklet', endpoint='admin/bookmarklet'),
         Rule('/users/', endpoint='admin/manage_users', defaults={'page': 1}),
         Rule('/users/page/<int:page>', endpoint='admin/manage_users'),
         Rule('/users/new', endpoint='admin/new_user'),

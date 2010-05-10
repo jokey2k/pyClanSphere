@@ -43,7 +43,6 @@ all_views = {
 
     # admin views
     'admin/index':              admin.index,
-    'admin/bookmarklet':        admin.bookmarklet,
     'admin/manage_users':       admin.manage_users,
     'admin/new_user':           admin.edit_user,
     'admin/edit_user':          admin.edit_user,
