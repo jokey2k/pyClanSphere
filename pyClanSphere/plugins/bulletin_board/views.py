@@ -356,7 +356,7 @@ def category_edit(request, category_id=None):
                 return redirect_to(cat_endpoints['edit'], category_id=category_id)
             elif 'save_and_new' in request.form:
                 return redirect_to(cat_endpoints['edit'])
-            return form.redirect(cat_endpoints['list'])
+            return redirect_to(cat_endpoints['list'])
     return render_admin_response('admin/board_base_edit.html', 'board.categories',
                                  form=form.as_widget(), itemname=_('Category'))
 
@@ -444,7 +444,7 @@ def forum_edit(request, forum_id=None):
                 return redirect_to(forum_endpoints['edit'], forum_id=forum_id)
             elif 'save_and_new' in request.form:
                 return redirect_to(forum_endpoints['edit'])
-            return form.redirect(forum_endpoints['list'])
+            return redirect_to(forum_endpoints['list'])
     return render_admin_response('admin/board_base_edit.html', 'board.forums',
                                  form=form.as_widget(), itemname=_('Forum'))
 
