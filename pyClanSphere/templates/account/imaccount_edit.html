@@ -4,8 +4,8 @@
 {% block contents %}
   <h1>{{ self.title() }}</h1>
   {% call form() %}
-  {{ render_formbox(form.service, collapsed=false) }}
-  {{ render_formbox(form.account, collapsed=false) }}
+  {{ render_formbox(form.service) }}
+  {{ render_formbox(form.account) }}
   {{ render_actions(form) }}
   {% endcall %}
 {% endblock %}

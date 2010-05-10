@@ -1,4 +1,4 @@
-{% macro render_formbox(field, label, class, toggleable=true, collapsed=true, disabled=false) %}
+{% macro render_formbox(field, label, class, toggleable=true, collapsed=false, disabled=false) %}
   <div class="formbox{{ " " + class if class }}{{ " toggleable" if toggleable
     }}{{ " collapsed" if collapsed and toggleable }}">
     <h3>{{ label if label else field.label() }}</h3>
@@ -7,7 +7,7 @@
   </div>
 {% endmacro %}
 
-{% macro render_filefield(fieldname, label, class, toggleable=true, collapsed=true, disabled=false, existing_label=None, existing_bool=False) %}
+{% macro render_filefield(fieldname, label, class, toggleable=true, collapsed=false, disabled=false, existing_label=None, existing_bool=False) %}
   <div class="formbox{{ " " + class if class }}{{ " toggleable" if toggleable
     }}{{ " collapsed" if collapsed and toggleable }}">
     <h3>{{ label }}</h3>
@@ -24,7 +24,7 @@
   </div>
 {% endmacro %}
 
-{% macro render_formmultibox(fields, boxlabel, class, toggleable=true, collapsed=true, disabled=false) %}
+{% macro render_formmultibox(fields, boxlabel, class, toggleable=true, collapsed=false, disabled=false) %}
   <div class="formbox{{ " " + class if class }}{{ " toggleable" if toggleable
     }}{{ " collapsed" if collapsed and toggleable }}">
     <h3>{{ boxlabel }}</h3>
