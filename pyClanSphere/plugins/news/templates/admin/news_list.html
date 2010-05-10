@@ -12,7 +12,7 @@
   {%- for news in newsitems %}
     <tr class="{{ loop.cycle('odd', 'even') }}">
 	  {%- if news.can_edit() %}
-      <td><a href="{{ url_for('admin/news_edit', news_id=news.id) }}">{{
+      <td><a href="{{ url_for('admin/news/edit', news_id=news.id) }}">{{
           news.title }}</a></td>
       {%- else %}
       <td>{{ news.title }}</td>
@@ -28,7 +28,7 @@
   {%- endfor %}
   </table>
   {% if can_create %}
-  <form action="{{ url_for('admin/news_create') }}" method="get">
+  <form action="{{ url_for('admin/news/new') }}" method="get">
     <div class="actions">
       <input type="submit" value="{{ _('New News') }}">
     </div>

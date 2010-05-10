@@ -45,12 +45,12 @@ def add_admin_links(sender, **kwds):
 
     priv_check = kwds['request'].user.has_privilege
 
-    entries = [('list', url_for('admin/news_list'), _(u'Overview'))]
+    entries = [('list', url_for('admin/news'), _(u'Overview'))]
 
     if priv_check(NEWS_CREATE) or priv_check(NEWS_EDIT):
-        entries.append(('edit', url_for('admin/news_create'), _(u'Write')))
+        entries.append(('edit', url_for('admin/news/new'), _(u'Write')))
 
-    kwds['navbar'].insert(1,(('news', url_for('admin/news_list'), _(u'News'), entries)))
+    kwds['navbar'].insert(1,(('news', url_for('admin/news'), _(u'News'), entries)))
 
 
 def setup(app, plugin):
