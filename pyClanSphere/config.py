@@ -134,14 +134,17 @@ DEFAULT_VARS = {
         u'folder.')),
 
     # reCAPTCHA settings
-    'recaptcha_enable':         BooleanField(default=False, help_text=l_(
-        u'If you want to protect forms that non-logged in users or guests can fill out,'
-        u' enable it and get your api keys from http://recaptcha.net. Heavily recommended,'
-        u' just not enabled per default as you need to get api keys yourself')),
-    'recaptcha_use_ssl':        BooleanField(default=True, help_text=l_(
-        u'Secure communication between this app and recaptcha over ssl')),
+    'recaptcha_enable':         BooleanField(default=False),
+    'recaptcha_use_ssl':        BooleanField(default=True),
     'recaptcha_public_key':     TextField(default=u''),
-    'recaptcha_private_key':    TextField(default=u'')
+    'recaptcha_private_key':    TextField(default=u''),
+    'recaptcha_default_theme':  ChoiceField(choices=[('red', l_(u'Red (default)')),
+             ('white', l_(u'White')),
+             ('blackglass', l_(u'Black Glass')),
+             ('clean', l_(u'Clean')),
+             ('custom', l_(u'Custom (I known what I\'m doing!)'))
+    ], default=u'red', help_text=l_(
+        u'Use this theme unless overriden by active theme or hardcoded call'))
 }
 
 HIDDEN_KEYS = set(('iid', 'secret_key', 'pyclansphere_auth_token',

@@ -1,0 +1,19 @@
+{% extends "admin/layout.html" %}
+{% block title %}{{ _("reCAPTCHA Configuration") }}{% endblock %}
+{% block contents %}
+  <h1>{{ _("reCAPTCHA Configuration") }}</h1>
+  <p>{% trans recaptcha_link='<a href="http://recaptcha.net/">recaptcha.net</a>'|safe %}
+    reCAPTCHA is a free CAPTCHA service that protects your public site forms
+    against spam. You will need to register free of charge at {{ recaptcha_link }}
+    and obtain a public and a private key for your domain.
+  {% endtrans %}</p>
+  <p>{% trans %}
+    Users that are <b>not</b> logged in, will be presented a captcha to solve if this is enabled.
+  {% endtrans %}</p>
+  {%- call form() %}
+    {{ form.as_dl() }}
+    <div class="actions">
+      <input type="submit" value="{{ _('Save') }}">
+    </div>
+  {%- endcall %}
+{% endblock %}

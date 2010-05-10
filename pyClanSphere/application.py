@@ -74,8 +74,8 @@ DEFAULT_THEME_SETTINGS = {
     'date.datetime_format.full':    None,
     'date.datetime_format.long':    None,
 
-    # reCAPTCHA theme if default stuff is used
-    'recaptcha.theme':              'red',
+    # reCAPTCHA theme choice may be overridden by theme
+    'recaptcha.theme':              None,
 
     # query optimizations for overview pages.  Themes can change the
     # eager/lazy loading settings of some queries to remove unnecessary

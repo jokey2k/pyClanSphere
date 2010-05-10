@@ -61,6 +61,7 @@ all_views = {
     'admin/plugins':            admin.plugins,
     'admin/remove_plugin':      admin.remove_plugin,
     'admin/cache':              admin.cache,
+    'admin/recaptcha':          admin.recaptcha,
     'admin/configuration':      admin.configuration,
     'admin/maintenance':        admin.maintenance,
     'admin/information':        admin.information,

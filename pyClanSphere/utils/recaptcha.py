@@ -23,18 +23,23 @@ from pyClanSphere.api import _, get_application
 API_SERVER = 'http://api.recaptcha.net/'
 SSL_API_SERVER = 'https://api-secure.recaptcha.net/'
 VERIFY_SERVER = 'http://api-verify.recaptcha.net/verify'
+AVAILABLE_THEMES = ['red', 'white', 'blackglass', 'clean', 'custom']
 
 
 def get_recaptcha_html(error=None, theme=None):
     """Returns the recaptcha input HTML."""
 
-    # reCAPTCHA wants this protected
-    if theme == None and theme not in ['red', 'white', 'blackglass', 'clean', 'custom']:
-        theme = 'red'
-
     app = get_application()
-    server = app.cfg['recaptcha_use_ssl'] and SSL_API_SERVER or API_SERVER
-    options = dict(k=app.cfg['recaptcha_public_key'])
+    theme_settings = get_application().theme.settings
+    cfg = app.cfg
+
+    if theme == None or theme not in AVAILABLE_THEMES:
+        theme = theme_settings['recaptcha.theme']
+        if theme == None or theme not in AVAILABLE_THEMES:
+            theme = cfg['recaptcha_default_theme']
+
+    server = cfg['recaptcha_use_ssl'] and SSL_API_SERVER or API_SERVER
+    options = dict(k=cfg['recaptcha_public_key'])
     if error is not None:
         options['error'] = unicode(error)
     query = url_encode(options)

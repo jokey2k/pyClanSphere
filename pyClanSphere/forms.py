@@ -574,6 +574,19 @@ class CacheOptionsForm(_ConfigForm):
                                         u'use filesystem cache.'))
 
 
+class RecaptchaOptionsForm(_ConfigForm):
+    recaptcha_enable = config_field('recaptcha_enable',
+                          lazy_gettext(u'Enable reCAPTCHA Protection'))
+    recaptcha_use_ssl = config_field('recaptcha_use_ssl',
+                           lazy_gettext(u'Use https to connect to reCAPTCHA'))
+    recaptcha_public_key = config_field('recaptcha_public_key',
+                          lazy_gettext(u'Public Key'))
+    recaptcha_private_key = config_field('recaptcha_private_key',
+                           lazy_gettext(u'Private Key'))
+    recaptcha_default_theme = config_field('recaptcha_default_theme',
+                          lazy_gettext(u'Default widget theme'))
+
+
 class MaintenanceModeForm(forms.Form):
     """yet a dummy form, but could be extended later."""
 

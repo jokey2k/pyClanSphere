@@ -55,6 +55,7 @@ def make_urls(app):
         Rule('/options/theme/configure', endpoint='admin/configure_theme'),
         Rule('/options/cache', endpoint='admin/cache'),
         Rule('/options/configuration', endpoint='admin/configuration'),
+        Rule('/options/recaptcha', endpoint='admin/recaptcha'),
         Rule('/system/', endpoint='admin/information'),
         Rule('/system/maintenance', endpoint='admin/maintenance'),
         Rule('/system/log', defaults={'page': 1}, endpoint='admin/log'),

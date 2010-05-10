@@ -38,7 +38,7 @@ from pyClanSphere.pluginsystem import install_package, InstallationError, \
 from pyClanSphere.forms import LoginForm, ChangePasswordForm, PluginForm, \
      LogOptionsForm, BasicOptionsForm, URLOptionsForm, EditUserForm, DeleteUserForm, \
      CacheOptionsForm, EditGroupForm, DeleteGroupForm, ThemeOptionsForm, DeleteImportForm, ExportForm, \
-     MaintenanceModeForm, RemovePluginForm, DeleteIMAccountForm, \
+     MaintenanceModeForm, RemovePluginForm, DeleteIMAccountForm, RecaptchaOptionsForm, \
      make_config_form, make_notification_form
 
 #: how many posts / comments should be displayed per page?
@@ -80,6 +80,7 @@ def render_admin_response(template_name, _active_menu_item=None, **values):
                 ('basic', url_for('admin/basic_options'), _(u'Basic')),
                 ('urls', url_for('admin/urls'), _(u'URLs')),
                 ('theme', url_for('admin/theme'), _(u'Theme')),
+                ('recaptcha', url_for('admin/recaptcha'), _(u'reCAPTCHA')),
                 ('cache', url_for('admin/cache'), _(u'Cache')),
                 ('configuration', url_for('admin/configuration'),
                  _(u'Configuration Editor'))
@@ -547,6 +548,21 @@ def cache(request):
             return redirect_to('admin/cache')
 
     return render_admin_response('admin/cache.html', 'options.cache',
+                                 form=form.as_widget())
+
+
+@require_admin_privilege(CLAN_ADMIN)
+def recaptcha(request):
+    """Configure reCAPTCHA form protection."""
+    form = RecaptchaOptionsForm()
+
+    if request.method == 'POST':
+        if form.validate(request.form):
+            form.apply()
+            flash(_(u'reCAPTCHA settings were changed successfully.'), 'configure')
+            return redirect_to('admin/recaptcha')
+
+    return render_admin_response('admin/recaptcha.html', 'options.recaptcha',
                                  form=form.as_widget())
 
 
