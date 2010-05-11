@@ -11,7 +11,7 @@
       {% for gameaccount in group.list %}
       <tr class="{{ loop.cycle('odd', 'even') }}">
         {% if loop.first %}<td valign="top" rowspan="{{ group.list|count }}">{{ group.grouper.name }}</td>{%- endif %}
-        <td width="100%"><a href="{{ url_for('account/gameaccount_edit', account_id=gameaccount.id) }}">{{ gameaccount.account }}</td>
+        <td width="100%"><a href="{{ url_for('account/gameaccounts/edit', account_id=gameaccount.id) }}">{{ gameaccount.account }}</td>
       </tr>
       {% endfor %}
     {% else %}

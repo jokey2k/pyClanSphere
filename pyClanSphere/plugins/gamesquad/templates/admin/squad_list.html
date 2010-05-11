@@ -19,7 +19,7 @@
     <td>{{ squad.game.name }}</td>
 	  <td>
 	    {%- if squad.can_manage() %}
-	    <a href="{{ url_for("admin/squad_listmembers", squad_id=squad.id) }}">
+	    <a href="{{ url_for('admin/squadmembers', squad_id=squad.id) }}">
   	  {%- endif %}
       {%- for member in squad.members %}
         {{ member.display_name }}{%- if not loop.last %}, {%- endif %}
