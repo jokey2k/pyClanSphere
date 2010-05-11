@@ -111,18 +111,18 @@ def setup(app, plugin):
                    views.edit_level, views.delete_level)
 
     # Squadmembers
-    app.add_url_rule('/squads/<int:squad_id>/listmembers', prefix='admin', defaults={'page': 1}, endpoint='admin/squad_listmembers',
+    app.add_url_rule('/squads/<int:squad_id>/members', prefix='admin', defaults={'page': 1}, endpoint='admin/squadmembers',
                      view=views.list_squadmembers)
-    app.add_url_rule('/squads/<int:squad_id>/listmembers/page/<int:page>', prefix='admin', endpoint='admin/squad_listmembers')
-    app.add_url_rule('/squads/<int:squad_id>/editmember/<int:user_id>', prefix='admin', endpoint='admin/squad_editmember',
+    app.add_url_rule('/squads/<int:squad_id>/members/page/<int:page>', prefix='admin', endpoint='admin/squadembers')
+    app.add_url_rule('/squads/<int:squad_id>/members/<int:user_id>/edit', prefix='admin', endpoint='admin/squadmembers/edit',
                      view=views.edit_squadmember)
-    app.add_url_rule('/squads/<int:squad_id>/newmember', prefix='admin', endpoint='admin/squad_newmember',
+    app.add_url_rule('/squads/<int:squad_id>/members/new', prefix='admin', endpoint='admin/squadmembers/new',
                      view=views.edit_squadmember)
-    app.add_url_rule('/squads/<int:squad_id>/deletemember/<int:user_id>', prefix='admin', endpoint='admin/squad_deletemember',
+    app.add_url_rule('/squads/<int:squad_id>/members/<int:user_id>/delete', prefix='admin', endpoint='admin/squadmembers/delete',
                      view=views.delete_squadmember)
 
     # Admin views: Gameaccounts
-    app.add_url_rule('/gameaccounts/<int:account_id>/delete', prefix='admin', endpoint='admin/gameaccount_delete',
+    app.add_url_rule('/gameaccounts/<int:account_id>/delete', prefix='admin', endpoint='admin/gameaccounts/delete',
                       view=views.adm_delete_gameaccount)
 
     # Account views: Gameaccounts
