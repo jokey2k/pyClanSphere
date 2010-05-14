@@ -458,7 +458,7 @@ def forum_delete(request, forum_id=None):
 
     if request.method == 'POST':
         if 'cancel' in request.form:
-            return redirect_to(cat_endpoints['edit'], forum_id=forum_id)
+            return redirect_to(forum_endpoints['edit'], forum_id=forum_id)
         if form.validate(request.form) and 'confirm' in request.form:
             msg = _('The forum %s was deleted successfully.')  % \
                   escape(forum.name)
