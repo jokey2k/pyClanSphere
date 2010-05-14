@@ -137,7 +137,7 @@ class Forum(object):
             return False
 
         global_lastread = GlobalLastRead.query.get(user.id)
-        if not global_lastread:
+        if not global_lastread or not self.modification_date:
             return False
         if global_lastread.date > self.modification_date:
             return False
