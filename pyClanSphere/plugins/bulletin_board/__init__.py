@@ -34,7 +34,7 @@ the database is consistent afterwards.
 :keyword category: the category to be deleted
 :keyword formdata: data of the submitted form
 """)
-signal('before_board_forum_squad_deleted', """\
+signal('before_board_forum_deleted', """\
 Plugins can use this to react to board forum deletes.  They can't stop
 the deleting but they can delete information in their own tables so that
 the database is consistent afterwards.
