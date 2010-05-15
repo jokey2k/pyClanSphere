@@ -18,7 +18,11 @@
 	  <ul>
 	    <li>{{ _("Squad") }}: {{ war.squad.name }}</li>
 	    <li>{{ _("Date") }}: {{ war.date|datetimeformat }}</li>
-	    <li>{% trans link='<a href="%s">%s</a>'|safe % (url_for(war.orgamember), war.orgamember.display_name) %}Orgamember: {{ link }}{% endtrans %}</li>
+	    <li>{%- if war.orgamember %}
+	      {% trans link='<a href="%s">%s</a>'|safe % (url_for(war.orgamember), war.orgamember.display_name) %}Orgamember: {{ link }}{% endtrans %}
+	      {% else %}
+	      {% trans %}Orgamember: None yet{% endtrans %}
+	      {% endif -%}</li>
 	    <li>{{ _("Status") }}: {{ warstates[war.status] }}</li>
     </ul>
   </div>
