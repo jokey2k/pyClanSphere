@@ -296,7 +296,7 @@ class _UserProfileForm(_UserBoundForm):
     def _set_common_attributes(self, user):
         forms.set_fields(user, self.data, 'www', 'real_name', 'birthday',
                          'display_name', 'height', 'address', 'zip', 'city',
-                         'country', 'username', 'email')
+                         'country', 'username', 'email', 'notes')
 
     def save_changes(self):
         """Apply the changes."""
