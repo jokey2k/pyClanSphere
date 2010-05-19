@@ -95,6 +95,7 @@ class User(object):
     @property
     def localized_country(self):
         """country name as in locale, with fallback"""
+        from pyClanSphere.api import get_application
         try:
             retval = get_application().locale.territories[self.country]
         except KeyError:
