@@ -99,7 +99,8 @@ def result(cache_key, vary=(), eager_caching=False, timeout=None,
                     md5calc = md5()
                     for arglist in args[skip_posargs:], frozenset(kwargs.iteritems()):
                         for arg in arglist:
-                            md5calc.update(arg.encode("utf-8"))
+                            if arg is not None:
+                                md5calc.update(arg.encode("utf-8"))
                     key += '__%s' % md5calc.hexdigest()
                 result = request.app.cache.get(key)
                 if result is not None:
