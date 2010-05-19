@@ -16,11 +16,13 @@ from werkzeug.exceptions import NotFound
 from pyClanSphere.schema import users, groups, group_users, \
      privileges, user_privileges, group_privileges, \
      notification_subscriptions, imaccounts, db, passwordrequests
-from pyClanSphere.i18n import parse_datetime
+from pyClanSphere.i18n import parse_datetime, lazy_gettext
 from pyClanSphere.utils.pagination import Pagination
 from pyClanSphere.utils.crypto import gen_pwhash, check_pwhash
 from pyClanSphere.privileges import _Privilege, privilege_attribute, \
      add_admin_privilege, ENTER_ADMIN_PANEL, CLAN_ADMIN, ENTER_ACCOUNT_PANEL
+
+_ = lazy_gettext
 
 class UserQuery(db.Query):
     """Add some extra query methods to the user object."""
