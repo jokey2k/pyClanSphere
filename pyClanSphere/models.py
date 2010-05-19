@@ -93,6 +93,15 @@ class User(object):
     own_privileges = privilege_attribute('_own_privileges')
 
     @property
+    def localized_country(self):
+        """country name as in locale, with fallback"""
+        try:
+            retval = get_application().locale.territories[self.country]
+        except KeyError:
+            retval = self.country
+        return retval
+
+    @property
     def privileges(self):
         """A read-only set with all privileges."""
         result = set(self.own_privileges)
