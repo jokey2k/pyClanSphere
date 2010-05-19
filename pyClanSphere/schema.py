@@ -31,7 +31,8 @@ users = db.Table('users', metadata,
     db.Column('www', db.String(200)),
     db.Column('creation_date', db.DateTime, nullable=False,
               default=datetime.utcnow()),
-    db.Column('last_visited', db.DateTime)
+    db.Column('last_visited', db.DateTime),
+    db.Column('notes', db.Text)
 )
 
 groups = db.Table('groups', metadata,

@@ -262,6 +262,8 @@ class _UserProfileForm(_UserBoundForm):
     city = forms.TextField(lazy_gettext(u'City'))
     country = forms.ChoiceField(lazy_gettext(u'Country'), widget=forms.SelectBox)
 
+    notes = forms.TextField(lazy_gettext(u'About me'), max_length=65000,
+                            widget=forms.Textarea)
     def __init__(self, user, initial=None):
         if user is not None:
             initial = forms.fill_dict(initial,
@@ -276,7 +278,8 @@ class _UserProfileForm(_UserBoundForm):
                 city=user.city,
                 country=user.country,
                 email=user.email,
-                www=user.www
+                www=user.www,
+                notes=user.notes
             )
         _UserBoundForm.__init__(self, user, initial)
         self.user = user

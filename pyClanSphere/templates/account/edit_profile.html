@@ -8,7 +8,7 @@
                          _("Core account data"), toggleable=false) }}
   {{ render_formmultibox([form.real_name, form.address, form.zip,
                           form.city, form.country, form.www, form.gender_male,
-                          form.birthday, form.height], _("About me")) }}
+                          form.birthday, form.height, form.notes], _("About me")) }}
     <div class="actions">
       <input type="submit" name="save" value="{{ _('Update Profile') }}">
       <input type="submit" name="cancel" value="{{ _('Cancel') }}">

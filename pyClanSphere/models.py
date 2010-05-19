@@ -48,7 +48,8 @@ class User(object):
 
     def __init__(self, username, password, email, real_name=u'',
                  gender_male=True, birthday=date(1970,1,1), height=0,
-                 address=u'', zip=0, city=u'', country=u'', www=u''):
+                 address=u'', zip=0, city=u'', country=u'', www=u'',
+                 notes=u''):
         super(User, self).__init__()
         self.username = username
         if password is not None:
@@ -66,6 +67,7 @@ class User(object):
         self.city = city
         self.country = country
         self.www = www
+        self.notes = notes
 
     @property
     def is_manager(self):
