@@ -18,7 +18,7 @@
       <tr><td colspan="2">{{ _("No accounts") }}</td></tr>
     {% endfor %}
   </table>
-  <form action="{{ url_for('account/gameaccount_new') }}" method="get">
+  <form action="{{ url_for('account/gameaccounts/new') }}" method="get">
     <div class="actions">
       <input type="submit" value="{{ _('New Account') }}">
     </div>
