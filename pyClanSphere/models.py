@@ -248,7 +248,9 @@ class IMAccount(object):
         7: u'ebuddy',
         8: u'XMPP (Jabber)',
         9: u'QQ',
-        10: u'Gadu-Gadu'
+        10: u'Gadu-Gadu',
+        11: _(u'Phone'),
+        12: _(u'Cell')
     }
 
     query = db.query_property(IMAccountQuery)
