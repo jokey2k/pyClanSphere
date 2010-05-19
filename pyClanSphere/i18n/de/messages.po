@@ -351,8 +351,8 @@ msgid "Day of Birth"
 msgstr "Geburtstag"
 
 #: pyClanSphere/forms.py:264
-msgid "Height in full cm"
-msgstr "Größe in ganzen cm"
+msgid "Height"
+msgstr "Größe"
 
 #: pyClanSphere/forms.py:265
 msgid "Streetaddress"

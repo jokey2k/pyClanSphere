@@ -302,7 +302,7 @@ msgid "Day of Birth"
 msgstr ""
 
 #: pyClanSphere/forms.py:264
-msgid "Height in full cm"
+msgid "Height"
 msgstr ""
 
 #: pyClanSphere/forms.py:265
