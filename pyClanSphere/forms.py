@@ -256,7 +256,7 @@ class _UserProfileForm(_UserBoundForm):
                           validators=[is_valid_url()])
     gender_male = forms.ChoiceField(lazy_gettext(u'Gender'))
     birthday = forms.DateField(lazy_gettext(u'Day of Birth'))
-    height = forms.IntegerField(lazy_gettext(u'Height'), helptext=lazy_gettext(u'Full cm'))
+    height = forms.IntegerField(lazy_gettext(u'Height'), help_text=lazy_gettext(u'Full cm'))
     address = forms.TextField(lazy_gettext(u'Streetaddress'))
     zip = forms.IntegerField(lazy_gettext(u'Zip code'))
     city = forms.TextField(lazy_gettext(u'City'))
