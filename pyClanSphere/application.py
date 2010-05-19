@@ -736,6 +736,8 @@ class pyClanSphere(object):
                   The key for the cache is prettified_ and a hash of the text we want to prettify
             """
 
+            if text is None:
+                return Markup(u'')
             text = bbcode_parser(text)
             text = smiley_parser.makehappy(text)
             return Markup(text)
