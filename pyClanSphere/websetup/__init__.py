@@ -159,7 +159,7 @@ class WebSetup(object):
         except Exception, error:
             error = str(error).decode('utf-8', 'ignore')
         else:
-            from pyClanSphere.database import users, user_privileges, privileges
+            from pyClanSphere.schema import users, user_privileges, privileges
             from pyClanSphere.privileges import CLAN_ADMIN
 
             # create admin account
