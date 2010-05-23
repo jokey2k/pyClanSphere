@@ -279,8 +279,14 @@ class WarResult(object):
         return "%s:%s" % (self.our_points, self.enemy_points)
 
     @property
-    def win(self):
-        return self.our_points > self.enemy_points
+    def named_result(self):
+        if self.our_points > self.enemy_points:
+            return u'win'
+        if self.our_points < self.enemy_points:
+            return u'loss'
+        if self.our_points == self.enemy_points:
+            return u'draw'
+
 
 class NullWarResult(WarResult):
     """Empty War Result"""
