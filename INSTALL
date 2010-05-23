@@ -12,6 +12,8 @@ installed:
 - simplejson* [included in Python 2.6 and higher]
 - pytz*
 - Babel (>= 0.9.5; shipping svn version as of 18.12.2009)
+- Blinker >= 1.0*
+- translitcodec
 
 Libraries marked with * are installable from the cheeseshop via
 easy_install / pip or might be available in Debian already.
