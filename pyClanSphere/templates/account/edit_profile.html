@@ -1,17 +1,15 @@
 {% extends "account/layout.html" %}
 {% from "admin/_form_helpers.html" import render_formbox, render_formmultibox %}
+{% from "admin/_form_avatar.html" import render_avatar %}
 {% block title %}{{ _('Edit my profile') }}{% endblock %}
 {% block contents %}
   <h1>{{ self.title() }}</h1>
-  {% call form() %}
+  {% call form(enctype="multipart/form-data") %}
   {{ render_formmultibox([form.display_name, form.email],
                          _("Core account data"), toggleable=false) }}
   {{ render_formmultibox([form.real_name, form.address, form.zip,
                           form.city, form.country, form.www, form.gender_male,
                           form.birthday, form.height, form.notes], _("About me")) }}
-    <div class="actions">
-      <input type="submit" name="save" value="{{ _('Update Profile') }}">
-      <input type="submit" name="cancel" value="{{ _('Cancel') }}">
-    </div>
+  {{ render_avatar(form) }}
   {% endcall %}
 {% endblock %}

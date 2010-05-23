@@ -77,6 +77,10 @@ DEFAULT_THEME_SETTINGS = {
     # reCAPTCHA theme choice may be overridden by theme
     'recaptcha.theme':              None,
 
+    # Gravatar needs it, others could use it as well
+    # 150 (default) results in 150x150px
+    'avatar.size':                  150,
+
     # query optimizations for overview pages.  Themes can change the
     # eager/lazy loading settings of some queries to remove unnecessary
     # overhead that is not in use for what they want to display.  For
@@ -698,6 +702,7 @@ class pyClanSphere(object):
 
         # now add the middleware for static file serving
         self.add_shared_exports('core', SHARED_DATA)
+        self.add_shared_exports('userpics', path.join(self.instance_folder, 'userpics'))
         self.add_middleware(SharedDataMiddleware, self._shared_exports)
 
         # set up the urls

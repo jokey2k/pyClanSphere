@@ -144,7 +144,12 @@ DEFAULT_VARS = {
              ('clean', l_(u'Clean')),
              ('custom', l_(u'Custom (I know what I\'m doing!)'))
     ], default=u'red', help_text=l_(
-        u'Use this theme unless overriden by active theme or hardcoded call'))
+        u'Use this theme unless overriden by active theme or hardcoded call')),
+
+    # Avatar Settings
+    'avatar_default':           TextField(default=u'http://upload.wikimedia.org/' +
+                                          u'wikipedia/commons/5/52/Spacer.gif',
+                                          help_text=l_(u'URL to a default avatar')),
 }
 
 HIDDEN_KEYS = set(('iid', 'secret_key', 'pyclansphere_auth_token',

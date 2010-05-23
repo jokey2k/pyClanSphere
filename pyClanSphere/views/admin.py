@@ -24,7 +24,7 @@ from pyClanSphere.i18n import _, ngettext
 from pyClanSphere.application import get_request, url_for, \
      render_response, get_application
 from pyClanSphere.database import db, secure_database_uri
-from pyClanSphere.models import User, Group, IMAccount
+from pyClanSphere.models import User, Group, IMAccount, UserPicture
 from pyClanSphere.utils import dump_json, load_json
 from pyClanSphere.utils.validators import is_valid_email, is_valid_url, check
 from pyClanSphere.utils.admin import flash, require_admin_privilege
@@ -239,10 +239,24 @@ def edit_user(request, user_id=None):
         elif form.validate(request.form):
             if user is None:
                 user = form.make_user()
+                if picfile and form['userpictype'] == 'Upload':
+                    picture.place_file(picfile)
                 msg = _(u'User %s created successfully.')
                 icon = 'add'
             else:
-                form.save_changes()
+                picfile = request.files.get('picfile')
+                picture = UserPicture(request.user)
+                if picfile:
+                    form.save_changes()
+                    if form['userpictype'] == 'Upload':
+                        picture.place_file(picfile)
+                else:
+                    pictype = user.userpictype
+                    if form['userpictype'] == 'Upload' or not form['userpictype']:
+                        form['userpictype'] = pictype
+                    if form['userpictype'] != pictype:
+                       picture.remove()
+                    form.save_changes()
                 msg = _(u'User %s edited successfully.')
                 icon = 'info'
             db.commit()

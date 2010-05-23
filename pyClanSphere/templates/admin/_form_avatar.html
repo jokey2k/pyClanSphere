@@ -1,0 +1,11 @@
+{% macro render_avatar(form) %}
+<div class="formbox toggleable">
+  <h3>{{ _("Avatar") }}</h3>
+  <table>
+    <tr><td nowrap>{{ _('Current picture') }}</td><td width="100%"><img src="{{ form.user.pic_url }}" width="{{ request.app.theme.settings['avatar.size'] }}"> ({{ form.user.userpictype if (form.user.userpictype != 'None' and form.user.userpictype) else 'Default' }})</td></tr>          
+    <tr><td nowrap>{{ _('New picture') }}</td><td width="100%">{{ form.userpictype() }}</td></tr>
+    <tr><td nowrap>{{ _('or') }}</td><td width="100%">&nbsp;</td></tr>
+    <tr><td nowrap>{{ _('Upload picture') }} ({{ request.app.theme.settings['avatar.size'] }}px * {{ request.app.theme.settings['avatar.size'] }}px)</td><td width="100%"><input type="file" name="picfile"></td></tr>
+  </table>
+</div>  
+{% endmacro %}

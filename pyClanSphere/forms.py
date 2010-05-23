@@ -16,7 +16,7 @@ from pyClanSphere.i18n import _, lazy_gettext, list_languages
 from pyClanSphere.application import get_application
 from pyClanSphere.config import DEFAULT_VARS
 from pyClanSphere.database import db
-from pyClanSphere.models import User, Group, NotificationSubscription, IMAccount, PasswordRequest
+from pyClanSphere.models import User, Group, NotificationSubscription, IMAccount, PasswordRequest, UserPicture
 from pyClanSphere.privileges import bind_privileges
 from pyClanSphere.utils import forms, log
 from pyClanSphere.utils.validators import ValidationError, is_valid_email, \
@@ -261,9 +261,10 @@ class _UserProfileForm(_UserBoundForm):
     zip = forms.IntegerField(lazy_gettext(u'Zip code'))
     city = forms.TextField(lazy_gettext(u'City'))
     country = forms.ChoiceField(lazy_gettext(u'Country'), widget=forms.SelectBox)
-
     notes = forms.TextField(lazy_gettext(u'About me'), max_length=65000,
                             widget=forms.Textarea)
+    userpictype = forms.ChoiceField(lazy_gettext(u'User Picture'), widget=forms.SelectBox)
+
     def __init__(self, user, initial=None):
         if user is not None:
             initial = forms.fill_dict(initial,
@@ -279,7 +280,8 @@ class _UserProfileForm(_UserBoundForm):
                 country=user.country,
                 email=user.email,
                 www=user.www,
-                notes=user.notes
+                notes=user.notes,
+                userpictype=user.userpictype
             )
         _UserBoundForm.__init__(self, user, initial)
         self.user = user
@@ -292,11 +294,17 @@ class _UserProfileForm(_UserBoundForm):
             (0, _('Female'))
         ]
         self.country.choices = sorted(get_application().locale.territories.iteritems(), key=itemgetter(1))
+        self.userpictype.choices = [
+            (u'', _('No change')),
+            (u'None', _('No Picture')),
+            (u'Gravatar', _('Gravatar.com'))
+        ]
 
     def _set_common_attributes(self, user):
         forms.set_fields(user, self.data, 'www', 'real_name', 'birthday',
                          'display_name', 'height', 'address', 'zip', 'city',
-                         'country', 'username', 'email', 'notes')
+                         'country', 'username', 'email', 'notes',
+                         'userpictype')
 
     def save_changes(self):
         """Apply the changes."""
@@ -388,6 +396,7 @@ class DeleteUserForm(_UserBoundForm):
     def delete_user(self):
         """Deletes the user."""
         signals.before_user_deleted.send(user=self.user, formdata=self.data)
+        UserPicture(self.user).remove(True)
         db.delete(self.user)
 
 

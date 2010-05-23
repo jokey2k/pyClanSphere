@@ -9,8 +9,14 @@
     :license: BSD, see LICENSE for more details.
 """
 from datetime import date
+from hashlib import md5
 from uuid import uuid4
+from urllib import urlencode
+import imghdr
+import os, os.path
+pjoin = os.path.join
 
+from werkzeug import FileStorage
 from werkzeug.exceptions import NotFound
 
 from pyClanSphere.schema import users, groups, group_users, \
@@ -51,7 +57,7 @@ class User(object):
     def __init__(self, username, password, email, real_name=u'',
                  gender_male=True, birthday=date(1970,1,1), height=0,
                  address=u'', zip=0, city=u'', country=u'', www=u'',
-                 notes=u''):
+                 notes=u'', userpictype=u'None'):
         super(User, self).__init__()
         self.username = username
         if password is not None:
@@ -70,6 +76,7 @@ class User(object):
         self.country = country
         self.www = www
         self.notes = notes
+        self.userpictype = userpictype
 
     @property
     def is_manager(self):
@@ -139,11 +146,91 @@ class User(object):
     def get_url_values(self):
         return self.www or '#'
 
+    @property
+    def pic_url(self):
+        return UserPicture(self).url()
+
     def __repr__(self):
         return '<%s %r>' % (
             self.__class__.__name__,
             self.username
         )
+
+
+class UserPicture(object):
+    """A local user picture"""
+
+    def __init__(self, user):
+        super(UserPicture, self).__init__()
+        self.user = user
+
+    def _pic_hash(self):
+        from pyClanSphere.api import get_application
+        app = get_application()
+        return md5(app.cfg['iid'] + str(self.user.id)).hexdigest()
+
+    @property
+    def picture_folder(self):
+        try:
+            return self._picture_folder
+        except AttributeError:
+            from pyClanSphere.api import get_application
+            app = get_application()
+            self._picture_folder = pjoin(app.instance_folder, 'userpics')
+            if not os.path.exists(self._picture_folder):
+                os.makedirs(self._picture_folder)
+            return self._picture_folder
+
+    @property
+    def filename(self):
+        pictype = self.user.userpictype
+        retval = u''
+        if pictype and pictype not in ['None', 'Gravatar']:
+            retval = "%s.%s" % (self._pic_hash(), pictype.lower())
+        return retval
+
+    def url(self):
+        """Return a default pic link, the magic gravatar url or
+           a link to the uploaded picture, if any
+        """
+
+        from pyClanSphere.api import get_application, url_for
+        app = get_application()
+        size = app.theme.settings['avatar.size']
+        pictype = self.user.userpictype
+        if not pictype or pictype == u'None':
+            return app.cfg['avatar_default']
+        if self.user.userpictype == u'Gravatar':
+            gravatar_url = "http://www.gravatar.com/avatar/"
+            gravatar_url += md5(self.user.email).hexdigest() + "?"
+            gravatar_url += urlencode({'size':str(size)})
+            return gravatar_url
+        else:
+            return url_for('userpics/shared', filename=self.filename)
+
+    def place_file(self, newfile):
+        """Move picture file to instance subfolder and generate appropriate filename"""
+
+        if isinstance(newfile, FileStorage):
+            temp_path = pjoin(self.picture_folder, self._pic_hash())
+            newfile.save(temp_path)
+            imgtype = imghdr.what(temp_path)
+            if imgtype not in ['png', 'gif', 'jpeg']:
+                os.remove(temp_path)
+                return
+            self.user.userpictype = imgtype
+            os.rename(temp_path, pjoin(self.picture_folder, self.filename))
+        else:
+            raise NotImplemented('Dunno how to handle that kind of file object')
+
+    def remove(self, set_default=False):
+        """Remove a picture"""
+
+        filename = self.filename
+        if filename and os.path.isfile(filename):
+            os.remove(filename)
+        if set_default:
+            self.user.userpictype = u'None'
 
 
 class Group(object):

@@ -16,7 +16,7 @@ from pyClanSphere.api import *
 from pyClanSphere.forms import LoginForm, DeleteAccountForm, EditProfileForm, \
      make_notification_form, DeleteIMAccountForm, EditIMAccountForm, \
      ChangePasswordForm, PasswordRequestForm
-from pyClanSphere.models import IMAccount, PasswordRequest
+from pyClanSphere.models import IMAccount, PasswordRequest, UserPicture
 from pyClanSphere.i18n import _, ngettext
 from pyClanSphere.privileges import ENTER_ADMIN_PANEL
 from pyClanSphere.utils.account import flash, require_account_privilege
@@ -214,7 +214,18 @@ def profile(request):
         elif 'delete' in request.form:
             return redirect_to('account/delete')
         elif form.validate(request.form):
-            form.save_changes()
+            picfile = request.files.get('picfile')
+            picture = UserPicture(request.user)
+            if picfile:
+                form.save_changes()
+                picture.place_file(picfile)
+            else:
+                pictype = request.user.userpictype
+                if not form['userpictype']:
+                    form.data['userpictype'] = pictype
+                if form['userpictype'] != pictype:
+                   picture.remove()
+                form.save_changes()
             db.commit()
             flash(_(u'Your profile was updated successfully.'), 'info')
             return form.redirect('account/index')

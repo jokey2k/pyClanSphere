@@ -1,5 +1,6 @@
 {% extends "admin/layout.html" %}
 {% from "admin/_form_helpers.html" import render_formmultibox, render_actions %}
+{% from "admin/_form_avatar.html" import render_avatar %}
 {% block title %}{{ _('New User') if form.new else _('Edit User') }}{% endblock %}
 {% block contents %}
   <h1>{{ self.title() }}</h1>
@@ -25,6 +26,7 @@
       {% endfor %}
       </table>
     </div>
+    {{ render_avatar(form) }}
     {{ render_actions(form) }}
   {% endcall %}
 {% endblock %}
