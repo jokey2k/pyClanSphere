@@ -144,6 +144,7 @@ class User(object):
         return self.pw_hash == '!'
 
     def get_url_values(self):
+        from pyClanSphere.api import url_for
         return url_for('core/profile', user_id=self.id)
 
     @property
