@@ -11,5 +11,9 @@
                           form.city, form.country, form.www, form.gender_male,
                           form.birthday, form.height, form.notes], _("About me")) }}
   {{ render_avatar(form) }}
+  <div class="actions">
+    <input type="submit" name="save" value="{{ _('Update Profile') }}">
+    <input type="submit" name="cancel" value="{{ _('Cancel') }}">
+  </div>
   {% endcall %}
 {% endblock %}
