@@ -144,7 +144,7 @@ class User(object):
         return self.pw_hash == '!'
 
     def get_url_values(self):
-        return self.www or '#'
+        return url_for('core/profile', user_id=self.id)
 
     @property
     def pic_url(self):
