@@ -142,7 +142,7 @@ DEFAULT_VARS = {
              ('white', l_(u'White')),
              ('blackglass', l_(u'Black Glass')),
              ('clean', l_(u'Clean')),
-             ('custom', l_(u'Custom (I known what I\'m doing!)'))
+             ('custom', l_(u'Custom (I know what I\'m doing!)'))
     ], default=u'red', help_text=l_(
         u'Use this theme unless overriden by active theme or hardcoded call'))
 }
