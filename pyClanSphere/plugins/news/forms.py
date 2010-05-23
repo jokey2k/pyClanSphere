@@ -15,7 +15,7 @@ from pyClanSphere.utils.validators import ValidationError
 
 from pyClanSphere.plugins.news.models import News, \
      STATUS_DRAFT, STATUS_PUBLISHED
-from pyClanSphere.plugins.news.privileges import NEWS_DELETE
+from pyClanSphere.plugins.news.privileges import NEWS_DELETE, NEWS_PUBLIC
 
 class NewsForm(forms.Form):
     """The form for news writing."""
@@ -54,8 +54,8 @@ class NewsForm(forms.Form):
     def validate_status(self, status):
         """Users without NEWS_PUBLIC are not allowed to switch status flag"""
 
-        if status == STATUS_PUBLISHED and not \
-                self.news.can_publish():
+        req = get_request()
+        if status == STATUS_PUBLISHED and not req.user.has_privilege(NEWS_PUBLIC):
             raise ValidationError(_(u'You have no permission to publish posts.'))
 
     def _set_common_attributes(self, news):
