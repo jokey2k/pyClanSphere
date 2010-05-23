@@ -4,7 +4,7 @@
 
 {% macro author_link(author) %}
 {% if author.is_somebody %}
-<a href="#">{{ author.display_name }}</a>
+<a href="{{ url_for(author) }}">{{ author.display_name }}</a>
 {% else %}
 {{ author.display_name }}
 {% endif %}
