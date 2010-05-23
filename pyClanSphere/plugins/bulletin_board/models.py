@@ -330,7 +330,7 @@ class Post(AuthorBase):
     def can_edit(self, user=None):
         if user is None:
             user = get_request().user
-        if not user.is_somebody():
+        if not user.is_somebody:
             return
         if not self.author.is_somebody:
             return user.has_privilege(BOARD_MODERATE)
