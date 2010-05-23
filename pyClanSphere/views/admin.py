@@ -252,8 +252,8 @@ def edit_user(request, user_id=None):
                         picture.place_file(picfile)
                 else:
                     pictype = user.userpictype
-                    if form['userpictype'] == 'Upload' or not form['userpictype']:
-                        form['userpictype'] = pictype
+                    if not form['userpictype']:
+                        form.data['userpictype'] = pictype
                     if form['userpictype'] != pictype:
                        picture.remove()
                     form.save_changes()
