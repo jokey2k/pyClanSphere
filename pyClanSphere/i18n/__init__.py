@@ -145,7 +145,7 @@ class pyClanSphereTranslations(TranslationsBase, _CustomAttrsTranslations):
         locale = Locale.parse(locale)
         catalog = find_catalog(path, domain, locale, gettext_lookup)
         if catalog:
-            return pyClanSphereTranslations(fileobj=open(catalog), locale=locale)
+            return pyClanSphereTranslations(fileobj=open(catalog, 'rb'), locale=locale)
         return pyClanSphereNullTranslations(locale=locale)
 
     # Always use the unicode versions, we don't support byte strings
