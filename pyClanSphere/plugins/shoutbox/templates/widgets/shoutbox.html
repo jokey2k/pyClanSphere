@@ -2,7 +2,11 @@
 {% block body %}
 <ul class="sidemenu">
 {% for entry in widget.entries %}
-<li>{{ entry.author }}:{{ entry.text }}<br>
+{% if entry.existing_user %}
+<li><a href="{{ url_for(entry.user) }}">{{ entry.user.display_name|e }}</a>:{{ entry.text }}<br>
+{% else %}
+<li>{{ entry.author|e }}:{{ entry.text }}<br>
+{% endif %}
   <span class="postdate">({{ entry.postdate|datetimeformat }})</span><br><hr></li>
   {% if entry.can_manage() %}<a href="{{ url_for('shoutbox/delete', entry_id=entry.id) }}">delete this</a>{% endif -%}
 {% endfor %}
