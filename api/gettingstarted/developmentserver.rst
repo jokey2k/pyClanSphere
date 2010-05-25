@@ -9,11 +9,11 @@ need to mess with a server setup.
 
     # On Mac/Linux
     $ mkdir instance
-    $ scripts/server
+    $ scripts/server -I instance
 
     # On Win
     C:\pyClanSphere> mkdir instance
-    C:\pyClanSphere> python scripts\server
+    C:\pyClanSphere> python scripts\server -I instance
 
 Now a development server will be running on localhost, port 4000.
 
