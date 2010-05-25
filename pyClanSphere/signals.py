@@ -3,7 +3,7 @@
     pyClanSphere.signals
     ~~~~~~~~~~~~~~~~~~~~
 
-    Signals used in the app, explicitely import :meth:signal if you want to
+    Signals used in the app, explicitely import :meth:`signal` if you want to
     add your own signals
     
     Known signals are attributes of this module so they should be straight
@@ -19,6 +19,14 @@ from blinker import ANY, Namespace
 _namespace = Namespace()
 _ns_signal = _namespace.signal
 def signal(name, doc=None):
+    """Create a named signal
+
+    The signal is automatically registered in the
+    :mod:`pyClanSphere.signals` namespace
+
+    :keyword name: name of the signal to be created
+    :keyword doc: docstring for the Signal (see signals.py for examples)
+    """
     sig = _ns_signal(name, doc)
     globals()[name] = sig
     if name not in __all__: __all__.append(name)
