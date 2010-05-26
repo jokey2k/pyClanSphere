@@ -21,7 +21,7 @@ def flash(msg, type='info'):
     "add", "remove", "error", "ok" and "configure". The message type affects
     the icon and visual appearance.
 
-    The flashes messages appear only in the admin interface!
+    The flashes messages appear only in the account interface!
     """
     assert type in \
         ('info', 'add', 'remove', 'error', 'ok', 'configure', 'warning')

@@ -44,20 +44,21 @@ _position_hint_lock = Lock()
 
 def fill_dict(_dict, **kwargs):
     """A helper to fill the dict passed with the items passed as keyword
-    arguments if they are not yet in the dict.  If the dict passed was
-    `None` a new dict is created and returned.
+       arguments if they are not yet in the dict.  If the dict passed was
+       `None` a new dict is created and returned.
 
-    This can be used to prepopulate initial dicts in overriden constructors:
+       This can be used to prepopulate initial dicts in overriden constructors:
 
-        class MyForm(forms.Form):
-            foo = forms.TextField()
-            bar = forms.TextField()
+           class MyForm(forms.Form):
+               foo = forms.TextField()
+               bar = forms.TextField()
 
-            def __init__(self, initial=None):
-                forms.Form.__init__(self, forms.fill_dict(initial,
-                    foo="nothing",
-                    bar="nothing"
-                ))
+               def __init__(self, initial=None):
+                   forms.Form.__init__(self, forms.fill_dict(initial,
+                       foo="nothing",
+                       bar="nothing"
+                   ))
+
     """
     if _dict is None:
         return kwargs
