@@ -64,6 +64,32 @@ def add_admin_links(sender, **kwds):
 
     kwds['navbar'].insert(1, ('board', url_for('admin/board/categories'), _(u'Board'), entries))
 
+def convert_to_guestpost(sender, **kwds):
+    """Upon user deletion, convert belonging entries to guest entries"""
+
+    user = kwds['user']
+    anon_user = AnonymousUser()
+    anon_user.display_name = user.display_name
+
+    touched_topics = set()
+    touched_forums = set()
+    posts =  Post.query.filter_by(author_id=user.id)
+
+    for post in posts:
+        topic = post.topic
+        forum = topic.forum
+        post.author = anon_user
+        touched_forums.add(forum)
+        touched_topics.add(topic)
+
+    db.commit()
+    for topic in touched_topics:
+        topic.refresh()
+    db.commit()
+    for forum in touched_forums:
+        forum.refresh()
+    db.commit()
+
 def setup(app, plugin):
     # Add our privileges
     for priv in PLUGIN_PRIVILEGES.values():
@@ -100,6 +126,9 @@ def setup(app, plugin):
 
     # Inject our js for post quoting
     signals.before_metadata_assembled.connect(inject_js)
+
+    # convert posts to guestposts upon user deletion
+    signals.before_user_deleted.connect(convert_to_guestpost)
 
     # Add JSON services
     app.add_servicepoint('bulletin_board/get_post', do_get_post)
