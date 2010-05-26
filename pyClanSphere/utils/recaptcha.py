@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-    solace.utils.recaptcha
-    ~~~~~~~~~~~~~~~~~~~~~~
+    pyClanSphere.utils.recaptcha
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Provides basic recaptcha integration.
+    Based on reCAPTCHA implementation from Plurk's solace
 
     :copyright: (c) 2009 by pyClanSphere Team
                 (c) 2009 by Plurk Inc., see AUTHORS for more details.
