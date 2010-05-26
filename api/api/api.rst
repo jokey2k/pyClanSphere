@@ -9,3 +9,4 @@ Contents:
    application
    notifications
    signals
+   utilities/index
