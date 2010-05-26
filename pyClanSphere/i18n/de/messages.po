@@ -1702,7 +1702,7 @@ msgstr "zur Administration"
 #: pyClanSphere/plugins/vessel_theme/templates/layout.html:28
 #, python-format
 msgid "Proudly powered by %(pyClanSphere)s, Theme copyright by Armin Ronacher."
-msgstr "%(pyClanSphere)s unter der Haube, %(theme)s designed von %(author)s."
+msgstr "%(pyClanSphere)s unter der Haube, Theme copyright by Armin Ronacher."
 
 #: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:2
 #: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:4
