@@ -1,0 +1,57 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+    Create content locations for nginx
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    This creates a nginx config for static exports.
+
+    :copyright: (c) 2010 by the pyClanSphere Team,
+                see AUTHORS for more details.
+    :license: BSD, see LICENSE for more details.
+"""
+import sys
+from os.path import abspath, dirname
+from optparse import OptionParser
+from urlparse import urlparse
+
+
+HELP_TEXT = '''\
+This script generates an nginx config for the static data pyClanSphere or
+pyClanSphere plugins export.  It's recommended to generate this configuration
+every time a plugin is enabled/disabled and reincluded in the vhost
+of your regular pyClanSphere nginx configuration.
+
+This will greatly improve the performance of your pyClanSphere installation.\
+'''
+
+
+sys.path.append(dirname(__file__))
+from _init_pyClanSphere import find_instance
+from pyClanSphere import setup
+
+
+def main():
+    parser = OptionParser(usage='%prog [options]\n\n' + HELP_TEXT)
+    parser.add_option('--instance', '-I', dest='instance',
+                      help='Use the path provided as pyClanSphere instance.')
+    options, args = parser.parse_args()
+    if args:
+        parser.error('incorrect number of arguments')
+    instance = options.instance or find_instance()
+    if instance is None:
+        parser.error('instance not found.  Specify path to instance')
+
+    app = setup(instance)
+    
+    prefix = urlparse(app.cfg['site_url'])[2].rstrip('/')
+
+    for alias, dst in app._shared_exports.iteritems():
+        dst = abspath(dst)
+        if len(dst.split()) != 1:
+            dst = '"%s"' % dst
+        print 'location %s%s {\n    alias  %s\n}' % (prefix, alias, dst)
+
+
+if __name__ == '__main__':
+    main()
