@@ -70,7 +70,7 @@ General application stuff
 .. autoattribute:: pyClanSphere.signals.application_setup_done
 
 Creating your own signal
-========================
+------------------------
 
 As noted above, just import :meth:`signal`
 
