@@ -76,7 +76,7 @@ def user_deleted_memberships(sender, **kwds):
 
     user = kwds['user']
     
-    memberships = SquadMember.query.filter_by(user=me).all()
+    memberships = SquadMember.query.filter_by(user=user).all()
 
     for membership in memberships:
       db.delete(membership)
