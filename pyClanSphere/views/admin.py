@@ -237,6 +237,7 @@ def edit_user(request, user_id=None):
         elif request.form.get('delete') and user:
             return redirect_to('admin/delete_user', user_id=user.id)
         elif form.validate(request.form):
+            picfile = request.files.get('picfile')
             if user is None:
                 user = form.make_user()
                 if picfile and form['userpictype'] == 'Upload':
@@ -244,7 +245,6 @@ def edit_user(request, user_id=None):
                 msg = _(u'User %s created successfully.')
                 icon = 'add'
             else:
-                picfile = request.files.get('picfile')
                 picture = UserPicture(request.user)
                 if picfile:
                     form.save_changes()
