@@ -16,9 +16,9 @@ from pyClanSphere.api import _, url_for, db, render_response
 from pyClanSphere.models import AnonymousUser
 from pyClanSphere.utils.admin import require_admin_privilege, \
      flash as admin_flash
+from pyClanSphere.utils.datastructures import OrderedDict
 from pyClanSphere.utils.http import redirect_to
 from pyClanSphere.utils.pagination import AdminPagination
-from pyClanSphere.utils.support import OrderedDict
 from pyClanSphere.views.admin import render_admin_response, PER_PAGE
 
 from pyClanSphere.plugins.bulletin_board.forms import CategoryForm, \
