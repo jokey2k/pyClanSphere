@@ -22,3 +22,23 @@ Just open up a browser and continue the `setup`_, remember to use the following 
     sqlite://database.db
 
 .. _setup: http://localhost:4000/
+
+Commandline Options
+-------------------
+
+Known commandline options for the development server:
+
+Usage: server [options]
+
+-h, --help            show help message and exit
+--no-reloader         Disable the reloader
+--no-debugger         Disable the debugger
+--threaded            Activate multithreading
+--profile             Enable the profiler
+--mount=MOUNT         If you want to mount the application somewhere outside
+                      the URL root.  This is useful for debugging URL
+                      generation problems.
+-I INSTANCE, --instance=INSTANCE
+                      Use the path provided as pyClanSphere instance.
+-a HOSTNAME, --hostname=HOSTNAME  bind to given hostname
+-p PORT, --port=PORT  bind to given port
