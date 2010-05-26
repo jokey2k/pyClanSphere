@@ -20,7 +20,6 @@ from pyClanSphere.plugins.gamesquad.models import SquadMember
 from pyClanSphere.plugins.gamesquad.privileges import PLUGIN_PRIVILEGES, GAME_MANAGE, LEVEL_MANAGE
 from pyClanSphere.plugins.gamesquad import views
 
-
 TEMPLATE_FILES = join(dirname(__file__), 'templates')
 
 # Register our used signals
@@ -71,6 +70,11 @@ def add_admin_links(sender, **kwds):
 
     kwds['navbar'].insert(1, ('gamesquad', url_for('admin/squads'), _(u'Games and Squads'), entries))
 
+def add_account_links(sender, **kwds):
+    """Add our views to the account interface"""
+
+    kwds['navbar'].insert(2, ('gameaccounts', url_for('account/gameaccounts'), _(u'Gameaccounts'),[]))
+
 def user_deleted_memberships(sender, **kwds):
     """Delete memberships of a user that will be deleted"""
 
@@ -82,11 +86,6 @@ def user_deleted_memberships(sender, **kwds):
       db.delete(membership)
 
     db.commit()
-
-def add_account_links(sender, **kwds):
-    """Add our views to the account interface"""
-
-    kwds['navbar'].insert(2, ('gameaccounts', url_for('account/gameaccounts'), _(u'Gameaccounts'),[]))
 
 def setup(app, plugin):
     """Init our needed stuff"""
