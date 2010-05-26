@@ -16,8 +16,10 @@ from pyClanSphere.utils.account import add_account_urls
 from pyClanSphere.utils.admin import add_admin_urls
 
 from pyClanSphere.plugins.gamesquad.database import init_database
+from pyClanSphere.plugins.gamesquad.models import SquadMember
 from pyClanSphere.plugins.gamesquad.privileges import PLUGIN_PRIVILEGES, GAME_MANAGE, LEVEL_MANAGE
 from pyClanSphere.plugins.gamesquad import views
+
 
 TEMPLATE_FILES = join(dirname(__file__), 'templates')
 
@@ -68,6 +70,18 @@ def add_admin_links(sender, **kwds):
         entries.append(('levels', url_for('admin/levels'), _(u'Levels')))
 
     kwds['navbar'].insert(1, ('gamesquad', url_for('admin/squads'), _(u'Games and Squads'), entries))
+
+def user_deleted_memberships(sender, **kwds):
+    """Delete memberships of a user that will be deleted"""
+
+    user = kwds['user']
+    
+    memberships = SquadMember.query.filter_by(user=me).all()
+
+    for membership in memberships:
+      db.delete(membership)
+
+    db.commit()
 
 def add_account_links(sender, **kwds):
     """Add our views to the account interface"""
@@ -128,6 +142,9 @@ def setup(app, plugin):
     # Account views: Gameaccounts
     add_account_urls(app, 'gameaccounts', 'account_id', views.gameaccount_list,
                      views.gameaccount_edit, views.acc_delete_gameaccount)
+
+    # Delete squadmember entries while a user is being deleted
+    signals.before_user_deleted.connect(user_deleted_memberships)
 
     # Add admin views to navigation bar
     signals.modify_admin_navigation_bar.connect(add_admin_links)
