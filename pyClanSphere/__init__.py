@@ -25,7 +25,7 @@
     :license: BSD, see LICENSE for more details.
 """
 __version__ = '0.1'
-__url__ = 'http://pyclansphere.digital-family.de/'
+__url__ = 'http://www.pyclansphere.de/'
 
 
 # implementation detail.  Stuff in __all__ and the initial import has to be

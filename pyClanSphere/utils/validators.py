@@ -88,9 +88,9 @@ def is_valid_url(message=None):
 
     >>> check(is_valid_url, 'http://digital-family.de/')
     True
-    >>> check(is_valid_url, 'http://pyclansphere.digital-family.de/lists')
+    >>> check(is_valid_url, 'http://www.pyclansphere.de/lists')
     True
-    >>> check(is_valid_url, 'pyclansphere.digital-family.de/lists')
+    >>> check(is_valid_url, 'www.pyclansphere.de/lists')
     False
     >>> check(is_valid_url, 'javascript:alert("pyClanSphere rocks!");')
     False

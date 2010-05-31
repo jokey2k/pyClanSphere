@@ -677,7 +677,7 @@ class pyClanSphere(object):
             pyClanSphere={
                 'version':      pyClanSphere.__version__,
                 'copyright':    _(u'Copyright %(years)s by the pyClanSphere Team')
-                                % {'years': '2009'}
+                                % {'years': '2009 - 2010'}
             }
         )
 

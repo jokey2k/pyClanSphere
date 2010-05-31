@@ -1,7 +1,7 @@
 Name: Squad Manager
-Plugin URL: http://pyclansphere.digital-family.de/
+Plugin URL: http://www.pyclansphere.de/
 Author: Markus Ullmann <mail@markus-ullmann.de>
-Author URL: http://pyclansphere.digital-family.de/
+Author URL: http://www.pyclansphere.de/
 License: BSD
 Version: 0.2
 Description: Game / Squad / Member Group Management

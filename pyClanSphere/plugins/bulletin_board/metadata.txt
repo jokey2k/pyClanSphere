@@ -1,7 +1,7 @@
 Name: Bulletin Board
 Author: Markus Ullmann
 Author URL: http://www.markus-ullmann.de/
-Plugin URL: http://pyclansphere.digital-family.de/
+Plugin URL: http://www.pyclansphere.de/
 Version: 0.2
 License: BSD
 Description: A simple bulletin board

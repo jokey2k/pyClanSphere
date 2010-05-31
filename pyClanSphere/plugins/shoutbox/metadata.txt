@@ -1,7 +1,7 @@
 Name: Shoutbox
 Author: Markus Ullmann <mail@markus-ullmann.de>
 Author URL: http://www.markus-ullmann.de
-Plugin URL: http://pyclansphere.digital-family.de/
+Plugin URL: http://www.pyclansphere.de/
 Version: 0.1
 License: BSD
 Description: Simple Shoutbox, administration via front page

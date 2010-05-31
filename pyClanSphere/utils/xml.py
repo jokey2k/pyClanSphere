@@ -96,7 +96,7 @@ def generate_rsd(app):
     service = root.appendChild(document.createElement('service'))
 
     attributes = [('engineName', 'pyClanSphere'),
-                  ('engineLink', 'http://pyclansphere.digital-family.de/'),
+                  ('engineLink', 'http://www.pyclansphere.de/'),
                   ('homePageLink', url_for('core/index', _external=True))]
 
     for attr, value in attributes:
@@ -281,9 +281,9 @@ class Namespace(object):
     """Attribute access to this class returns fully qualified names for the
     given URI.
 
-    >>> ns = Namespace('http://pyClanSphere.digital-family.de/')
+    >>> ns = Namespace('http://www.pyclansphere.de/')
     >>> ns.foo
-    u'{http://pyClanSphere.digital-family.de/}foo'
+    u'{http://www.pyclansphere.de/}foo'
     """
 
     def __init__(self, uri):
