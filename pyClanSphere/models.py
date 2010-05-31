@@ -216,7 +216,8 @@ class UserPicture(object):
         size = app.theme.settings['avatar.size']
         pictype = self.user.userpictype
         if not pictype or pictype == u'None':
-            return app.cfg['avatar_default']
+            return app.cfg['avatar_default'] if app.cfg['avatar_default'] \
+                else url_for('core/shared', filename='nopicture.jpg')
         if self.user.userpictype == u'Gravatar':
             gravatar_url = "http://www.gravatar.com/avatar/"
             gravatar_url += md5(self.user.email).hexdigest() + "?"
