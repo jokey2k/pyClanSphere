@@ -294,6 +294,7 @@ class _UserProfileForm(_UserBoundForm):
             (0, _('Female'))
         ]
         self.country.choices = sorted(get_application().locale.territories.iteritems(), key=itemgetter(1))
+        self.country.choices.insert(0,('',''))
         self.userpictype.choices = [
             (u'', _('No change')),
             (u'None', _('No Picture')),
