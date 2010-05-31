@@ -730,6 +730,22 @@ class pyClanSphere(object):
 
         signals.after_bbcode_initialized.send(bbcode_parser=bbcode_parser)
 
+        @cached_result('bbcode_')
+        def format_bbcode(text):
+            """Pass text through bbcode parser"""
+            if text is None:
+                return Markup(u'')
+            text = bbcode_parser(text)
+            return Markup(text)
+
+        @cached_result('smileyfied_')
+        def format_smileys(text):
+            """Pass text through smiley parser"""
+            if text is None:
+                return Markup(u'')
+            text = smiley_parser.makehappy(text)
+            return Markup(text)
+
         @cached_result('prettified_')
         def prettify(text):
             """Pass text through bbcode and smiley to make it look pretty to the user
@@ -748,8 +764,8 @@ class pyClanSphere(object):
             return Markup(text)
 
         env.filters.update(
-            smileys=lambda x: Markup(smiley_parser.makehappy(x)),
-            bbcode=lambda x: Markup(bbcode_parser(x)),
+            smileys=format_smileys,
+            bbcode=format_bbcode,
             prettify=prettify
         )
 
