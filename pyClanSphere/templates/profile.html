@@ -9,8 +9,8 @@
     <tr><td>{{ _('Realname') }}:</td><td>{{ user.real_name or '' }}</td></tr>
   	<tr><td>{{ _('Gender') }}:</td><td>{{ _('Male') if user.gender_male else _('Female') }}</td></tr>
     <tr><td>{{ _('Day of Birth') }}:</td><td>{{ user.birthday|dateformat if user.birthday else '' }}</td></tr>
-    <tr><td>{{ _('Height') }}:</td><td>{{ user.height }} cm</td></tr>
-    <tr><td>{{ _('Streetaddress') }}:</td><td>{{ user.address or '' }}{{ '<br>'|safe if user.address else '' }}{{ user.zip or '' }} {{ user.city or '' }}</td></tr>
+    <tr><td>{{ _('Height') }}:</td><td>{{ user.height or '0' }} cm</td></tr>
+    <tr><td>{{ _('Address') }}:</td><td>{{ user.address or '' }}{{ '<br>'|safe if user.address else '' }}{{ user.zip or '' }} {{ user.city or '' }}</td></tr>
     <tr><td>{{ _('Country') }}:</td><td>{{ user.localized_country }}</td></tr>
     <tr><td>{{ _('Homepage') }}:</td><td>{% if user.www %}<a href="{{ user.www }}" target="_blank">{{ user.www }}</a>{% else %}No homepage (yet){% endif %}</td></tr>
   </table>
