@@ -128,9 +128,13 @@ class lib(object):
             key = ' %s ' % key
         return """<a href="javascript:void(0);" onClick="pyClanSphere.insertText('""" + targetfield + r"""','""" + key + """')">""" + t + '</a>'
 
-    def get_panel(self, targetname="text"):
+    def get_panel(self, targetname="text", skip_duplicate_imgs=False):
         """Returns HTML to display current smiley set with clickable Javascript links to insert into form.textarea"""
         panel = ""
+        sent_imgs = []
         for s in self.smilies.keys():
-            panel = panel + self.get_insert(s, targetname) + '\n'
+            if skip_duplicate_imgs and self.smilies[s][0] in sent_imgs:
+                continue
+            panel += self.get_insert(s, targetname) + '\n'
+            sent_imgs.append(self.smilies[s][0])
         return panel
