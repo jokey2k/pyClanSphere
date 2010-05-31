@@ -114,6 +114,22 @@ class User(object):
         return retval
 
     @property
+    def age(self):
+        """Return birtdate as agecount"""
+
+        if not isinstance(self.birthday, date):
+            return 0
+
+        now = date.today()
+        years = now.year - self.birthday.year
+        if now.month < self.birthday.month:
+            years -= 1
+        elif now.month == self.birthday.month:
+            if now.day < self.birthday.day:
+                years -= 1
+        return years
+
+    @property
     def privileges(self):
         """A read-only set with all privileges."""
         result = set(self.own_privileges)
