@@ -3,7 +3,7 @@
 {% block contents %}
 <div class="post">
 	<h2 class="title" align="center">{{ _("About the user") }}</h2>
-	<img src="{{ user.pic_url }}" width="{{ request.app.theme.settings['avatar.size'] }}" style="float:right; margin:6px;">
+	<img src="{{ user.pic_url }}" style="float:right; margin:6px;max-width:{{ request.app.theme.settings['avatar.size'] }}px">
   <table>
   	<tr><td>{{ _('Username') }}:</td><td>{{ user.username }}</td></tr>
     <tr><td>{{ _('Realname') }}:</td><td>{{ user.real_name or '' }}</td></tr>
