@@ -770,7 +770,7 @@ class pyClanSphere(object):
         )
 
         env.globals.update(
-            smileylist = lambda x: smiley_parser.get_panel(x)
+            smileylist = lambda x: smiley_parser.get_panel(x, True)
         )
 
         #! called after the application and all plugins are initialized
