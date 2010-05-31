@@ -56,7 +56,7 @@ import os
 import cPickle as pickle
 import struct
 from gettext import NullTranslations
-from datetime import datetime, timedelta as datetime_timedelta
+from datetime import datetime, timedelta as datetime_timedelta, date
 from time import strptime
 from weakref import WeakKeyDictionary
 
@@ -504,7 +504,27 @@ def has_timezone(tz):
     return True
 
 
-def parse_datetime(string, rebase=True, dateonly=False):
+def parse_date(string):
+    """Parses a string into a date object. Timezone is ignored as dates are
+    not bound to timezones. If you need that dependency, parse it as datetime.
+    Returned is always a :class:`datetime.date` object.
+    """
+    if string is None or string.lower() in ('now', _('now')):
+        return datetime.today()
+
+    def convert(format):
+        """Helper that parses the string and converts the timezone."""
+        rv = datetime(*strptime(string, format)[:7])
+        return rv.replace(microsecond=0)
+
+    for d_fmt in DATE_FORMATS:
+        try:
+            val = convert(d_fmt)
+            return date(val.year, val.month, val.day)
+        except ValueError:
+            pass
+
+def parse_datetime(string, rebase=True):
     """Parses a string into a datetime object.  Per default a conversion
     from the given timezone to UTC is performed but returned as naive
     datetime object (that is tzinfo being None).  If rebasing is disabled
@@ -520,7 +540,7 @@ def parse_datetime(string, rebase=True, dateonly=False):
         return datetime.utcnow().replace(microsecond=0)
 
     def convert(format):
-        """Helper that parses the string and convers the timezone."""
+        """Helper that parses the string and converts the timezone."""
         rv = datetime(*strptime(string, format)[:7])
         if rebase:
             rv = to_utc(rv)
@@ -528,7 +548,7 @@ def parse_datetime(string, rebase=True, dateonly=False):
     cfg = pyClanSphere.application.get_application().cfg
 
     # first of all try the following format because this is the format
-    # Texpress will output by default for any date time string in the
+    # pyClanSphere will output by default for any date time string in the
     # administration panel.
     try:
         return convert(u'%Y-%m-%d %H:%M')
@@ -556,16 +576,6 @@ def parse_datetime(string, rebase=True, dateonly=False):
             return convert(fmt)
         except ValueError:
             pass
-
-    # We're allowed to retry with date-only
-    if dateonly:
-        for d_fmt in DATE_FORMATS:
-            try:
-                val = convert(d_fmt)
-                return to_utc(datetime.utcnow().replace(year=val.year,
-                              month=val.month, day=val.day, hour=0, minute=0, second=0,microsecond=0))
-            except ValueError:
-                pass
 
     raise ValueError('invalid date format')
 

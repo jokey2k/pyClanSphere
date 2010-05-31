@@ -16,7 +16,7 @@
     :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
-from datetime import datetime
+from datetime import datetime, date
 from itertools import chain
 from threading import Lock
 try:
@@ -31,7 +31,7 @@ from jinja2 import Markup
 from pyClanSphere.application import get_request, url_for, get_application
 from pyClanSphere.database import db
 from pyClanSphere.i18n import _, ngettext, lazy_gettext, parse_datetime, \
-     format_system_datetime
+     format_system_datetime, parse_date
 from pyClanSphere.utils.http import get_redirect_target, _redirect, redirect_to
 from pyClanSphere.utils.datastructures import OrderedDict, missing
 from pyClanSphere.utils.recaptcha import get_recaptcha_html, validate_recaptcha
@@ -1315,7 +1315,6 @@ class DateTimeField(Field):
                        default)
         self.required = required
         self.rebase = rebase
-        self.dateonly = False
 
     def convert(self, value):
         if isinstance(value, datetime):
@@ -1326,24 +1325,45 @@ class DateTimeField(Field):
                 raise ValidationError(self.messages['required'])
             return None
         try:
-            return parse_datetime(value, rebase=self.rebase, dateonly=self.dateonly)
+            return parse_datetime(value, rebase=self.rebase)
         except ValueError:
             raise ValidationError(self.messages['invalid_date'])
 
     def to_primitive(self, value):
         if isinstance(value, datetime):
-            value = format_system_datetime(value, rebase=self.rebase, dateonly=self.dateonly)
+            value = format_system_datetime(value, rebase=self.rebase)
         return value
 
 
 class DateField(DateTimeField):
-    """A Field, where dates without time is okay, overriding for convenience"""
+    """A Field for date input, timezone neutral"""
+
+    messages = dict(invalid_date=lazy_gettext('Please enter a valid date.'))
+
     def __init__(self, label=None, help_text=None, required=False,
-                 rebase=True, validators=None, widget=None, messages=None,
+                 validators=None, widget=None, messages=None,
                  default=missing):
-        DateTimeField.__init__(self, label, help_text, required, rebase,
-                      validators, widget, messages, default)
-        self.dateonly=True
+        Field.__init__(self, label, help_text, validators, widget, messages,
+                       default)
+        self.required = required
+
+    def convert(self, value):
+        if isinstance(value, date):
+            return value
+        value = _to_string(value)
+        if not value:
+            if self.required:
+                raise ValidationError(self.messages['required'])
+            return None
+        try:
+            return parse_date(value)
+        except ValueError:
+            raise ValidationError(self.messages['invalid_date'])
+
+    def to_primitive(self, value):
+        if isinstance(value, datetime):
+            value = format_system_datetime(value, dateonly=True)
+        return value
 
 
 class ModelField(Field):
