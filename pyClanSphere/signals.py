@@ -41,7 +41,7 @@ ignored but the context can be modified in place.
 :keyword template_name: name of the template
 :keyword stream: True if result is a jinja template stream instead
            of a unicode string
-:keyword render_context: current render context
+:keyword context: current render context
 """)
 signal('before_widget_rendered', """\
 Sent before a widget instance is rendered.
