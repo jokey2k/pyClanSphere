@@ -3,6 +3,14 @@ pyClanSphere Changelog
 
 This file lists the major changes between the pyClanSphere releases.
 
+pyClanSphere 0.2
+----------------
+
+(Codename unknown; not released yet)
+
+- Allow Forms to set csrf_use_source so CSRF is checked for the source path instead of action path
+  (Useful for frontend logins)
+
 pyClanSphere 0.1
 ----------------
 

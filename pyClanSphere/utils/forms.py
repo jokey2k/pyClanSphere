@@ -746,6 +746,8 @@ class FormWidget(MappingWidget):
         if self._field.form.request is not None:
             if self._field.form.csrf_protected:
                 fields.append(('_csrf_token', self.csrf_token))
+            if self._field.form.csrf_protected and self._field.form.csrf_use_source:
+                fields.append(('_csrf_source_path', get_request().path))
             if self._field.form.redirect_tracking:
                 target = self.redirect_target
                 if target is not None:
@@ -1091,8 +1093,13 @@ class FormMapping(Mapping):
                             'to convert data')
         if self.form.csrf_protected and self.form.request is not None:
             token = self.form.request.values.get('_csrf_token')
-            if token != self.form.csrf_token:
-                raise ValidationError(_(u'Invalid security token submitted.'))
+            source_path = self.form.request.values.get('_csrf_source_path')
+            if source_path:
+                if token != self.form.generate_csrf_token(source_path):
+                    raise ValidationError(_(u'Invalid security token submitted.'))
+            else:
+                if token != self.form.csrf_token:
+                    raise ValidationError(_(u'Invalid security token submitted.'))
         if self.form.captcha_protected:
             request = self.form.request
             if request is None:
@@ -1863,6 +1870,7 @@ class Form(object):
     __metaclass__ = FormMeta
 
     csrf_protected = True
+    csrf_use_source = False
     redirect_tracking = True
     captcha_protected = False
 
@@ -1921,11 +1929,15 @@ class Form(object):
 
     @property
     def csrf_token(self):
+        return self.generate_csrf_token()
+
+    def generate_csrf_token(self, path=None):
         """The unique CSRF security token for this form."""
         if self.request is None:
             raise AttributeError('no csrf token because form not bound '
                                  'to request')
-        path = self.request.path
+        if path is None:
+            path = self.request.path
         user_id = -1
         if self.request.user.is_somebody:
             user_id = self.request.user.id
