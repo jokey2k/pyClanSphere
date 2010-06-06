@@ -3,25 +3,43 @@
 {% block contents %}
 <div class="post">
   <h1>Members in Squad {{ squad.name }} playing <a href="{{ url_for('game/detail', game_id=squad.game.id) }}">{{ squad.game.name }}</a></h1>
+  {% if squad.squadmembers %}
+	<table>
+	<tr>
+		<th class="first">{{ _("Member") }}</th>
+		<th>{{ _("Level") }}</th>
+		<th>{{ _("Other Tasks") }}</th>
+	</tr>
   {%- for member in squad.squadmembers %}
-    {%- if loop.first %}
-  	<table>
-  	<tr>
-  		<th class="first">{{ _("Member") }}</th>
-  		<th>{{ _("Level") }}</th>
-  		<th>{{ _("Other Tasks") }}</th>
-  	</tr>
-    {%- endif %}
   	<tr class="{{ loop.cycle('odd', 'even') }}">
   		<td class="first">{{ member.user.display_name }}</td>
   		<td>{{ member.level.name }}</td>
-  		<td>{%- if member.othertasks %}{{ member.othertasks }}{%- else %}<div class="align-center">--</div>{%- endif %}</td>
+  		<td>{%- if member.othertasks %}{{ member.othertasks }}{% else %}<div class="align-center">--</div>{% endif -%}</td>
   	</tr>
-    {%- if loop.last %}
-    </table>
-    {%- endif %}
-  {%- else %}
-    {% trans %}<p><strong>No Members in this squad</strong></p>{% endtrans %}
-  {%- endfor %}
+  {% endfor %}
+  </table>
+  {% else %}
+    <p><b>{% trans %}No Members in this squad.{% endtrans %}</b></p>
+  {% endif %}
+  {% if squad.wars %}
+	<table>
+	<tr>
+		<th class="first">{{ _("Opponent") }}</th>
+		<th>{{ _("Date") }}</th>
+		<th>{{ _("Status") }}</th>
+		<th>{{ _("Result") }}</th>
+	</tr>
+  {%- for war in squad.wars %}
+  	<tr class="{{ loop.cycle('odd', 'even') }}">
+  		<td class="first">{{ war.clanname }}</td>
+  		<td>{{ war.date|datetimeformat("short") }}</td>
+  		<td>{{ war.named_status }}
+  		<td>{%- if war.result %}{{ war.result.points }}{% else %}&mdash;{% endif %}</td>
+  	</tr>
+  {% endfor %}
+  </table>
+  {% else %}
+    <p><b>{% trans %}So far there are no wars for this squad.{% endtrans %}</b></p>
+  {% endif %}
 </div>
 {% endblock %}

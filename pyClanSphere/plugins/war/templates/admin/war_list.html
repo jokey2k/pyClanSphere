@@ -20,7 +20,7 @@
 	  {%- endif %}
       <td>{{ war.squad.name }}</td>
 	    <td>{{ war.date|datetimeformat }}</td>
-	    <td>{{ warstates[war.status] }}</td>
+	    <td>{{ war.named_status }}</td>
 	    <td>{% if war.status >= 4 %}{{ _('Yes') if war.result else _('No') }}{% else %}&mdash;{% endif %}</td>
 	  </tr>
   {% else %}

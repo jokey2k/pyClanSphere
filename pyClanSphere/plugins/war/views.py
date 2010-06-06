@@ -75,7 +75,7 @@ def war_detail(request, war_id=None):
         raise NotFound()
 
     return render_response('war_detail.html', war=war, result=war.result,
-                           warstates=warstates, memberstates=memberstates)
+                           memberstates=memberstates)
 
 def war_fightus(request):
     """Render form for a fightus request on front page.

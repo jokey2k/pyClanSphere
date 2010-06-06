@@ -145,6 +145,10 @@ class War(object):
     def can_edit(self, user=None):
         return True
 
+    @property
+    def named_status(self):
+        return warstates[self.status]
+
     def __repr__(self):
         return "<%s (%s, %s)>" % (
             self.__class__.__name__,
@@ -319,7 +323,7 @@ mapper(War, wars, properties={
                         collection_class=db.attribute_mapped_collection('member')),
     'maps':             relation(WarMap, secondary=war_maps),
     'squad':            relation(Squad, uselist=False,
-                                 backref=backref('wars')),
+                                 backref=backref('wars', order_by=db.desc(wars.c.date))),
     'members':          relation(User, secondary=warmembers),
     'orgamember':       relation(User, uselist=False),
     'mode':             relation(WarMode, uselist=False)

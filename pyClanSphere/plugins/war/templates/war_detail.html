@@ -23,7 +23,7 @@
 	      {% else %}
 	      {% trans %}Orgamember: None yet{% endtrans %}
 	      {% endif -%}</li>
-	    <li>{{ _("Status") }}: {{ warstates[war.status] }}</li>
+	    <li>{{ _("Status") }}: {{ war.named_status }}</li>
     </ul>
   </div>
 </div>
