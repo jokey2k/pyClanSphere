@@ -1,28 +1,6 @@
 {% extends "layout.html" %}
+{% from "_news.html" import render_entry %}
 {% block title %}{{ "%s: %s" % (_("News"), newsitem.title) }}{% endblock %}
 {% block contents %}
-<div class="post">
-  {% set result = signals.before_news_entry_rendered.send(entry=entry) %}
-	<h2 class="title">{{ newsitem.title }}</h2>
-	<div class="entry"> <img src="{{ shared_url('shockg::images/homepage11.jpg') }}" alt="" width="136" height="91" class="left" />
-		{{ newsitem.text|prettify }}
-	</div>
-
-	<p class="meta">
-    {%- if newsitem.is_scheduled %}[ {% trans
-        time_span=newsitem.pub_date|timedeltaformat
-        %}<strong>Scheduled Post:</strong> This entry will appear in {{
-          time_span }}.{% endtrans %}
-      ]
-    {% else %}
-      {{ newsitem.pub_date|datetimeformat }}
-    {% endif -%}
-	  {%- trans author='<a href="%s" class="comments">%s</a>'|safe %
-    (url_for(newsitem.author)|e, newsitem.author.display_name|e),
-    pub_date=newsitem.pub_date|datetimeformat-%}
-    {{ author }}
-  {%- endtrans %}
-  </p>
-  {% set result = signals.after_news_entry_rendered.send(entry=entry) %}
-</div>
+{{ render_entry(newsitem, morelink=False) }}
 {% endblock %}

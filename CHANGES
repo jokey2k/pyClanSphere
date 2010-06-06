@@ -16,6 +16,9 @@ board plugin:
   It inherits layout.html by default yet allows a custom page just for the
   discussion boards as they typically need much space on screen
 
+news plugin:
+- merge news_details and _news templates to avoid code duplication
+
 pyClanSphere 0.1
 ----------------
 

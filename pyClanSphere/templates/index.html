@@ -6,7 +6,7 @@
     {% set hascontent = True %}
     {% from "_news.html" import render_entry %}
     {%- for item in newsitems %}
-      {{ render_entry(item, showall=loop.last) }}
+      {{ render_entry(item) }}
     {%- else %}
     <div class="notification">
       <p>{% trans %}So far there are no news entries here.{% endtrans %}</p>
