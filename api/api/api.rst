@@ -8,6 +8,7 @@ Contents:
 
    application
    cache
+   database
    notifications
    signals
    utilities/index
