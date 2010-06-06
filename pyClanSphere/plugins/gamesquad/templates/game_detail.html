@@ -3,11 +3,10 @@
 {% block contents %}
 <div class="post">
   <h1>Game: {{ game.name }}</h1>
-  <p>
   {%- for squad in game.squads %}
-    {%- if loop.first %}<p><strong>Squads for this game:</strong></p><p>{%- endif %}
-    <a href="{{ url_for('squad/detail', squad_id=squad.id) }}">{{ squad.name }}</a><br/>
-    {%- if loop.last %}</p>{%- endif %}
+    {%- if loop.first %}<p><strong>Squads for this game:</strong></p>{%- endif %}
+    <p><a href="{{ url_for('squad/detail', squad_id=squad.id) }}">{{ squad.name }}</a><br/>
+    Members: {% for member in squad.members %}{{ member.display_name }}{% if not loop.last %}, {% endif %}{% else %}{{ _("None") }}{% endfor %}</p>
   {%- else %}
     {% trans %}<strong>No Squads for this game</strong>{% endtrans %}
   {%- endfor %}
