@@ -103,7 +103,7 @@ def create_engine(uri, relative_to=None, debug=False):
     # - this setting is deployment dependent should not affect a development
     #   server for the same instance or a development shell
     for key in 'pool_size', 'pool_recycle', 'pool_timeout':
-        value = os.environ.get(key.upper())
+        value = os.environ.get("PYCLANSPHERE_" + key.upper())
         if value is not None:
             options[key] = int(value)
 
