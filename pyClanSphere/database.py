@@ -191,7 +191,7 @@ class AutoAddExt(orm.MapperExtension):
 
 #: get a new session
 session = orm.scoped_session(lambda: orm.create_session(get_engine(),
-                             autoflush=False, autocommit=False),
+                             autoflush=True, autocommit=False),
                              local_manager.get_ident)
 
 def mapper(cls, *arg, **options):

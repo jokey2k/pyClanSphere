@@ -4,14 +4,16 @@
 {% block contents %}
   <h1>{{ self.title() }}</h1>
   {% call form() %}
-    {% if not form.war.result %}
-    <p>{% trans link=url_for('admin/warresult_edit', war_id=form.war.id) %}
-      When the war is over, please <a href="%(link)s">write a result</a>
-    {% endtrans %}</p>
-    {% else %}
-    <p>{% trans link=url_for('admin/warresult_edit', war_id=form.war.id) %}
-      War is over, <a href="%(link)s">result</a> is here
-    {% endtrans %}</p>
+    {% if not form.new %}
+      {% if not form.war.result %}
+      <p>{% trans link=url_for('admin/warresult_edit', war_id=form.war.id) %}
+        When the war is over, please <a href="%(link)s">write a result</a>
+      {% endtrans %}</p>
+      {% else %}
+      <p>{% trans link=url_for('admin/warresult_edit', war_id=form.war.id) %}
+        War is over, <a href="%(link)s">result</a> is here
+      {% endtrans %}</p>
+      {% endif %}
     {% endif %}
     {{ render_formmultibox([form.clanname, form.clantag, form.clanhomepage, form.contact],
                            _("Opponent"), toggleable=false) }}
