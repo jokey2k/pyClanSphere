@@ -1,0 +1,4 @@
+{% macro render_field(field) %}
+  <label for="text">{{ field.label() }}</label>
+  {{ field() }}
+{% endmacro %}
