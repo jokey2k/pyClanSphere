@@ -54,7 +54,7 @@ def suite(modnames=[], return_covermods=False):
     # setup isn't imported at module level because this way coverage
     # can track the whole pyClanSphere imports
     from pyClanSphere import setup
-    instance_path = join(dirname(__file__), 'instance')
+    instance_path = join(dirname(__file__), '../instance')
     app = setup(instance_path)
 
     if return_covermods:
