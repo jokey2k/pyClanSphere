@@ -8,7 +8,7 @@ Contents:
 
    application
    cache
-   database
+   databaseabstraction
    notifications
    signals
    utilities/index
