@@ -4,7 +4,9 @@
     ~~~~~~~~~~~~~~~~~~
 
     Helper to locate pyClanSphere and the instance folder.
-    :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
+
+    :copyright: (c) 2009 - 2010 by the pyClanSphere Team,
+                see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 from os.path import abspath, join, dirname, pardir, isfile

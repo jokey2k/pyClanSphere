@@ -13,7 +13,8 @@
 
     For usage information see :class:`Form`.
 
-    :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
+    :copyright: (c) 2009 - 2010 by the pyClanSphere Team,
+                see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 from datetime import datetime, date

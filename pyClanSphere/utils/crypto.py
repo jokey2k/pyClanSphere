@@ -4,7 +4,8 @@
 
     This module implements various cryptographic functions.
 
-    :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
+    :copyright: (c) 2009 - 2010 by the pyClanSphere Team,
+                see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 import string

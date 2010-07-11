@@ -9,7 +9,7 @@
     Known signals are attributes of this module so they should be straight
     forward on use
 
-    :copyright: (c) 2010 by the pyClanSphere Team,
+    :copyright: (c) 2009 - 2010 by the pyClanSphere Team,
                 see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """

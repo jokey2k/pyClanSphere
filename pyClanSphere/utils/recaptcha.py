@@ -6,8 +6,9 @@
     Provides basic recaptcha integration.
     Based on reCAPTCHA implementation from Plurk's solace
 
-    :copyright: (c) 2009 by pyClanSphere Team
-                (c) 2009 by Plurk Inc., see AUTHORS for more details.
+    :copyright: (c) 2009 - 2010 by pyClanSphere Team,
+                (c) 2009 by Plurk Inc.
+                see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 import urllib2

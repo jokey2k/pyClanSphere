@@ -8,8 +8,9 @@
 
     The rules for ZEML are documented as part of the parser.
 
-    :copyright: (c) 2009-2010 by the Zine Team,
-                (c) 2010 by the pyClanSphere Team, see AUTHORS for more details.
+    :copyright: (c) 2009 - 2010 by the Zine Team,
+                (c) 2009 - 2010 by the pyClanSphere Team,
+                see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 import re

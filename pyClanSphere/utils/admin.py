@@ -5,7 +5,8 @@
 
     This module implements various functions used by the admin interface.
 
-    :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
+    :copyright: (c) 2009 - 2010 by the pyClanSphere Team,
+                see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 import os

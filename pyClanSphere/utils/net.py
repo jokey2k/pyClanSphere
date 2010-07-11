@@ -6,7 +6,8 @@
     This module implements various network related functions and among
     others a minimal urllib implementation that supports timeouts.
 
-    :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
+    :copyright: (c) 2009 - 2010 by the pyClanSphere Team,
+                see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 from cStringIO import StringIO, InputType

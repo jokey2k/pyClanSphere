@@ -5,7 +5,8 @@
 
     Our needed tables are declared here (now)
 
-    :copyright: (c) 2009-2010 by the pyClanSphere Team, see AUTHORS for details
+    :copyright: (c) 2009 - 2010 by the pyClanSphere Team,
+                see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 from datetime import datetime

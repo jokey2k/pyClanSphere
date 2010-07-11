@@ -6,7 +6,8 @@
     This module implements the pyClanSphere caching system.  This is essentially
     a binding to memcached.
 
-    :copyright: (c) 2009 by the pyClanSphere Team, see AUTHORS for more details.
+    :copyright: (c) 2009 - 2010 by the pyClanSphere Team,
+                see AUTHORS for more details.
     :license: BSD, see LICENSE for more details.
 """
 import os
