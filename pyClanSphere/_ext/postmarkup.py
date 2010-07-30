@@ -346,7 +346,7 @@ class LinkTag(TagBase):
 
 class ThreadLinkTag(LinkTag):
 
-    def __init__(self, name, , **kwargs):
+    def __init__(self, name, **kwargs):
         LinkTag.__init__(self, name, annotate_links=False)
 
     def render_open(self, parser, node_index):
@@ -379,7 +379,7 @@ class ThreadLinkTag(LinkTag):
 
 class PostLinkTag(LinkTag):
 
-    def __init__(self, name, , **kwargs):
+    def __init__(self, name, **kwargs):
         LinkTag.__init__(self, name, annotate_links=False)
 
     def render_open(self, parser, node_index):
