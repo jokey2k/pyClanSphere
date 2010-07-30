@@ -125,6 +125,8 @@ def create(include=None, exclude=None, use_pygments=True, **kwargs):
     add_tag(LeftTag, u"left")
     add_tag(RightTag, u"right")
 
+    add_tag(NoparseTag, u"noparse")
+
     add_tag(ThreadLinkTag, u"thread")
     add_tag(PostLinkTag, u"post")
 
@@ -488,6 +490,18 @@ class CodeTag(TagBase):
         contents = _escape_no_breaks(self.get_contents(parser))
         self.skip_contents(parser)
         return '<div class="code"><pre>%s</pre></div>' % contents.replace("\n", "<br/>")
+
+
+class NoparseTag(TagBase):
+
+    def __init__(self, name, **kwargs):
+        TagBase.__init__(self, name, enclosed=True, strip_first_newline=True)
+
+    def render_open(self, parser, node_index):
+
+        contents = _escape_no_breaks(self.get_contents(parser))
+        self.skip_contents(parser)
+        return contents
 
 
 class ImgTag(TagBase):
