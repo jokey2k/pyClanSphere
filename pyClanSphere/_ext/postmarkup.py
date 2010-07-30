@@ -321,7 +321,10 @@ class LinkTag(TagBase):
             return u''
 
         if self.domain:
-            return u'</a>'+self.annotate_link(self.domain)
+            if self.params:
+                return u'</a>'+self.annotate_link(self.domain)
+            else:
+                return u'</a>'
         else:
             return u''
 
