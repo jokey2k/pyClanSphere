@@ -3,9 +3,10 @@
 """
 Post Markup
 Author: Will McGugan (http://www.willmcgugan.com)
+        pyClanSphere-related addons by pyClanSphere Team
 """
 
-__version__ = "1.1.5dev"
+__version__ = "1.1.5dev-pyClanSphere"
 
 import re
 from urllib import quote, unquote, quote_plus, urlencode
@@ -1009,7 +1010,7 @@ class PostMarkup(object):
 
     def render_to_html(self,
                        post_markup,
-                       encoding="ascii",
+                       encoding="utf8",
                        exclude_tags=None,
                        auto_urls=True,
                        paragraphs=False,
