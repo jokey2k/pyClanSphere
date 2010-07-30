@@ -125,6 +125,9 @@ def create(include=None, exclude=None, use_pygments=True, **kwargs):
     add_tag(LeftTag, u"left")
     add_tag(RightTag, u"right")
 
+    add_tag(ThreadLinkTag, u"thread")
+    add_tag(PostLinkTag, u"post")
+
     if use_pygments:
         assert pygments_available, "Install Pygments (http://pygments.org/) or call create with use_pygments=False"
         add_tag(PygmentsCodeTag, u'code', **kwargs)
@@ -336,6 +339,65 @@ class LinkTag(TagBase):
             return annotate_link(domain)
         else:
             return u""
+
+class ThreadLinkTag(LinkTag):
+
+    def render_open(self, parser, node_index):
+
+        self.threadid = None
+
+        tag_data = parser.tag_data
+        nest_level = tag_data['link_nest_level'] = tag_data.setdefault('link_nest_level', 0) + 1
+
+        if nest_level > 1:
+            return u''
+
+        try:
+            if self.params:
+                self.threadid = int(self.params.strip())
+            else:
+                self.threadid = int(self.get_contents_text(parser).strip())
+        except ValueError:
+            return u''
+
+        from pyClanSphere.api import url_for
+        from pyClanSphere.plugins.bulletin_board.models import Topic
+        topic = Topic.query.get(self.threadid)
+        if topic is None:
+            self.threadid = None
+            return u''
+
+        return u'<a href="%s">' % url_for('board/topic_detail', topic_id=self.threadid)
+
+
+class PostLinkTag(LinkTag):
+
+    def render_open(self, parser, node_index):
+
+        self.postid = None
+
+        tag_data = parser.tag_data
+        nest_level = tag_data['link_nest_level'] = tag_data.setdefault('link_nest_level', 0) + 1
+
+        if nest_level > 1:
+            return u''
+
+        try:
+            if self.params:
+                self.postid = int(self.params.strip())
+            else:
+                self.postid = int(self.get_contents_text(parser).strip())
+        except ValueError:
+            return u''
+
+        from pyClanSphere.api import url_for
+        from pyClanSphere.plugins.bulletin_board.models import Post
+        post = Post.query.get(self.postid)
+        if post is None:
+            self.postid = None
+            return u''
+
+        return u'<a href="%s">' % url_for('board/post_find', post_id=self.postid)
 
 
 class QuoteTag(TagBase):
