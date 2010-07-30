@@ -121,6 +121,8 @@ def create(include=None, exclude=None, use_pygments=True, **kwargs):
 
     add_tag(SizeTag, u"size")
     add_tag(ColorTag, u"color")
+    add_tag(FontTag, u"font")
+
     add_tag(CenterTag, u"center")
     add_tag(LeftTag, u"left")
     add_tag(RightTag, u"right")
@@ -647,10 +649,32 @@ class ColorTag(TagBase):
         return u'</span>'
 
 
+class FontTag(TagBase):
 
+    valid_chars = frozenset("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ -")
+
+    def __init__(self, name, **kwargs):
+        TagBase.__init__(self, name, inline=True)
+
+    def render_open(self, parser, node_index):
+        valid_chars = self.valid_chars
+        try:
+            fontfamily = self.params.split()[0]
+            self.fontfamily = "".join([c for c in fontfamily if c in valid_chars])
+        except IndexError:
+            self.fontfamily = None
+
+        if not self.fontfamily:
+            return u''
+
+        return u'<span style="font-family:%s">' % self.fontfamily
 
     def render_close(self, parser, node_index):
-        return u'</div>'
+        if not self.fontfamily:
+            return u''
+        return u'</span>'
+
+
 class LeftTag(DivStyleTag):
 
     def __init__(self, name, **kwargs):
