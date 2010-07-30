@@ -19,6 +19,15 @@ board plugin:
 news plugin:
 - merge news_details and _news templates to avoid code duplication
 
+bbcode extension:
+- allow ftp urls
+- annotate links only if url is given as parameter instead of being within the tag
+- new tags:
+  left, right
+  note, warning
+  noparse
+  thread, post
+
 pyClanSphere 0.1
 ----------------
 
