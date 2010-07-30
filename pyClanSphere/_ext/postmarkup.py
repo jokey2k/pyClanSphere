@@ -122,6 +122,8 @@ def create(include=None, exclude=None, use_pygments=True, **kwargs):
     add_tag(SizeTag, u"size")
     add_tag(ColorTag, u"color")
     add_tag(CenterTag, u"center")
+    add_tag(LeftTag, u"left")
+    add_tag(RightTag, u"right")
 
     if use_pygments:
         assert pygments_available, "Install Pygments (http://pygments.org/) or call create with use_pygments=False"
@@ -569,6 +571,24 @@ class ColorTag(TagBase):
         if not self.color:
             return u''
         return u'</span>'
+
+
+class LeftTag(TagBase):
+
+    def render_open(self, parser, node_index, **kwargs):
+        return u'<div style="text-align:left;">'
+
+    def render_close(self, parser, node_index):
+        return u'</div>'
+
+
+class RightTag(TagBase):
+
+    def render_open(self, parser, node_index, **kwargs):
+        return u'<div style="text-align:right;">'
+
+    def render_close(self, parser, node_index):
+        return u'</div>'
 
 
 class CenterTag(TagBase):
