@@ -416,7 +416,6 @@ class PygmentsCodeTag(TagBase):
         return hcontents
 
 
-
 class CodeTag(TagBase):
 
     def __init__(self, name, **kwargs):
@@ -454,7 +453,6 @@ class ListTag(TagBase):
 
     def close(self, parser, close_pos, node_index):
         TagBase.close(self, parser, close_pos, node_index)
-
 
     def render_open(self, parser, node_index):
 
@@ -573,29 +571,41 @@ class ColorTag(TagBase):
         return u'</span>'
 
 
-class LeftTag(TagBase):
+
+
+    def render_close(self, parser, node_index):
+        return u'</div>'
+class LeftTag(DivStyleTag):
+
+    def __init__(self, name, **kwargs):
+        DivStyleTag.__init__(self, name, 'text-align', 'left')
+
+
+class RightTag(DivStyleTag):
+
+    def __init__(self, name, **kwargs):
+        DivStyleTag.__init__(self, name, 'text-align', 'right')
+
+
+class CenterTag(DivStyleTag):
+
+    def __init__(self, name, **kwargs):
+        DivStyleTag.__init__(self, name, 'text-align', 'center')
+
+
+class WarningTag(TagBase):
 
     def render_open(self, parser, node_index, **kwargs):
-        return u'<div style="text-align:left;">'
+        return u'<div class="contentwarning"><b>Warning:</b> '
 
     def render_close(self, parser, node_index):
         return u'</div>'
 
 
-class RightTag(TagBase):
+class NoteTag(TagBase):
 
     def render_open(self, parser, node_index, **kwargs):
-        return u'<div style="text-align:right;">'
-
-    def render_close(self, parser, node_index):
-        return u'</div>'
-
-
-class CenterTag(TagBase):
-
-    def render_open(self, parser, node_index, **kwargs):
-        return u'<div style="text-align:center;">'
-
+        return u'<div class="contentnote"><b>Note:</b> '
 
     def render_close(self, parser, node_index):
         return u'</div>'
@@ -631,6 +641,7 @@ class ParagraphTag(TagBase):
         tag_data['ParagraphTag.level'] -= 1;
 
         return u'</p>'
+
 
 class SectionTag(TagBase):
 
