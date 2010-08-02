@@ -42,6 +42,9 @@ class PythonScript(MigratePythonScript):
 # Keep __doc__ to a single line
 from pyClanSphere.upgrades.versions import *
 
+# use this or define your own if you need
+metadata = db.MetaData()
+
 # Define tables here
 
 
@@ -60,7 +63,8 @@ def upgrade(migrate_engine):
                                                     autoflush=True,
                                                     autocommit=False))
     map_tables(session.mapper)
-
+    metadata.bind = migrate_engine
+    yield u'<p>Upgrading table bla</p>'
 
 def downgrade(migrate_engine):
     # Operations to reverse the above upgrade go here.
@@ -68,6 +72,8 @@ def downgrade(migrate_engine):
                                                     autoflush=True,
                                                     autocommit=False))
     map_tables(session.mapper)
+    metadata.bind = migrate_engine
+    yield u'<p>Downgrading table bla</p>'
 
 """
         open(path, 'w').write(NEW_SCRIPT_TEMPLATE %
