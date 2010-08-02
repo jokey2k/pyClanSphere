@@ -234,4 +234,5 @@ A listener should return None if the return value is not used.
 signal('application_setup_done', """\
 Application and all plugins are initialized
 """)
-
+signal('register_upgrade_repository', """\
+Core Repository registered, now plugins can register theirs""")

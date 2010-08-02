@@ -28,6 +28,14 @@ class InstanceNotInitialized(RuntimeError):
     instance folder.
     """
 
+class InstanceUpgradeRequired(RuntimeError):
+    """pyClanSphere requires a database upgrade"""
+    def __init__(self, repo_ids=None):
+        self.repo_ids = repo_ids
+
+class MissingDependency(RuntimeError):
+    """pyClanSphere requires an external library which is not installed."""
+
 
 def _create_pyClanSphere(instance_folder, timeout=5, in_reloader=True):
     """Creates a new pyClanSphere object and initializes it.  This is also aware of
@@ -60,6 +68,10 @@ def _create_pyClanSphere(instance_folder, timeout=5, in_reloader=True):
         _application = app = object.__new__(cls)
         try:
             app.__init__(instance_folder)
+            app.check_if_upgrade_required()
+        except InstanceUpgradeRequired, inst:
+            from pyClanSphere.upgrades.webapp import WebUpgrades
+            _application = app = WebUpgrades(app, inst.repo_ids)
         except:
             # if an exception happened, tear down the application
             # again so that we don't have a semi-initialized object
@@ -92,7 +104,9 @@ def _unload_pyClanSphere():
                 for key, value in module.__dict__.items():
                     if key not in preserve and not key.startswith('__'):
                         module.__dict__.pop(key, None)
-            elif name.startswith('pyClanSphere.') and name != 'pyClanSphere._core':
+            elif name.startswith('pyClanSphere.') and name not in (
+                                'pyClanSphere._core', 'pyClanSphere.upgrades',
+                                'pyClanSphere.upgrades.customisation'):
                 # get rid of the module
                 sys.modules.pop(name, None)
                 # zero out the dict

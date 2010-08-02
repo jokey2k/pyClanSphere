@@ -22,7 +22,8 @@ from werkzeug.exceptions import NotFound
 
 from pyClanSphere.schema import users, groups, group_users, \
      privileges, user_privileges, group_privileges, \
-     notification_subscriptions, imaccounts, db, passwordrequests
+     notification_subscriptions, imaccounts, db, passwordrequests, \
+     schema_versions
 from pyClanSphere.i18n import parse_datetime, lazy_gettext
 from pyClanSphere.utils.pagination import Pagination
 from pyClanSphere.utils.crypto import gen_pwhash, check_pwhash
@@ -399,6 +400,16 @@ class PasswordRequest(object):
             self.user
         )
 
+
+class SchemaVersion(object):
+    """Represents a database schema version."""
+
+    def __init__(self, repos, version=0):
+        self.repository_id = repos.config.get('repository_id')
+        self.repository_path = repos.path
+        self.version = version
+
+
 # connect the tables.
 db.mapper(User, users, properties={
     'id':               users.c.user_id,
@@ -438,3 +449,4 @@ db.mapper(IMAccount, imaccounts, properties={
 db.mapper(PasswordRequest, passwordrequests, properties={
     'user':         db.relation(User, uselist=False, lazy=True)
 })
+db.mapper(SchemaVersion, schema_versions)
