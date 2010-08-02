@@ -1138,7 +1138,9 @@ REQUIREMENTS = [
     'Babel>=0.9.5',
     'webdepcompress',
     'translitcodec',
-    'Blinker>=1.0'
+    'Blinker>=1.0',
+    'html5lib',
+    'sqlalchemy-migrate>=0.6'
 ]
 
 # for python 2.4/2.5 we want simplejson installed too.
