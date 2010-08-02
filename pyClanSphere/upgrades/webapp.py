@@ -51,7 +51,7 @@ class WebUpgrades(object):
         self.repo_ids = repo_ids
         self.database_engine = app.database_engine
         self.lockfile = app.upgrade_lockfile
-        self.blog_url = app.url_adapter.build('blog/index')
+        self.index_url = app.url_adapter.build('core/index')
         self.login_url = app.url_adapter.build('account/login')
         self.maintenance_url = app.url_adapter.build('admin/maintenance')
 
@@ -77,7 +77,7 @@ class WebUpgrades(object):
 
         if user_id:
             admin_privilege = engine.execute(
-                privileges.select(privileges.c.name=='BLOG_ADMIN')
+                privileges.select(privileges.c.name=='CLAN_ADMIN')
             ).fetchone()
 
             admin = engine.execute(user_privileges.select(and_(
@@ -132,7 +132,7 @@ class WebUpgrades(object):
 
             return render_response(request, 'admin/perform_upgrade.html',
                                    live_log=mdb.cmd_upgrade(), _stream=True,
-                                   finish=finish, blog_url=self.blog_url,
+                                   finish=finish, blog_url=self.index_url,
                                    maintenance_url=self.maintenance_url,
                                    in_progress=False)
 
