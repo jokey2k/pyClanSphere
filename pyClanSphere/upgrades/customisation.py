@@ -97,15 +97,9 @@ def downgrade(migrate_engine):
             raise exceptions.ScriptError("%d is not a valid step" % step)
         funcname = migrate_ops[op]
         script_func = self._func(funcname)
-        try:
-            #script_func(engine)
-            # Yield messages out
-            for message in script_func(engine):
+        for message in script_func(engine):
+            if message is not None:
                 yield message
-        except TypeError:
-            warnings.warn("upgrade/downgrade functions must accept engine"
-                          " parameter (since version > 0.5.4)")
-            raise
 
 class Version(MigrateVersion):
     def _add_script_py(self, path):
@@ -153,24 +147,12 @@ class ControlledSchema(MigrateControlledSchema):
                 "%s is not %s" % (self.version, startver)
             )
         # Run the change
-        #change.run(self.engine, step)
-        # Yield messages out
         for message in change.run(self.engine, step):
             yield message
 
         # Update/refresh database version
-        try:
-            # Update/refresh database version
-            self.update_repository_table(startver, endver)
-            self.load()
-        except AttributeError:
-            # SQLAlchemy-migrate 0.5.4
-            from sqlalchemy.sql import and_
-            update = self.table.update(
-                and_(self.table.c.version == int(startver),
-                     self.table.c.repository_id == str(self.repository.id)))
-            self.engine.execute(update, version=int(endver))
-            self._load()
+        self.update_repository_table(startver, endver)
+        self.load()
 
 class Changeset(dict):
     """A collection of changes to be applied to a database.
@@ -218,8 +200,6 @@ class Changeset(dict):
     def run(self, *p, **k):
         """Run the changeset scripts"""
         for version, script in self:
-            #script.run(*p, **k)
-            # Yield messages out
             for message in script.run(*p, **k):
                 yield message
 
