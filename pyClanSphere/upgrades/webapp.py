@@ -21,7 +21,8 @@ from werkzeug.utils import redirect
 from werkzeug.contrib.securecookie import SecureCookie
 from werkzeug.wrappers import Response, Request
 
-from pyClanSphere.database import db, privileges, users, user_privileges
+from pyClanSphere.database import db
+from pyClanSphere.schema import privileges, users, user_privileges
 from pyClanSphere.i18n import load_core_translations
 from pyClanSphere.upgrades import ManageDatabase
 from pyClanSphere.utils.crypto import check_pwhash
