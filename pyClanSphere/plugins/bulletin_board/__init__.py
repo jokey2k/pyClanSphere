@@ -15,6 +15,7 @@
 from os.path import join, dirname
 
 from pyClanSphere.api import *
+from pyClanSphere.models import AnonymousUser
 from pyClanSphere.utils import htmlhelpers
 from pyClanSphere.utils.admin import add_admin_urls
 
