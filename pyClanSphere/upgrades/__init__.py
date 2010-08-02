@@ -231,6 +231,9 @@ class ManageDatabase(object):
         """
         from pyClanSphere.models import SchemaVersion
         sv = SchemaVersion.query.get(repo_id)
+        if sv is None:
+            yield '<p>error: "%s" is not a valid repository</p>\n' % repo_id
+            return
         repository = api.Repository(sv.repository_path, sv.repository_id)
         if version is None:
             version = sv.version - 1
