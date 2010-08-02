@@ -91,3 +91,10 @@ passwordrequests = db.Table('passwordrequests', metadata,
     db.Column('ip', db.String(64)),
     db.Column('requesttime', db.DateTime)
 )
+
+schema_versions = db.Table('schema_versions', metadata,
+    db.Column('repository_id', db.String(255), primary_key=True),
+    db.Column('repository_path', db.Text),
+    db.Column('version', db.Integer)
+)
+
