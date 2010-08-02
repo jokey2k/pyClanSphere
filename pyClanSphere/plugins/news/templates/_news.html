@@ -1,22 +1,16 @@
-{% macro render_entry(entry, morelink=True, image=None) -%}
+{% macro render_entry(entry, morelink=True, image=None) %}
 <div class="post">
-  {% set result = signals.before_news_entry_rendered.send(entry=entry) %}
-	<h2 class="title">{{ entry.title}}</h2>
-	<div class="entry">{% if image or entry.image %}<img src="{{ image if image else entry.image }}" alt="Newsimage" class="left" />{% endif %}
-    {% if morelink %}
-  	{{ entry.text|prettify|truncate(300)|safe }}
+  {% set result = signals.before_news_entry_rendered.send(entry=entry) -%}
+  <h2 class="title">{{ entry.title}}</h2>
+  <div class="entry">{% if image or entry.image %}<img src="{{ image if image else entry.image }}" alt="Newsimage" class="left" />{% endif %}
+    {%- if morelink %}
+    {{- entry.text|prettify|truncate(300)|safe }}
     {% else %}
-  	{{ entry.text|prettify }}
+    {{- entry.text|prettify }}
     {% endif %}
-	</div>
-
-	<p class="meta">
-	  {%- trans author='<a href="%s" class="comments">%s</a>'|safe %
-    (url_for(entry.author)|e, entry.author.display_name|e),
-    pub_date=entry.pub_date|datetimeformat-%}
-    {{ author }}
-  {%- endtrans %}
-  {%- if morelink %}<a href="{{ url_for('news/detail', news_id=entry.id) }}" class="permalink">{{ _('More') }}&hellip;</a>{% endif %}</p>
-</div>
+  </div>
+  <p class="meta"><a href="{{ url_for(entry.author) }}" class="comments">{{ entry.author.display_name }}</a>
+    {%- if morelink %}<a href="{{ url_for('news/detail', news_id=entry.id) }}" class="permalink">{{ _('More') }}&hellip;</a>{% endif %}</p>
+  </div>
   {% set result = signals.after_news_entry_rendered.send(entry=entry) %}
 {% endmacro %}

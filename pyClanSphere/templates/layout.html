@@ -1,10 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-  "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html lang="{{ cfg.language }}">
 <head>
   <title>{% block title %}{% endblock %} &mdash; {{ cfg.clan_title }}</title>
+  <meta charset="utf-8">
   <meta name="DC.title" content="{{ self.title() }} &mdash; {{ cfg.clan_title }}">
-  {{- get_page_metadata() }}
+  {{ get_page_metadata()|indent(2)|safe }}{# Indenting so stuff looks pretty in source view #}
   {%- block head %}{% endblock %}
 </head>
 <body>
@@ -13,12 +13,10 @@
     <p class="description">{{ cfg.clan_tagline }}</p>
   </div>
   <div class="contents">
-    {% set result = signals.before_contents_rendered.send() %}
-    {% block contents %}{% endblock %}
-    {% set result = signals.after_contents_rendered.send() %}
+    {% set result = signals.before_contents_rendered.send() %}{% block contents %}{% endblock -%}
+    {% set result = signals.after_contents_rendered.send() -%}
   </div>
   <div class="footer">{% trans pyClanSphere='<a href="http://www.pyclansphere.de/">pyClanSphere</a>'|safe
     %}Empowered by {{ pyClanSphere }}.{% endtrans %}</div>
-  </div>
 </body>
 </html>

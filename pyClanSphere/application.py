@@ -663,7 +663,7 @@ class pyClanSphere(object):
         from pyClanSphere import models
 
         env = Environment(loader=ThemeLoader(self), bytecode_cache=get_jinja_cache(self),
-                          extensions=['jinja2.ext.i18n'], autoescape=True)
+                          extensions=['jinja2.ext.i18n'], autoescape=True, trim_blocks=True)
         env.globals.update(
             cfg=self.cfg,
             theme=self.theme,

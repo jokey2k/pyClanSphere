@@ -8,7 +8,7 @@
   <div class="notification">
     <p>{% trans %}So far there are no news entries here.{% endtrans %}</p>
   </div>
-{%- endfor %}
+{% endfor -%}
 {% if pagination.necessary %}
 <div class="pagination">
 {{ _('Pages') }}: {{ pagination.generate() }}
