@@ -721,8 +721,6 @@ class pyClanSphere(object):
                                'application setup phase.')
         self.__dict__.update(dict.fromkeys(self._setup_only, _error))
 
-        self.initialized = True
-
         # init smileys
         smiley_parser = smileys_lib(path.join(SHARED_DATA,'smilies'),url_for('core/shared', filename='smilies/'))
 
@@ -773,6 +771,8 @@ class pyClanSphere(object):
         env.globals.update(
             smileylist = lambda x: smiley_parser.get_panel(x, True)
         )
+
+        self.initialized = True
 
         #! called after the application and all plugins are initialized
         signals.application_setup_done.send()
