@@ -551,10 +551,6 @@ class pyClanSphere(object):
                             self.__class__.__name__)
         self.instance_folder = path.abspath(instance_folder)
 
-        # create the event manager, this is the first thing we have to
-        # do because it could happen that events are sent during setup
-        self.initialized = False
-
         # and instanciate the configuration. this won't fail,
         # even if the database is not connected.
         from pyClanSphere.config import Configuration
@@ -771,8 +767,6 @@ class pyClanSphere(object):
         env.globals.update(
             smileylist = lambda x: smiley_parser.get_panel(x, True)
         )
-
-        self.initialized = True
 
         #! called after the application and all plugins are initialized
         signals.application_setup_done.send()
