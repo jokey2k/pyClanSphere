@@ -167,6 +167,7 @@ class EditWarForm(FightUsForm):
         """Apply the changes."""
         self._set_common_attributes(self.war)
         self.war.touch_times()
+        self.war.modificationuser = self.request.user
 
         if 'removemaps' in self.data:
             for mapid in self.data['removemaps']:

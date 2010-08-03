@@ -1,6 +1,7 @@
 """Log creation and modifications of wars"""
 # Keep __doc__ to a single line
 from pyClanSphere.upgrades.versions import *
+from pyClanSphere.schema import users
 from datetime import datetime
 
 # use this or define your own if you need
@@ -30,6 +31,7 @@ col_c = Column('creationdate', DateTime,
                default=datetime.utcnow())
 col_m = Column('modificationdate', DateTime,
                default=datetime.utcnow())
+col_u = Column('modificationuser_id', Integer, ForeignKey(users.c.user_id))
 
 
 # Define the objects here
@@ -50,10 +52,12 @@ def upgrade(migrate_engine):
     metadata.bind = migrate_engine
     if not wars.exists():
         wars.create(migrate_engine)
-    yield u'<p>Add creation column to wars</p>\n'
+    yield u'<p>Add creationdate column to wars</p>\n'
     col_c.create(wars, populate_default=True)
-    yield u'<p>Add modification column to wars</p>\n'
+    yield u'<p>Add modificationdate column to wars</p>\n'
     col_m.create(wars, populate_default=True)
+    yield u'<p>Add modificationuser column to wars</p>\n'
+    col_u.create(wars, populate_default=True)
 
 def downgrade(migrate_engine):
     # Operations to reverse the above upgrade go here.
@@ -62,7 +66,9 @@ def downgrade(migrate_engine):
                                                     autocommit=False))
     map_tables(session.mapper)
     metadata.bind = migrate_engine
-    yield u'<p>Drop modification column from wars</p>\n'
+    yield u'<p>Drop modificationuser column to wars</p>\n'
+    drop_column(col_u, wars)
+    yield u'<p>Drop modificationdate column from wars</p>\n'
     drop_column(col_m, wars)
-    yield u'<p>Drop creation column from wars</p>\n'
+    yield u'<p>Drop creationdate column from wars</p>\n'
     drop_column(col_c, wars)
