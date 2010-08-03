@@ -171,8 +171,7 @@ class WebSetup(object):
                 real_name=u'',
                 description=u'',
                 extra={},
-                display_name='$username',
-                is_author=True
+                display_name='$username'
             ).last_inserted_ids()[0]
 
             # insert a privilege for the user
@@ -210,7 +209,7 @@ class WebSetup(object):
 
         # use a local variable, the global render_response could
         # be None because we reloaded pyClanSphere and this module.
-        return render_response(request, error and 'error.html' or 'finished.html', {
+        return render_response(request, 'error.html' if error else 'finished.html', {
             'finished': True,
             'error':    error
         })
