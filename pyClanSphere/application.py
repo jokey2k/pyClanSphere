@@ -802,7 +802,8 @@ class pyClanSphere(object):
         except (SQLAlchemyError, AttributeError):
             # the schema_versions table does not yet exist, let's create it
             db.session.rollback()
-            from pyClanSphere.database import metadata, schema_versions
+            from pyClanSphere.database import metadata
+            from pyClanSphere.schema import schema_versions
             metadata.bind = self.database_engine
             if not schema_versions.exists():
                 schema_versions.create(self.database_engine)
