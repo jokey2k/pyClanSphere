@@ -37,9 +37,11 @@ def add_admin_links(sender, **kwds):
     kwds['navbar'].insert(1, ('war', url_for('admin/wars'), _(u'War Management'), entries))
 
 def setup(app, plugin):
-
     # Setup tables
     init_database(app)
+
+    # Register repository for schema updates
+    app.register_upgrade_repository(plugin, dirname(__file__))
 
     # Add our privileges
     for priv in PLUGIN_PRIVILEGES.values():

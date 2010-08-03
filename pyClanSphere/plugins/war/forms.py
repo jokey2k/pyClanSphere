@@ -94,7 +94,8 @@ class FightUsForm(_WarBoundForm):
     def _set_common_attributes(self, war):
         forms.set_fields(war, self.data, 'clanname', 'date', 'server',
                          'mode', 'playerchangecount', 'contact',
-                         'notes', 'squad', 'clanhomepage', 'clantag')
+                         'notes', 'squad', 'clanhomepage', 'clantag',
+                         'status')
 
     def save_changes(self):
         """Apply the changes."""
@@ -165,6 +166,7 @@ class EditWarForm(FightUsForm):
     def save_changes(self):
         """Apply the changes."""
         self._set_common_attributes(self.war)
+        self.war.touch_times()
 
         if 'removemaps' in self.data:
             for mapid in self.data['removemaps']:

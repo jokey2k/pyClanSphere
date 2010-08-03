@@ -18,6 +18,7 @@ from werkzeug import FileStorage
 from pyClanSphere.api import db, _
 from pyClanSphere.models import User
 from pyClanSphere.utils.pagination import Pagination
+from pyClanSphere.schema import users
 
 from pyClanSphere.plugins.gamesquad.models import Game, Squad
 from pyClanSphere.plugins.war.database import wars, war_maps, warmembers, \
@@ -124,7 +125,8 @@ class War(object):
     def __init__(self, clanname=u'', date=None, server=None, mode=None,
                  members=None, maps=None, playerchangecount=0,
                  contact=None, orgamember=None, checked=False, status=1,
-                 notes=None, result=None, squad=None, clanhomepage=None):
+                 notes=None, result=None, squad=None, clanhomepage=None,
+                 modificationuser=None):
         super(War, self).__init__()
         self.clanname = clanname
         self.clanhomepage = clanhomepage
@@ -139,6 +141,8 @@ class War(object):
         self.status = status
         self.result = result
         self.notes = notes
+        self.modificationuser = modificationuser
+        self.touch_times()
 
     def can_create(self, user=None):
         return True
@@ -157,6 +161,12 @@ class War(object):
             self.date
         )
 
+    def touch_times(self):
+        """Touches the times for this war."""
+        now = datetime.utcnow()
+        if self.creationdate is None:
+            self.creationdate = now
+        self.modificationdate = now
 
 class WarMember(object):
     """Memberstatus for a war"""
@@ -326,8 +336,9 @@ mapper(War, wars, properties={
     'squad':            relation(Squad, uselist=False,
                                  backref=backref('wars', order_by=db.desc(wars.c.date))),
     'members':          relation(User, secondary=warmembers),
-    'orgamember':       relation(User, uselist=False),
-    'mode':             relation(WarMode, uselist=False)
+    'orgamember':       relation(User, uselist=False, primaryjoin=wars.c.orgamember_id==users.c.user_id),
+    'mode':             relation(WarMode, uselist=False),
+    'modificationuser': relation(User, uselist=False, primaryjoin=wars.c.modificationuser_id==users.c.user_id)
 })
 mapper(WarMember, warmembers, properties={
     'war':              relation(War),

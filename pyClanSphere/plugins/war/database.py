@@ -10,14 +10,15 @@
     :license: BSD, see LICENSE for more details.
 """
 
-from datetime import date
+from datetime import date, datetime
 
 from pyClanSphere.database import db, metadata
 
 # Mapping these out from db module to increases readability further down
 # As this module is only part-imported by the models and init module, it should be safe to do so
-for var in ['Table', 'Column', 'String', 'Integer', 'Boolean', 'DateTime', 'ForeignKey', 'Text']:
-    globals()[var] = getattr(db,var)
+for var in ['Table', 'Column', 'String', 'Integer', 'Boolean', 'DateTime',
+            'ForeignKey', 'Text']:
+    globals()[var] = getattr(db, var)
 
 wars = Table('wars', metadata,
     Column('war_id', Integer, primary_key=True),
@@ -33,7 +34,12 @@ wars = Table('wars', metadata,
     Column('squad_id', ForeignKey('squads.squad_id')),
     Column('checked', String(250)),
     Column('status', Integer),
-    Column('notes', Text)
+    Column('notes', Text),
+    Column('creationdate', DateTime, nullable=False,
+           default=datetime.utcnow()),
+    Column('modificationdate', DateTime, nullable=False,
+           default=datetime.utcnow()),
+    Column('modificationuser_id', Integer, ForeignKey('users.user_id'))
 )
 
 warmembers = Table('warmembers', metadata,
