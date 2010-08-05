@@ -12,10 +12,7 @@
 """
 import os
 import sys
-
-path = os.path.join(os.path.dirname(__file__), os.path.pardir)
-os.chdir(path)
-sys.path.insert(0, path)
-
-from tests import main
+sys.path.append(os.path.dirname(__file__))
+from _init_pyClanSphere import find_instance
+from pyClanSphere.tests import main
 main()
