@@ -452,6 +452,13 @@ class Plugin(object):
         return False
 
     @cached_property
+    def is_tested(self):
+        """This property is True if the plugin has unit tests."""
+        if path.isfile(path.join(self.path, 'tests')):
+            return True
+        return False
+
+    @cached_property
     def is_bundled(self):
         """This property is True if the plugin is bundled with pyClanSphere."""
         return path.commonprefix([
