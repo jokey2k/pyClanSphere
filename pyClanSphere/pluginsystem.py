@@ -454,7 +454,7 @@ class Plugin(object):
     @cached_property
     def is_tested(self):
         """This property is True if the plugin has unit tests."""
-        if path.isfile(path.join(self.path, 'tests')):
+        if path.isdir(path.join(self.path, 'tests')):
             return True
         return False
 
