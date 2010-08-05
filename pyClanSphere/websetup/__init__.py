@@ -172,12 +172,12 @@ class WebSetup(object):
                 description=u'',
                 extra={},
                 display_name='$username'
-            ).last_inserted_ids()[0]
+            ).inserted_primary_key[0]
 
             # insert a privilege for the user
             privilege_id = e.execute(privileges.insert(),
                 name=CLAN_ADMIN.name
-            ).last_inserted_ids()[0]
+            ).inserted_primary_key[0]
             e.execute(user_privileges.insert(),
                 user_id=user_id,
                 privilege_id=privilege_id
