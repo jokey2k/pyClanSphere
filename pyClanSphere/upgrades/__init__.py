@@ -170,11 +170,8 @@ class ManageDatabase(object):
 
     def cmd_script(self, repo_id, description, filename=None):
         """Create an empty change script using the next unused version number
-        appended with the given description.
+        appended with the given description."""
 
-        For instance, manage.py script "Add initial tables" creates:
-        repository/versions/001_Add_initial_tables.py
-        """
         from pyClanSphere.models import SchemaVersion
         sv = SchemaVersion.query.filter_by(repository_id=repo_id).first()
         if not sv:

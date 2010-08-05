@@ -1227,11 +1227,7 @@ class CommaSeparated(Multiple):
 
 
 class LineSeparated(CommaSeparated):
-    """Works like `CommaSeparated` but uses multiple lines:
-
-    >>> field = LineSeparated(IntegerField())
-    >>> field(u'1\n2\n3')
-    [1, 2, 3]
+    """Works like `CommaSeparated` but uses multiple lines.
 
     The default widget is a `Textarea` and taht is pretty much the only thing
     that makes sense for this widget.

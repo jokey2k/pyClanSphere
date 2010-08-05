@@ -97,4 +97,3 @@ schema_versions = db.Table('schema_versions', metadata,
     db.Column('repository_path', db.Text),
     db.Column('version', db.Integer)
 )
-
