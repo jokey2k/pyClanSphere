@@ -226,7 +226,7 @@ class Configuration(object):
     file.
 
     >>> app.cfg['clan_title']
-    iu'My Title'
+    iu'My Clan Page'
     >>> app.cfg.change_single('clan_title', 'Test Title')
     >>> app.cfg['clan_title']
     u'Test Title'
