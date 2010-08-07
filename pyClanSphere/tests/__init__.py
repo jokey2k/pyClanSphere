@@ -22,7 +22,7 @@ import sys
 import os
 from tempfile import mkdtemp
 from os.path import join, dirname
-from unittest import TestSuite, TextTestRunner
+from unittest import TestSuite, TextTestRunner, TestCase
 from unittest2 import defaultTestLoader
 from doctest import DocTestSuite, DocFileSuite
 
@@ -200,16 +200,10 @@ def main():
                       help='show coverage information (slow!)')
     parser.add_option('-v', '--verbose', action='store_true', dest='verbose',
                       default=False, help='show which tests are run')
-    parser.add_option('--tempinstance', action='store_true', dest='tempinstance',
-                      default=False, help='use a temporary sqlite based test instance')
-    parser.add_option('--instance', dest='instance',
-                      help='instance to use instead of ./instance')
+    parser.add_option('--real-instance', dest='instance',
+                      help='instance to use instead of a temporary one, only use it if you know what you are doing!')
 
     options, args = parser.parse_args(sys.argv[1:])
-    if options.instance and options.tempinstance:
-        sys.stderr.write("you can't use a temporary and real instance at the same time!\n")
-        sys.exit(1)
-
     modnames = ['pyClanSphere.' + modname for modname in args]
     if options.coverage:
         if coverage is not None:
@@ -222,11 +216,9 @@ def main():
         use_coverage = False
 
     # get our instance
-    sys.stdout.write("Loading Instance ... ")
-    sys.stdout.flush()
-    if options.tempinstance:
-        instance, instance_folder = create_temporary_instance()
-    elif options.instance:
+    if options.instance:
+        sys.stdout.write("Opening given instance ... ")
+        sys.stdout.flush()
         from pyClanSphere.upgrades.webapp import WebUpgrades
         from pyClanSphere import setup
         instance = setup(options.instance)
@@ -234,14 +226,10 @@ def main():
             sys.stderr.write("Please migrate your instance to latest schema first!\n")
             sys.exit(1)
     else:
-        from pyClanSphere.upgrades.webapp import WebUpgrades
-        from pyClanSphere import setup
-        instance_folder = join(dirname(__file__),'../instance')
-        sys.stdout.write("Note: Using default instance found at %s\n" % instdir)
-        instance = setup(instance_folder)
-        if isinstance(instance, WebUpgrades):
-            sys.stderr.write("Please migrate your instance to latest schema first!\n")
-            sys.exit(1)
+        sys.stdout.write("Creating temporary instance ... ")
+        sys.stdout.flush()
+        instance, instance_folder = create_temporary_instance()
+
     sys.stdout.write("ok\nCollecting tests ... ")
     sys.stdout.flush()
     if use_coverage:
@@ -256,7 +244,7 @@ def main():
         coverage.stop()
         print '\n\n' + '=' * 25 + ' coverage information ' + '=' * 25
         coverage.report(covermods)
-    if options.tempinstance:
+    if not options.instance:
         try:
             for root, dirs, files in os.walk(instance_folder, topdown=False):
                 for name in files:
@@ -267,5 +255,3 @@ def main():
             print "Could not remove all tempfiles, please remove", \
                   instance_folder, "yourself"
             pass
-if __name__ == '__main__':
-    main()
