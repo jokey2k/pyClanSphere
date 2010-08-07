@@ -104,6 +104,9 @@ class testUserModel(pyClanSphereTestCase):
         self.assertEqual(user.display_name, 'TestUser')
         user.display_name = '$real_name'
         self.assertEqual(user.display_name, 'TestBenutzer')
+        user.display_name = '$username'
+        self.assertNotEqual(user.display_name, 'TestBenutzer')
+        self.assertEqual(user.display_name, 'TestUser')
 
     def tearDown(self):
         self.db.delete(models.User.query.get(2))
