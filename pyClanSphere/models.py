@@ -38,9 +38,6 @@ class UserQuery(db.Query):
     def get_nobody(self):
         return AnonymousUser()
 
-    def authors(self):
-        return self.filter_by(is_author=True)
-
     def namesort(self):
         return self.order_by(db.func.lower(User.username))
 
@@ -277,7 +274,7 @@ class Group(object):
 class AnonymousUser(User):
     """Fake model for anonymous users."""
     id = -1
-    is_somebody = is_author = False
+    is_somebody = False
     display_name = 'Nobody'
     real_name = description = username = ''
     own_privileges = privileges = property(lambda x: frozenset())
