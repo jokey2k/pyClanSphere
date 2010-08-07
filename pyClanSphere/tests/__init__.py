@@ -255,3 +255,15 @@ def main():
             print "Could not remove all tempfiles, please remove", \
                   instance_folder, "yourself"
             pass
+
+
+class pyClanSphereTestCase(TestCase):
+    def setUp(self):
+        from pyClanSphere.api import get_application
+        from pyClanSphere.database import db, init_database
+        self.app = get_application()
+        self.db = db
+
+        # just in case the table(s) for the test haven't been created
+        init_database(self.app.database_engine)
+
