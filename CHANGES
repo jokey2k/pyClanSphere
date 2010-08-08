@@ -12,6 +12,8 @@ pyClanSphere 0.2
   (Useful for frontend logins)
 - Database Schema Versioning to support sane migrations for core and plugins separately using
   sqlalchemy-migrate
+- Implement Test Kit and allow plugins to have some by scanning and enabling on the fly so
+  Plugins don't need to set that they're tested.
 
 board plugin:
 - Templates rebased to a layout_board.html
