@@ -12,7 +12,7 @@
 
 from os.path import join, dirname
 
-from pyClanSphere.api import _, url_for, signals, signal
+from pyClanSphere.api import _, url_for, signals, signal, db
 from pyClanSphere.utils.account import add_account_urls
 from pyClanSphere.utils.admin import add_admin_urls
 
