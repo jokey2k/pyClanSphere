@@ -13,8 +13,8 @@
     <p class="description">{{ cfg.clan_tagline }}</p>
   </div>
   <div class="contents">
-    {% set result = signals.before_contents_rendered.send() %}{% block contents %}{% endblock -%}
-    {% set result = signals.after_contents_rendered.send() -%}
+    {{ sendsignal(signals.before_contents_rendered) }}{% block contents %}{% endblock -%}
+    {{ sendsignal(signals.after_contents_rendered) }}
   </div>
   <div class="footer">{% trans pyClanSphere='<a href="http://www.pyclansphere.de/">pyClanSphere</a>'|safe
     %}Empowered by {{ pyClanSphere }}.{% endtrans %}</div>

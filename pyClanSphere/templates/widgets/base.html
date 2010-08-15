@@ -1,6 +1,6 @@
 <div class="widget">
-  {% set result = signals.before_widget_rendered.send(widget=widget) %}
+  {{ sendsignal(signal.before_widget_rendered,widget=widget) }}
   {% if widget.show_title %}<h3>{% block title %}{% endblock %}</h3>{% endif %}
   {% block body %}{% endblock %}
-  {% set result = signals.after´_widget_rendered.send(widget=widget) %}
+  {{ sendsignal(signal.after_widget_rendered,widget=widget) }}
 </div>

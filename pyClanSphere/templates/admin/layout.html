@@ -44,9 +44,8 @@
         <div class="message message-{{ message.type }}">{{ message.msg }}</div>
       {%- endfor %}
       </div>
-      {% set result = signals.before_admin_contents_rendered.send() %}
-      {% block contents %}{% endblock %}
-      {% set result = signals.after_admin_contents_rendered.send() %}
+      {{ sendsignal(signal.before_admin_contents_rendered) }}{% block contents %}{% endblock %}
+      {{ sendsignal(signal.after_admin_contents_rendered) }}
     </div>
   </div>
   <div class="footer">

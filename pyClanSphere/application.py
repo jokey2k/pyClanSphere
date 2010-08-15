@@ -660,6 +660,11 @@ class pyClanSphere(object):
         # init the template system with the core stuff
         from pyClanSphere import models
 
+        def sendsignal(signal, args=(), kwargs={}):
+            """Allow sending signals silencing its output"""
+            signal.send(*args,**kwargs)
+            return ''
+
         env = Environment(loader=ThemeLoader(self), bytecode_cache=get_jinja_cache(self),
                           extensions=['jinja2.ext.i18n'], autoescape=True, trim_blocks=True)
         env.globals.update(
@@ -670,6 +675,7 @@ class pyClanSphere(object):
             signals=signals,
             shared_url=shared_url,
             request=local('request'),
+            sendsignal=sendsignal,
             render_widgets=lambda x=[]: Markup(render_template('_widgets.html', widgetoptions=x)),
             get_page_metadata=self.get_page_metadata,
             widgets=self.widgets,
