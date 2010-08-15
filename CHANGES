@@ -3,6 +3,13 @@ pyClanSphere Changelog
 
 This file lists the major changes between the pyClanSphere releases.
 
+pyClanSphere 0.3
+----------------
+
+(Codename unknown; not released yet)
+
+- Added silent signal sending from template environment
+
 pyClanSphere 0.2
 ----------------
 
