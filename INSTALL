@@ -2,21 +2,22 @@ pyClanSphere Installation Instructions
 ======================================
 
 Note: for a development setup, please take a look at the Getting Started section
-in the development handbook on http://www.pyclansphere.de/
+in the development handbook on http://www.pyclansphere.de/docs/
 
 For a working pyClanSphere instance you need to have the following libraries
 installed:
 
 - Python 2.5 or higher
-- Werkzeug 0.5.5*
-- Jinja 2.2*
+- Werkzeug 0.6*
+- Jinja >= 2.4*
 - A database (MySQL, SQLite or PostgreSQL and others are supported, depending on SQLAlchemy here)
-- SQLAlchemy* 0.6beta1*
+- SQLAlchemy* 0.6*
 - simplejson* [included in Python 2.6 and higher]
 - pytz*
-- Babel (>= 0.9.5; shipping svn version as of 18.12.2009)
+- Babel >= 0.9.5*
 - Blinker >= 1.0*
-- translitcodec
+- translitcodec*
+- SQLALchemy-migrate >= 0.6*
 
 Libraries marked with * are installable from the cheeseshop via
 easy_install / pip or might be available in Debian already.
