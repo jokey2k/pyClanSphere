@@ -19,7 +19,7 @@ shoutboxentries = db.Table('shoutboxentries', metadata,
     db.Column('existing_user', db.Boolean),
     db.Column('ip', db.String(64)),
     db.Column('postdate', db.DateTime),
-    db.Column('text', db.String(255))
+    db.Column('text', db.Text)
 )
 
 def init_database():

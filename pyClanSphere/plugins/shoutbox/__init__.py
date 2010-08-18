@@ -26,6 +26,9 @@ def setup(app, plugin):
     # Setup tables
     init_database()
 
+    # Register repository for schema updates
+    app.register_upgrade_repository(plugin, dirname(__file__))
+
     # Add our privileges
     for priv in PLUGIN_PRIVILEGES.values():
         app.add_privilege(priv)

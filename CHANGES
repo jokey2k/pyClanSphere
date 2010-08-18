@@ -10,6 +10,9 @@ pyClanSphere 0.3
 
 - Added silent signal sending from template environment
 
+shoutbox plugin:
+- switch from String to Text in database
+
 pyClanSphere 0.2
 ----------------
 
