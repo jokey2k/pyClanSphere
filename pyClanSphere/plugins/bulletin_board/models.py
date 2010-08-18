@@ -13,6 +13,8 @@
 from datetime import datetime
 from operator import attrgetter
 
+from werkzeug import cached_property
+
 from pyClanSphere.api import db, get_request
 from pyClanSphere.models import User, AnonymousUser
 from pyClanSphere.utils.pagination import Pagination
@@ -286,6 +288,12 @@ class Topic(AuthorBase):
         self.lastpost_id = lastpost.id
         self.modification_date = lastpost.date
 
+    @cached_property
+    def pagination(self):
+        endpoint = 'board/topic_details'
+        per_page = 20
+        return Pagination(endpoint, 0, per_page,
+                          Post.query.filter(Post.topic_id==self.id).count())
 
 class PostQuery(db.Query):
     """Addon methods for querying posts"""
