@@ -660,7 +660,7 @@ class pyClanSphere(object):
         # init the template system with the core stuff
         from pyClanSphere import models
 
-        def sendsignal(signal, args=(), kwargs={}):
+        def sendsignal(signal, *args, **kwargs):
             """Allow sending signals silencing its output"""
             signal.send(*args,**kwargs)
             return ''
