@@ -8,15 +8,21 @@
   {%- block head %}{% endblock %}
 </head>
 <body>
-  <div class="header">
+  <div class="globalheader">
     <h1>{{ cfg.clan_title }}</h1>
     <p class="description">{{ cfg.clan_tagline }}</p>
   </div>
-  <div class="contents">
+  <div class="wrappedbody">
+    <div class="pageheader"></div>
+    <div class="leftsidebar"></div>
+    <div class="contentcontainer">
     {{ sendsignal(signals.before_contents_rendered) }}{% block contents %}{% endblock -%}
     {{ sendsignal(signals.after_contents_rendered) }}
+    </div>
+    <div class="rightsidebar"></div>
+    <div class="pagefooter"></div>
   </div>
-  <div class="footer">{% trans pyClanSphere='<a href="http://www.pyclansphere.de/">pyClanSphere</a>'|safe
+  <div class="globalfooter">{% trans pyClanSphere='<a href="http://www.pyclansphere.de/">pyClanSphere</a>'|safe
     %}Empowered by {{ pyClanSphere }}.{% endtrans %}</div>
 </body>
 </html>
