@@ -16,8 +16,8 @@
     </div>
     <div class="contentwrapper">
       <div class="contents">
-        {{ sendsignal(signal.before_contents_rendered) }}{% block contents %}{% endblock %}
-        {{ sendsignal(signal.after_contents_rendered) }}
+        {{ sendsignal(signals.before_contents_rendered) }}{% block contents %}{% endblock %}
+        {{ sendsignal(signals.after_contents_rendered) }}
       </div>
       <div class="sidebar">
         {{ render_widgets() }}

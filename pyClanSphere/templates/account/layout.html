@@ -46,8 +46,8 @@
         <div class="message message-{{ message.type }}">{{ message.msg }}</div>
       {%- endfor %}
       </div>
-      {{ sendsignal(signal.before_contents_rendered) }}{% block contents %}{% endblock %}
-      {{ sendsignal(signal.after_contents_rendered) }}
+      {{ sendsignal(signals.before_contents_rendered) }}{% block contents %}{% endblock %}
+      {{ sendsignal(signals.after_contents_rendered) }}
     </div>
   </div>
   <div class="footer">
