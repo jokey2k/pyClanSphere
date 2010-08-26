@@ -11,6 +11,8 @@
     :license: BSD, see LICENSE for more details.
 """
 
+from werkzeug.exceptions import NotFound
+
 from pyClanSphere import cache
 from pyClanSphere.api import *
 from pyClanSphere.i18n import _, ngettext
