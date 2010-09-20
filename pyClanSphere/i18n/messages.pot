@@ -8,61 +8,61 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: pyClanSphere@digital-family.de\n"
-"POT-Creation-Date: 2010-01-30 23:30+0100\n"
+"POT-Creation-Date: 2010-09-20 22:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 0.9.4\n"
+"Generated-By: Babel 0.9.5\n"
 
-#: pyClanSphere/application.py:697
+#: pyClanSphere/application.py:604
 msgid "Default Theme"
 msgstr ""
 
-#: pyClanSphere/application.py:698
+#: pyClanSphere/application.py:605
 msgid "Simple default theme that doesn't contain any style information."
 msgstr ""
 
-#: pyClanSphere/application.py:747
+#: pyClanSphere/application.py:654
 #, python-format
 msgid "Theme “%s” is no longer available, falling back to default theme."
 msgstr ""
 
-#: pyClanSphere/application.py:771
+#: pyClanSphere/application.py:684
 #, python-format
 msgid "Copyright %(years)s by the pyClanSphere Team"
 msgstr ""
 
-#: pyClanSphere/config.py:34
+#: pyClanSphere/config.py:35
 msgid ""
 "The database URI.  For more information about database settings consult the "
 "pyClanSphere help."
 msgstr ""
 
-#: pyClanSphere/config.py:37
+#: pyClanSphere/config.py:38
 msgid ""
 "If a request to an http URL comes in, pyClanSphere will redirect to the same"
 " URL on https if this is savely possible.  This requires a working SSL setup"
 " or otherwise pyClanSphere will become unresponsive."
 msgstr ""
 
-#: pyClanSphere/config.py:41
+#: pyClanSphere/config.py:42
 msgid ""
 "If enabled, the database will collect the SQL statements and add them to the"
 " bottom of the page for easier debugging"
 msgstr ""
 
-#: pyClanSphere/config.py:44
+#: pyClanSphere/config.py:45
 msgid "My Clan Page"
 msgstr ""
 
-#: pyClanSphere/config.py:45
+#: pyClanSphere/config.py:46
 msgid "just another Clan page"
 msgstr ""
 
-#: pyClanSphere/config.py:46
+#: pyClanSphere/config.py:47
 msgid ""
 "The base URL of the site.  This has to be set to a full canonical URL "
 "(including http or https).  If not set, the application will behave "
@@ -70,14 +70,14 @@ msgid ""
 "location."
 msgstr ""
 
-#: pyClanSphere/config.py:51
+#: pyClanSphere/config.py:52
 msgid ""
 "The email address given here is used by the notification system to send "
 "emails from.  Also plugins that send mails will use this address as the "
 "sender address."
 msgstr ""
 
-#: pyClanSphere/config.py:56
+#: pyClanSphere/config.py:57
 msgid ""
 "The timezone of the site.  All times and dates in the user interface and on "
 "the website will be shown in this timezone.  It's save to change the "
@@ -85,84 +85,100 @@ msgid ""
 "stored as UTC."
 msgstr ""
 
-#: pyClanSphere/config.py:61
+#: pyClanSphere/config.py:62
 msgid "If set to true, the site enables the maintainance mode."
 msgstr ""
 
-#: pyClanSphere/config.py:64
+#: pyClanSphere/config.py:65
 msgid ""
 "If there are multiple pyClanSphere installations on the same host the cookie"
 " name should be set to something different for each one."
 msgstr ""
 
-#: pyClanSphere/config.py:68
+#: pyClanSphere/config.py:69
 msgid ""
 "The secret key is used for various security related tasks in the system. For"
 " example, the cookie is signed with this value."
 msgstr ""
 
-#: pyClanSphere/config.py:74
+#: pyClanSphere/config.py:75
 msgid ""
 "The iid uniquely identifies the pyClanSphere instance.  Currently this value"
 " is unused, but once set you should not modify it."
 msgstr ""
 
-#: pyClanSphere/config.py:85
+#: pyClanSphere/config.py:86
 msgid ""
 "During development activating this is helpful to log emails into a mail.log "
 "file in your instance folder instead of delivering them to your MTA."
 msgstr ""
 
-#: pyClanSphere/config.py:89
+#: pyClanSphere/config.py:90
 msgid ""
 "If this is set to true, errors in pyClanSphere are not caught so that "
 "debuggers can catch it instead.  This is useful for plugin and core "
 "development."
 msgstr ""
 
-#: pyClanSphere/config.py:103
+#: pyClanSphere/config.py:104
 msgid "No Cache"
 msgstr ""
 
-#: pyClanSphere/config.py:104
+#: pyClanSphere/config.py:105
 msgid "Simple Cache"
 msgstr ""
 
-#: pyClanSphere/config.py:105
+#: pyClanSphere/config.py:106
 msgid "memcached"
 msgstr ""
 
-#: pyClanSphere/config.py:106
+#: pyClanSphere/config.py:107
 msgid "Filesystem"
 msgstr ""
 
-#: pyClanSphere/config.py:121
+#: pyClanSphere/config.py:122
 msgid ""
 "This timeout is used by default for all network related operations. The "
 "default should be fine for most environments but if you have a very bad "
 "network connection during development you should increase it."
 msgstr ""
 
-#: pyClanSphere/config.py:131
+#: pyClanSphere/config.py:132
 msgid ""
 "It's possible to one or more comma separated paths here that are searched "
 "for plugins.  If the is not absolute, it's considered relative to the "
 "instance folder."
 msgstr ""
 
-#: pyClanSphere/config.py:137
-msgid ""
-"If you want to protect forms that non-logged in users or guests can fill "
-"out, enable it and get your api keys from http://recaptcha.net. Heavily "
-"recommended, just not enabled per default as you need to get api keys "
-"yourself"
+#: pyClanSphere/config.py:142
+msgid "Red (default)"
 msgstr ""
 
-#: pyClanSphere/config.py:141
-msgid "Secure communication between this app and recaptcha over ssl"
+#: pyClanSphere/config.py:143
+msgid "White"
 msgstr ""
 
-#: pyClanSphere/config.py:198
+#: pyClanSphere/config.py:144
+msgid "Black Glass"
+msgstr ""
+
+#: pyClanSphere/config.py:145
+msgid "Clean"
+msgstr ""
+
+#: pyClanSphere/config.py:146
+msgid "Custom (I know what I'm doing!)"
+msgstr ""
+
+#: pyClanSphere/config.py:147
+msgid "Use this theme unless overriden by active theme or hardcoded call"
+msgstr ""
+
+#: pyClanSphere/config.py:151
+msgid "URL to an external default avatar"
+msgstr ""
+
+#: pyClanSphere/config.py:205
 msgid ""
 "\n"
 "    <p>\n"
@@ -172,64 +188,64 @@ msgid ""
 "    "
 msgstr ""
 
-#: pyClanSphere/config.py:210
+#: pyClanSphere/config.py:217
 #, python-format
 msgid "Could not save configuration file: %s"
 msgstr ""
 
-#: pyClanSphere/forms.py:42 pyClanSphere/forms.py:87
+#: pyClanSphere/forms.py:44 pyClanSphere/forms.py:89
 #, python-format
 msgid "User “%(value)s” does not exist."
 msgstr ""
 
-#: pyClanSphere/forms.py:43 pyClanSphere/forms.py:88
+#: pyClanSphere/forms.py:45 pyClanSphere/forms.py:90
 msgid "You have to enter a username."
 msgstr ""
 
-#: pyClanSphere/forms.py:45
+#: pyClanSphere/forms.py:47
 #, python-format
 msgid "Failed login attempt, user “%s” does not exist"
 msgstr ""
 
-#: pyClanSphere/forms.py:53
+#: pyClanSphere/forms.py:55
 #, python-format
 msgid "Failed login attempt from “%s”, invalid password"
 msgstr ""
 
-#: pyClanSphere/forms.py:55
+#: pyClanSphere/forms.py:57
 msgid "Incorrect password."
 msgstr ""
 
-#: pyClanSphere/forms.py:60
+#: pyClanSphere/forms.py:62
 msgid "Old password"
 msgstr ""
 
-#: pyClanSphere/forms.py:62
+#: pyClanSphere/forms.py:64
 msgid "New password"
 msgstr ""
 
-#: pyClanSphere/forms.py:64
+#: pyClanSphere/forms.py:66
 msgid "Repeat password"
 msgstr ""
 
-#: pyClanSphere/forms.py:74
+#: pyClanSphere/forms.py:76
 msgid "The old password you've entered is wrong."
 msgstr ""
 
-#: pyClanSphere/forms.py:79 pyClanSphere/forms.py:332
+#: pyClanSphere/forms.py:81 pyClanSphere/forms.py:340
 msgid "The two passwords don't match."
 msgstr ""
 
-#: pyClanSphere/forms.py:90
+#: pyClanSphere/forms.py:92
 #, python-format
 msgid "User “%s” does not exist for password request"
 msgstr ""
 
-#: pyClanSphere/forms.py:103
+#: pyClanSphere/forms.py:105
 msgid "Disable plugin guard"
 msgstr ""
 
-#: pyClanSphere/forms.py:104
+#: pyClanSphere/forms.py:106
 msgid "If the plugin guard is disabled errors on plugin setup are not caught."
 msgstr ""
 
@@ -237,9 +253,9 @@ msgstr ""
 msgid "Groupname"
 msgstr ""
 
-#: pyClanSphere/forms.py:157 pyClanSphere/forms.py:310
-#: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:12
-#: pyClanSphere/templates/admin/edit_user.html:12
+#: pyClanSphere/forms.py:157 pyClanSphere/forms.py:318
+#: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:13
+#: pyClanSphere/templates/admin/edit_user.html:13
 #: pyClanSphere/templates/admin/information.html:102
 msgid "Privileges"
 msgstr ""
@@ -268,7 +284,8 @@ msgstr ""
 msgid "You have to select a group that gets the users assigned."
 msgstr ""
 
-#: pyClanSphere/forms.py:253 pyClanSphere/forms.py:289
+#: pyClanSphere/forms.py:249 pyClanSphere/forms.py:290
+#: pyClanSphere/templates/profile.html:8
 #: pyClanSphere/templates/account/login.html:29
 #: pyClanSphere/templates/account/lost_password.html:29
 #: pyClanSphere/templates/admin/manage_users.html:8
@@ -276,184 +293,242 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: pyClanSphere/forms.py:256 pyClanSphere/forms.py:290
+#: pyClanSphere/forms.py:252 pyClanSphere/forms.py:291
+#: pyClanSphere/templates/profile.html:9
 #: pyClanSphere/templates/admin/manage_users.html:9
 msgid "Realname"
 msgstr ""
 
-#: pyClanSphere/forms.py:257
+#: pyClanSphere/forms.py:253
 msgid "Display name"
 msgstr ""
 
-#: pyClanSphere/forms.py:258 pyClanSphere/plugins/war/forms.py:52
+#: pyClanSphere/forms.py:254 pyClanSphere/plugins/war/forms.py:55
+#: pyClanSphere/templates/profile.html:28
 msgid "Email"
 msgstr ""
 
-#: pyClanSphere/forms.py:260
+#: pyClanSphere/forms.py:256
 msgid "Website"
 msgstr ""
 
-#: pyClanSphere/forms.py:262
+#: pyClanSphere/forms.py:258 pyClanSphere/templates/profile.html:10
 msgid "Gender"
 msgstr ""
 
-#: pyClanSphere/forms.py:263
+#: pyClanSphere/forms.py:259 pyClanSphere/templates/profile.html:11
 msgid "Day of Birth"
 msgstr ""
 
-#: pyClanSphere/forms.py:264
+#: pyClanSphere/forms.py:260 pyClanSphere/templates/profile.html:12
 msgid "Height"
 msgstr ""
 
-#: pyClanSphere/forms.py:265
+#: pyClanSphere/forms.py:260
+msgid "Full cm"
+msgstr ""
+
+#: pyClanSphere/forms.py:261
 msgid "Streetaddress"
 msgstr ""
 
-#: pyClanSphere/forms.py:266
+#: pyClanSphere/forms.py:262
 msgid "Zip code"
 msgstr ""
 
-#: pyClanSphere/forms.py:267
+#: pyClanSphere/forms.py:263
 msgid "City"
 msgstr ""
 
-#: pyClanSphere/forms.py:268
+#: pyClanSphere/forms.py:264 pyClanSphere/templates/profile.html:14
 msgid "Country"
 msgstr ""
 
-#: pyClanSphere/forms.py:293
+#: pyClanSphere/forms.py:265 pyClanSphere/templates/profile.html:35
+#: pyClanSphere/templates/account/edit_profile.html:12
+msgid "About me"
+msgstr ""
+
+#: pyClanSphere/forms.py:267
+msgid "User Picture"
+msgstr ""
+
+#: pyClanSphere/forms.py:294 pyClanSphere/templates/profile.html:10
 msgid "Male"
 msgstr ""
 
-#: pyClanSphere/forms.py:294
+#: pyClanSphere/forms.py:295 pyClanSphere/templates/profile.html:10
 msgid "Female"
 msgstr ""
 
-#: pyClanSphere/forms.py:312 pyClanSphere/views/admin.py:74
+#: pyClanSphere/forms.py:300
+msgid "No change"
+msgstr ""
+
+#: pyClanSphere/forms.py:301
+msgid "No Picture"
+msgstr ""
+
+#: pyClanSphere/forms.py:302
+msgid "Gravatar.com"
+msgstr ""
+
+#: pyClanSphere/forms.py:320 pyClanSphere/views/admin.py:76
 msgid "Groups"
 msgstr ""
 
-#: pyClanSphere/forms.py:314 pyClanSphere/templates/account/login.html:32
-#: pyClanSphere/views/account.py:48
+#: pyClanSphere/forms.py:322 pyClanSphere/templates/account/login.html:32
+#: pyClanSphere/views/account.py:49
 #: pyClanSphere/websetup/templates/admin_account.html:12
 msgid "Password"
 msgstr ""
 
-#: pyClanSphere/forms.py:316
+#: pyClanSphere/forms.py:324
 msgid "Confirm password"
 msgstr ""
 
-#: pyClanSphere/forms.py:339
+#: pyClanSphere/forms.py:347
 msgid "This username is already in use"
 msgstr ""
 
-#: pyClanSphere/forms.py:375
+#: pyClanSphere/forms.py:383
 msgid "This email address is already in use"
 msgstr ""
 
-#: pyClanSphere/forms.py:384
+#: pyClanSphere/forms.py:392
 msgid "Passwords do not match"
 msgstr ""
 
-#: pyClanSphere/forms.py:441 pyClanSphere/templates/account/imaccount_list.html:7
+#: pyClanSphere/forms.py:442 pyClanSphere/templates/account/imaccount_list.html:7
 msgid "Service"
 msgstr ""
 
-#: pyClanSphere/forms.py:443
+#: pyClanSphere/forms.py:444
 msgid "User"
 msgstr ""
 
-#: pyClanSphere/forms.py:445 pyClanSphere/plugins/gamesquad/forms.py:366
+#: pyClanSphere/forms.py:446 pyClanSphere/plugins/gamesquad/forms.py:379
+#: pyClanSphere/templates/profile.html:20
 msgid "Account ID"
 msgstr ""
 
-#: pyClanSphere/forms.py:474 pyClanSphere/plugins/gamesquad/forms.py:392
+#: pyClanSphere/forms.py:475 pyClanSphere/plugins/gamesquad/forms.py:405
 msgid "This account is already registered"
 msgstr ""
 
-#: pyClanSphere/forms.py:518
+#: pyClanSphere/forms.py:519
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.js:47
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.min.js:14
 msgid "Filename"
 msgstr ""
 
-#: pyClanSphere/forms.py:519
+#: pyClanSphere/forms.py:520
 msgid "Log Level"
 msgstr ""
 
-#: pyClanSphere/forms.py:524
+#: pyClanSphere/forms.py:525
 msgid "Clan Page title"
 msgstr ""
 
-#: pyClanSphere/forms.py:525
+#: pyClanSphere/forms.py:526
 msgid "Clan Page tagline"
 msgstr ""
 
-#: pyClanSphere/forms.py:526
+#: pyClanSphere/forms.py:527
 msgid "Clan email"
 msgstr ""
 
-#: pyClanSphere/forms.py:527
+#: pyClanSphere/forms.py:528
 msgid "Language"
 msgstr ""
 
-#: pyClanSphere/forms.py:528
+#: pyClanSphere/forms.py:529
 msgid "Timezone"
 msgstr ""
 
-#: pyClanSphere/forms.py:530
+#: pyClanSphere/forms.py:531
 msgid "Cookie Name"
 msgstr ""
 
-#: pyClanSphere/forms.py:543
+#: pyClanSphere/forms.py:544
 msgid "Admin URL prefix"
 msgstr ""
 
-#: pyClanSphere/forms.py:545
+#: pyClanSphere/forms.py:546
 msgid "Account URL prefix"
 msgstr ""
 
-#: pyClanSphere/forms.py:546
+#: pyClanSphere/forms.py:547
 msgid "Force HTTPS"
 msgstr ""
 
-#: pyClanSphere/forms.py:570
+#: pyClanSphere/forms.py:571
 msgid "Cache system"
 msgstr ""
 
-#: pyClanSphere/forms.py:572
+#: pyClanSphere/forms.py:573
 msgid "Default cache timeout"
 msgstr ""
 
-#: pyClanSphere/forms.py:574
+#: pyClanSphere/forms.py:575
 msgid "Enable eager caching"
 msgstr ""
 
-#: pyClanSphere/forms.py:575
+#: pyClanSphere/forms.py:576
 msgid "Enable"
 msgstr ""
 
-#: pyClanSphere/forms.py:582
+#: pyClanSphere/forms.py:583
 msgid "You have to provide at least one server to use memcached."
 msgstr ""
 
-#: pyClanSphere/forms.py:586
+#: pyClanSphere/forms.py:587
 msgid "You have to provide cache folder to use filesystem cache."
 msgstr ""
 
-#: pyClanSphere/forms.py:607
+#: pyClanSphere/forms.py:593
+msgid "Enable reCAPTCHA Protection"
+msgstr ""
+
+#: pyClanSphere/forms.py:595
+msgid "Use https to connect to reCAPTCHA"
+msgstr ""
+
+#: pyClanSphere/forms.py:597
+msgid "Public Key"
+msgstr ""
+
+#: pyClanSphere/forms.py:599
+msgid "Private Key"
+msgstr ""
+
+#: pyClanSphere/forms.py:601
+msgid "Default widget theme"
+msgstr ""
+
+#: pyClanSphere/forms.py:621
 msgid "Use default value"
 msgstr ""
 
-#: pyClanSphere/notifications.py:134
-#: pyClanSphere/plugins/war/templates/war_detail.html:10
+#: pyClanSphere/models.py:360
+msgid "Phone"
+msgstr ""
+
+#: pyClanSphere/models.py:361
+msgid "Cell"
+msgstr ""
+
+#: pyClanSphere/notifications.py:185
+#: pyClanSphere/plugins/war/templates/war_detail.html:11
 #: pyClanSphere/websetup/templates/admin_account.html:16
 msgid "E-Mail"
 msgstr ""
 
-#: pyClanSphere/notifications.py:257
+#: pyClanSphere/notifications.py:308
 msgid "When pyClanSphere found an urgent security alarm."
 msgstr ""
 
-#: pyClanSphere/notifications.py:259
+#: pyClanSphere/notifications.py:310
 msgid "When pyClanSphere throws errors."
 msgstr ""
 
@@ -488,15 +563,15 @@ msgstr ""
 msgid "Exception happend on setup: %(error)s (%(file)s, line %(line)d)"
 msgstr ""
 
-#: pyClanSphere/privileges.py:203
+#: pyClanSphere/privileges.py:204
 msgid "can enter user account panel"
 msgstr ""
 
-#: pyClanSphere/privileges.py:204
+#: pyClanSphere/privileges.py:205
 msgid "can enter admin panel"
 msgstr ""
 
-#: pyClanSphere/privileges.py:205
+#: pyClanSphere/privileges.py:206
 msgid "can administer everything"
 msgstr ""
 
@@ -504,46 +579,41 @@ msgstr ""
 msgid "no documented plugins installed."
 msgstr ""
 
-#: pyClanSphere/i18n/__init__.py:443
+#: pyClanSphere/i18n/__init__.py:444
 msgid "just now"
 msgstr ""
 
-#: pyClanSphere/i18n/__init__.py:445
+#: pyClanSphere/i18n/__init__.py:446
 msgid "today"
 msgstr ""
 
-#: pyClanSphere/i18n/__init__.py:448
+#: pyClanSphere/i18n/__init__.py:449
 msgid "yesterday"
 msgstr ""
 
-#: pyClanSphere/i18n/__init__.py:519
+#: pyClanSphere/i18n/__init__.py:513 pyClanSphere/i18n/__init__.py:540
 msgid "now"
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/__init__.py:40
+#: pyClanSphere/plugins/bulletin_board/__init__.py:63
 #: pyClanSphere/plugins/bulletin_board/templates/admin/board_category_list.html:2
 msgid "Categories"
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/__init__.py:41
-#: pyClanSphere/plugins/bulletin_board/views.py:344
+#: pyClanSphere/plugins/bulletin_board/__init__.py:64
+#: pyClanSphere/plugins/bulletin_board/views.py:385
 #: pyClanSphere/plugins/bulletin_board/templates/admin/board_forum_list.html:2
 msgid "Forums"
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/__init__.py:45
+#: pyClanSphere/plugins/bulletin_board/__init__.py:67
 #: pyClanSphere/plugins/bulletin_board/templates/board_delete_post.html:3
 #: pyClanSphere/plugins/bulletin_board/templates/board_delete_post.html:8
-#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:3
-#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:8
-#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:3
-#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:8
 msgid "Board"
 msgstr ""
 
 #: pyClanSphere/plugins/bulletin_board/forms.py:23
 #: pyClanSphere/plugins/bulletin_board/forms.py:103
-#: pyClanSphere/plugins/bulletin_board/templates/board_index.html:12
 #: pyClanSphere/plugins/bulletin_board/templates/admin/board_category_list.html:8
 #: pyClanSphere/plugins/bulletin_board/templates/admin/board_forum_list.html:9
 msgid "Name"
@@ -553,11 +623,13 @@ msgstr ""
 #: pyClanSphere/plugins/bulletin_board/forms.py:106
 #: pyClanSphere/plugins/bulletin_board/templates/admin/board_category_list.html:7
 #: pyClanSphere/plugins/bulletin_board/templates/admin/board_forum_list.html:8
+#: pyClanSphere/plugins/gamesquad/forms.py:288
 msgid "Order"
 msgstr ""
 
 #: pyClanSphere/plugins/bulletin_board/forms.py:25
 #: pyClanSphere/plugins/bulletin_board/forms.py:107
+#: pyClanSphere/plugins/gamesquad/forms.py:289
 msgid "Sorting order, ascending"
 msgstr ""
 
@@ -582,8 +654,8 @@ msgid "You have to select a category which the forums get assigned to."
 msgstr ""
 
 #: pyClanSphere/plugins/bulletin_board/forms.py:101
-#: pyClanSphere/plugins/bulletin_board/views.py:321
-#: pyClanSphere/plugins/bulletin_board/views.py:343
+#: pyClanSphere/plugins/bulletin_board/views.py:362
+#: pyClanSphere/plugins/bulletin_board/views.py:384
 #: pyClanSphere/plugins/bulletin_board/templates/admin/board_forum_list.html:7
 msgid "Category"
 msgstr ""
@@ -626,13 +698,14 @@ msgid "Your Name"
 msgstr ""
 
 #: pyClanSphere/plugins/bulletin_board/forms.py:199
-#: pyClanSphere/plugins/news/forms.py:23
+#: pyClanSphere/plugins/bulletin_board/templates/_boardtopics.html:5
+#: pyClanSphere/plugins/news/forms.py:24
 #: pyClanSphere/plugins/news/templates/admin/news_list.html:7
 msgid "Title"
 msgstr ""
 
 #: pyClanSphere/plugins/bulletin_board/forms.py:201
-#: pyClanSphere/plugins/shoutbox/forms.py:39
+#: pyClanSphere/plugins/shoutbox/forms.py:40
 msgid "Text"
 msgstr ""
 
@@ -640,80 +713,173 @@ msgstr ""
 msgid "No Doublepost"
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/privileges.py:27
+#: pyClanSphere/plugins/bulletin_board/privileges.py:28
 msgid "can moderate posts"
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/privileges.py:28
+#: pyClanSphere/plugins/bulletin_board/privileges.py:29
 msgid "can manage forums"
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/views.py:305
+#: pyClanSphere/plugins/bulletin_board/views.py:346
 #, python-format
 msgid "Category %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/views.py:309
+#: pyClanSphere/plugins/bulletin_board/views.py:350
 #, python-format
 msgid "Category %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/views.py:335
+#: pyClanSphere/plugins/bulletin_board/views.py:376
 #, python-format
 msgid "The category %s was deleted successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/views.py:393
+#: pyClanSphere/plugins/bulletin_board/views.py:434
 #, python-format
 msgid "The forum %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/views.py:397
+#: pyClanSphere/plugins/bulletin_board/views.py:438
 #, python-format
 msgid "The forum %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/views.py:409
-#: pyClanSphere/plugins/bulletin_board/views.py:431
+#: pyClanSphere/plugins/bulletin_board/views.py:450
+#: pyClanSphere/plugins/bulletin_board/views.py:472
 msgid "Forum"
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/views.py:423
+#: pyClanSphere/plugins/bulletin_board/views.py:464
 #, python-format
 msgid "The forum %s was deleted successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/views.py:432
-#: pyClanSphere/plugins/bulletin_board/templates/board_index.html:13
+#: pyClanSphere/plugins/bulletin_board/views.py:473
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:51
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:91
 msgid "Topics"
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/templates/_board.html:31
-#, python-format
-msgid "%(date)s<br>by %(author)s"
-msgstr ""
-
-#: pyClanSphere/plugins/bulletin_board/templates/_board.html:33
-#, python-format
-msgid "%(topic)s<br>%(date)s by %(author)s"
-msgstr ""
-
-#: pyClanSphere/plugins/bulletin_board/templates/_board.html:46
+#: pyClanSphere/plugins/bulletin_board/templates/_boardeditor.html:13
 msgid "New Post"
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/templates/_board.html:50
-#: pyClanSphere/utils/account.py:29 pyClanSphere/utils/admin.py:37
+#: pyClanSphere/plugins/bulletin_board/templates/_boardeditor.html:17
+#: pyClanSphere/utils/account.py:30 pyClanSphere/utils/admin.py:38
 msgid "Error"
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/templates/_board.html:80
-#: pyClanSphere/utils/forms.py:782
+#: pyClanSphere/plugins/bulletin_board/templates/_boardeditor.html:47
+#: pyClanSphere/utils/forms.py:786
 msgid "Submit"
 msgstr ""
 
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:6
+#: pyClanSphere/plugins/bulletin_board/templates/_boardtopics.html:7
+msgid "Last post"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:27
+msgid "Viewers"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:33
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:51
+msgid "Subforums"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:45
+msgid "Actions"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:47
+msgid "Show RSS Feed for this forum"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:49
+#: pyClanSphere/plugins/bulletin_board/templates/_boardtopics.html:6
+#: pyClanSphere/plugins/bulletin_board/templates/_boardtopics.html:33
+msgid "Stats"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:52
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:93
+#: pyClanSphere/plugins/bulletin_board/templates/_boardposts.html:28
+#: pyClanSphere/plugins/bulletin_board/templates/_boardtopics.html:35
+msgid "Posts"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:54
+#: pyClanSphere/plugins/bulletin_board/templates/_boardtopics.html:38
+msgid "Last Post"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:65
+#: pyClanSphere/plugins/bulletin_board/templates/_boardtopics.html:41
+#: pyClanSphere/templates/admin/theme.html:20
+#, python-format
+msgid "by %(author)s"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:77
+msgid "Current information"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:80
+msgid "currently active users"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:88
+msgid "Board stats"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:95
+msgid "Visits today"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:102
+msgid "Board legend"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:105
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:106
+msgid "No unread topics"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:107
+#: pyClanSphere/plugins/bulletin_board/templates/_boardoverview.html:108
+msgid "Unread topics"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardposts.html:26
+msgid "Joined"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardtopics.html:5
+#: pyClanSphere/plugins/news/templates/admin/news_list.html:8
+#: pyClanSphere/plugins/shoutbox/forms.py:37
+#: pyClanSphere/templates/admin/information.html:142
+msgid "Author"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardtopics.html:26
+#, python-format
+msgid "Created by %(author)s, %(date)s"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardtopics.html:28
+#: pyClanSphere/plugins/news/templates/news_index.html:14
+#: pyClanSphere/plugins/war/templates/war_index.html:29
+msgid "Pages"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/_boardtopics.html:36
+msgid "Hits"
+msgstr ""
+
 #: pyClanSphere/plugins/bulletin_board/templates/board_delete_post.html:14
-#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:15
 #, python-format
 msgid "Written: %(date)s"
 msgstr ""
@@ -727,7 +893,7 @@ msgstr ""
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_deletemember.html:11
 #: pyClanSphere/plugins/news/templates/admin/news_delete.html:11
 #: pyClanSphere/plugins/shoutbox/templates/shoutbox_delete.html:11
-#: pyClanSphere/plugins/war/models.py:43
+#: pyClanSphere/plugins/war/models.py:45
 #: pyClanSphere/plugins/war/templates/admin/war_delete.html:11
 #: pyClanSphere/plugins/war/templates/admin/war_list.html:24
 #: pyClanSphere/plugins/war/templates/admin/warmap_delete.html:11
@@ -748,37 +914,164 @@ msgid "Yes"
 msgstr ""
 
 #: pyClanSphere/plugins/bulletin_board/templates/board_index.html:3
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:3
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:4
 msgid "Board index"
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/templates/board_index.html:14
-#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:13
-msgid "Posts"
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:8
+msgid "Topictools"
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/templates/board_index.html:15
-#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:12
-msgid "Last post"
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:10
+msgid "Show printable version"
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:32
-#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:29
-#: pyClanSphere/plugins/news/templates/news_index.html:14
-#: pyClanSphere/plugins/war/templates/war_index.html:29
-msgid "Pages"
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:11
+msgid "Send notification as EMail"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:12
+msgid "Notify me of updates"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:13
+msgid "Add poll"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:17
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:37
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:17
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:35
+msgid "Moderation"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:19
+msgid "Close topic"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:20
+msgid "Unapprove topic"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:21
+msgid "Move topic"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:22
+msgid "Copy topic"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:23
+msgid "Edit topic"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:24
+msgid "Delete Topic"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:25
+msgid "Make topic sticky"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:26
+msgid "Join topics"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:31
+msgid "Search in topic"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:33
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:31
+msgid "Search"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:39
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:37
+msgid "Mark all"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:40
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:38
+msgid "Mark none"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:41
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:39
+msgid "Invert selection"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:43
+msgid "Select posts to be approved"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:44
+msgid "Select posts with attachments"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_detail.html:45
+msgid "Select posts from guests"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:9
+msgid "Forumtools"
 msgstr ""
 
 #: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:11
-msgid "Topic / Author"
+msgid "Mark forum as read"
 msgstr ""
 
-#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:17
-#, python-format
-msgid "%(topic)s<br><em>by %(author)s at %(date)s</em>"
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:12
+msgid "Create new topic"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:13
+msgid "Notify for new topics"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:19
+msgid "Show posts/topics to be approved"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:20
+msgid "Show attachments to be approved"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:21
+msgid "Move multiple topics"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:22
+msgid "Delete multiple topics"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:23
+msgid "Add moderator"
 msgstr ""
 
 #: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:24
-msgid "No Topics yet"
+msgid "Add announcement"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:29
+msgid "Search in board"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:41
+msgid "Select topics to be approved"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:42
+msgid "Select topics with attachments"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:43
+msgid "Select topics from guests"
+msgstr ""
+
+#: pyClanSphere/plugins/bulletin_board/templates/board_topic_list.html:61
+msgid "Stickies"
 msgstr ""
 
 #: pyClanSphere/plugins/bulletin_board/templates/admin/board_base_delete.html:3
@@ -819,149 +1112,155 @@ msgstr ""
 msgid "New Forum"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/__init__.py:27
+#: pyClanSphere/plugins/gamesquad/__init__.py:64
 #: pyClanSphere/plugins/gamesquad/templates/admin/game_list.html:8
 msgid "Squads"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/__init__.py:30
+#: pyClanSphere/plugins/gamesquad/__init__.py:67
 msgid "Games"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/__init__.py:33
+#: pyClanSphere/plugins/gamesquad/__init__.py:70
 msgid "Levels"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/__init__.py:35
+#: pyClanSphere/plugins/gamesquad/__init__.py:72
 msgid "Games and Squads"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/__init__.py:40
+#: pyClanSphere/plugins/gamesquad/__init__.py:77
+#: pyClanSphere/templates/profile.html:17
 msgid "Gameaccounts"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:37
+#: pyClanSphere/plugins/gamesquad/forms.py:38
 msgid "Gamename"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:53
+#: pyClanSphere/plugins/gamesquad/forms.py:54
 msgid "This gamename is already in use"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:69
+#: pyClanSphere/plugins/gamesquad/forms.py:70
 msgid "What should pyClanSphere do with squads assigned to this group?"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:72
+#: pyClanSphere/plugins/gamesquad/forms.py:73
 msgid "Delete game, remove squads"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:73
+#: pyClanSphere/plugins/gamesquad/forms.py:74
 msgid "Move the squads to another game"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:75
+#: pyClanSphere/plugins/gamesquad/forms.py:76
 msgid "Relocate squad to"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:88
+#: pyClanSphere/plugins/gamesquad/forms.py:89
 msgid "You have to select a game which the squad gets assigned to."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:121
+#: pyClanSphere/plugins/gamesquad/forms.py:122
 msgid "Squadname"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:124
+#: pyClanSphere/plugins/gamesquad/forms.py:125
 msgid "Belongs to"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:126
+#: pyClanSphere/plugins/gamesquad/forms.py:127
 msgid "Squad Tag"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:160
+#: pyClanSphere/plugins/gamesquad/forms.py:161
 msgid "What should pyClanSphere do with members assigned to this squad?"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:163
+#: pyClanSphere/plugins/gamesquad/forms.py:164
 msgid "Delete squad, remove squadmemberships"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:164
+#: pyClanSphere/plugins/gamesquad/forms.py:165
 msgid "Move the members to another squad"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:166
+#: pyClanSphere/plugins/gamesquad/forms.py:167
 msgid "Relocate members to"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:179
+#: pyClanSphere/plugins/gamesquad/forms.py:180
 msgid "You have to select a squad which the squad gets assigned to."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:213
+#: pyClanSphere/plugins/gamesquad/forms.py:214
 msgid "Clanmember"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:215
-#: pyClanSphere/plugins/gamesquad/templates/squad_detail.html:11
-#: pyClanSphere/plugins/gamesquad/templates/admin/level_list.html:7
+#: pyClanSphere/plugins/gamesquad/forms.py:216
+#: pyClanSphere/plugins/gamesquad/templates/squad_detail.html:10
+#: pyClanSphere/plugins/gamesquad/templates/admin/level_list.html:8
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_listmembers.html:8
 msgid "Level"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:217
+#: pyClanSphere/plugins/gamesquad/forms.py:218
 msgid "Other tasks"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:283
+#: pyClanSphere/plugins/gamesquad/forms.py:285
 msgid "Levelname"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:299
+#: pyClanSphere/plugins/gamesquad/forms.py:304
 msgid "This levelname is already in use"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:320
-msgid "Reassign squadmembers to"
+#: pyClanSphere/plugins/gamesquad/forms.py:308
+msgid "Ordering with positive integers or zero only"
 msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/forms.py:333
+msgid "Reassign squadmembers to"
+msgstr ""
+
+#: pyClanSphere/plugins/gamesquad/forms.py:346
 msgid "You have to select a level which the squadmembers get assigned to."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/forms.py:364
+#: pyClanSphere/plugins/gamesquad/forms.py:377
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_list.html:7
 #: pyClanSphere/plugins/gamesquad/templates/admin/game_list.html:7
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_list.html:8
-#: pyClanSphere/plugins/war/forms.py:325
+#: pyClanSphere/plugins/war/forms.py:332
 #: pyClanSphere/plugins/war/templates/admin/warmode_list.html:8
+#: pyClanSphere/templates/profile.html:20
 msgid "Game"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/privileges.py:27
+#: pyClanSphere/plugins/gamesquad/privileges.py:28
 msgid "can manage games"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/privileges.py:28
+#: pyClanSphere/plugins/gamesquad/privileges.py:29
 msgid "can manage squad memberships"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/privileges.py:29
+#: pyClanSphere/plugins/gamesquad/privileges.py:30
 msgid "can manage squads"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/privileges.py:30
+#: pyClanSphere/plugins/gamesquad/privileges.py:31
 msgid "can add/edit/remove memberlevel groups"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:139
+#: pyClanSphere/plugins/gamesquad/views.py:140
 #, python-format
 msgid "The game %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:143
+#: pyClanSphere/plugins/gamesquad/views.py:144
 #, python-format
 msgid "The game %s was updated successfully."
 msgstr ""
@@ -981,58 +1280,62 @@ msgstr ""
 msgid "The squad %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:247
+#: pyClanSphere/plugins/gamesquad/views.py:246
 #, python-format
 msgid "%s was deleted successfully"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:295
+#: pyClanSphere/plugins/gamesquad/views.py:296
 #, python-format
 msgid "The squadmember %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:299
+#: pyClanSphere/plugins/gamesquad/views.py:300
 #, python-format
 msgid "The squadmember %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:333
+#: pyClanSphere/plugins/gamesquad/views.py:332
 #, python-format
 msgid "Member %s removed from %s"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:372
+#: pyClanSphere/plugins/gamesquad/views.py:368
 #, python-format
 msgid "The level %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:376
+#: pyClanSphere/plugins/gamesquad/views.py:372
 #, python-format
 msgid "The level %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:404
+#: pyClanSphere/plugins/gamesquad/views.py:399
 #, python-format
 msgid "The level %s was deleted successfully"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:441
+#: pyClanSphere/plugins/gamesquad/views.py:436
 #, python-format
 msgid "The game account %s was registered successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:445
+#: pyClanSphere/plugins/gamesquad/views.py:440
 #, python-format
 msgid "The game account %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/views.py:474
-#: pyClanSphere/plugins/gamesquad/views.py:496
+#: pyClanSphere/plugins/gamesquad/views.py:469
+#: pyClanSphere/plugins/gamesquad/views.py:491
 #, python-format
 msgid "The game account %s was deleted successfully"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/templates/game_detail.html:12
+#: pyClanSphere/plugins/gamesquad/templates/game_detail.html:9
+msgid "None"
+msgstr ""
+
+#: pyClanSphere/plugins/gamesquad/templates/game_detail.html:11
 msgid "<strong>No Squads for this game</strong>"
 msgstr ""
 
@@ -1044,18 +1347,56 @@ msgstr ""
 msgid "So far there are no games."
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/templates/squad_detail.html:10
+#: pyClanSphere/plugins/gamesquad/templates/squad_detail.html:9
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_listmembers.html:7
 msgid "Member"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/templates/squad_detail.html:12
+#: pyClanSphere/plugins/gamesquad/templates/squad_detail.html:11
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_listmembers.html:9
 msgid "Other Tasks"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/templates/squad_detail.html:24
-msgid "<p><strong>No Members in this squad</strong></p>"
+#: pyClanSphere/plugins/gamesquad/templates/squad_detail.html:22
+msgid "No Members in this squad."
+msgstr ""
+
+#: pyClanSphere/plugins/gamesquad/templates/squad_detail.html:27
+#: pyClanSphere/plugins/war/templates/war_detail.html:5
+#: pyClanSphere/plugins/war/templates/war_fightus.html:6
+#: pyClanSphere/plugins/war/templates/admin/war_edit.html:19
+#: pyClanSphere/plugins/war/templates/admin/war_list.html:7
+#: pyClanSphere/plugins/war/templates/admin/warresult_edit.html:11
+msgid "Opponent"
+msgstr ""
+
+#: pyClanSphere/plugins/gamesquad/templates/squad_detail.html:28
+#: pyClanSphere/plugins/news/templates/admin/news_list.html:10
+#: pyClanSphere/plugins/war/forms.py:48
+#: pyClanSphere/plugins/war/templates/war_detail.html:20
+#: pyClanSphere/plugins/war/templates/admin/war_list.html:9
+#: pyClanSphere/plugins/war/templates/admin/warresult_edit.html:13
+msgid "Date"
+msgstr ""
+
+#: pyClanSphere/plugins/gamesquad/templates/squad_detail.html:29
+#: pyClanSphere/plugins/news/forms.py:29
+#: pyClanSphere/plugins/news/templates/admin/news_list.html:9
+#: pyClanSphere/plugins/war/templates/war_detail.html:26
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.js:49
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.min.js:14
+msgid "Status"
+msgstr ""
+
+#: pyClanSphere/plugins/gamesquad/templates/squad_detail.html:30
+#: pyClanSphere/plugins/war/templates/war_detail.html:60
+#: pyClanSphere/plugins/war/templates/admin/war_list.html:11
+msgid "Result"
+msgstr ""
+
+#: pyClanSphere/plugins/gamesquad/templates/squad_detail.html:42
+#: pyClanSphere/plugins/war/templates/war_index.html:11
+msgid "So far there are no wars for this squad."
 msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_delete.html:2
@@ -1082,7 +1423,7 @@ msgstr ""
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_deletemember.html:10
 #: pyClanSphere/plugins/news/templates/admin/news_delete.html:10
 #: pyClanSphere/plugins/shoutbox/templates/shoutbox_delete.html:10
-#: pyClanSphere/plugins/war/models.py:41
+#: pyClanSphere/plugins/war/models.py:43
 #: pyClanSphere/plugins/war/templates/admin/war_delete.html:10
 #: pyClanSphere/plugins/war/templates/admin/war_list.html:24
 #: pyClanSphere/plugins/war/templates/admin/warmap_delete.html:10
@@ -1113,29 +1454,30 @@ msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_edit.html:9
 #: pyClanSphere/plugins/gamesquad/templates/admin/game_edit.html:11
-#: pyClanSphere/plugins/gamesquad/templates/admin/level_edit.html:11
+#: pyClanSphere/plugins/gamesquad/templates/admin/level_edit.html:9
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_edit.html:13
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_editmember.html:10
 #: pyClanSphere/plugins/news/templates/admin/news_edit.html:15
 #: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:11
-#: pyClanSphere/plugins/war/templates/admin/war_edit.html:62
+#: pyClanSphere/plugins/war/templates/admin/war_edit.html:35
 #: pyClanSphere/templates/account/notification_settings.html:28
 #: pyClanSphere/templates/admin/_form_helpers.html:41
 #: pyClanSphere/templates/admin/basic_options.html:12
 #: pyClanSphere/templates/admin/cache.html:98
 #: pyClanSphere/templates/admin/configuration.html:47
 #: pyClanSphere/templates/admin/edit_group.html:13
+#: pyClanSphere/templates/admin/recaptcha.html:16
 #: pyClanSphere/templates/admin/url_options.html:17
 msgid "Save"
 msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_edit.html:10
 #: pyClanSphere/plugins/gamesquad/templates/admin/game_edit.html:12
-#: pyClanSphere/plugins/gamesquad/templates/admin/level_edit.html:12
+#: pyClanSphere/plugins/gamesquad/templates/admin/level_edit.html:10
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_edit.html:14
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_editmember.html:11
 #: pyClanSphere/plugins/news/templates/admin/news_edit.html:16
-#: pyClanSphere/plugins/war/templates/admin/war_edit.html:63
+#: pyClanSphere/plugins/war/templates/admin/war_edit.html:36
 #: pyClanSphere/templates/admin/_form_helpers.html:42
 #: pyClanSphere/templates/admin/edit_group.html:14
 msgid "Save and continue editing"
@@ -1143,11 +1485,11 @@ msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_edit.html:12
 #: pyClanSphere/plugins/gamesquad/templates/admin/game_edit.html:14
-#: pyClanSphere/plugins/gamesquad/templates/admin/level_edit.html:14
+#: pyClanSphere/plugins/gamesquad/templates/admin/level_edit.html:12
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_edit.html:16
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_editmember.html:13
 #: pyClanSphere/plugins/news/templates/admin/news_edit.html:18
-#: pyClanSphere/plugins/war/templates/admin/war_edit.html:65
+#: pyClanSphere/plugins/war/templates/admin/war_edit.html:38
 #: pyClanSphere/templates/admin/_form_helpers.html:44
 #: pyClanSphere/templates/admin/edit_group.html:16
 msgid "Delete"
@@ -1155,14 +1497,14 @@ msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_edit.html:14
 #: pyClanSphere/plugins/gamesquad/templates/admin/game_edit.html:16
-#: pyClanSphere/plugins/gamesquad/templates/admin/level_edit.html:16
+#: pyClanSphere/plugins/gamesquad/templates/admin/level_edit.html:14
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_edit.html:18
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_editmember.html:15
 #: pyClanSphere/plugins/news/templates/admin/news_edit.html:20
 #: pyClanSphere/plugins/vessel_theme/templates/admin/configure_vessel_theme.html:12
-#: pyClanSphere/plugins/war/templates/admin/war_edit.html:67
+#: pyClanSphere/plugins/war/templates/admin/war_edit.html:40
 #: pyClanSphere/templates/account/change_password.html:9
-#: pyClanSphere/templates/account/edit_profile.html:14
+#: pyClanSphere/templates/account/edit_profile.html:16
 #: pyClanSphere/templates/account/reset_password.html:9
 #: pyClanSphere/templates/admin/_form_helpers.html:46
 #: pyClanSphere/templates/admin/edit_group.html:18
@@ -1180,10 +1522,10 @@ msgid "Accountname"
 msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/templates/account/gameaccount_list.html:18
-#: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:24
-#: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:39
+#: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:25
+#: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:40
 #: pyClanSphere/templates/account/imaccount_list.html:18
-#: pyClanSphere/templates/admin/edit_user.html:24
+#: pyClanSphere/templates/admin/edit_user.html:25
 msgid "No accounts"
 msgstr ""
 
@@ -1191,34 +1533,35 @@ msgstr ""
 msgid "New Account"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:3
-#: pyClanSphere/templates/admin/edit_user.html:3
+#: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:4
+#: pyClanSphere/templates/admin/edit_user.html:4
 #: pyClanSphere/templates/admin/manage_users.html:24
 msgid "New User"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:3
-#: pyClanSphere/templates/admin/edit_user.html:3
+#: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:4
+#: pyClanSphere/templates/admin/edit_user.html:4
 msgid "Edit User"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:8
-#: pyClanSphere/templates/account/edit_profile.html:8
-#: pyClanSphere/templates/admin/edit_user.html:8
+#: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:9
+#: pyClanSphere/templates/account/edit_profile.html:9
+#: pyClanSphere/templates/admin/edit_user.html:9
 msgid "Core account data"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:11
-#: pyClanSphere/templates/admin/edit_user.html:11
+#: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:12
+#: pyClanSphere/templates/profile.html:5
+#: pyClanSphere/templates/admin/edit_user.html:12
 msgid "About the user"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:14
-#: pyClanSphere/templates/admin/edit_user.html:14
+#: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:15
+#: pyClanSphere/templates/admin/edit_user.html:15
 msgid "IM Accounts"
 msgstr ""
 
-#: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:29
+#: pyClanSphere/plugins/gamesquad/templates/admin/edit_user.html:30
 msgid "Registered Game Accounts"
 msgstr ""
 
@@ -1284,7 +1627,7 @@ msgid ""
 msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/templates/admin/level_edit.html:3
-#: pyClanSphere/plugins/gamesquad/templates/admin/level_list.html:22
+#: pyClanSphere/plugins/gamesquad/templates/admin/level_list.html:24
 msgid "New Level"
 msgstr ""
 
@@ -1295,6 +1638,10 @@ msgstr ""
 #: pyClanSphere/plugins/gamesquad/templates/admin/level_list.html:2
 #: pyClanSphere/plugins/gamesquad/templates/admin/level_list.html:4
 msgid "Levels Overview"
+msgstr ""
+
+#: pyClanSphere/plugins/gamesquad/templates/admin/level_list.html:7
+msgid "Ordering"
 msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_delete.html:2
@@ -1353,8 +1700,8 @@ msgid "Squads Overview"
 msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_list.html:7
-#: pyClanSphere/plugins/war/forms.py:48
-#: pyClanSphere/plugins/war/templates/war_detail.html:18
+#: pyClanSphere/plugins/war/forms.py:51
+#: pyClanSphere/plugins/war/templates/war_detail.html:19
 #: pyClanSphere/plugins/war/templates/admin/war_list.html:8
 #: pyClanSphere/plugins/war/templates/admin/warmap_list.html:7
 #: pyClanSphere/plugins/war/templates/admin/warresult_edit.html:12
@@ -1362,8 +1709,8 @@ msgid "Squad"
 msgstr ""
 
 #: pyClanSphere/plugins/gamesquad/templates/admin/squad_list.html:9
-#: pyClanSphere/plugins/war/templates/admin/war_edit.html:55
-#: pyClanSphere/plugins/war/templates/admin/war_edit.html:57
+#: pyClanSphere/plugins/war/templates/admin/war_edit.html:29
+#: pyClanSphere/plugins/war/templates/admin/war_edit.html:31
 msgid "Members"
 msgstr ""
 
@@ -1376,89 +1723,73 @@ msgstr ""
 msgid "New Member"
 msgstr ""
 
-#: pyClanSphere/plugins/news/__init__.py:28
+#: pyClanSphere/plugins/news/__init__.py:49
 msgid "Overview"
 msgstr ""
 
-#: pyClanSphere/plugins/news/__init__.py:31
+#: pyClanSphere/plugins/news/__init__.py:52
 msgid "Write"
 msgstr ""
 
-#: pyClanSphere/plugins/news/__init__.py:33 pyClanSphere/plugins/news/forms.py:24
-#: pyClanSphere/plugins/news/templates/news_detail.html:2
+#: pyClanSphere/plugins/news/__init__.py:54 pyClanSphere/plugins/news/forms.py:25
+#: pyClanSphere/plugins/news/templates/news_detail.html:3
 msgid "News"
 msgstr ""
 
-#: pyClanSphere/plugins/news/forms.py:26
+#: pyClanSphere/plugins/news/forms.py:27
 msgid "Date of Publication"
 msgstr ""
 
-#: pyClanSphere/plugins/news/forms.py:27
-#: pyClanSphere/plugins/news/templates/admin/news_list.html:9
-#: pyClanSphere/plugins/war/templates/war_detail.html:21
-msgid "Status"
+#: pyClanSphere/plugins/news/forms.py:28
+msgid "Leave empty for auto-fill"
 msgstr ""
 
-#: pyClanSphere/plugins/news/forms.py:49
+#: pyClanSphere/plugins/news/forms.py:51
 #: pyClanSphere/plugins/news/templates/admin/news_list.html:22
 msgid "Draft"
 msgstr ""
 
-#: pyClanSphere/plugins/news/forms.py:50
+#: pyClanSphere/plugins/news/forms.py:52
 #: pyClanSphere/plugins/news/templates/admin/news_list.html:24
 msgid "Published"
 msgstr ""
 
-#: pyClanSphere/plugins/news/forms.py:57
-msgid "Initially news should always be drafts"
-msgstr ""
-
-#: pyClanSphere/plugins/news/forms.py:61
+#: pyClanSphere/plugins/news/forms.py:60
 msgid "You have no permission to publish posts."
 msgstr ""
 
-#: pyClanSphere/plugins/news/privileges.py:27
+#: pyClanSphere/plugins/news/privileges.py:28
 msgid "can create news"
 msgstr ""
 
-#: pyClanSphere/plugins/news/privileges.py:28
+#: pyClanSphere/plugins/news/privileges.py:29
 msgid "can edit non-selfwritten news"
 msgstr ""
 
-#: pyClanSphere/plugins/news/privileges.py:29
+#: pyClanSphere/plugins/news/privileges.py:30
 msgid "can work on published items or publish new ones"
 msgstr ""
 
-#: pyClanSphere/plugins/news/privileges.py:30
+#: pyClanSphere/plugins/news/privileges.py:31
 msgid "can delete news"
 msgstr ""
 
-#: pyClanSphere/plugins/news/views.py:150
+#: pyClanSphere/plugins/news/views.py:152
 #, python-format
 msgid "The entry %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/news/views.py:153
+#: pyClanSphere/plugins/news/views.py:155
 #, python-format
 msgid "The entry %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/news/views.py:181
+#: pyClanSphere/plugins/news/views.py:182
 #, python-format
 msgid "The entry %s was deleted successfully"
 msgstr ""
 
-#: pyClanSphere/plugins/news/templates/_news.html:10
-msgid "Show all available news"
-msgstr ""
-
-#: pyClanSphere/plugins/news/templates/_news.html:11
-#: pyClanSphere/plugins/news/templates/news_detail.html:20
-#, python-format
-msgid "%(author)s"
-msgstr ""
-
-#: pyClanSphere/plugins/news/templates/_news.html:15
+#: pyClanSphere/plugins/news/templates/_news.html:13
 msgid "More"
 msgstr ""
 
@@ -1489,16 +1820,12 @@ msgstr ""
 msgid "empty archive"
 msgstr ""
 
-#: pyClanSphere/plugins/news/templates/news_detail.html:12
-#, python-format
-msgid "<strong>Scheduled Post:</strong> This entry will appear in %(time_span)s."
-msgstr ""
-
 #: pyClanSphere/plugins/news/templates/news_index.html:3
 msgid "News Index"
 msgstr ""
 
 #: pyClanSphere/plugins/news/templates/news_index.html:9
+#: pyClanSphere/templates/index.html:11
 msgid "So far there are no news entries here."
 msgstr ""
 
@@ -1528,21 +1855,7 @@ msgstr ""
 msgid "News Overview"
 msgstr ""
 
-#: pyClanSphere/plugins/news/templates/admin/news_list.html:8
-#: pyClanSphere/plugins/shoutbox/forms.py:36
-#: pyClanSphere/templates/admin/information.html:142
-msgid "Author"
-msgstr ""
-
-#: pyClanSphere/plugins/news/templates/admin/news_list.html:10
-#: pyClanSphere/plugins/war/forms.py:45
-#: pyClanSphere/plugins/war/templates/war_detail.html:19
-#: pyClanSphere/plugins/war/templates/admin/war_list.html:9
-#: pyClanSphere/plugins/war/templates/admin/warresult_edit.html:13
-msgid "Date"
-msgstr ""
-
-#: pyClanSphere/plugins/shoutbox/privileges.py:27
+#: pyClanSphere/plugins/shoutbox/privileges.py:28
 msgid "can manage shoutbox entries"
 msgstr ""
 
@@ -1606,7 +1919,7 @@ msgstr ""
 msgid "go to admin panel"
 msgstr ""
 
-#: pyClanSphere/plugins/vessel_theme/templates/layout.html:28
+#: pyClanSphere/plugins/vessel_theme/templates/layout.html:27
 #, python-format
 msgid "Proudly powered by %(pyClanSphere)s, Theme copyright by Armin Ronacher."
 msgstr ""
@@ -1623,224 +1936,242 @@ msgid ""
 "  "
 msgstr ""
 
-#: pyClanSphere/plugins/war/__init__.py:31
+#: pyClanSphere/plugins/war/__init__.py:33
 msgid "Wars"
 msgstr ""
 
-#: pyClanSphere/plugins/war/__init__.py:32
-#: pyClanSphere/plugins/war/templates/war_detail.html:36
-#: pyClanSphere/plugins/war/templates/admin/war_edit.html:50
-#: pyClanSphere/plugins/war/templates/admin/war_edit.html:52
+#: pyClanSphere/plugins/war/__init__.py:34
+#: pyClanSphere/plugins/war/templates/war_detail.html:41
+#: pyClanSphere/plugins/war/templates/admin/war_edit.html:24
+#: pyClanSphere/plugins/war/templates/admin/war_edit.html:26
 msgid "Maps"
 msgstr ""
 
-#: pyClanSphere/plugins/war/__init__.py:33
+#: pyClanSphere/plugins/war/__init__.py:35
 msgid "Modes"
 msgstr ""
 
-#: pyClanSphere/plugins/war/__init__.py:35
+#: pyClanSphere/plugins/war/__init__.py:37
 msgid "War Management"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:40
+#: pyClanSphere/plugins/war/forms.py:41
 #: pyClanSphere/plugins/war/templates/war_detail.html:8
 msgid "Clan"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:43
+#: pyClanSphere/plugins/war/forms.py:44
 #: pyClanSphere/plugins/war/templates/war_detail.html:9
-msgid "Homepage"
+msgid "Clantag"
 msgstr ""
 
 #: pyClanSphere/plugins/war/forms.py:46
+#: pyClanSphere/plugins/war/templates/war_detail.html:10
+#: pyClanSphere/templates/profile.html:15
+msgid "Homepage"
+msgstr ""
+
+#: pyClanSphere/plugins/war/forms.py:49
 msgid "Warmode"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:50
+#: pyClanSphere/plugins/war/forms.py:53
 msgid "Playerchanges/map"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:51
+#: pyClanSphere/plugins/war/forms.py:54
 msgid "How many playerchanges are allowed each mapchange"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:55
-#: pyClanSphere/plugins/war/templates/war_detail.html:30
+#: pyClanSphere/plugins/war/forms.py:58
+#: pyClanSphere/plugins/war/templates/war_detail.html:35
 msgid "Server"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:56
-#: pyClanSphere/plugins/war/templates/war_detail.html:47
+#: pyClanSphere/plugins/war/forms.py:59
+#: pyClanSphere/plugins/war/templates/war_detail.html:52
 msgid "Notes"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:105
+#: pyClanSphere/plugins/war/forms.py:110
 msgid "Orgamember"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:107 pyClanSphere/plugins/war/forms.py:264
+#: pyClanSphere/plugins/war/forms.py:112 pyClanSphere/plugins/war/forms.py:271
 #: pyClanSphere/plugins/war/templates/admin/war_list.html:10
 msgid "State"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:108
+#: pyClanSphere/plugins/war/forms.py:113
 msgid "Add map"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:110 pyClanSphere/plugins/war/forms.py:116
+#: pyClanSphere/plugins/war/forms.py:115 pyClanSphere/plugins/war/forms.py:121
 msgid "Check to remove"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:112
+#: pyClanSphere/plugins/war/forms.py:117
 msgid "Add member"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:114
+#: pyClanSphere/plugins/war/forms.py:119
 msgid "Status for newly added member"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:207
+#: pyClanSphere/plugins/war/forms.py:214
 msgid "Internal Mapname"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:210
+#: pyClanSphere/plugins/war/forms.py:217
 msgid "Owning squad"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:212
+#: pyClanSphere/plugins/war/forms.py:219
 msgid "Use name from file metadata as internal mapname"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:213
+#: pyClanSphere/plugins/war/forms.py:220
 msgid "Read map metadata and set internal mapname to name from mapfile"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:224
+#: pyClanSphere/plugins/war/forms.py:231
 msgid "MapName"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:260
+#: pyClanSphere/plugins/war/forms.py:267
 msgid "Our Points"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:261
+#: pyClanSphere/plugins/war/forms.py:268
 msgid "Enemy Points"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:262
-#: pyClanSphere/plugins/war/templates/war_detail.html:59
+#: pyClanSphere/plugins/war/forms.py:269
+#: pyClanSphere/plugins/war/templates/war_detail.html:64
 msgid "Comment"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:322
+#: pyClanSphere/plugins/war/forms.py:329
 #: pyClanSphere/plugins/war/templates/admin/warmode_list.html:7
 msgid "Modename"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:327
+#: pyClanSphere/plugins/war/forms.py:334
 msgid "Free field 1"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:328
+#: pyClanSphere/plugins/war/forms.py:335
 msgid "Free field 2"
 msgstr ""
 
-#: pyClanSphere/plugins/war/forms.py:329
+#: pyClanSphere/plugins/war/forms.py:336
 msgid "Free field 3"
 msgstr ""
 
-#: pyClanSphere/plugins/war/models.py:31
+#: pyClanSphere/plugins/war/models.py:33
 msgid "Fightus Request"
 msgstr ""
 
-#: pyClanSphere/plugins/war/models.py:32
+#: pyClanSphere/plugins/war/models.py:34
 msgid "Incomplete"
 msgstr ""
 
-#: pyClanSphere/plugins/war/models.py:33
+#: pyClanSphere/plugins/war/models.py:35
 msgid "Planned"
 msgstr ""
 
-#: pyClanSphere/plugins/war/models.py:34
+#: pyClanSphere/plugins/war/models.py:36
 msgid "Running"
 msgstr ""
 
-#: pyClanSphere/plugins/war/models.py:35
+#: pyClanSphere/plugins/war/models.py:37
 msgid "Finished"
 msgstr ""
 
-#: pyClanSphere/plugins/war/models.py:36
+#: pyClanSphere/plugins/war/models.py:38
 msgid "Aborted"
 msgstr ""
 
-#: pyClanSphere/plugins/war/models.py:37
+#: pyClanSphere/plugins/war/models.py:39
 msgid "Cancelled"
 msgstr ""
 
-#: pyClanSphere/plugins/war/models.py:42
+#: pyClanSphere/plugins/war/models.py:44
 msgid "Maybe"
 msgstr ""
 
-#: pyClanSphere/plugins/war/privileges.py:27
+#: pyClanSphere/plugins/war/models.py:299
+msgid "win"
+msgstr ""
+
+#: pyClanSphere/plugins/war/models.py:301
+msgid "loss"
+msgstr ""
+
+#: pyClanSphere/plugins/war/models.py:303
+msgid "draw"
+msgstr ""
+
+#: pyClanSphere/plugins/war/privileges.py:28
 msgid "can manage war-related stuff"
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:135
+#: pyClanSphere/plugins/war/views.py:136
 #, python-format
 msgid "The war %s was added successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:139
+#: pyClanSphere/plugins/war/views.py:140
 #, python-format
 msgid "The war %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:167
+#: pyClanSphere/plugins/war/views.py:168
 #, python-format
 msgid "The war %s was deleted successfully"
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:202
+#: pyClanSphere/plugins/war/views.py:203
 #, python-format
 msgid "Warmap %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:206
+#: pyClanSphere/plugins/war/views.py:207
 #, python-format
 msgid "Warmap %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:242
+#: pyClanSphere/plugins/war/views.py:241
 #, python-format
 msgid "Warmap %s was deleted successfully"
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:267
+#: pyClanSphere/plugins/war/views.py:266
 #, python-format
 msgid "The result for %s was deleted successfully"
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:272
+#: pyClanSphere/plugins/war/views.py:271
 #, python-format
 msgid "The result for war %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:276
+#: pyClanSphere/plugins/war/views.py:275
 #, python-format
 msgid "The result for war %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:318
+#: pyClanSphere/plugins/war/views.py:317
 #, python-format
 msgid "Warmode %s was created successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:322
+#: pyClanSphere/plugins/war/views.py:321
 #, python-format
 msgid "Warmode %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/plugins/war/views.py:353
+#: pyClanSphere/plugins/war/views.py:350
 #, python-format
 msgid "Warmode %s was deleted successfully"
 msgstr ""
@@ -1850,54 +2181,35 @@ msgstr ""
 msgid "%(squad)s vs %(opponent)s"
 msgstr ""
 
-#: pyClanSphere/plugins/war/templates/war_detail.html:5
-#: pyClanSphere/plugins/war/templates/war_fightus.html:6
-#: pyClanSphere/plugins/war/templates/admin/war_edit.html:11
-#: pyClanSphere/plugins/war/templates/admin/war_edit.html:45
-#: pyClanSphere/plugins/war/templates/admin/war_list.html:7
-#: pyClanSphere/plugins/war/templates/admin/warresult_edit.html:11
-msgid "Opponent"
-msgstr ""
-
-#: pyClanSphere/plugins/war/templates/war_detail.html:15
+#: pyClanSphere/plugins/war/templates/war_detail.html:16
 #: pyClanSphere/plugins/war/templates/war_fightus.html:16
-#: pyClanSphere/plugins/war/templates/admin/war_edit.html:17
-#: pyClanSphere/plugins/war/templates/admin/war_edit.html:47
+#: pyClanSphere/plugins/war/templates/admin/war_edit.html:21
 msgid "War coordination data"
 msgstr ""
 
-#: pyClanSphere/plugins/war/templates/war_detail.html:20
+#: pyClanSphere/plugins/war/templates/war_detail.html:22
 #, python-format
 msgid "Orgamember: %(link)s"
 msgstr ""
 
-#: pyClanSphere/plugins/war/templates/war_detail.html:26
+#: pyClanSphere/plugins/war/templates/war_detail.html:24
+msgid "Orgamember: None yet"
+msgstr ""
+
+#: pyClanSphere/plugins/war/templates/war_detail.html:31
 #: pyClanSphere/plugins/war/templates/war_fightus.html:25
 msgid "Rules"
 msgstr ""
 
-#: pyClanSphere/plugins/war/templates/war_detail.html:29
+#: pyClanSphere/plugins/war/templates/war_detail.html:34
 msgid "Mode"
 msgstr ""
 
-#: pyClanSphere/plugins/war/templates/war_detail.html:31
+#: pyClanSphere/plugins/war/templates/war_detail.html:36
 msgid "Playerchanges per map"
 msgstr ""
 
-#: pyClanSphere/plugins/war/templates/war_detail.html:55
-#: pyClanSphere/plugins/war/templates/admin/war_list.html:11
-msgid "Result"
-msgstr ""
-
-#: pyClanSphere/plugins/war/templates/war_detail.html:55
-msgid "Win"
-msgstr ""
-
-#: pyClanSphere/plugins/war/templates/war_detail.html:55
-msgid "Loss"
-msgstr ""
-
-#: pyClanSphere/plugins/war/templates/war_detail.html:58
+#: pyClanSphere/plugins/war/templates/war_detail.html:63
 msgid "Points"
 msgstr ""
 
@@ -1934,10 +2246,6 @@ msgstr ""
 msgid "Squad: %(squad)s (%(game)s)"
 msgstr ""
 
-#: pyClanSphere/plugins/war/templates/war_index.html:11
-msgid "So far there are no wars for this squad."
-msgstr ""
-
 #: pyClanSphere/plugins/war/templates/war_index.html:18
 msgid "War Index"
 msgstr ""
@@ -1967,30 +2275,25 @@ msgstr ""
 msgid "Edit War"
 msgstr ""
 
-#: pyClanSphere/plugins/war/templates/admin/war_edit.html:8
+#: pyClanSphere/plugins/war/templates/admin/war_edit.html:9
 #, python-format
 msgid ""
 "\n"
-"      The war is over and has a <a href=\"%(link)s\">result</a>, so here are"
-" just the details about it. Delete result if you want to modify it again.\n"
-"    "
+"        When the war is over, please <a href=\"%(link)s\">write a result</a>"
+"\n"
+"      "
 msgstr ""
 
-#: pyClanSphere/plugins/war/templates/admin/war_edit.html:24
-#: pyClanSphere/plugins/war/templates/admin/war_edit.html:48
+#: pyClanSphere/plugins/war/templates/admin/war_edit.html:13
+#, python-format
+msgid ""
+"\n"
+"        War is over, <a href=\"%(link)s\">result</a> is here\n"
+"      "
+msgstr ""
+
+#: pyClanSphere/plugins/war/templates/admin/war_edit.html:22
 msgid "Details"
-msgstr ""
-
-#: pyClanSphere/plugins/war/templates/admin/war_edit.html:30
-msgid "Memberparticipation"
-msgstr ""
-
-#: pyClanSphere/plugins/war/templates/admin/war_edit.html:40
-#, python-format
-msgid ""
-"\n"
-"      When the war is over, please <a href=\"%(link)s\">write a result</a>\n"
-"    "
 msgstr ""
 
 #: pyClanSphere/plugins/war/templates/admin/war_list.html:2
@@ -2116,6 +2419,43 @@ msgstr ""
 msgid "(Create as top level comment)"
 msgstr ""
 
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.js:40
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.min.js:14
+msgid "Select files"
+msgstr ""
+
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.js:41
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.min.js:14
+msgid "Add files to the upload queue and click the start button."
+msgstr ""
+
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.js:50
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.min.js:14
+msgid "Size"
+msgstr ""
+
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.js:59
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.min.js:14
+msgid "Add files"
+msgstr ""
+
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.js:60
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.min.js:14
+msgid "Start upload"
+msgstr ""
+
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.js:194
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.min.js:28
+msgid "Add files."
+msgstr ""
+
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.js:208
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.js:259
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.min.js:29
+#: pyClanSphere/shared/plupload/jquery.plupload.queue.min.js:32
+msgid "Drag files here."
+msgstr ""
+
 #: pyClanSphere/templates/403.html:2
 msgid "Access Denied"
 msgstr ""
@@ -2229,20 +2569,22 @@ msgstr ""
 msgid "Table Of Contents"
 msgstr ""
 
-#: pyClanSphere/templates/error_layout.html:5
+#: pyClanSphere/templates/error_layout.html:4
 msgid "pyClanSphere Error"
 msgstr ""
 
-#: pyClanSphere/templates/index.html:2
-msgid "Index"
+#: pyClanSphere/templates/imprint.html:2
+msgid "Imprint"
 msgstr ""
 
-#: pyClanSphere/templates/index.html:4
-msgid "Welcome"
+#: pyClanSphere/templates/index.html:3
+msgid "Home"
 msgstr ""
 
-#: pyClanSphere/templates/index.html:5
-msgid "So far there are no entries here."
+#: pyClanSphere/templates/index.html:20
+msgid ""
+"Nothing here to see yet, please enable some plugins or give them something "
+"to be proud of."
 msgstr ""
 
 #: pyClanSphere/templates/internal_error.html:2
@@ -2257,20 +2599,18 @@ msgstr ""
 msgid ""
 "\n"
 "    If you have troubles fixing the problem have a look at the pyClanSphere\n"
-"    documentation.\n"
-"  "
+"    documentation."
 msgstr ""
 
-#: pyClanSphere/templates/internal_error.html:17
+#: pyClanSphere/templates/internal_error.html:16
 msgid ""
 "\n"
 "    This error is only visible to site administrators.  If a regular user\n"
 "    triggered the error an entry to the log is added and a generic error\n"
-"    message is displayed.\n"
-"  "
+"    message is displayed."
 msgstr ""
 
-#: pyClanSphere/templates/layout.html:20
+#: pyClanSphere/templates/layout.html:25
 #, python-format
 msgid "Empowered by %(pyClanSphere)s."
 msgstr ""
@@ -2284,6 +2624,22 @@ msgid ""
 "\n"
 "      This pyClanSphere instance is currently in maintenance mode.\n"
 "      Please wait until the administrator reopens the site."
+msgstr ""
+
+#: pyClanSphere/templates/profile.html:13
+msgid "Address"
+msgstr ""
+
+#: pyClanSphere/templates/profile.html:26
+msgid "Contact"
+msgstr ""
+
+#: pyClanSphere/templates/profile_not_public.html:2
+msgid "Profile not public"
+msgstr ""
+
+#: pyClanSphere/templates/profile_not_public.html:4
+msgid "Profiles cannot be seen publicly yet, please login first"
 msgstr ""
 
 #: pyClanSphere/templates/server_error.html:2
@@ -2308,15 +2664,11 @@ msgstr ""
 msgid "Do you really want to delete your account?"
 msgstr ""
 
-#: pyClanSphere/templates/account/edit_profile.html:3
+#: pyClanSphere/templates/account/edit_profile.html:4
 msgid "Edit my profile"
 msgstr ""
 
-#: pyClanSphere/templates/account/edit_profile.html:11
-msgid "About me"
-msgstr ""
-
-#: pyClanSphere/templates/account/edit_profile.html:13
+#: pyClanSphere/templates/account/edit_profile.html:15
 #: pyClanSphere/templates/account/index.html:14
 msgid "Update Profile"
 msgstr ""
@@ -2365,8 +2717,8 @@ msgstr ""
 #: pyClanSphere/templates/account/index.html:2
 #: pyClanSphere/templates/account/index.html:5
 #: pyClanSphere/templates/admin/index.html:2
-#: pyClanSphere/templates/admin/index.html:5 pyClanSphere/views/account.py:45
-#: pyClanSphere/views/admin.py:64
+#: pyClanSphere/templates/admin/index.html:5 pyClanSphere/views/account.py:46
+#: pyClanSphere/views/admin.py:66
 msgid "Dashboard"
 msgstr ""
 
@@ -2384,7 +2736,7 @@ msgstr ""
 msgid "Set new password"
 msgstr ""
 
-#: pyClanSphere/templates/account/index.html:16 pyClanSphere/views/account.py:52
+#: pyClanSphere/templates/account/index.html:16 pyClanSphere/views/account.py:53
 msgid "Notifications"
 msgstr ""
 
@@ -2408,8 +2760,8 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: pyClanSphere/templates/account/layout.html:55
-#: pyClanSphere/templates/admin/layout.html:53
+#: pyClanSphere/templates/account/layout.html:54
+#: pyClanSphere/templates/admin/layout.html:52
 #, python-format
 msgid "Powered by %(pyClanSphere)s %(version)s."
 msgstr ""
@@ -2473,6 +2825,26 @@ msgstr ""
 msgid "We're sorry to see you go!"
 msgstr ""
 
+#: pyClanSphere/templates/admin/_form_avatar.html:3
+msgid "Avatar"
+msgstr ""
+
+#: pyClanSphere/templates/admin/_form_avatar.html:5
+msgid "Current picture"
+msgstr ""
+
+#: pyClanSphere/templates/admin/_form_avatar.html:6
+msgid "New picture"
+msgstr ""
+
+#: pyClanSphere/templates/admin/_form_avatar.html:7
+msgid "or"
+msgstr ""
+
+#: pyClanSphere/templates/admin/_form_avatar.html:8
+msgid "Upload picture"
+msgstr ""
+
 #: pyClanSphere/templates/admin/basic_options.html:2
 #: pyClanSphere/templates/admin/basic_options.html:4
 msgid "Basic Options"
@@ -2530,7 +2902,7 @@ msgid ""
 "          if you have a persistent environment. Roughly speaking this cache\n"
 "          works better the higher the number of threads in a process and the"
 "\n"
-"          lower the number or processes. If you have the chance to use a\n"
+"          lower the number of processes. If you have the chance to use a\n"
 "          memcached you should not use the simple cache."
 msgstr ""
 
@@ -2642,7 +3014,7 @@ msgstr ""
 
 #: pyClanSphere/templates/admin/configuration.html:2
 #: pyClanSphere/templates/admin/configuration.html:4
-#: pyClanSphere/views/admin.py:84
+#: pyClanSphere/views/admin.py:87
 msgid "Configuration Editor"
 msgstr ""
 
@@ -2930,7 +3302,7 @@ msgid ""
 msgstr ""
 
 #: pyClanSphere/templates/admin/information.html:135
-#: pyClanSphere/views/admin.py:97
+#: pyClanSphere/views/admin.py:100
 msgid "Plugins"
 msgstr ""
 
@@ -2989,7 +3361,7 @@ msgid "%(clan_title)s Administration"
 msgstr ""
 
 #: pyClanSphere/templates/admin/log.html:2 pyClanSphere/templates/admin/log.html:4
-#: pyClanSphere/views/admin.py:98
+#: pyClanSphere/views/admin.py:101
 msgid "Log"
 msgstr ""
 
@@ -3027,7 +3399,7 @@ msgid "Apply"
 msgstr ""
 
 #: pyClanSphere/templates/admin/maintenance.html:2
-#: pyClanSphere/templates/admin/maintenance.html:4 pyClanSphere/views/admin.py:96
+#: pyClanSphere/templates/admin/maintenance.html:4 pyClanSphere/views/admin.py:99
 msgid "Maintenance"
 msgstr ""
 
@@ -3071,6 +3443,68 @@ msgstr ""
 
 #: pyClanSphere/templates/admin/manage_users.html:10
 msgid "Mail"
+msgstr ""
+
+#: pyClanSphere/templates/admin/perform_upgrade.html:91
+msgid "Upgrade In Progress"
+msgstr ""
+
+#: pyClanSphere/templates/admin/perform_upgrade.html:92
+msgid "<b>Database upgrade in progress!</b>"
+msgstr ""
+
+#: pyClanSphere/templates/admin/perform_upgrade.html:94
+msgid "Upgrading..."
+msgstr ""
+
+#: pyClanSphere/templates/admin/perform_upgrade.html:95
+msgid ""
+"Upgrade in progress.\n"
+"        <strong>Do not hit cancel!</strong>"
+msgstr ""
+
+#: pyClanSphere/templates/admin/perform_upgrade.html:99
+#, python-format
+msgid ""
+"pyClanSphere maintenance mode has been switched on.\n"
+"          Please <a href=\"%(index_url)s\">check your page</a> to see if the"
+"\n"
+"          it works fine with the upgraded database.\n"
+"          Don't forget to <a href=\"%(maintenance_url)s\">turn maintenance "
+"mode\n"
+"          off again</a> once you've finished.\n"
+"      "
+msgstr ""
+
+#: pyClanSphere/templates/admin/perform_upgrade.html:108
+msgid "Upgrade required"
+msgstr ""
+
+#: pyClanSphere/templates/admin/perform_upgrade.html:109
+msgid "<b>pyClanSphere requires a database upgrade!</b>"
+msgstr ""
+
+#: pyClanSphere/templates/admin/perform_upgrade.html:110
+msgid ""
+"A database upgrade can become necessary when a new version\n"
+"          of pyClanSphere or one of your plugins is installed."
+msgstr ""
+
+#: pyClanSphere/templates/admin/perform_upgrade.html:112
+msgid ""
+"When you click “Perform upgrade”, your database will be\n"
+"          brought in sync with the format the installed software expects.  "
+"While\n"
+"          this is designed not to corrupt your database, you can back it up\n"
+"          now before clicking “Perform upgrade”."
+msgstr ""
+
+#: pyClanSphere/templates/admin/perform_upgrade.html:117
+msgid "Components that need an upgrade:"
+msgstr ""
+
+#: pyClanSphere/templates/admin/perform_upgrade.html:122
+msgid "Perform upgrade"
 msgstr ""
 
 #: pyClanSphere/templates/admin/plugins.html:2
@@ -3146,6 +3580,31 @@ msgid ""
 "    "
 msgstr ""
 
+#: pyClanSphere/templates/admin/recaptcha.html:2
+#: pyClanSphere/templates/admin/recaptcha.html:4
+msgid "reCAPTCHA Configuration"
+msgstr ""
+
+#: pyClanSphere/templates/admin/recaptcha.html:5
+#, python-format
+msgid ""
+"\n"
+"    reCAPTCHA is a free CAPTCHA service that protects your public site forms"
+"\n"
+"    against spam. You will need to register free of charge at "
+"%(recaptcha_link)s\n"
+"    and obtain a public and a private key for your domain.\n"
+"  "
+msgstr ""
+
+#: pyClanSphere/templates/admin/recaptcha.html:10
+msgid ""
+"\n"
+"    Users that are <b>not</b> logged in, will be presented a captcha to "
+"solve if this is enabled.\n"
+"  "
+msgstr ""
+
 #: pyClanSphere/templates/admin/remove_plugin.html:2
 #: pyClanSphere/templates/admin/remove_plugin.html:4
 msgid "Remove Plugin"
@@ -3171,11 +3630,6 @@ msgstr ""
 msgid "Select this theme"
 msgstr ""
 
-#: pyClanSphere/templates/admin/theme.html:20
-#, python-format
-msgid "by %(author)s"
-msgstr ""
-
 #: pyClanSphere/templates/admin/theme.html:31
 msgid "Configure Theme"
 msgstr ""
@@ -3196,453 +3650,473 @@ msgid ""
 "  "
 msgstr ""
 
-#: pyClanSphere/utils/account.py:31 pyClanSphere/utils/admin.py:39
+#: pyClanSphere/utils/account.py:32 pyClanSphere/utils/admin.py:40
 msgid "Warning"
 msgstr ""
 
-#: pyClanSphere/utils/exceptions.py:59
+#: pyClanSphere/utils/exceptions.py:60
 msgid "unkown file"
 msgstr ""
 
-#: pyClanSphere/utils/forms.py:682
+#: pyClanSphere/utils/forms.py:684
 msgid "No choices."
 msgstr ""
 
-#: pyClanSphere/utils/forms.py:926
+#: pyClanSphere/utils/forms.py:930
 msgid "This field is required."
 msgstr ""
 
-#: pyClanSphere/utils/forms.py:1094
+#: pyClanSphere/utils/forms.py:1100 pyClanSphere/utils/forms.py:1103
 msgid "Invalid security token submitted."
 msgstr ""
 
-#: pyClanSphere/utils/forms.py:1102
+#: pyClanSphere/utils/forms.py:1111
 msgid "You entered an invalid captcha."
 msgstr ""
 
-#: pyClanSphere/utils/forms.py:1155 pyClanSphere/utils/forms.py:1551
+#: pyClanSphere/utils/forms.py:1164 pyClanSphere/utils/forms.py:1576
 #, python-format
 msgid "Please provide at least %d item."
 msgid_plural "Please provide at least %d items."
 msgstr[0] ""
 msgstr[1] ""
 
-#: pyClanSphere/utils/forms.py:1162 pyClanSphere/utils/forms.py:1558
+#: pyClanSphere/utils/forms.py:1171 pyClanSphere/utils/forms.py:1583
 #, python-format
 msgid "Please provide no more than %d item."
 msgid_plural "Please provide no more than %d items."
 msgstr[0] ""
 msgstr[1] ""
 
-#: pyClanSphere/utils/forms.py:1277
+#: pyClanSphere/utils/forms.py:1282
 #, python-format
 msgid "Please enter at least %d character."
 msgid_plural "Please enter at least %d characters."
 msgstr[0] ""
 msgstr[1] ""
 
-#: pyClanSphere/utils/forms.py:1284
+#: pyClanSphere/utils/forms.py:1289
 #, python-format
 msgid "Please enter no more than %d character."
 msgid_plural "Please enter no more than %d characters."
 msgstr[0] ""
 msgstr[1] ""
 
-#: pyClanSphere/utils/forms.py:1308
+#: pyClanSphere/utils/forms.py:1313 pyClanSphere/utils/forms.py:1345
 msgid "Please enter a valid date."
 msgstr ""
 
-#: pyClanSphere/utils/forms.py:1355
+#: pyClanSphere/utils/forms.py:1380
 #, python-format
 msgid "“%(value)s” does not exist"
 msgstr ""
 
-#: pyClanSphere/utils/forms.py:1414
+#: pyClanSphere/utils/forms.py:1439
 msgid "Invalid value."
 msgstr ""
 
-#: pyClanSphere/utils/forms.py:1415
+#: pyClanSphere/utils/forms.py:1440
 msgid "Key does not exist."
 msgstr ""
 
-#: pyClanSphere/utils/forms.py:1485
+#: pyClanSphere/utils/forms.py:1510
 msgid "Please enter a valid choice."
 msgstr ""
 
-#: pyClanSphere/utils/forms.py:1545
+#: pyClanSphere/utils/forms.py:1570
 #, python-format
 msgid "“%s” is not a valid choice"
 msgstr ""
 
-#: pyClanSphere/utils/forms.py:1590
+#: pyClanSphere/utils/forms.py:1615
 msgid "Please enter a whole number."
 msgstr ""
 
-#: pyClanSphere/utils/forms.py:1616
+#: pyClanSphere/utils/forms.py:1641
 #, python-format
 msgid "Ensure this value is greater than or equal to %s."
 msgstr ""
 
-#: pyClanSphere/utils/forms.py:1622
+#: pyClanSphere/utils/forms.py:1647
 #, python-format
 msgid "Ensure this value is less than or equal to %s."
 msgstr ""
 
-#: pyClanSphere/utils/forms.py:1644
+#: pyClanSphere/utils/forms.py:1669
 msgid "True"
 msgstr ""
 
-#: pyClanSphere/utils/forms.py:1645
+#: pyClanSphere/utils/forms.py:1670
 msgid "False"
 msgstr ""
 
-#: pyClanSphere/utils/log.py:35
+#: pyClanSphere/utils/log.py:36
 msgid "critical"
 msgstr ""
 
-#: pyClanSphere/utils/log.py:36
+#: pyClanSphere/utils/log.py:37
 msgid "error"
 msgstr ""
 
-#: pyClanSphere/utils/log.py:37
+#: pyClanSphere/utils/log.py:38
 msgid "warning"
 msgstr ""
 
-#: pyClanSphere/utils/log.py:38
+#: pyClanSphere/utils/log.py:39
 msgid "notice"
 msgstr ""
 
-#: pyClanSphere/utils/log.py:39
+#: pyClanSphere/utils/log.py:40
 msgid "info"
 msgstr ""
 
-#: pyClanSphere/utils/log.py:40
+#: pyClanSphere/utils/log.py:41
 msgid "debug"
 msgstr ""
 
-#: pyClanSphere/utils/pagination.py:114 pyClanSphere/utils/pagination.py:117
+#: pyClanSphere/utils/pagination.py:115 pyClanSphere/utils/pagination.py:118
 msgid "Next »"
 msgstr ""
 
-#: pyClanSphere/utils/pagination.py:121 pyClanSphere/utils/pagination.py:124
+#: pyClanSphere/utils/pagination.py:122 pyClanSphere/utils/pagination.py:125
 msgid "« Previous"
 msgstr ""
 
-#: pyClanSphere/utils/recaptcha.py:55
+#: pyClanSphere/utils/recaptcha.py:62
 msgid "Get a visual challenge"
 msgstr ""
 
-#: pyClanSphere/utils/recaptcha.py:56
+#: pyClanSphere/utils/recaptcha.py:63
 msgid "Get an audio challenge"
 msgstr ""
 
-#: pyClanSphere/utils/recaptcha.py:57
+#: pyClanSphere/utils/recaptcha.py:64
 msgid "Get a new challenge"
 msgstr ""
 
-#: pyClanSphere/utils/recaptcha.py:58
+#: pyClanSphere/utils/recaptcha.py:65
 msgid "Type the two words:"
 msgstr ""
 
-#: pyClanSphere/utils/recaptcha.py:59
+#: pyClanSphere/utils/recaptcha.py:66
 msgid "Type what you hear:"
 msgstr ""
 
-#: pyClanSphere/utils/recaptcha.py:60 pyClanSphere/views/account.py:61
-#: pyClanSphere/views/admin.py:89
+#: pyClanSphere/utils/recaptcha.py:67 pyClanSphere/views/account.py:62
+#: pyClanSphere/views/admin.py:92
 msgid "Help"
 msgstr ""
 
-#: pyClanSphere/utils/recaptcha.py:61
+#: pyClanSphere/utils/recaptcha.py:68
 msgid "Play sound again"
 msgstr ""
 
-#: pyClanSphere/utils/recaptcha.py:62
+#: pyClanSphere/utils/recaptcha.py:69
 msgid "Download sound as MP3"
 msgstr ""
 
-#: pyClanSphere/utils/recaptcha.py:63
+#: pyClanSphere/utils/recaptcha.py:70
 msgid "Incorrect. Try again."
 msgstr ""
 
-#: pyClanSphere/utils/validators.py:78
+#: pyClanSphere/utils/validators.py:79
 msgid "You have to enter a valid e-mail address."
 msgstr ""
 
-#: pyClanSphere/utils/validators.py:99
+#: pyClanSphere/utils/validators.py:100
 msgid "You have to enter a valid URL."
 msgstr ""
 
-#: pyClanSphere/utils/validators.py:120
+#: pyClanSphere/utils/validators.py:121
 msgid "The slug is too long"
 msgstr ""
 
-#: pyClanSphere/utils/validators.py:122
+#: pyClanSphere/utils/validators.py:123
 msgid "The slug must not start with a slash"
 msgstr ""
 
-#: pyClanSphere/utils/validators.py:140 pyClanSphere/utils/validators.py:143
+#: pyClanSphere/utils/validators.py:141 pyClanSphere/utils/validators.py:144
 msgid "You have to enter a valid net address."
 msgstr ""
 
-#: pyClanSphere/utils/validators.py:145
+#: pyClanSphere/utils/validators.py:146
 msgid "The port has to be numeric"
 msgstr ""
 
-#: pyClanSphere/utils/validators.py:153
+#: pyClanSphere/utils/validators.py:154
 msgid "Invalid character, < or > are not allowed."
 msgstr ""
 
-#: pyClanSphere/utils/validators.py:155
+#: pyClanSphere/utils/validators.py:156
 msgid "URL prefix must not be a sole slash."
 msgstr ""
 
-#: pyClanSphere/utils/validators.py:158
+#: pyClanSphere/utils/validators.py:159
 msgid "URL prefix must start with a slash."
 msgstr ""
 
-#: pyClanSphere/utils/validators.py:160
+#: pyClanSphere/utils/validators.py:161
 msgid "URL prefix must not end with a slash."
 msgstr ""
 
-#: pyClanSphere/utils/validators.py:182
+#: pyClanSphere/utils/validators.py:183
 msgid "Invalid character, <, > or \\ are not allowed."
 msgstr ""
 
-#: pyClanSphere/utils/validators.py:186
+#: pyClanSphere/utils/validators.py:187
 msgid "URL format cannot start with a slash."
 msgstr ""
 
-#: pyClanSphere/utils/validators.py:188
+#: pyClanSphere/utils/validators.py:189
 msgid "URL cannot contain //."
 msgstr ""
 
-#: pyClanSphere/utils/validators.py:190
+#: pyClanSphere/utils/validators.py:191
 msgid "URL cannot contain a reference toparent path."
 msgstr ""
 
-#: pyClanSphere/utils/validators.py:194
+#: pyClanSphere/utils/validators.py:195
 #, python-format
 msgid "Unknown format code %s."
 msgstr ""
 
-#: pyClanSphere/utils/validators.py:204
+#: pyClanSphere/utils/validators.py:205
 msgid "The text must not be empty."
 msgstr ""
 
-#: pyClanSphere/views/account.py:46 pyClanSphere/views/account.py:47
+#: pyClanSphere/utils/zeml.py:302
+msgid ""
+"Error when loading dynamic ZEML element. The system ignored the element.  "
+"Maybe a disabled plugin caused the problem."
+msgstr ""
+
+#: pyClanSphere/utils/zeml.py:703
+#, python-format
+msgid "Error loading dynamic element %s"
+msgstr ""
+
+#: pyClanSphere/utils/zeml.py:717
+msgid "Error in markup"
+msgstr ""
+
+#: pyClanSphere/utils/zeml.py:1143
+#, python-format
+msgid "Invalid attribute given to %s tag: %s"
+msgstr ""
+
+#: pyClanSphere/views/account.py:47 pyClanSphere/views/account.py:48
 msgid "Profile"
 msgstr ""
 
-#: pyClanSphere/views/account.py:50
+#: pyClanSphere/views/account.py:51
 msgid "IM accounts"
 msgstr ""
 
-#: pyClanSphere/views/account.py:57
+#: pyClanSphere/views/account.py:58
 msgid "About"
 msgstr ""
 
-#: pyClanSphere/views/account.py:63 pyClanSphere/views/admin.py:101
+#: pyClanSphere/views/account.py:64 pyClanSphere/views/admin.py:104
 msgid "System"
 msgstr ""
 
-#: pyClanSphere/views/account.py:148
+#: pyClanSphere/views/account.py:146
 msgid "Your lost password request"
 msgstr ""
 
-#: pyClanSphere/views/account.py:222
+#: pyClanSphere/views/account.py:231
 msgid "Your profile was updated successfully."
 msgstr ""
 
-#: pyClanSphere/views/account.py:251
+#: pyClanSphere/views/account.py:260
 msgid "Notification settings changed."
 msgstr ""
 
-#: pyClanSphere/views/account.py:276
+#: pyClanSphere/views/account.py:285
 msgid "Password changed successfully."
 msgstr ""
 
-#: pyClanSphere/views/account.py:314
+#: pyClanSphere/views/account.py:323
 #, python-format
 msgid "IM account %s was added successfully."
 msgstr ""
 
-#: pyClanSphere/views/account.py:318
+#: pyClanSphere/views/account.py:327
 #, python-format
 msgid "IM account %s was updated successfully."
 msgstr ""
 
-#: pyClanSphere/views/account.py:348 pyClanSphere/views/admin.py:326
+#: pyClanSphere/views/account.py:357 pyClanSphere/views/admin.py:320
 #, python-format
 msgid "IM account %s was deleted successfully"
 msgstr ""
 
-#: pyClanSphere/views/admin.py:72
+#: pyClanSphere/views/admin.py:74
 msgid "Users and Groups"
 msgstr ""
 
-#: pyClanSphere/views/admin.py:73
+#: pyClanSphere/views/admin.py:75
 msgid "Users"
 msgstr ""
 
-#: pyClanSphere/views/admin.py:78
+#: pyClanSphere/views/admin.py:80
 msgid "Options"
 msgstr ""
 
-#: pyClanSphere/views/admin.py:79
+#: pyClanSphere/views/admin.py:81
 msgid "Basic"
 msgstr ""
 
-#: pyClanSphere/views/admin.py:80
+#: pyClanSphere/views/admin.py:82
 msgid "URLs"
 msgstr ""
 
-#: pyClanSphere/views/admin.py:81
+#: pyClanSphere/views/admin.py:83
 msgid "Theme"
 msgstr ""
 
-#: pyClanSphere/views/admin.py:82
+#: pyClanSphere/views/admin.py:84
+msgid "reCAPTCHA"
+msgstr ""
+
+#: pyClanSphere/views/admin.py:85
 msgid "Cache"
 msgstr ""
 
-#: pyClanSphere/views/admin.py:94
+#: pyClanSphere/views/admin.py:97
 msgid "Information"
 msgstr ""
 
-#: pyClanSphere/views/admin.py:125
+#: pyClanSphere/views/admin.py:127
 #, python-format
 msgid ""
 "pyClanSphere is in maintenance mode. Don't forget to <a href=\"%s\">turn it "
 "off again</a> once you finish your changes."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:134
+#: pyClanSphere/views/admin.py:136
 #, python-format
 msgid "Could not activate plugin “%(name)s”: %(error)s"
 msgstr ""
 
-#: pyClanSphere/views/admin.py:200
-msgid "Text here..."
-msgstr ""
-
-#: pyClanSphere/views/admin.py:202
-msgid "Untitled Page"
-msgstr ""
-
-#: pyClanSphere/views/admin.py:263
+#: pyClanSphere/views/admin.py:246
 #, python-format
 msgid "User %s created successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:267
+#: pyClanSphere/views/admin.py:261
 #, python-format
 msgid "User %s edited successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:291
+#: pyClanSphere/views/admin.py:285
 msgid "You cannot delete yourself."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:299
+#: pyClanSphere/views/admin.py:293
 #, python-format
 msgid "User %s removed successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:356
+#: pyClanSphere/views/admin.py:350
 #, python-format
 msgid "Group %s created successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:360
+#: pyClanSphere/views/admin.py:354
 #, python-format
 msgid "Group %s edited successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:412
+#: pyClanSphere/views/admin.py:406
 msgid "Configuration altered successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:439
+#: pyClanSphere/views/admin.py:433
 msgid "URL configuration changed."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:460
+#: pyClanSphere/views/admin.py:454
 msgid "Theme changed successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:476
+#: pyClanSphere/views/admin.py:470
 msgid "This theme is not configurable"
 msgstr ""
 
-#: pyClanSphere/views/admin.py:488
+#: pyClanSphere/views/admin.py:482
 msgid "Plugin configuration changed"
 msgstr ""
 
-#: pyClanSphere/views/admin.py:497
+#: pyClanSphere/views/admin.py:491
 #, python-format
 msgid "Plugin “%s” added successfully. You can now enable it in the plugin list."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:524
+#: pyClanSphere/views/admin.py:518
 #, python-format
 msgid ""
 "Could not remove the plugin “%s” because an IO error occurred. Wrong "
 "permissions?"
 msgstr ""
 
-#: pyClanSphere/views/admin.py:527
+#: pyClanSphere/views/admin.py:521
 #, python-format
 msgid "The plugin “%s” was removed from the instance successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:545
+#: pyClanSphere/views/admin.py:539
 msgid "The cache was cleared successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:549
+#: pyClanSphere/views/admin.py:543
 msgid "Cache settings were changed successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:573
+#: pyClanSphere/views/admin.py:558
+msgid "reCAPTCHA settings were changed successfully."
+msgstr ""
+
+#: pyClanSphere/views/admin.py:582
 msgid "Configuration updated successfully."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:576
+#: pyClanSphere/views/admin.py:585
 msgid "Could not save the configuration because the configuration is invalid."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:593
+#: pyClanSphere/views/admin.py:602
 msgid "Maintenance mode disabled.  The site is now publicly available."
 msgstr ""
 
-#: pyClanSphere/views/admin.py:691
+#: pyClanSphere/views/admin.py:700
 msgid "Log changes saved."
 msgstr ""
 
-#: pyClanSphere/websetup/__init__.py:105
+#: pyClanSphere/websetup/__init__.py:106
 #, python-format
 msgid ""
 "Instance folder does not exist.  You have to create the folder “%s” before "
 "proceeding."
 msgstr ""
 
-#: pyClanSphere/websetup/__init__.py:127
+#: pyClanSphere/websetup/__init__.py:128
 msgid "You have to provide a username."
 msgstr ""
 
-#: pyClanSphere/websetup/__init__.py:130
+#: pyClanSphere/websetup/__init__.py:131
 msgid "You have to enter a mail address."
 msgstr ""
 
-#: pyClanSphere/websetup/__init__.py:132
+#: pyClanSphere/websetup/__init__.py:133
 msgid "The mail address is not valid."
 msgstr ""
 
-#: pyClanSphere/websetup/__init__.py:135
+#: pyClanSphere/websetup/__init__.py:136
 msgid "You have to enter a password."
 msgstr ""
 
-#: pyClanSphere/websetup/__init__.py:137
+#: pyClanSphere/websetup/__init__.py:138
 msgid "The two passwords do not match."
 msgstr ""
 
