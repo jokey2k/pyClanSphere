@@ -296,11 +296,11 @@ class WarResult(object):
     @property
     def named_result(self):
         if self.our_points > self.enemy_points:
-            return _('win')
+            return 'win'
         if self.our_points < self.enemy_points:
-            return _('loss')
+            return 'loss'
         if self.our_points == self.enemy_points:
-            return _('draw')
+            return 'draw'
 
 
 class NullWarResult(WarResult):
