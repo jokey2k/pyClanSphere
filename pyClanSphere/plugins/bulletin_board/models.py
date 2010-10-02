@@ -14,6 +14,7 @@ from datetime import datetime
 from operator import attrgetter
 
 from werkzeug import cached_property
+from werkzeug.exceptions import NotFound
 
 from pyClanSphere.api import db, get_request
 from pyClanSphere.models import User, AnonymousUser
