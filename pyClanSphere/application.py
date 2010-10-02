@@ -766,10 +766,14 @@ class pyClanSphere(object):
             text = smiley_parser.makehappy(text)
             return Markup(text)
 
+        def do_enumerate(value, start=0):
+            return enumerate(value, start)
+
         env.filters.update(
             smileys=format_smileys,
             bbcode=format_bbcode,
-            prettify=prettify
+            prettify=prettify,
+            enumerate=do_enumerate
         )
 
         env.globals.update(
