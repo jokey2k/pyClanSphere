@@ -85,10 +85,10 @@ class FightUsForm(_WarBoundForm):
     def make_war(self):
         """A helper function that creates a new user object."""
         war = War()
+        #hardcoded fightus, user doesn't need to set it
+        self.data['status'] = 0
         self._set_common_attributes(war)
         self.war = war
-        #hardcoded fightus, user doesn't need to set it
-        self.war.status=0
         return war
 
     def _set_common_attributes(self, war):
