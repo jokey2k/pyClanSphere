@@ -180,6 +180,13 @@ class EditWarForm(FightUsForm):
                 if member is not None:
                     db.delete(member)
 
+    def make_war(self):
+        """A helper function that creates a new user object."""
+        war = War()
+        self._set_common_attributes(war)
+        self.war = war
+        return war
+
 
 class DeleteWarForm(_WarBoundForm):
     """Used to delete a war from the admin panel."""
