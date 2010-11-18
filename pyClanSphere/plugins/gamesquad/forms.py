@@ -186,7 +186,7 @@ class DeleteSquadForm(_SquadBoundForm):
             new_squad = Squad.query.filter_by(id=self.data['relocate_to'].id).first()
             for squadmember in self.squad.squadmembers:
                 if squadmember not in new_squad.squadmembers:
-                    squadmember.squad_id = new_squad.squad_id
+                    squadmember.squad_id = new_squad.id
             db.commit()
 
         signals.before_squad_deleted.send(squad=self.squad, formdata=self.data)
